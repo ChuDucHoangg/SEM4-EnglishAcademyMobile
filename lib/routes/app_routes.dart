@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../presentation/launching_screen/launching_screen.dart';
 import '../presentation/intro_one_screen/intro_one_screen.dart';
 import '../presentation/intro_two_screen/intro_two_screen.dart';
+// Son cut
 // import '../presentation/intro_three_screen/intro_three_screen.dart';
 // import '../presentation/let_s_you_in_screen/let_s_you_in_screen.dart';
 // import '../presentation/register_now_screen/register_now_screen.dart';
@@ -18,6 +19,8 @@ import '../presentation/intro_two_screen/intro_two_screen.dart';
 // import '../presentation/search_screen/search_screen.dart';
 // import '../presentation/popular_courses_container_screen/popular_courses_container_screen.dart';
 // import '../presentation/top_mentors_screen/top_mentors_screen.dart';
+
+//Duc cut
 // import '../presentation/courses_list_screen/courses_list_screen.dart';
 // import '../presentation/courses_list_filter_screen/courses_list_filter_screen.dart';
 // import '../presentation/mentors_list_screen/mentors_list_screen.dart';
@@ -35,6 +38,8 @@ import '../presentation/intro_two_screen/intro_two_screen.dart';
 // import '../presentation/my_course_lessons_screen/my_course_lessons_screen.dart';
 // import '../presentation/my_course_certificate_screen/my_course_certificate_screen.dart';
 // import '../presentation/my_course_ongoing_screen/my_course_ongoing_screen.dart';
+
+//Hoang cut
 // import '../presentation/my_course_ongoing_lessons_screen/my_course_ongoing_lessons_screen.dart';
 // import '../presentation/my_course_ongoing_video_screen/my_course_ongoing_video_screen.dart';
 // import '../presentation/my_course_course_completed_screen/my_course_course_completed_screen.dart';
