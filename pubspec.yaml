@@ -1,0 +1,50 @@
+name: english_academy_mobile
+description: A new Flutter project.
+version: 1.0.0+1
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  cached_network_image: ^3.3.0
+  flutter_svg: ^2.0.9
+  pin_code_fields: ^8.0.1
+  flutter_rating_bar: ^4.0.1
+  country_pickers: ^2.0.0
+  smooth_page_indicator: ^1.1.0
+  flutter_svg_provider: ^1.0.7
+  carousel_slider: ^4.2.1
+  grouped_list: ^5.1.2
+  readmore: ^2.2.0
+  intl: ^0.18.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+  fonts:
+    - family: Aubrey
+      fonts:
+        - asset: assets/fonts/Aubrey.ttf
+          weight: 400
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/PoppinsSemiBold.ttf
+          weight: 600
+    - family: Jost
+      fonts:
+        - asset: assets/fonts/JostSemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/JostBold.ttf
+          weight: 700
+    - family: Mulish
+      fonts:
+        - asset: assets/fonts/MulishBold.ttf
+          weight: 700
+        - asset: assets/fonts/MulishExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/MulishSemiBold.ttf
+          weight: 600
