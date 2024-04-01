@@ -14,107 +14,105 @@ class CreateNewPinScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: appTheme.whiteA700,
-        resizeToAvoidBottomInset: false,
-        appBar: _buildAppBar(context),
-        body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(horizontal: 34.h),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 26.v),
-              Container(
-                width: 273.h,
-                margin: EdgeInsets.only(
-                  left: 42.h,
-                  right: 43.h,
-                ),
-                child: Text(
-                  "Add a Pin Number to Make Your Account more Secure",
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.titleSmall,
-                ),
+    return Scaffold(
+      backgroundColor: appTheme.whiteA700,
+      resizeToAvoidBottomInset: false,
+      appBar: _buildAppBar(context),
+      body: Container(
+        width: double.maxFinite,
+        padding: EdgeInsets.symmetric(horizontal: 34.h),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: 26.v),
+            Container(
+              width: 273.h,
+              margin: EdgeInsets.only(
+                left: 42.h,
+                right: 43.h,
               ),
-              SizedBox(height: 84.v),
-              CustomPinCodeTextField(
-                context: context,
-                onChanged: (value) {},
+              child: Text(
+                "Add a Pin Number to Make Your Account more Secure",
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.titleSmall,
               ),
+            ),
+            SizedBox(height: 84.v),
+            CustomPinCodeTextField(
+              context: context,
+              onChanged: (value) {},
+            ),
 
-              SizedBox(height: 70.v),
-              _buildContinue(context),
-              SizedBox(height: 64.v),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 33.h),
-                child: _buildFour(
-                  context,
-                  four: "1",
-                  five: "2",
-                  six: "3",
-                ),
+            SizedBox(height: 70.v),
+            _buildContinue(context),
+            SizedBox(height: 64.v),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 33.h),
+              child: _buildFour(
+                context,
+                four: "1",
+                five: "2",
+                six: "3",
               ),
-              SizedBox(height: 56.v),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 33.h),
-                child: _buildFour(
-                  context,
-                  four: "4",
-                  five: "5",
-                  six: "6",
-                ),
+            ),
+            SizedBox(height: 56.v),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 33.h),
+              child: _buildFour(
+                context,
+                four: "4",
+                five: "5",
+                six: "6",
               ),
-              SizedBox(height: 55.v),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 33.h),
-                child: _buildFour(
-                  context,
-                  four: "7",
-                  five: "8",
-                  six: "9",
-                ),
+            ),
+            SizedBox(height: 55.v),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 33.h),
+              child: _buildFour(
+                context,
+                four: "7",
+                five: "8",
+                six: "9",
               ),
-              SizedBox(height: 56.v),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 31.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "*",
-                      style: CustomTextStyles.titleLargeMulishGray800,
+            ),
+            SizedBox(height: 56.v),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 31.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "*",
+                    style: CustomTextStyles.titleLargeMulishGray800,
+                  ),
+                  Spacer(
+                    flex: 51,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 4.v),
+                    child: Text(
+                      "0",
+                      style: CustomTextStyles.titleMediumMulishGray800,
                     ),
-                    Spacer(
-                      flex: 51,
+                  ),
+                  Spacer(
+                    flex: 48,
+                  ),
+                  CustomImageView(
+                    imagePath: ImageConstant.imgCloseGray90001,
+                    height: 16.v,
+                    margin: EdgeInsets.only(
+                      top: 2.v,
+                      bottom: 8.v,
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 4.v),
-                      child: Text(
-                        "0",
-                        style: CustomTextStyles.titleMediumMulishGray800,
-                      ),
-                    ),
-                    Spacer(
-                      flex: 48,
-                    ),
-                    CustomImageView(
-                      imagePath: ImageConstant.imgCloseGray90001,
-                      height: 16.v,
-                      margin: EdgeInsets.only(
-                        top: 2.v,
-                        bottom: 8.v,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

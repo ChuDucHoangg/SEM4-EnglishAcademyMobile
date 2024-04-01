@@ -8,7 +8,7 @@ import '../presentation/intro_two_screen/intro_two_screen.dart';
 // import '../presentation/register_now_screen/register_now_screen.dart';
 // import '../presentation/login_screen/login_screen.dart';
 // import '../presentation/fill_your_profile_screen/fill_your_profile_screen.dart';
-import '../presentation/create_new_pin_screen/create_new_pin_screen.dart';
+// import '../presentation/create_new_pin_screen/create_new_pin_screen.dart';
 // import '../presentation/set_your_fingerprint_screen/set_your_fingerprint_screen.dart';
 // import '../presentation/congratulations_screen/congratulations_screen.dart';
 // import '../presentation/forgot_password_screen/forgot_password_screen.dart';
@@ -75,7 +75,7 @@ class AppRoutes {
   //
   // static const String fillYourProfileScreen = '/fill_your_profile_screen';
   //
-  static const String createNewPinScreen = '/create_new_pin_screen';
+  // static const String createNewPinScreen = '/create_new_pin_screen';
   //
   // static const String setYourFingerprintScreen = '/set_your_fingerprint_screen';
   //
@@ -202,7 +202,7 @@ class AppRoutes {
     // registerNowScreen: (context) => RegisterNowScreen(),
     // loginScreen: (context) => LoginScreen(),
     // fillYourProfileScreen: (context) => FillYourProfileScreen(),
-    createNewPinScreen: (context) => CreateNewPinScreen(),
+    // createNewPinScreen: (context) => CreateNewPinScreen(),
     // setYourFingerprintScreen: (context) => SetYourFingerprintScreen(),
     // congratulationsScreen: (context) => CongratulationsScreen(),
     // forgotPasswordScreen: (context) => ForgotPasswordScreen(),
