@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           theme: theme,
           title: 'English Academy Mobile',
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.launchingScreen,
+          initialRoute: AppRoutes.appNavigationScreen,
           routes: AppRoutes.routes,
         );
       },
