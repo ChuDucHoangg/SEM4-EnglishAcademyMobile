@@ -270,7 +270,7 @@ class ImageConstant {
 
   static String imgFilter = '$imagePath/img_filter.svg';
 
-  static String imgArrowRightPrimary = '$imagePath/img_arrow_right_primary.svg';
+  static String imgArrowRightPrimary = '$imagePath/img_arrow_right_primary.svg.svg';
 
   static String imgSignalAmberA20001 =
       '$imagePath/img_signal_amber_a200_01.svg';
