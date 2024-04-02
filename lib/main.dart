@@ -10,7 +10,6 @@ void main() {
     DeviceOrientation.portraitUp,
   ]);
 
-  ///Please update theme as per your need if required.
   ThemeHelper().changeTheme('primary');
   runApp(MyApp());
 }
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
           theme: theme,
           title: 'English Academy Mobile',
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.appNavigationScreen,
+          initialRoute: AppRoutes.introOneScreen,
           routes: AppRoutes.routes,
         );
       },

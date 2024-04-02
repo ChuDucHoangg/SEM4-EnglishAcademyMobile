@@ -11,25 +11,42 @@ class SonjaItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 80.h,
-      child: Column(
-        children: [
-          Container(
-            height: 70.v,
+      height: 97.v,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        separatorBuilder: (
+            context,
+            index,
+            ) {
+          return SizedBox(
+            width: 18.h,
+          );
+        },
+        itemCount: 6,
+        itemBuilder: (context, index) {
+          return SizedBox(
             width: 80.h,
-            decoration: BoxDecoration(
-              color: appTheme.black900,
-              borderRadius: BorderRadius.circular(
-                20.h,
-              ),
+            child: Column(
+              children: [
+                Container(
+                  height: 70.v,
+                  width: 80.h,
+                  decoration: BoxDecoration(
+                    color: appTheme.black900,
+                    borderRadius: BorderRadius.circular(
+                      20.h,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8.v),
+                Text(
+                  "Sonja",
+                  style: CustomTextStyles.labelLargeJostBluegray900,
+                ),
+              ],
             ),
-          ),
-          SizedBox(height: 8.v),
-          Text(
-            "Sonja",
-            style: CustomTextStyles.labelLargeJostBluegray900,
-          ),
-        ],
+          );
+        },
       ),
     );
   }

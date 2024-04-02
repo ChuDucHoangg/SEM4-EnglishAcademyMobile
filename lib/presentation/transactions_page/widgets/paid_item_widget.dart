@@ -46,7 +46,7 @@ class PaidItemWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 12.v),
                 Container(
-                  width: 60.h,
+                  width: 62.h,
                   padding: EdgeInsets.symmetric(
                     horizontal: 17.h,
                     vertical: 2.v,

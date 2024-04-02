@@ -72,7 +72,7 @@ class MyCourseOngoingScreen extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: _buildBottomBar(context),
+        // bottomNavigationBar: _buildBottomBar(context),
       ),
     );
   }
@@ -144,48 +144,48 @@ class MyCourseOngoingScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildBottomBar(BuildContext context) {
-    return CustomBottomBar(
-      onChanged: (BottomBarEnum type) {
-        Navigator.pushNamed(
-            navigatorKey.currentContext!, getCurrentRoute(type));
-      },
-    );
-  }
-
-  ///Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
-    switch (type) {
-      case BottomBarEnum.Home:
-        return AppRoutes.popularCoursesPage;
-      case BottomBarEnum.Mycourses:
-        return AppRoutes.myCourseCompletedPage;
-      case BottomBarEnum.Indox:
-        return AppRoutes.indoxChatsPage;
-      case BottomBarEnum.Transaction:
-        return AppRoutes.transactionsPage;
-      case BottomBarEnum.Profile:
-        return AppRoutes.profilesPage;
-      default:
-        return "/";
-    }
-  }
+  // Widget _buildBottomBar(BuildContext context) {
+  //   return CustomBottomBar(
+  //     onChanged: (BottomBarEnum type) {
+  //       Navigator.pushNamed(
+  //           navigatorKey.currentContext!, getCurrentRoute(type));
+  //     },
+  //   );
+  // }
+  //
+  // ///Handling route based on bottom click actions
+  // String getCurrentRoute(BottomBarEnum type) {
+  //   switch (type) {
+  //     case BottomBarEnum.Home:
+  //       return AppRoutes.popularCoursesPage;
+  //     case BottomBarEnum.Mycourses:
+  //       return AppRoutes.myCourseCompletedPage;
+  //     case BottomBarEnum.Indox:
+  //       return AppRoutes.indoxChatsPage;
+  //     case BottomBarEnum.Transaction:
+  //       return AppRoutes.transactionsPage;
+  //     case BottomBarEnum.Profile:
+  //       return AppRoutes.profilesPage;
+  //     default:
+  //       return "/";
+  //   }
+  // }
 
   ///Handling page based on route
-  Widget getCurrentPage(String currentRoute) {
-    switch (currentRoute) {
-      case AppRoutes.popularCoursesPage:
-        return PopularCoursesPage();
-      case AppRoutes.myCourseCompletedPage:
-        return MyCourseCompletedPage();
-      case AppRoutes.indoxChatsPage:
-        return IndoxChatsPage();
-      case AppRoutes.transactionsPage:
-        return TransactionsPage();
-      case AppRoutes.profilesPage:
-        return ProfilesPage();
-      default:
-        return DefaultWidget();
-    }
-  }
+  // Widget getCurrentPage(String currentRoute) {
+  //   switch (currentRoute) {
+  //     case AppRoutes.popularCoursesPage:
+  //       return PopularCoursesPage();
+  //     case AppRoutes.myCourseCompletedPage:
+  //       return MyCourseCompletedPage();
+  //     case AppRoutes.indoxChatsPage:
+  //       return IndoxChatsPage();
+  //     case AppRoutes.transactionsPage:
+  //       return TransactionsPage();
+  //     case AppRoutes.profilesPage:
+  //       return ProfilesPage();
+  //     default:
+  //       return DefaultWidget();
+  //   }
+  // }
 }

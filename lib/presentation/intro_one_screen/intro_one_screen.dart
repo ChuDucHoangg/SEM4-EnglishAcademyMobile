@@ -1,3 +1,4 @@
+import 'package:english_academy_mobile/presentation/intro_two_screen/intro_two_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:english_academy_mobile/widgets/custom_icon_button.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,8 @@ import 'package:english_academy_mobile/core/app_export.dart';
 class IntroOneScreen extends StatelessWidget {
   const IntroOneScreen({Key? key})
       : super(
-    key: key,
-  );
+          key: key,
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -86,10 +87,18 @@ class IntroOneScreen extends StatelessWidget {
             width: 60.adaptSize,
             padding: EdgeInsets.all(16.h),
             decoration: IconButtonStyleHelper.outlineBlack,
-            child: CustomImageView(
-              imagePath: ImageConstant.imgArrowRightWhiteA700,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => IntroTwoScreen()),
+                );
+              },
+              child: CustomImageView(
+                imagePath: ImageConstant.imgArrowRightWhiteA700,
+              ),
             ),
-          ),
+          )
         ],
       ),
     );
