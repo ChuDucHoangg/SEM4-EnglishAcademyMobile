@@ -1,3 +1,4 @@
+import 'package:english_academy_mobile/init_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:english_academy_mobile/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +77,12 @@ class IntroThreeScreen extends StatelessWidget {
             ),
           ),
           CustomElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => InitScreen()),
+              );
+            },
             width: 200.h,
             text: "Get Started",
           ),

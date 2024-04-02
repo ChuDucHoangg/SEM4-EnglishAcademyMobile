@@ -1,3 +1,4 @@
+import 'package:english_academy_mobile/presentation/intro_three_screen/intro_three_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:english_academy_mobile/widgets/custom_icon_button.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,7 @@ class IntroTwoScreen extends StatelessWidget {
             height: 10.v,
             margin: EdgeInsets.symmetric(vertical: 25.v),
             child: AnimatedSmoothIndicator(
-              activeIndex: 0,
+              activeIndex: 1,
               count: 3,
               effect: ScrollingDotsEffect(
                 spacing: 15,
@@ -80,8 +81,16 @@ class IntroTwoScreen extends StatelessWidget {
             width: 60.adaptSize,
             padding: EdgeInsets.all(16.h),
             decoration: IconButtonStyleHelper.outlineBlack,
-            child: CustomImageView(
-              imagePath: ImageConstant.imgArrowRightWhiteA700,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => IntroThreeScreen()),
+                );
+              },
+              child: CustomImageView(
+                imagePath: ImageConstant.imgArrowRightWhiteA700,
+              ),
             ),
           ),
         ],

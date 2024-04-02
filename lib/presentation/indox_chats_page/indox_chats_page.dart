@@ -233,18 +233,9 @@ class IndoxChatsPage extends StatelessWidget {
   /// Section Widget
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
-      leadingWidth: 61.h,
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgArrowDown,
-        margin: EdgeInsets.only(
-          left: 35.h,
-          top: 19.v,
-          bottom: 16.v,
-        ),
-      ),
       title: AppbarSubtitle(
         text: "Indox",
-        margin: EdgeInsets.only(left: 12.h),
+        margin: EdgeInsets.only(left: 35.h),
       ),
       actions: [
         AppbarTrailingImage(

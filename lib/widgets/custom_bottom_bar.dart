@@ -84,33 +84,14 @@ class CustomBottomBarState extends State<CustomBottomBar> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 19.v,
+
+                CustomImageView(
+                  imagePath: bottomMenuList[index].activeIcon,
                   width: 18.h,
-                  child: Stack(
-                    alignment: Alignment.centerRight,
-                    children: [
-                      CustomImageView(
-                        imagePath: ImageConstant.imgInbox,
-                        width: 8.h,
-                        alignment: Alignment.bottomLeft,
-                        margin: EdgeInsets.only(
-                          top: 4.v,
-                          right: 10.h,
-                        ),
-                      ),
-                      CustomImageView(
-                        imagePath: bottomMenuList[index].activeIcon,
-                        width: 13.h,
-                        color: appTheme.teal700,
-                        alignment: Alignment.centerRight,
-                        margin: EdgeInsets.only(left: 4.h),
-                      ),
-                    ],
-                  ),
+                  color: appTheme.teal700,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 5.v),
+                  padding: EdgeInsets.only(top: 4.v),
                   child: Text(
                     bottomMenuList[index].title ?? "",
                     style: CustomTextStyles.labelSmallTeal700.copyWith(
@@ -156,28 +137,4 @@ class BottomMenuModel {
   String? title;
 
   BottomBarEnum type;
-}
-
-class DefaultWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xffffffff),
-      padding: EdgeInsets.all(10),
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Please replace the respective Widget here',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }

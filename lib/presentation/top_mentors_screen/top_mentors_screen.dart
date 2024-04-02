@@ -36,13 +36,13 @@ class TopMentorsScreen extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(
-            left: 36.h,
-            right: 31.h,
-          ),
-          child: _buildBottomBar(context),
-        ),
+        // bottomNavigationBar: Padding(
+        //   padding: EdgeInsets.only(
+        //     left: 36.h,
+        //     right: 31.h,
+        //   ),
+        //   child: _buildBottomBar(context),
+        // ),
       ),
     );
   }
@@ -246,48 +246,48 @@ class TopMentorsScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildBottomBar(BuildContext context) {
-    return CustomBottomBar(
-      onChanged: (BottomBarEnum type) {
-        Navigator.pushNamed(
-            navigatorKey.currentContext!, getCurrentRoute(type));
-      },
-    );
-  }
-
-  ///Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
-    switch (type) {
-      case BottomBarEnum.Home:
-        return AppRoutes.popularCoursesPage;
-      case BottomBarEnum.Mycourses:
-        return AppRoutes.myCourseCompletedPage;
-      case BottomBarEnum.Indox:
-        return AppRoutes.indoxChatsPage;
-      case BottomBarEnum.Transaction:
-        return AppRoutes.transactionsPage;
-      case BottomBarEnum.Profile:
-        return AppRoutes.profilesPage;
-      default:
-        return "/";
-    }
-  }
-
-  ///Handling page based on route
-  Widget getCurrentPage(String currentRoute) {
-    switch (currentRoute) {
-      case AppRoutes.popularCoursesPage:
-        return PopularCoursesPage();
-      case AppRoutes.myCourseCompletedPage:
-        return MyCourseCompletedPage();
-      case AppRoutes.indoxChatsPage:
-        return IndoxChatsPage();
-      case AppRoutes.transactionsPage:
-        return TransactionsPage();
-      case AppRoutes.profilesPage:
-        return ProfilesPage();
-      default:
-        return DefaultWidget();
-    }
-  }
+  // Widget _buildBottomBar(BuildContext context) {
+  //   return CustomBottomBar(
+  //     onChanged: (BottomBarEnum type) {
+  //       Navigator.pushNamed(
+  //           navigatorKey.currentContext!, getCurrentRoute(type));
+  //     },
+  //   );
+  // }
+  //
+  // ///Handling route based on bottom click actions
+  // String getCurrentRoute(BottomBarEnum type) {
+  //   switch (type) {
+  //     case BottomBarEnum.Home:
+  //       return AppRoutes.popularCoursesPage;
+  //     case BottomBarEnum.Mycourses:
+  //       return AppRoutes.myCourseCompletedPage;
+  //     case BottomBarEnum.Indox:
+  //       return AppRoutes.indoxChatsPage;
+  //     case BottomBarEnum.Transaction:
+  //       return AppRoutes.transactionsPage;
+  //     case BottomBarEnum.Profile:
+  //       return AppRoutes.profilesPage;
+  //     default:
+  //       return "/";
+  //   }
+  // }
+  //
+  // ///Handling page based on route
+  // Widget getCurrentPage(String currentRoute) {
+  //   switch (currentRoute) {
+  //     case AppRoutes.popularCoursesPage:
+  //       return PopularCoursesPage();
+  //     case AppRoutes.myCourseCompletedPage:
+  //       return MyCourseCompletedPage();
+  //     case AppRoutes.indoxChatsPage:
+  //       return IndoxChatsPage();
+  //     case AppRoutes.transactionsPage:
+  //       return TransactionsPage();
+  //     case AppRoutes.profilesPage:
+  //       return ProfilesPage();
+  //     default:
+  //       return DefaultWidget();
+  //   }
+  // }
 }

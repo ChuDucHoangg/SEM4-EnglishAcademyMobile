@@ -17,7 +17,6 @@ import '../presentation/create_new_password_screen/create_new_password_screen.da
 import '../presentation/home_screen/home_screen.dart';
 import '../presentation/category_screen/category_screen.dart';
 import '../presentation/search_screen/search_screen.dart';
-import '../presentation/popular_courses_container_screen/popular_courses_container_screen.dart';
 import '../presentation/top_mentors_screen/top_mentors_screen.dart';
 import '../presentation/courses_list_screen/courses_list_screen.dart';
 import '../presentation/courses_list_filter_screen/courses_list_filter_screen.dart';
@@ -208,7 +207,6 @@ class AppRoutes {
     homeScreen: (context) => HomeScreen(),
     categoryScreen: (context) => CategoryScreen(),
     searchScreen: (context) => SearchScreen(),
-    popularCoursesContainerScreen: (context) => PopularCoursesContainerScreen(),
     topMentorsScreen: (context) => TopMentorsScreen(),
     coursesListScreen: (context) => CoursesListScreen(),
     coursesListFilterScreen: (context) => CoursesListFilterScreen(),

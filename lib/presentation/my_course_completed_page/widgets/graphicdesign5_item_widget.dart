@@ -92,7 +92,7 @@ class Graphicdesign5ItemWidget extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 15.v),
+                        SizedBox(height: 14.v),
                         Align(
                           alignment: Alignment.centerRight,
                           child: Text(
