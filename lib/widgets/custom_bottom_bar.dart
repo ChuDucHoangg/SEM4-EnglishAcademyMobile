@@ -23,7 +23,7 @@ class CustomBottomBarState extends State<CustomBottomBar> {
     BottomMenuModel(
       icon: ImageConstant.imgNavMyCourses,
       activeIcon: ImageConstant.imgNavMyCourses,
-      title: "My Courses".toUpperCase(),
+      title: "Courses".toUpperCase(),
       type: BottomBarEnum.Mycourses,
     ),
     BottomMenuModel(
