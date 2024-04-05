@@ -1,3 +1,4 @@
+import 'package:english_academy_mobile/presentation/course_screen/course_detail_screen/course_detail_screen.dart';
 import 'package:english_academy_mobile/presentation/home_screen/home_screen.dart';
 import 'package:english_academy_mobile/presentation/course_screen/course_screen.dart';
 import 'package:english_academy_mobile/presentation/indox_screen/indox_screen.dart';

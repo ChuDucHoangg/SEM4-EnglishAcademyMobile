@@ -5,6 +5,7 @@ import '../presentation/intro_two_screen/intro_two_screen.dart';
 import '../presentation/intro_three_screen/intro_three_screen.dart';
 import '../presentation/home_screen/home_screen.dart';
 import '../presentation/course_screen/course_screen.dart';
+import '../presentation/course_screen/course_detail_screen/course_detail_screen.dart';
 import '../presentation/indox_screen/indox_screen.dart';
 import '../presentation/transactions_screen/transactions_screen.dart';
 import '../presentation/profiles_screen/profiles_screen.dart';
@@ -22,6 +23,8 @@ class AppRoutes {
 
   static const String courseScreen = '/course_screen';
 
+  static const String courseDetailScreen = '/course_detail_screen';
+
   static const String indoxScreen = '/indox_screen';
 
   static const String transactionsScreen = '/transactions_screen';
@@ -35,6 +38,11 @@ class AppRoutes {
     introThreeScreen: (context) => IntroThreeScreen(),
     homeScreen: (context) => HomeScreen(),
     courseScreen: (context) => CourseScreen(),
+    courseDetailScreen: (context) {
+      final String? slug =
+          ModalRoute.of(context)?.settings.arguments as String?;
+      return CourseDetailScreen(slug: slug!);
+    },
     indoxScreen: (context) => IndoxScreen(),
     transactionsScreen: (context) => TransactionsScreen(),
     profilesScreen: (context) => ProfilesScreen(),

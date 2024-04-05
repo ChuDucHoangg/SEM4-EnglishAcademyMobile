@@ -302,6 +302,8 @@ class ImageConstant {
 
   static String imgUpload = '$imagePath/img_upload.svg';
 
+  static String imgTime = '$imagePath/img_time.svg';
+
   static String imgFill3 = '$imagePath/img_fill_3.svg';
 
   static String imgGroup6 = '$imagePath/img_group_6.svg';
