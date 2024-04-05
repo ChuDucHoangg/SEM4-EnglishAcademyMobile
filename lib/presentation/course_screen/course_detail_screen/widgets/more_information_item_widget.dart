@@ -108,29 +108,7 @@ class MoreInformationItemWidget extends StatelessWidget {
                     top: 2.v,
                   ),
                   child: Text(
-                    "25 Lessons",
-                    style: theme.textTheme.titleSmall,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 30.v),
-          Padding(
-            padding: EdgeInsets.only(left: 38.h),
-            child: Row(
-              children: [
-                CustomImageView(
-                  imagePath: ImageConstant.imgMinimize,
-                  width: 15.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: 16.h,
-                    top: 4.v,
-                  ),
-                  child: Text(
-                    "Access Mobile, Desktop & TV",
+                    "21 Lessons",
                     style: theme.textTheme.titleSmall,
                   ),
                 ),
@@ -153,7 +131,7 @@ class MoreInformationItemWidget extends StatelessWidget {
                     top: 3.v,
                   ),
                   child: Text(
-                    "Beginner Level",
+                    "3.0 Ielts Level",
                     style: theme.textTheme.titleSmall,
                   ),
                 ),
@@ -196,7 +174,7 @@ class MoreInformationItemWidget extends StatelessWidget {
                     bottom: 2.v,
                   ),
                   child: Text(
-                    "Lifetime Access",
+                    "Access All Content",
                     style: theme.textTheme.titleSmall,
                   ),
                 ),
@@ -218,7 +196,7 @@ class MoreInformationItemWidget extends StatelessWidget {
                     top: 3.v,
                   ),
                   child: Text(
-                    "100 Quizzes",
+                    "10 Quizzes",
                     style: theme.textTheme.titleSmall,
                   ),
                 ),
@@ -386,118 +364,6 @@ class MoreInformationItemWidget extends StatelessWidget {
                                 padding: EdgeInsets.only(left: 22.h),
                                 child: Text(
                                   "2 Weeks Agos",
-                                  style: CustomTextStyles.labelLargeBluegray900
-                                      .copyWith(
-                                    color: appTheme.blueGray900,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 22.v),
-          Align(
-            alignment: Alignment.center,
-            child: Divider(
-              indent: 34.h,
-              endIndent: 34.h,
-            ),
-          ),
-          SizedBox(height: 25.v),
-          Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 34.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomImageView(
-                    imagePath: ImageConstant.imgImageBg1,
-                    height: 46.adaptSize,
-                    width: 46.adaptSize,
-                    radius: BorderRadius.circular(
-                      23.h,
-                    ),
-                    margin: EdgeInsets.only(
-                      top: 3.v,
-                      bottom: 65.v,
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 12.h),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(top: 1.v),
-                                child: Text(
-                                  "Martha E. Thompson",
-                                  style: CustomTextStyles.titleMedium17,
-                                ),
-                              ),
-                              CustomOutlinedButton(
-                                height: 26.v,
-                                width: 60.h,
-                                text: "4.5",
-                                leftIcon: Container(
-                                  margin: EdgeInsets.only(right: 2.h),
-                                  child: CustomImageView(
-                                    imagePath: ImageConstant.imgSignalAmber700,
-                                    height: 12.adaptSize,
-                                    width: 12.adaptSize,
-                                  ),
-                                ),
-                                buttonTextStyle:
-                                CustomTextStyles.labelLargeJostBluegray900,
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 8.v),
-                          Container(
-                            width: 295.h,
-                            margin: EdgeInsets.only(right: 5.h),
-                            child: Text(
-                              "The Course is Very Good dolor sit amet, consect tur adipiscing elit. Naturales divitias dixit parab les esse, quod parvo",
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              style: theme.textTheme.labelLarge!.copyWith(
-                                height: 1.38,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 7.v),
-                          Row(
-                            children: [
-                              CustomImageView(
-                                imagePath: ImageConstant.imgFavorite,
-                                height: 16.v,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 8.h),
-                                child: Text(
-                                  "88",
-                                  style: CustomTextStyles.labelLargeBluegray900
-                                      .copyWith(
-                                    color: appTheme.blueGray900,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 22.h),
-                                child: Text(
-                                  "1 Weeks Agos",
                                   style: CustomTextStyles.labelLargeBluegray900
                                       .copyWith(
                                     color: appTheme.blueGray900,
