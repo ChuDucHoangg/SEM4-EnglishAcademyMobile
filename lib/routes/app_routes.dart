@@ -1,3 +1,4 @@
+import 'package:english_academy_mobile/presentation/intro_scren/intro_screen.dart';
 import 'package:flutter/material.dart';
 import '../presentation/launching_screen/launching_screen.dart';
 import '../presentation/intro_one_screen/intro_one_screen.dart';
@@ -12,6 +13,8 @@ import '../presentation/profiles_screen/profiles_screen.dart';
 
 class AppRoutes {
   static const String launchingScreen = '/launching_screen';
+
+  static const String introScreen = '/intro_screen';
 
   static const String introOneScreen = '/intro_one_screen';
 
@@ -33,6 +36,7 @@ class AppRoutes {
 
   static Map<String, WidgetBuilder> routes = {
     launchingScreen: (context) => LaunchingScreen(),
+    introScreen: (context) => IntroScreen(),
     introOneScreen: (context) => IntroOneScreen(),
     introTwoScreen: (context) => IntroTwoScreen(),
     introThreeScreen: (context) => IntroThreeScreen(),
