@@ -111,7 +111,7 @@ class PopularCourseItemWidget extends StatelessWidget {
             itemCount: 2,
             itemBuilder: (context, index) {
               return Container(
-                decoration: AppDecoration.outlineBlack9001.copyWith(
+                decoration: AppDecoration.noShadow.copyWith(
                   borderRadius: BorderRadiusStyle.roundedBorder22,
                 ),
                 width: 280.h,
@@ -126,6 +126,7 @@ class PopularCourseItemWidget extends StatelessWidget {
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(20.h),
                         ),
+                        boxShadow: null
                       ),
                     ),
                     SizedBox(height: 10.v),
