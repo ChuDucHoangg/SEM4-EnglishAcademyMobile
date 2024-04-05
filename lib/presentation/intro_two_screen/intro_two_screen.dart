@@ -21,13 +21,6 @@ class IntroTwoScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                "Skip",
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
             Spacer(
               flex: 78,
             ),
@@ -45,55 +38,6 @@ class IntroTwoScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: _buildTelevision(context),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildTelevision(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 34.h,
-        right: 34.h,
-        bottom: 66.v,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            height: 10.v,
-            margin: EdgeInsets.symmetric(vertical: 25.v),
-            child: AnimatedSmoothIndicator(
-              activeIndex: 1,
-              count: 3,
-              effect: ScrollingDotsEffect(
-                spacing: 15,
-                activeDotColor: theme.colorScheme.primary,
-                dotColor: appTheme.teal5001,
-                dotHeight: 10.v,
-                dotWidth: 10.h,
-              ),
-            ),
-          ),
-          CustomIconButton(
-            height: 60.adaptSize,
-            width: 60.adaptSize,
-            padding: EdgeInsets.all(16.h),
-            decoration: IconButtonStyleHelper.outlineBlack,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => IntroThreeScreen()),
-                );
-              },
-              child: CustomImageView(
-                imagePath: ImageConstant.imgArrowRightWhiteA700,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

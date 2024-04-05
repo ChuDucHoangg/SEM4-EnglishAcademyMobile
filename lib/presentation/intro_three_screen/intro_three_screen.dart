@@ -21,13 +21,6 @@ class IntroThreeScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                "Skip",
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
             Spacer(
               flex: 78,
             ),
@@ -45,48 +38,6 @@ class IntroThreeScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: _buildGetStarted(context),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGetStarted(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 34.h,
-        right: 34.h,
-        bottom: 66.v,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            height: 10.v,
-            margin: EdgeInsets.symmetric(vertical: 25.v),
-            child: AnimatedSmoothIndicator(
-              activeIndex: 2,
-              count: 3,
-              effect: ScrollingDotsEffect(
-                spacing: 15,
-                activeDotColor: theme.colorScheme.primary,
-                dotColor: appTheme.teal5001,
-                dotHeight: 10.v,
-                dotWidth: 10.h,
-              ),
-            ),
-          ),
-          CustomElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => InitScreen()),
-              );
-            },
-            width: 200.h,
-            text: "Get Started",
-          ),
-        ],
       ),
     );
   }
