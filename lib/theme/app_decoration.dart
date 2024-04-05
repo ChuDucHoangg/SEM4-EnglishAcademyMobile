@@ -77,6 +77,9 @@ class AppDecoration {
       ),
     ],
   );
+  static BoxDecoration get noShadow => BoxDecoration(
+    color: appTheme.whiteA700,
+  );
   static BoxDecoration get outlineBlack9002 => BoxDecoration(
     color: appTheme.whiteA700,
     boxShadow: [
