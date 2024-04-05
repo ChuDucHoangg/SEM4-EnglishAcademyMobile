@@ -14,4 +14,16 @@ class CourseService {
       throw Exception('Failed to load courses');
     }
   }
+
+  static Future<CourseModel> fetchCourseDetail(String slug) async {
+    final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.courseDetail}/$slug'));
+
+    if (response.statusCode == 200) {
+      final dynamic courseJson = json.decode(response.body)['data'];
+      return CourseModel.fromJson(courseJson);
+    } else {
+      throw Exception('Failed to load course detail');
+    }
+  }
 }
+

@@ -15,6 +15,9 @@ class CourseModel {
   final DateTime modifiedDate;
   final String createdBy;
   final String modifiedBy;
+  final List<dynamic> reviewList;
+  final List<dynamic> topicOnlineDetailList;
+  final List<dynamic> testOnlineDTOList;
 
   CourseModel({
     required this.id,
@@ -33,26 +36,35 @@ class CourseModel {
     required this.modifiedDate,
     required this.createdBy,
     required this.modifiedBy,
+    required this.reviewList,
+    required this.topicOnlineDetailList,
+    required this.testOnlineDTOList,
   });
 
   factory CourseModel.fromJson(Map<String, dynamic> json) {
+    final List<dynamic> reviewList = json['reviewList'] ?? [];
+    final List<dynamic> topicOnlineDetailList = json['topicOnlineDetailList'] ?? [];
+    final List<dynamic> testOnlineDTOList = json['testOnlineDTOList'] ?? [];
     return CourseModel(
-      id: json['id'],
-      name: json['name'],
-      slug: json['slug'],
-      image: json['image'],
-      price: json['price'].toDouble(),
-      star: json['star'].toDouble(),
-      totalReview: json['totalReview'],
-      description: json['description'],
-      level: json['level'],
-      language: json['language'],
-      status: json['status'],
-      trailer: json['trailer'],
-      createdDate: DateTime.parse(json['createdDate']),
-      modifiedDate: DateTime.parse(json['modifiedDate']),
-      createdBy: json['createdBy'],
-      modifiedBy: json['modifiedBy'],
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+      slug: json['slug'] ?? '',
+      image: json['image'] ?? '',
+      price: json['price']?.toDouble() ?? 0.0,
+      star: json['star']?.toDouble() ?? 0.0,
+      totalReview: json['totalReview'] ?? 0,
+      description: json['description'] ?? '',
+      level: json['level'] ?? 0,
+      language: json['language'] ?? '',
+      status: json['status'] ?? 0,
+      trailer: json['trailer'] ?? '',
+      createdDate: json['createdDate'] != null ? DateTime.parse(json['createdDate']) : DateTime.now(),
+      modifiedDate: json['modifiedDate'] != null ? DateTime.parse(json['modifiedDate']) : DateTime.now(),
+      createdBy: json['createdBy'] ?? '',
+      modifiedBy: json['modifiedBy'] ?? '',
+      reviewList: reviewList,
+      topicOnlineDetailList: topicOnlineDetailList,
+      testOnlineDTOList: testOnlineDTOList,
     );
   }
 }
