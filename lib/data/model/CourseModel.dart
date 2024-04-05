@@ -17,7 +17,7 @@ class CourseModel {
   final String modifiedBy;
   final List<dynamic> reviewList;
   final List<dynamic> topicOnlineDetailList;
-  final List<dynamic> testOnlineDTOList;
+  // final List<dynamic> testOnlineDTOList;
 
   CourseModel({
     required this.id,
@@ -38,13 +38,13 @@ class CourseModel {
     required this.modifiedBy,
     required this.reviewList,
     required this.topicOnlineDetailList,
-    required this.testOnlineDTOList,
+    // required this.testOnlineDTOList,
   });
 
   factory CourseModel.fromJson(Map<String, dynamic> json) {
     final List<dynamic> reviewList = json['reviewList'] ?? [];
     final List<dynamic> topicOnlineDetailList = json['topicOnlineDetailList'] ?? [];
-    final List<dynamic> testOnlineDTOList = json['testOnlineDTOList'] ?? [];
+    // final List<dynamic> testOnlineDTOList = json['testOnlineDTOList'] ?? [];
     return CourseModel(
       id: json['id'] ?? 0,
       name: json['name'] ?? '',
@@ -64,7 +64,7 @@ class CourseModel {
       modifiedBy: json['modifiedBy'] ?? '',
       reviewList: reviewList,
       topicOnlineDetailList: topicOnlineDetailList,
-      testOnlineDTOList: testOnlineDTOList,
+      // testOnlineDTOList: testOnlineDTOList,
     );
   }
 }
