@@ -7,6 +7,7 @@ import '../presentation/intro_three_screen/intro_three_screen.dart';
 import '../presentation/home_screen/home_screen.dart';
 import '../presentation/course_screen/course_screen.dart';
 import '../presentation/course_screen/course_detail_screen/course_detail_screen.dart';
+import 'package:english_academy_mobile/presentation/course_screen/course_leaning_screen/course_learning_screen.dart';
 import '../presentation/indox_screen/indox_screen.dart';
 import '../presentation/transactions_screen/transactions_screen.dart';
 import '../presentation/profiles_screen/profiles_screen.dart';
@@ -28,6 +29,8 @@ class AppRoutes {
 
   static const String courseDetailScreen = '/course_detail_screen';
 
+  static const String courseLearningScreen = '/course_learning_screen';
+
   static const String indoxScreen = '/indox_screen';
 
   static const String transactionsScreen = '/transactions_screen';
@@ -47,6 +50,7 @@ class AppRoutes {
           ModalRoute.of(context)?.settings.arguments as String?;
       return CourseDetailScreen(slug: slug!);
     },
+    courseLearningScreen: (context) => CourseLearningScreen(),
     indoxScreen: (context) => IndoxScreen(),
     transactionsScreen: (context) => TransactionsScreen(),
     profilesScreen: (context) => ProfilesScreen(),

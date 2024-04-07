@@ -30,10 +30,11 @@ class _GeneralInformationItemWidgetState
   @override
   void initState() {
     super.initState();
-    _isExpandedList = List<bool>.filled(widget.course.topicOnlineDetailList.length, false);
-    _isExpandedList[0] = true;
+    if (widget.course.topicOnlineDetailList.isNotEmpty) {
+      _isExpandedList = List<bool>.filled(widget.course.topicOnlineDetailList.length, false);
+      _isExpandedList[0] = true;
+    }
   }
-
 
   @override
   Widget build(BuildContext context) {
