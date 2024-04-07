@@ -53,7 +53,7 @@ class CourseScreen extends StatelessWidget {
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
       title: AppbarSubtitle(
-        text: "All Courses",
+        text: "Courses",
         margin: EdgeInsets.only(left: 35.h),
       ),
       actions: [
@@ -73,7 +73,7 @@ class CourseScreen extends StatelessWidget {
         Expanded(
           child: CustomElevatedButton(
             height: 48.v,
-            text: "Online",
+            text: "All Course",
             margin: EdgeInsets.only(right: 10.h),
             buttonStyle: CustomButtonStyles.fillTeal,
             buttonTextStyle: CustomTextStyles.titleSmallWhiteA700ExtraBold,
@@ -82,7 +82,7 @@ class CourseScreen extends StatelessWidget {
         Expanded(
           child: CustomElevatedButton(
             height: 48.v,
-            text: "Offline",
+            text: "My Course",
             margin: EdgeInsets.only(left: 10.h),
             buttonStyle: CustomButtonStyles.fillBlue,
             buttonTextStyle: CustomTextStyles.titleSmallBluegray900ExtraBold15,
