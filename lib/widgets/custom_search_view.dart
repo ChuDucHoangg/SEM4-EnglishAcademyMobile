@@ -96,71 +96,111 @@ class CustomSearchView extends StatelessWidget {
         }
       },
       autofocus: autofocus!,
-      style: textStyle ?? CustomTextStyles.titleMediumMulishBluegray200,
+      style: textStyle ?? theme.textTheme.bodyMedium,
       keyboardType: textInputType,
       maxLines: maxLines ?? 1,
       decoration: decoration,
       validator: validator,
       onChanged: (String value) {
-        onChanged!.call(value);
+        onChanged?.call(value);
       },
     ),
   );
   InputDecoration get decoration => InputDecoration(
     hintText: hintText ?? "",
-    hintStyle: hintStyle ?? CustomTextStyles.titleMediumMulishBluegray200,
+    hintStyle: hintStyle ?? CustomTextStyles.bodyMediumOnErrorContainer,
     prefixIcon: prefix ??
         Container(
-          margin: EdgeInsets.fromLTRB(13.h, 22.v, 9.h, 22.v),
+          margin: EdgeInsets.symmetric(
+            horizontal: 12.h,
+            vertical: 16.v,
+          ),
           child: CustomImageView(
-            imagePath: ImageConstant.imgQrcode,
-            height: 20.adaptSize,
-            width: 20.adaptSize,
+            imagePath: ImageConstant.imgRewindBlueGray300,
+            height: 16.adaptSize,
+            width: 16.adaptSize,
           ),
         ),
     prefixIconConstraints: prefixConstraints ??
         BoxConstraints(
-          maxHeight: 64.v,
+          maxHeight: 48.v,
         ),
     suffixIcon: suffix ??
-        Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 9.h,
-            vertical: 10.v,
+        Padding(
+          padding: EdgeInsets.only(
+            right: 15.h,
           ),
-          margin: EdgeInsets.fromLTRB(30.h, 13.v, 10.h, 13.v),
-          decoration: BoxDecoration(
-            color: theme.colorScheme.primary,
-            borderRadius: BorderRadius.circular(10.h),
-          ),
-          child: CustomImageView(
-            imagePath: ImageConstant.imgFilter,
-            height: 18.v,
-            width: 19.h,
+          child: IconButton(
+            onPressed: () => controller!.clear(),
+            icon: Icon(
+              Icons.clear,
+              color: Colors.grey.shade600,
+            ),
           ),
         ),
     suffixIconConstraints: suffixConstraints ??
         BoxConstraints(
-          maxHeight: 64.v,
+          maxHeight: 48.v,
         ),
     isDense: true,
-    contentPadding: contentPadding ?? EdgeInsets.symmetric(vertical: 21.v),
-    fillColor: fillColor ?? appTheme.whiteA700,
+    contentPadding: contentPadding ??
+        EdgeInsets.only(
+          top: 15.v,
+          right: 15.h,
+          bottom: 15.v,
+        ),
+    fillColor:
+    fillColor ?? theme.colorScheme.onErrorContainer.withOpacity(0.05),
     filled: filled,
     border: borderDecoration ??
         OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.h),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(12.h),
+          borderSide: BorderSide(
+            color: theme.colorScheme.onErrorContainer,
+            width: 1,
+          ),
         ),
     enabledBorder: borderDecoration ??
         OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.h),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(12.h),
+          borderSide: BorderSide(
+            color: theme.colorScheme.onErrorContainer,
+            width: 1,
+          ),
         ),
     focusedBorder: borderDecoration ??
         OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.h),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(10.h),
+          borderSide: BorderSide(
+            color: theme.colorScheme.primary,
+            width: 1,
+          ),
         ),
+  );
+}
+
+/// Extension on [CustomSearchView] to facilitate inclusion of all types of border style etc
+extension SearchViewStyleHelper on CustomSearchView {
+  static OutlineInputBorder get outlineBlueGray => OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10.h),
+    borderSide: BorderSide(
+      color: appTheme.blueGray50,
+      width: 1,
+    ),
+  );
+  static OutlineInputBorder get outlineBlueGrayTL12 => OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12.h),
+    borderSide: BorderSide(
+      color: appTheme.blueGray50,
+      width: 1,
+    ),
+  );
+  static OutlineInputBorder get fillOnErrorContainer => OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12.h),
+    borderSide: BorderSide.none,
+  );
+  static OutlineInputBorder get fillGray => OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12.h),
+    borderSide: BorderSide.none,
   );
 }

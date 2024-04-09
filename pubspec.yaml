@@ -11,12 +11,9 @@ dependencies:
   pin_code_fields: ^8.0.1
   flutter_rating_bar: ^4.0.1
   country_pickers: ^2.0.0
-  smooth_page_indicator: ^1.1.0
-  flutter_svg_provider: ^1.0.7
-  carousel_slider: ^4.2.1
   grouped_list: ^5.1.2
-  readmore: ^2.2.0
   intl: ^0.18.0
+  smooth_page_indicator: ^1.1.0
   http: ^1.2.1
   animated_splash_screen: ^1.3.0
   lottie: ^3.1.0
@@ -31,25 +28,33 @@ flutter:
     - assets/images/
     - assets/lottie/
   fonts:
-    - family: Aubrey
+    - family: Inter
       fonts:
-        - asset: assets/fonts/Aubrey.ttf
+        - asset: assets/fonts/InterBold.ttf
+          weight: 700
+        - asset: assets/fonts/InterMedium.ttf
+          weight: 500
+        - asset: assets/fonts/InterRegular.ttf
           weight: 400
-    - family: Poppins
+    - family: Manrope
       fonts:
-        - asset: assets/fonts/PoppinsSemiBold.ttf
-          weight: 600
-    - family: Jost
-      fonts:
-        - asset: assets/fonts/JostSemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/JostBold.ttf
+        - asset: assets/fonts/ManropeRegular.ttf
+          weight: 400
+        - asset: assets/fonts/ManropeBold.ttf
           weight: 700
-    - family: Mulish
-      fonts:
-        - asset: assets/fonts/MulishBold.ttf
-          weight: 700
-        - asset: assets/fonts/MulishExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/MulishSemiBold.ttf
+        - asset: assets/fonts/ManropeSemiBold.ttf
           weight: 600
+    - family: Urbanist
+      fonts:
+        - asset: assets/fonts/UrbanistBold.ttf
+          weight: 700
+    - family: Plus Jakarta Sans
+      fonts:
+        - asset: assets/fonts/PlusJakartaSansSemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/PlusJakartaSansMedium.ttf
+          weight: 500
+        - asset: assets/fonts/PlusJakartaSansBold.ttf
+          weight: 700
+        - asset: assets/fonts/PlusJakartaSansRegular.ttf
+          weight: 400

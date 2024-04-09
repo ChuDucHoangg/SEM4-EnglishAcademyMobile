@@ -1,4 +1,6 @@
+import 'package:english_academy_mobile/presentation/%20instructor_screen/instructor_screen.dart';
 import 'package:english_academy_mobile/presentation/intro_scren/intro_screen.dart';
+import 'package:english_academy_mobile/presentation/notification_screen/notification_screen.dart';
 import 'package:flutter/material.dart';
 import '../presentation/launching_screen/launching_screen.dart';
 import '../presentation/intro_one_screen/intro_one_screen.dart';
@@ -8,9 +10,7 @@ import '../presentation/home_screen/home_screen.dart';
 import '../presentation/course_screen/course_screen.dart';
 import '../presentation/course_screen/course_detail_screen/course_detail_screen.dart';
 import 'package:english_academy_mobile/presentation/course_screen/course_leaning_screen/course_learning_screen.dart';
-import '../presentation/indox_screen/indox_screen.dart';
-import '../presentation/transactions_screen/transactions_screen.dart';
-import '../presentation/profiles_screen/profiles_screen.dart';
+import '../presentation/profile_screen/profile_screen.dart';
 
 class AppRoutes {
   static const String launchingScreen = '/launching_screen';
@@ -25,17 +25,17 @@ class AppRoutes {
 
   static const String homeScreen = '/home_screen';
 
+  static const String instructorScreen = '/instructor_screen';
+
   static const String courseScreen = '/course_screen';
 
   static const String courseDetailScreen = '/course_detail_screen';
 
   static const String courseLearningScreen = '/course_learning_screen';
 
-  static const String indoxScreen = '/indox_screen';
+  static const String notificationScreen = '/notification_screen';
 
-  static const String transactionsScreen = '/transactions_screen';
-
-  static const String profilesScreen = '/profiles_screen';
+  static const String profileScreen = '/profile_screen';
 
   static Map<String, WidgetBuilder> routes = {
     launchingScreen: (context) => LaunchingScreen(),
@@ -44,15 +44,15 @@ class AppRoutes {
     introTwoScreen: (context) => IntroTwoScreen(),
     introThreeScreen: (context) => IntroThreeScreen(),
     homeScreen: (context) => HomeScreen(),
+    instructorScreen: (context) => InstructorScreen(),
     courseScreen: (context) => CourseScreen(),
-    courseDetailScreen: (context) {
-      final String? slug =
-          ModalRoute.of(context)?.settings.arguments as String?;
-      return CourseDetailScreen(slug: slug!);
-    },
-    courseLearningScreen: (context) => CourseLearningScreen(),
-    indoxScreen: (context) => IndoxScreen(),
-    transactionsScreen: (context) => TransactionsScreen(),
-    profilesScreen: (context) => ProfilesScreen(),
+    notificationScreen: (context) => NotificationScreen(),
+    // courseDetailScreen: (context) {
+    //   final String? slug =
+    //       ModalRoute.of(context)?.settings.arguments as String?;
+    //   return CourseDetailScreen(slug: slug!);
+    // },
+    // courseLearningScreen: (context) => CourseLearningScreen(),
+    profileScreen: (context) => ProfileScreen(),
   };
 }

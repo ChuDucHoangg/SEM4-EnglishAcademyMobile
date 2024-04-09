@@ -24,71 +24,80 @@ class CustomPhoneNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: appTheme.whiteA700,
-        borderRadius: BorderRadius.circular(
-          12.h,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: appTheme.black900.withOpacity(0.1),
-            spreadRadius: 2.h,
-            blurRadius: 2.h,
-            offset: Offset(
-              0,
-              2,
-            ),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          InkWell(
-            onTap: () {
-              _openCountryPicker(context);
-            },
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: 20.h,
-                top: 22.v,
-                bottom: 22.v,
+    return Row(
+      children: [
+        InkWell(
+          onTap: () {
+            _openCountryPicker(context);
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: appTheme.blueGray50,
+                  width: 1.h,
+                ),
+                left: BorderSide(
+                  color: appTheme.blueGray50,
+                  width: 1.h,
+                ),
+                bottom: BorderSide(
+                  color: appTheme.blueGray50,
+                  width: 1.h,
+                ),
               ),
-              child: Row(
-                children: [
-                  CountryPickerUtils.getDefaultFlagImage(
+            ),
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: 16.h,
+                    top: 18.v,
+                    bottom: 18.v,
+                  ),
+                  child: CountryPickerUtils.getDefaultFlagImage(
                     country,
                   ),
-                  CustomImageView(
-                    imagePath: ImageConstant.imgArrowDownGray90001,
-                    height: 6.v,
-                    margin: EdgeInsets.only(
-                      left: 10.h,
-                      top: 6.v,
-                      bottom: 4.v,
-                    ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(8.h, 18.v, 17.h, 17.v),
+                  child: Text(
+                    "+${country.phoneCode}",
+                    style: theme.textTheme.bodyLarge,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: 17.h,
-                right: 5.h,
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(right: 5.h),
+            child: CustomTextFormField(
+              width: 243.h,
+              controller: controller,
+              hintText: "8976 88",
+              suffix: Container(
+                margin: EdgeInsets.fromLTRB(30.h, 22.v, 15.h, 22.v),
+                child: CustomImageView(
+                  imagePath: ImageConstant.imgClose,
+                  height: 12.adaptSize,
+                  width: 12.adaptSize,
+                ),
               ),
-              child: CustomTextFormField(
-                width: 272.h,
-                controller: controller,
-                hintText: "7248481225",
-                textInputType: TextInputType.phone,
-                contentPadding: EdgeInsets.symmetric(horizontal: 5.h),
+              suffixConstraints: BoxConstraints(
+                maxHeight: 56.v,
               ),
+              contentPadding: EdgeInsets.only(
+                left: 16.h,
+                top: 18.v,
+                bottom: 18.v,
+              ),
+              borderDecoration: TextFormFieldStyleHelper.outlinePrimaryLR12,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

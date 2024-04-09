@@ -50,8 +50,8 @@ class CustomIconButton extends StatelessWidget {
         padding: padding ?? EdgeInsets.zero,
         decoration: decoration ??
             BoxDecoration(
-              color: appTheme.teal700,
-              borderRadius: BorderRadius.circular(8.h),
+              color: appTheme.gray100,
+              borderRadius: BorderRadius.circular(12.h),
             ),
         child: child,
       ),
@@ -77,110 +77,87 @@ extension IconButtonStyleHelper on CustomIconButton {
       ),
     ],
   );
-  static BoxDecoration get outlineBlackTL24 => BoxDecoration(
-    color: appTheme.whiteA700,
+  static BoxDecoration get fillIndigo => BoxDecoration(
+    color: appTheme.indigo90001,
+    borderRadius: BorderRadius.circular(28.h),
+  );
+  static BoxDecoration get fillGray => BoxDecoration(
+    color: appTheme.gray5002,
     borderRadius: BorderRadius.circular(24.h),
-    boxShadow: [
-      BoxShadow(
-        color: appTheme.black900.withOpacity(0.1),
-        spreadRadius: 2.h,
-        blurRadius: 2.h,
-        offset: Offset(
-          1,
-          2,
-        ),
-      ),
-    ],
   );
-  static BoxDecoration get outlineTeal => BoxDecoration(
-    color: appTheme.blue50,
-    borderRadius: BorderRadius.circular(18.h),
-    border: Border.all(
-      color: appTheme.teal700,
-      width: 2.h,
-    ),
+  static BoxDecoration get fillOnErrorContainer => BoxDecoration(
+    color: theme.colorScheme.onErrorContainer.withOpacity(1),
+    borderRadius: BorderRadius.circular(10.h),
   );
-  static BoxDecoration get outlineTealTL20 => BoxDecoration(
-    borderRadius: BorderRadius.circular(20.h),
-    border: Border.all(
-      color: appTheme.teal700,
-      width: 2.h,
-    ),
-  );
-  static BoxDecoration get outlineBlackTL31 => BoxDecoration(
-    color: appTheme.teal700,
-    borderRadius: BorderRadius.circular(31.h),
-    boxShadow: [
-      BoxShadow(
-        color: appTheme.black900.withOpacity(0.2),
-        spreadRadius: 2.h,
-        blurRadius: 2.h,
-        offset: Offset(
-          1,
-          4,
-        ),
-      ),
-    ],
-  );
-  static BoxDecoration get outlineBlackTL26 => BoxDecoration(
-    color: appTheme.gray50,
-    borderRadius: BorderRadius.circular(26.h),
-    boxShadow: [
-      BoxShadow(
-        color: appTheme.black900.withOpacity(0.1),
-        spreadRadius: 2.h,
-        blurRadius: 2.h,
-        offset: Offset(
-          1,
-          3,
-        ),
-      ),
-    ],
-  );
-  static BoxDecoration get outlineBlackTL261 => BoxDecoration(
+  static BoxDecoration get fillPrimary => BoxDecoration(
     color: theme.colorScheme.primary,
-    borderRadius: BorderRadius.circular(26.h),
-    boxShadow: [
-      BoxShadow(
-        color: appTheme.black900.withOpacity(0.1),
-        spreadRadius: 2.h,
-        blurRadius: 2.h,
-        offset: Offset(
-          1,
-          3,
-        ),
-      ),
-    ],
-  );
-  static BoxDecoration get outlineBlackTL311 => BoxDecoration(
-    color: appTheme.redA400,
-    borderRadius: BorderRadius.circular(31.h),
-    boxShadow: [
-      BoxShadow(
-        color: appTheme.black900.withOpacity(0.3),
-        spreadRadius: 2.h,
-        blurRadius: 2.h,
-        offset: Offset(
-          1,
-          2,
-        ),
-      ),
-    ],
+    borderRadius: BorderRadius.circular(10.h),
   );
   static BoxDecoration get outlineBlueGray => BoxDecoration(
-    color: appTheme.blue50,
-    borderRadius: BorderRadius.circular(12.h),
+    borderRadius: BorderRadius.circular(28.h),
     border: Border.all(
-      color: appTheme.blueGray200.withOpacity(0.5),
-      width: 2.h,
+      color: appTheme.blueGray50,
+      width: 1.h,
     ),
   );
-  static BoxDecoration get outlineTealTL8 => BoxDecoration(
-    color: appTheme.whiteA700,
-    borderRadius: BorderRadius.circular(8.h),
+  static BoxDecoration get outlineBlueGrayTL12 => BoxDecoration(
+    borderRadius: BorderRadius.circular(12.h),
     border: Border.all(
-      color: appTheme.teal700,
-      width: 3.h,
+      color: appTheme.blueGray80001,
+      width: 1.h,
     ),
+  );
+  static BoxDecoration get outlineOnErrorContainer => BoxDecoration(
+    color: theme.colorScheme.onErrorContainer.withOpacity(0.25),
+    borderRadius: BorderRadius.circular(28.h),
+    border: Border.all(
+      color: theme.colorScheme.onErrorContainer.withOpacity(0.35),
+      width: 1.h,
+    ),
+  );
+  static BoxDecoration get outlineOnErrorContainerTL36 => BoxDecoration(
+    color: theme.colorScheme.onErrorContainer.withOpacity(0.25),
+    borderRadius: BorderRadius.circular(36.h),
+    border: Border.all(
+      color: theme.colorScheme.onErrorContainer.withOpacity(0.4),
+      width: 1.h,
+    ),
+  );
+  static BoxDecoration get outlineBlueGrayTL121 => BoxDecoration(
+    borderRadius: BorderRadius.circular(12.h),
+    border: Border.all(
+      color: appTheme.blueGray50,
+      width: 1.h,
+    ),
+  );
+  static BoxDecoration get fillGrayTL8 => BoxDecoration(
+    color: appTheme.gray5002,
+    borderRadius: BorderRadius.circular(8.h),
+  );
+  static BoxDecoration get fillGrayTL20 => BoxDecoration(
+    color: appTheme.gray5002,
+    borderRadius: BorderRadius.circular(20.h),
+  );
+  static BoxDecoration get fillBlueGray => BoxDecoration(
+    color: appTheme.blueGray50,
+    borderRadius: BorderRadius.circular(8.h),
+  );
+  static BoxDecoration get outlineBlueGrayTL24 => BoxDecoration(
+    borderRadius: BorderRadius.circular(24.h),
+    border: Border.all(
+      color: appTheme.blueGray50,
+      width: 1.h,
+    ),
+  );
+  static BoxDecoration get outlineBlueGrayTL20 => BoxDecoration(
+    borderRadius: BorderRadius.circular(20.h),
+    border: Border.all(
+      color: appTheme.blueGray50,
+      width: 1.h,
+    ),
+  );
+  static BoxDecoration get fillIndigoTL10 => BoxDecoration(
+    color: appTheme.indigo100,
+    borderRadius: BorderRadius.circular(10.h),
   );
 }

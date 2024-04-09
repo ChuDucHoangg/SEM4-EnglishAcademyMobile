@@ -48,10 +48,22 @@ class CustomFloatingButton extends StatelessWidget {
       height: height ?? 0,
       decoration: decoration ??
           BoxDecoration(
-            color: appTheme.whiteA700,
-            borderRadius: BorderRadius.circular(24.h),
+            color: theme.colorScheme.primary,
+            borderRadius: BorderRadius.circular(28.h),
           ),
       child: child,
     ),
+  );
+}
+
+/// Extension on [CustomFloatingButton] to facilitate inclusion of all types of border style etc
+extension FloatingButtonStyleHelper on CustomFloatingButton {
+  static BoxDecoration get fillBlueGray => BoxDecoration(
+    color: appTheme.blueGray600,
+    borderRadius: BorderRadius.circular(28.h),
+  );
+  static BoxDecoration get fillPrimaryTL12 => BoxDecoration(
+    color: theme.colorScheme.primary,
+    borderRadius: BorderRadius.circular(12.h),
   );
 }

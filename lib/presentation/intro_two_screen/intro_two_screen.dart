@@ -31,7 +31,11 @@ class IntroTwoScreen extends StatelessWidget {
             SizedBox(height: 6.v),
             Text(
               "Booked or Same the Lectures for Future",
-              style: theme.textTheme.titleSmall,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: CustomTextStyles.bodyLargeBluegray30002.copyWith(
+              ),
             ),
             Spacer(
               flex: 21,

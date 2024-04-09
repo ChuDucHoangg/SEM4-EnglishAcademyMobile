@@ -69,19 +69,11 @@ class CustomRadioButton extends StatelessWidget {
     child: Container(
       decoration: decoration ??
           BoxDecoration(
-            color: appTheme.whiteA700,
-            borderRadius: BorderRadius.circular(16.h),
-            boxShadow: [
-              BoxShadow(
-                color: appTheme.black900.withOpacity(0.08),
-                spreadRadius: 2.h,
-                blurRadius: 2.h,
-                offset: Offset(
-                  0,
-                  4,
-                ),
-              ),
-            ],
+            borderRadius: BorderRadius.circular(12.h),
+            border: Border.all(
+              color: appTheme.blueGray50,
+              width: 1.h,
+            ),
           ),
       width: width,
       padding: padding,
@@ -112,7 +104,7 @@ class CustomRadioButton extends StatelessWidget {
   Widget get textWidget => Text(
     text ?? "",
     textAlign: textAlignment ?? TextAlign.start,
-    style: textStyle ?? CustomTextStyles.titleSmallBluegray900ExtraBold,
+    style: textStyle ?? CustomTextStyles.labelLargeBluegray300,
   );
   Widget get radioButtonWidget => SizedBox(
     height: iconSize,

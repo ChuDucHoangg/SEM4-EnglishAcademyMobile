@@ -31,7 +31,12 @@ class IntroThreeScreen extends StatelessWidget {
             SizedBox(height: 10.v),
             Text(
               "Analyse your scores and Track your results",
-              style: theme.textTheme.titleSmall,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: CustomTextStyles.bodyLargeBluegray30002.copyWith(
+                height: 1.50,
+              ),
             ),
             Spacer(
               flex: 21,

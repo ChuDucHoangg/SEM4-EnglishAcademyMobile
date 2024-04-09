@@ -36,14 +36,14 @@ class ThemeHelper {
       visualDensity: VisualDensity.standard,
       colorScheme: colorScheme,
       textTheme: TextThemes.textTheme(colorScheme),
-      scaffoldBackgroundColor: appTheme.gray50,
+      scaffoldBackgroundColor: colorScheme.onErrorContainer.withOpacity(1),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: colorScheme.primary,
+          backgroundColor: appTheme.green50,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(5),
           ),
-          shadowColor: appTheme.black900.withOpacity(0.3),
+          shadowColor: appTheme.gray900.withOpacity(0.08),
           elevation: 2,
           visualDensity: const VisualDensity(
             vertical: -4,
@@ -56,11 +56,11 @@ class ThemeHelper {
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.transparent,
           side: BorderSide(
-            color: appTheme.blueA200,
-            width: 2,
+            color: appTheme.blueGray50,
+            width: 1,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(13),
+            borderRadius: BorderRadius.circular(8),
           ),
           visualDensity: const VisualDensity(
             vertical: -4,
@@ -97,12 +97,12 @@ class ThemeHelper {
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: appTheme.whiteA700,
+        backgroundColor: colorScheme.primary,
       ),
       dividerTheme: DividerThemeData(
         thickness: 1,
         space: 1,
-        color: appTheme.blue50,
+        color: appTheme.blueGray50,
       ),
     );
   }
@@ -117,58 +117,70 @@ class ThemeHelper {
 /// Class containing the supported text theme styles.
 class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
-    displaySmall: TextStyle(
-      color: appTheme.blueGray900,
-      fontSize: 38.fSize,
-      fontFamily: 'Jost',
-      fontWeight: FontWeight.w600,
-    ),
-    headlineLarge: TextStyle(
-      color: appTheme.indigo700,
-      fontSize: 30.fSize,
-      fontFamily: 'Aubrey',
+    bodyLarge: TextStyle(
+      color: appTheme.gray900,
+      fontSize: 16.fSize,
+      fontFamily: 'Inter',
       fontWeight: FontWeight.w400,
     ),
+    bodyMedium: TextStyle(
+      color: appTheme.gray900,
+      fontSize: 14.fSize,
+      fontFamily: 'Inter',
+      fontWeight: FontWeight.w400,
+    ),
+    bodySmall: TextStyle(
+      color: appTheme.gray60001,
+      fontSize: 12.fSize,
+      fontFamily: 'Inter',
+      fontWeight: FontWeight.w400,
+    ),
+    headlineMedium: TextStyle(
+      color: appTheme.gray900,
+      fontSize: 28.fSize,
+      fontFamily: 'Inter',
+      fontWeight: FontWeight.w700,
+    ),
     headlineSmall: TextStyle(
-      color: appTheme.blueGray900,
+      color: appTheme.gray900,
       fontSize: 24.fSize,
-      fontFamily: 'Jost',
-      fontWeight: FontWeight.w600,
+      fontFamily: 'Inter',
+      fontWeight: FontWeight.w700,
     ),
     labelLarge: TextStyle(
-      color: appTheme.gray700,
-      fontSize: 13.fSize,
-      fontFamily: 'Mulish',
+      color: Color(0XFF6B7280),
+      fontSize: 12.fSize,
+      fontFamily: 'Inter',
       fontWeight: FontWeight.w700,
     ),
     labelMedium: TextStyle(
-      color: appTheme.blueGray900,
-      fontSize: 11.fSize,
-      fontFamily: 'Mulish',
-      fontWeight: FontWeight.w800,
+      color: appTheme.gray60001,
+      fontSize: 10.fSize,
+      fontFamily: 'Inter',
+      fontWeight: FontWeight.w500,
     ),
     labelSmall: TextStyle(
-      color: appTheme.blueGray900,
-      fontSize: 9.fSize,
-      fontFamily: 'Mulish',
-      fontWeight: FontWeight.w800,
+      color: appTheme.greenA400,
+      fontSize: 8.fSize,
+      fontFamily: 'Inter',
+      fontWeight: FontWeight.w700,
     ),
     titleLarge: TextStyle(
-      color: appTheme.blueGray900,
-      fontSize: 21.fSize,
-      fontFamily: 'Jost',
-      fontWeight: FontWeight.w600,
+      color: appTheme.gray900,
+      fontSize: 20.fSize,
+      fontFamily: 'Inter',
+      fontWeight: FontWeight.w700,
     ),
     titleMedium: TextStyle(
-      color: appTheme.blueGray900,
+      color: appTheme.gray900,
       fontSize: 16.fSize,
-      fontFamily: 'Jost',
-      fontWeight: FontWeight.w600,
+      fontFamily: 'Inter',
+      fontWeight: FontWeight.w700,
     ),
     titleSmall: TextStyle(
-      color: appTheme.gray700,
+      color: appTheme.gray900,
       fontSize: 14.fSize,
-      fontFamily: 'Mulish',
+      fontFamily: 'Inter',
       fontWeight: FontWeight.w700,
     ),
   );
@@ -178,87 +190,97 @@ class TextThemes {
 class ColorSchemes {
   static final primaryColorScheme = ColorScheme.light(
     // Primary colors
-    primary: Color(0XFF0961F5),
-    primaryContainer: Color(0XFF1F0E31),
-    secondaryContainer: Color(0XFFDD2D44),
+    primary: Color(0XFF1D2857),
+    primaryContainer: Color(0XFF8992BA),
 
     // Error colors
-    errorContainer: Color(0XFF3046CC),
-    onError: Color(0XFF8E5AA3),
+    errorContainer: Color(0XFFE31837),
+    onErrorContainer: Color(0X1EFFFFFF),
 
     // On colors(text colors)
-    onPrimary: Color(0XFF0E0E0E),
-    onPrimaryContainer: Color(0XFF1DA1F2),
+    onPrimary: Color(0XFFE3E5E7),
+    onPrimaryContainer: Color(0XFF0F172A),
   );
 }
 
 /// Class containing custom colors for a primary theme.
 class PrimaryColors {
   // Amber
-  Color get amber700 => Color(0XFFFF9C07);
-  Color get amberA200 => Color(0XFFFAC840);
-  Color get amberA20001 => Color(0XFFFCCB40);
-  Color get amberA400 => Color(0XFFFFC200);
-  Color get amberA40001 => Color(0XFFFCC202);
+  Color get amber500 => Color(0XFFFFC107);
+  Color get amberA200 => Color(0XFFFDC83D);
 
   // Black
   Color get black900 => Color(0XFF000000);
 
   // Blue
-  Color get blue50 => Color(0XFFE8F1FF);
-  Color get blue600 => Color(0XFF1B97DF);
-  Color get blueA200 => Color(0XFF4D81E5);
-  Color get blueA400 => Color(0XFF1A6EFB);
-  Color get blueA40001 => Color(0XFF1A6EFC);
+  Color get blue50 => Color(0XFFE6EFFE);
+  Color get blueA200 => Color(0XFF3F75FF);
+  Color get blueA400 => Color(0XFF1877F2);
+  Color get blueA700 => Color(0XFF0564F1);
 
   // BlueGray
-  Color get blueGray100 => Color(0XFFD7D7D7);
-  Color get blueGray200 => Color(0XFFB4BDC4);
-  Color get blueGray50 => Color(0XFFEFEFF1);
-  Color get blueGray900 => Color(0XFF202244);
+  Color get blueGray100 => Color(0XFFD1D5DB);
+  Color get blueGray300 => Color(0XFF9CA3AF);
+  Color get blueGray30001 => Color(0XFF94A3B8);
+  Color get blueGray30002 => Color(0XFF97A9BD);
+  Color get blueGray400 => Color(0XFF888888);
+  Color get blueGray50 => Color(0XFFEDEFF1);
+  Color get blueGray500 => Color(0XFF5B6C8C);
+  Color get blueGray50001 => Color(0XFF6772A0);
+  Color get blueGray50002 => Color(0XFF64748B);
+  Color get blueGray600 => Color(0XFF465287);
+  Color get blueGray700 => Color(0XFF4B5563);
+  Color get blueGray70059 => Color(0X59345D62);
+  Color get blueGray800 => Color(0XFF374151);
+  Color get blueGray80001 => Color(0XFF2B3558);
+  Color get blueGray900 => Color(0XFF292D32);
+
+  // BlueGrayB
+  Color get blueGray800B2 => Color(0XB22C3658);
 
   // Gray
-  Color get gray100 => Color(0XFFF3F3F3);
-  Color get gray10001 => Color(0XFFF4F4F4);
-  Color get gray200 => Color(0XFFEAEAEA);
-  Color get gray50 => Color(0XFFF4F8FE);
-  Color get gray500 => Color(0XFFA0A4AB);
-  Color get gray700 => Color(0XFF545454);
-  Color get gray800 => Color(0XFF505050);
-  Color get gray80001 => Color(0XFF472D2D);
-  Color get gray900 => Color(0XFF111223);
-  Color get gray90001 => Color(0XFF1C1C1B);
+  Color get gray100 => Color(0XFFF3F4F6);
+  Color get gray10001 => Color(0XFFF0F5FE);
+  Color get gray10002 => Color(0XFFF2F5F7);
+  Color get gray200 => Color(0XFFE5E7EB);
+  Color get gray20001 => Color(0XFFF0F0F0);
+  Color get gray20002 => Color(0XFFE8E9EC);
+  Color get gray50 => Color(0XFFF8F4FF);
+  Color get gray5001 => Color(0XFFFFF4F6);
+  Color get gray5002 => Color(0XFFF9FAFB);
+  Color get gray600 => Color(0XFF717585);
+  Color get gray60001 => Color(0XFF6B7280);
+  Color get gray900 => Color(0XFF111827);
+  Color get gray90001 => Color(0XFF121933);
+  Color get gray90002 => Color(0XFF121932);
 
   // Green
-  Color get green500 => Color(0XFF50B747);
-  Color get green600 => Color(0XFF4C935E);
+  Color get green50 => Color(0XFFEAFCF2);
+  Color get green900 => Color(0XFF128807);
+  Color get greenA400 => Color(0XFF24D076);
 
   // Indigo
-  Color get indigo500 => Color(0XFF4267B2);
-  Color get indigo700 => Color(0XFF332DA1);
-  Color get indigo900 => Color(0XFF073862);
-  Color get indigo90001 => Color(0XFF292E63);
+  Color get indigo100 => Color(0XFFBBC2E1);
+  Color get indigo10001 => Color(0XFFC8D0F6);
+  Color get indigo900 => Color(0XFF27346A);
+  Color get indigo90001 => Color(0XFF25326D);
 
-  // Orange
-  Color get orange100 => Color(0XFFF8DCA3);
-  Color get orange600 => Color(0XFFE68B01);
-  Color get orangeA200 => Color(0XFFEBB039);
-  Color get orangeA700 => Color(0XFFFF6B00);
+  // LightBlue
+  Color get lightBlue400 => Color(0XFF1ABCFE);
+  Color get lightBlue800 => Color(0XFF016FD0);
+
+  // Pink
+  Color get pink50 => Color(0XFFFFDADF);
 
   // Red
-  Color get red500 => Color(0XFFF04336);
-  Color get red600 => Color(0XFFDB4A39);
-  Color get redA400 => Color(0XFFFF001E);
+  Color get red700 => Color(0XFFBD3D44);
+  Color get red900 => Color(0XFFAA151B);
+  Color get redA200 => Color(0XFFFF445D);
 
-  // Teal
-  Color get teal50 => Color(0XFFDBE8EB);
+  // Yellow
+  Color get yellow50 => Color(0XFFFFFAEC);
+
   Color get teal5001 => Color(0XFFD5E1F5);
-  Color get teal600 => Color(0XFF128C7E);
-  Color get teal700 => Color(0XFF167F71);
-  Color get teal900 => Color(0XFF033B58);
-
-  // White
-  Color get whiteA700 => Color(0XFFFFFFFF);
 }
 
 PrimaryColors get appTheme => ThemeHelper().themeColor();

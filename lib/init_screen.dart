@@ -1,11 +1,10 @@
-import 'package:english_academy_mobile/presentation/course_screen/course_detail_screen/course_detail_screen.dart';
-import 'package:english_academy_mobile/presentation/home_screen/home_screen.dart';
+import 'package:english_academy_mobile/presentation/%20instructor_screen/instructor_screen.dart';
 import 'package:english_academy_mobile/presentation/course_screen/course_screen.dart';
-import 'package:english_academy_mobile/presentation/indox_screen/indox_screen.dart';
-import 'package:english_academy_mobile/presentation/profiles_screen/profiles_screen.dart';
-import 'package:english_academy_mobile/presentation/transactions_screen/transactions_screen.dart';
+import 'package:english_academy_mobile/presentation/home_screen/home_screen.dart';
+import 'package:english_academy_mobile/presentation/notification_screen/notification_screen.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:english_academy_mobile/widgets/custom_bottom_bar.dart';
+import 'package:english_academy_mobile/widgets/custom_bottom_app_bar.dart';
 
 class InitScreen extends StatefulWidget {
   const InitScreen({Key? key}) : super(key: key);
@@ -19,17 +18,17 @@ class _InitScreenState extends State<InitScreen> {
 
   final List<Widget> _screens = [
     HomeScreen(),
+    InstructorScreen(),
     CourseScreen(),
-    IndoxScreen(),
-    TransactionsScreen(),
-    ProfilesScreen(),
+    NotificationScreen(),
+    ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_selectedIndex],
-      bottomNavigationBar: CustomBottomBar(
+      bottomNavigationBar: CustomBottomAppBar(
         onChanged: (index) {
           setState(() {
             _selectedIndex = index.index;
