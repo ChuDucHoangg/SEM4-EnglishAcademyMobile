@@ -11,34 +11,30 @@ class CustomBottomAppBar extends StatefulWidget {
 }
 
 class CustomBottomAppBarState extends State<CustomBottomAppBar> {
+  BottomBarEnum selectedMenu = BottomBarEnum.Home;
+
   List<BottomMenuModel> bottomMenuList = [
     BottomMenuModel(
-        icon: ImageConstant.imgNavHome,
-        activeIcon: ImageConstant.imgNavHome,
-        title: "Home",
-        type: BottomBarEnum.Home,
-        isSelected: true),
-    BottomMenuModel(
-      icon: ImageConstant.imgNavExplore,
-      activeIcon: ImageConstant.imgNavExplore,
-      title: "Instructor",
-      type: BottomBarEnum.Instructor,
+      icon: ImageConstant.imgNavHome,
+      activeIcon: ImageConstant.imgNavHomeActive,
+      title: "Home",
+      type: BottomBarEnum.Home,
     ),
     BottomMenuModel(
-      icon: ImageConstant.imgNavExplore,
-      activeIcon: ImageConstant.imgNavExplore,
+      icon: ImageConstant.imgUser,
+      activeIcon: ImageConstant.imgUserActive,
       title: "Course",
       type: BottomBarEnum.Course,
     ),
     BottomMenuModel(
-      icon: ImageConstant.imgNavWishlist,
-      activeIcon: ImageConstant.imgNavWishlist,
-      title: "Notification",
+      icon: ImageConstant.imgTelevisionOnerrorcontainer,
+      activeIcon: ImageConstant.imgTelevisionOnerrorcontainerActive,
+      title: "Entrance Test",
       type: BottomBarEnum.Notification,
     ),
     BottomMenuModel(
       icon: ImageConstant.imgNavProfile,
-      activeIcon: ImageConstant.imgNavProfile,
+      activeIcon: ImageConstant.imgNavProfileActive,
       title: "Profile",
       type: BottomBarEnum.Profile,
     )
@@ -51,63 +47,56 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
       child: SizedBox(
         height: 24.v,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(
             bottomMenuList.length,
                 (index) {
+              final BottomMenuModel menuItem = bottomMenuList[index];
+              final bool isSelected = selectedMenu == menuItem.type;
               return InkWell(
                 onTap: () {
-                  for (var element in bottomMenuList) {
-                    element.isSelected = false;
-                  }
-                  bottomMenuList[index].isSelected = true;
-                  widget.onChanged?.call(bottomMenuList[index].type);
-                  setState(() {});
+                  setState(() {
+                    selectedMenu = menuItem.type;
+                  });
+                  widget.onChanged?.call(menuItem.type);
                 },
-                child: bottomMenuList[index].isSelected
-                    ? Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CustomImageView(
-                      imagePath: bottomMenuList[index].activeIcon,
-                      height: 24.adaptSize,
-                      width: 24.adaptSize,
-                      color: appTheme.gray900,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 6.v),
-                      child: Text(
-                        bottomMenuList[index].title ?? "",
-                        style:
-                        CustomTextStyles.labelLargeGray900_1.copyWith(
-                          color: appTheme.gray900,
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 300),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.0,
+                    horizontal: 15.0,
+                  ),
+                  decoration: BoxDecoration(
+                    color: isSelected ? theme.colorScheme.primary : null,
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Opacity(
+                        opacity: isSelected ? 1.0 : 0.6,
+                        child: CustomImageView(
+                          imagePath: isSelected
+                              ? menuItem.activeIcon
+                              : menuItem.icon,
                         ),
                       ),
-                    ),
-                  ],
-                )
-                    : Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CustomImageView(
-                      imagePath: bottomMenuList[index].icon,
-                      height: 24.adaptSize,
-                      width: 24.adaptSize,
-                      color: appTheme.gray60001,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 7.v),
-                      child: Text(
-                        bottomMenuList[index].title ?? "",
-                        style: CustomTextStyles.bodySmallBluegray300_1
-                            .copyWith(
-                          color: appTheme.blueGray300,
+                      if (isSelected)
+                        Padding(
+                          padding: EdgeInsets.only(left: 12.0),
+                          child: Text(
+                            menuItem.title ?? "",
+                            style: CustomTextStyles
+                                .bodySmallBluegray300_1
+                                .copyWith(
+                              color: Color(0xFFD5E1F5),
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },
@@ -120,7 +109,6 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
 
 enum BottomBarEnum {
   Home,
-  Instructor,
   Course,
   Notification,
   Profile,
@@ -132,7 +120,6 @@ class BottomMenuModel {
     required this.activeIcon,
     this.title,
     required this.type,
-    this.isSelected = false,
   });
 
   String icon;
@@ -142,7 +129,4 @@ class BottomMenuModel {
   String? title;
 
   BottomBarEnum type;
-
-  bool isSelected;
 }
-

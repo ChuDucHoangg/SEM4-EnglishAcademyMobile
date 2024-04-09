@@ -1,4 +1,3 @@
-import 'package:english_academy_mobile/presentation/%20instructor_screen/instructor_screen.dart';
 import 'package:english_academy_mobile/presentation/course_screen/course_screen.dart';
 import 'package:english_academy_mobile/presentation/home_screen/home_screen.dart';
 import 'package:english_academy_mobile/presentation/notification_screen/notification_screen.dart';
@@ -18,7 +17,6 @@ class _InitScreenState extends State<InitScreen> {
 
   final List<Widget> _screens = [
     HomeScreen(),
-    InstructorScreen(),
     CourseScreen(),
     NotificationScreen(),
     ProfileScreen(),

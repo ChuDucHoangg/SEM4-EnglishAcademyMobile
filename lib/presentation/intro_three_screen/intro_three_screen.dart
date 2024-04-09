@@ -12,36 +12,47 @@ class IntroThreeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.maxFinite,
-        padding: EdgeInsets.symmetric(
-          horizontal: 34.h,
-          vertical: 50.v,
-        ),
-        child: Column(
-          children: [
-            Spacer(
-              flex: 78,
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Container(
+            width: double.maxFinite,
+            padding: EdgeInsets.symmetric(
+              horizontal: 24.h,
+              vertical: 16.v,
             ),
-            Text(
-              "Get Online Certificate",
-              style: theme.textTheme.headlineSmall,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomImageView(
+                  imagePath: ImageConstant.imgLightBulb1,
+                  height: 240.adaptSize,
+                  width: 240.adaptSize,
+                ),
+                SizedBox(height: 48.v),
+                Column(
+                  children: [
+                    Text(
+                      "Welcome to English Academy",
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.titleLarge,
+                    ),
+                    SizedBox(height: 6.v),
+                    SizedBox(
+                      width: 220.h,
+                      child: Text(
+                        "One Lesson at a Time with English Academy.",
+                        textAlign: TextAlign.center,
+                        style: CustomTextStyles.bodyLargeBluegray30002.copyWith(
+                          height: 1.50,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            SizedBox(height: 10.v),
-            Text(
-              "Analyse your scores and Track your results",
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: CustomTextStyles.bodyLargeBluegray30002.copyWith(
-                height: 1.50,
-              ),
-            ),
-            Spacer(
-              flex: 21,
-            ),
-          ],
+          ),
         ),
       ),
     );

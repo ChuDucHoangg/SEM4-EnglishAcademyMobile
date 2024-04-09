@@ -360,6 +360,9 @@ class ImageConstant {
   static String imgTelevisionOnerrorcontainer =
       '$imagePath/img_television_onerrorcontainer.svg';
 
+  static String imgTelevisionOnerrorcontainerActive =
+      '$imagePath/img_television_onerrorcontainer_active.svg';
+
   static String imgMusicGray60001 = '$imagePath/img_music_gray_600_01.svg';
 
   static String imgClockGray60001 = '$imagePath/img_clock_gray_600_01.svg';
@@ -509,13 +512,19 @@ class ImageConstant {
 
   static String imgNavHome = '$imagePath/img_nav_home.svg';
 
+  static String imgNavHomeActive = '$imagePath/img_nav_home_active.svg';
+
   static String imgNavExplore = '$imagePath/img_nav_explore.svg';
 
   static String imgUser = '$imagePath/img_user.svg';
 
+  static String imgUserActive = '$imagePath/img_user_active.svg';
+
   static String imgNavWishlist = '$imagePath/img_nav_wishlist.svg';
 
   static String imgNavProfile = '$imagePath/img_nav_profile.svg';
+
+  static String imgNavProfileActive = '$imagePath/img_nav_profile_active.svg';
 
   static String imgImage5 = '$imagePath/img_image_5.png';
 
