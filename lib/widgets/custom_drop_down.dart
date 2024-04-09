@@ -20,7 +20,7 @@ class CustomDropDown extends StatelessWidget {
     this.contentPadding,
     this.borderDecoration,
     this.fillColor,
-    this.filled = true,
+    this.filled = false,
     this.validator,
     this.onChanged,
   }) : super(
@@ -81,14 +81,14 @@ class CustomDropDown extends StatelessWidget {
       focusNode: focusNode,
       icon: icon,
       autofocus: autofocus!,
-      style: textStyle ?? CustomTextStyles.titleSmallGray800,
+      style: textStyle ?? CustomTextStyles.labelLargeGray60001,
       items: items?.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(
             value,
             overflow: TextOverflow.ellipsis,
-            style: hintStyle ?? CustomTextStyles.titleSmallGray800,
+            style: hintStyle ?? theme.textTheme.titleMedium,
           ),
         );
       }).toList(),
@@ -101,29 +101,67 @@ class CustomDropDown extends StatelessWidget {
   );
   InputDecoration get decoration => InputDecoration(
     hintText: hintText ?? "",
-    hintStyle: hintStyle ?? CustomTextStyles.titleSmallGray800,
+    hintStyle: hintStyle ?? theme.textTheme.titleMedium,
     prefixIcon: prefix,
     prefixIconConstraints: prefixConstraints,
     suffixIcon: suffix,
     suffixIconConstraints: suffixConstraints,
     isDense: true,
-    contentPadding: contentPadding ?? EdgeInsets.all(21.h),
-    fillColor: fillColor ?? appTheme.whiteA700,
+    contentPadding: contentPadding ??
+        EdgeInsets.only(
+          left: 8.h,
+          top: 8.v,
+          bottom: 8.v,
+        ),
+    fillColor: fillColor,
     filled: filled,
     border: borderDecoration ??
         OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.h),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(8.h),
+          borderSide: BorderSide(
+            color: appTheme.blueGray50,
+            width: 1,
+          ),
         ),
     enabledBorder: borderDecoration ??
         OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.h),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(8.h),
+          borderSide: BorderSide(
+            color: appTheme.blueGray50,
+            width: 1,
+          ),
         ),
     focusedBorder: borderDecoration ??
         OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.h),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(8.h),
+          borderSide: BorderSide(
+            color: appTheme.blueGray50,
+            width: 1,
+          ),
         ),
+  );
+}
+
+/// Extension on [CustomDropDown] to facilitate inclusion of all types of border style etc
+extension DropDownStyleHelper on CustomDropDown {
+  static OutlineInputBorder get outlineBlueGrayTL12 => OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12.h),
+    borderSide: BorderSide(
+      color: appTheme.blueGray50,
+      width: 1,
+    ),
+  );
+  static OutlineInputBorder get outlineBlueGray1 => OutlineInputBorder(
+    borderSide: BorderSide(
+      color: appTheme.blueGray50,
+      width: 1,
+    ),
+  );
+  static OutlineInputBorder get outlineBlueGrayTL5 => OutlineInputBorder(
+    borderRadius: BorderRadius.circular(5.h),
+    borderSide: BorderSide(
+      color: appTheme.blueGray50,
+      width: 1,
+    ),
   );
 }

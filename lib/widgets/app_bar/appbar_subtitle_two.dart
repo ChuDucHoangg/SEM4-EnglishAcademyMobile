@@ -26,15 +26,10 @@ class AppbarSubtitleTwo extends StatelessWidget {
       },
       child: Padding(
         padding: margin ?? EdgeInsets.zero,
-        child: SizedBox(
-          width: 112.h,
-          child: Text(
-            text,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: CustomTextStyles.labelLargeGray700.copyWith(
-              color: appTheme.gray700.withOpacity(0.8),
-            ),
+        child: Text(
+          text,
+          style: CustomTextStyles.titleMediumOnErrorContainer_1.copyWith(
+            color: theme.colorScheme.onErrorContainer.withOpacity(1),
           ),
         ),
       ),

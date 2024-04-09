@@ -13,17 +13,23 @@ class CustomPinCodeTextField extends StatelessWidget {
     this.textStyle,
     this.hintStyle,
     this.validator,
-    this.pinThemeColor,
-  }) : super(key: key);
+  }) : super(
+    key: key,
+  );
 
   final Alignment? alignment;
+
   final BuildContext context;
+
   final TextEditingController? controller;
+
   final TextStyle? textStyle;
+
   final TextStyle? hintStyle;
-  final Function(String) onChanged;
+
+  Function(String) onChanged;
+
   final FormFieldValidator<String>? validator;
-  final Color? pinThemeColor;
 
   @override
   Widget build(BuildContext context) {
@@ -40,16 +46,18 @@ class CustomPinCodeTextField extends StatelessWidget {
     controller: controller,
     length: 4,
     keyboardType: TextInputType.number,
-    textStyle: textStyle,
-    hintStyle: hintStyle,
+    textStyle: textStyle ?? theme.textTheme.headlineSmall,
+    hintStyle: hintStyle ?? theme.textTheme.headlineSmall,
     inputFormatters: [
       FilteringTextInputFormatter.digitsOnly,
     ],
     pinTheme: PinTheme(
+      fieldHeight: 56.h,
+      fieldWidth: 56.h,
       shape: PinCodeFieldShape.box,
-      borderRadius: BorderRadius.circular(10),
-      inactiveColor: Colors.transparent,
-      activeColor: pinThemeColor ?? Colors.grey,
+      borderRadius: BorderRadius.circular(12.h),
+      inactiveColor: theme.colorScheme.primary,
+      activeColor: theme.colorScheme.primary,
       selectedColor: Colors.transparent,
     ),
     onChanged: (value) => onChanged(value),

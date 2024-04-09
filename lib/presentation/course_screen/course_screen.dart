@@ -1,8 +1,6 @@
-import 'package:english_academy_mobile/widgets/app_bar/custom_app_bar.dart';
-import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle.dart';
-import 'package:english_academy_mobile/widgets/custom_search_view.dart';
-import 'package:english_academy_mobile/widgets/custom_elevated_button.dart';
-import '../../widgets/app_bar/appbar_trailing_image.dart';
+import 'package:english_academy_mobile/widgets/custom_outlined_button.dart';
+import 'package:english_academy_mobile/widgets/custom_drop_down.dart';
+import '../../widgets/custom_search_view.dart';
 import 'widgets/data_course_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
@@ -15,85 +13,150 @@ class CourseScreen extends StatelessWidget {
 
   TextEditingController searchController = TextEditingController();
 
+  List<String> dropdownItemList = [
+    "Item One",
+    "Item Two",
+    "Item Three",
+  ];
+
+  List<String> dropdownItemList1 = [
+    "Item One",
+    "Item Two",
+    "Item Three",
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: _buildAppBar(context),
-      body: Stack(children: [
-        SingleChildScrollView(
-          child: Container(
-            width: double.maxFinite,
-            padding: EdgeInsets.symmetric(horizontal: 34.h),
-            child: Column(
-              children: [
-                SizedBox(height: 2.v),
-                CustomSearchView(
-                  controller: searchController,
-                  hintText: "Search for …",
-                  contentPadding: EdgeInsets.only(
-                    left: 15.h,
-                    top: 21.v,
-                    bottom: 21.v,
+      body: SizedBox(
+        child: Stack(
+          children: [
+            SizedBox(
+              child: Align(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.h),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(height: 65.v),
+                      CustomSearchView(
+                        controller: searchController,
+                        hintText: "Search",
+                        hintStyle: CustomTextStyles.bodyMediumBluegray300,
+                        borderDecoration:
+                            SearchViewStyleHelper.outlineBlueGrayTL12,
+                        filled: false,
+                      ),
+                      SizedBox(height: 10.v),
+                      _buildTab(context),
+                      SizedBox(height: 26.v),
+                      _buildTitle(context),
+                      SizedBox(height: 16.v),
+                      _buildUXDesign(context),
+                    ],
                   ),
                 ),
-                SizedBox(height: 20.v),
-                _buildCategory(context),
-                SizedBox(height: 16.v),
-                _buildDataCourseItem(context),
-              ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: 74.v,
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment(0.5, 0.09),
+                    end: Alignment(0.5, 0.92),
+                    colors: [
+                      theme.colorScheme.onErrorContainer.withOpacity(0),
+                      theme.colorScheme.onErrorContainer.withOpacity(0.7),
+                      theme.colorScheme.onErrorContainer.withOpacity(1),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Section Widget
+  Widget _buildTab(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CustomOutlinedButton(
+          height: 32.v,
+          width: 77.h,
+          text: "Filter",
+          leftIcon: Container(
+            margin: EdgeInsets.only(right: 8.h),
+            child: CustomImageView(
+              imagePath: ImageConstant.imgUserGray60001,
+              height: 14.adaptSize,
+              width: 14.adaptSize,
             ),
           ),
         ),
-      ]),
-    );
-  }
-
-  /// Section Widget
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
-      title: AppbarSubtitle(
-        text: "Courses",
-        margin: EdgeInsets.only(left: 35.h),
-      ),
-      actions: [
-        AppbarTrailingImage(
-          imagePath: ImageConstant.imgFavoriteGray90001,
-          margin: EdgeInsets.fromLTRB(34.h, 20.v, 34.h, 15.v),
+        CustomDropDown(
+          width: 117.h,
+          icon: Container(
+            margin: EdgeInsets.only(right: 8.v),
+            child: CustomImageView(
+              imagePath: ImageConstant.imgArrowdownGray60001,
+              height: 16.adaptSize,
+              width: 16.adaptSize,
+            ),
+          ),
+          hintText: "Sort by",
+          items: dropdownItemList,
         ),
+        CustomDropDown(
+          width: 117.h,
+          icon: Container(
+            margin: EdgeInsets.only(right: 8.v),
+            child: CustomImageView(
+              imagePath: ImageConstant.imgArrowdownGray60001,
+              height: 16.adaptSize,
+              width: 16.adaptSize,
+            ),
+          ),
+          hintText: "All levels",
+          items: dropdownItemList1,
+        )
       ],
     );
   }
 
   /// Section Widget
-  Widget _buildCategory(BuildContext context) {
+  Widget _buildTitle(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          child: CustomElevatedButton(
-            height: 48.v,
-            text: "All Course",
-            margin: EdgeInsets.only(right: 10.h),
-            buttonStyle: CustomButtonStyles.fillTeal,
-            buttonTextStyle: CustomTextStyles.titleSmallWhiteA700ExtraBold,
-          ),
+        Text(
+          "Popular Courses",
+          style: theme.textTheme.titleMedium,
         ),
-        Expanded(
-          child: CustomElevatedButton(
-            height: 48.v,
-            text: "My Course",
-            margin: EdgeInsets.only(left: 10.h),
-            buttonStyle: CustomButtonStyles.fillBlue,
-            buttonTextStyle: CustomTextStyles.titleSmallBluegray900ExtraBold15,
-          ),
+        Spacer(),
+        CustomImageView(
+          imagePath: ImageConstant.imgGridPrimary,
+          height: 20.adaptSize,
+          width: 20.adaptSize,
+        ),
+        CustomImageView(
+          imagePath: ImageConstant.imgMegaphone,
+          height: 20.adaptSize,
+          width: 20.adaptSize,
+          margin: EdgeInsets.only(left: 4.h),
         ),
       ],
     );
   }
 
   /// Section Widget
-  Widget _buildDataCourseItem(BuildContext context) {
+  Widget _buildUXDesign(BuildContext context) {
     return DataCourseItemWidget();
   }
 }

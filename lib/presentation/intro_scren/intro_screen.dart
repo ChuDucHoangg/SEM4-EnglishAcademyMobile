@@ -1,3 +1,5 @@
+import 'package:english_academy_mobile/presentation/home_screen/home_screen.dart';
+import 'package:english_academy_mobile/presentation/launching_screen/launching_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/init_screen.dart';
 import 'package:english_academy_mobile/presentation/intro_one_screen/intro_one_screen.dart';
@@ -46,8 +48,8 @@ class _IntroScreenState extends State<IntroScreen> {
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => InitScreen()),
+                    context,
+                    MaterialPageRoute(builder: (context) => InitScreen()),
                   );
                 },
                 child: Text(
@@ -94,20 +96,22 @@ class _IntroScreenState extends State<IntroScreen> {
               height: 60.adaptSize,
               width: 60.adaptSize,
               padding: EdgeInsets.all(16.h),
-              decoration: IconButtonStyleHelper.outlineBlack,
+              decoration: IconButtonStyleHelper.fillIndigo,
               child: ElevatedButton(
-              onPressed: () {
-              if (_currentPage < 3) {
-                _pageController.nextPage(
-                duration: Duration(milliseconds: 500),
-                curve: Curves.ease,
-                );
-              } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => InitScreen()),
-                );
-              }},
+                onPressed: () {
+                  if (_currentPage < 3) {
+                    _pageController.nextPage(
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.ease,
+                    );
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => InitScreen()),
+                    );
+                  }
+                },
                 child: CustomImageView(
                   imagePath: ImageConstant.imgArrowRightWhiteA700,
                 ),
@@ -148,6 +152,8 @@ class _IntroScreenState extends State<IntroScreen> {
                   MaterialPageRoute(builder: (context) => InitScreen()),
                 );
               },
+              buttonStyle: CustomButtonStyles.fillIndigo,
+              buttonTextStyle: CustomTextStyles.titleMediumPrimary,
               width: 200.h,
               text: "Get Started",
             ),
@@ -156,5 +162,4 @@ class _IntroScreenState extends State<IntroScreen> {
       );
     }
   }
-
 }

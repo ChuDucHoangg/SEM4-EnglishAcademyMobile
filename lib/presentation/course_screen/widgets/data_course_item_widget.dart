@@ -1,156 +1,127 @@
+import 'package:english_academy_mobile/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
+
 import '../../../data/model/CourseModel.dart';
 import '../../../service/CourseService.dart';
 
 class DataCourseItemWidget extends StatelessWidget {
   const DataCourseItemWidget({Key? key})
       : super(
-    key: key,
-  );
+          key: key,
+        );
 
   @override
   Widget build(BuildContext context) {
     void _navigateToCourseDetail(BuildContext context, String slug) {
-      Navigator.pushNamed(context, AppRoutes.courseDetailScreen, arguments: slug);
+      Navigator.pushNamed(context, AppRoutes.courseDetailScreen,
+          arguments: slug);
     }
+
     return FutureBuilder<List<CourseModel>>(
       future: CourseService.fetchCourses(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final List<CourseModel> courses = snapshot.data!;
-          return ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            separatorBuilder: (
-                context,
-                index,
-                ) {
-              return SizedBox(
-                height: 20.v,
-              );
-            },
-            itemCount: courses.length,
-            itemBuilder: (context, index) {
-              final CourseModel course = courses[index];
-              return GestureDetector(
-                onTap: () {
-                  _navigateToCourseDetail(context, course.slug);
-                },
-                child: SizedBox(
-                  height: 142.v,
-                  width: 360.h,
-                  child: Stack(
-                    alignment: Alignment.topRight,
+          return Expanded(
+            child: GridView.builder(
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                mainAxisExtent: 208.v,
+                crossAxisCount: 2,
+                mainAxisSpacing: 16.h,
+                crossAxisSpacing: 16.h,
+              ),
+              physics: BouncingScrollPhysics(),
+              itemCount: courses.length,
+              itemBuilder: (context, index) {
+                final CourseModel course = courses[index];
+                return Container(
+                  padding: EdgeInsets.all(7.h),
+                  decoration: AppDecoration.outlineGray100.copyWith(
+                    borderRadius: BorderRadiusStyle.roundedBorder8,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          margin: EdgeInsets.only(top: 8.v),
-                          decoration: AppDecoration.outlineBlack9001.copyWith(
-                            borderRadius: BorderRadiusStyle.circleBorder15,
+                      Container(
+                        height: 96.v,
+                        width: 139.h,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.horizontal(
+                            left: Radius.circular(6.h),
+                            right: Radius.circular(6.h),
                           ),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 134.v,
-                                width: 130.h,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.horizontal(
-                                    left: Radius.circular(16.h),
-                                  ),
-                                  child: Image.network(
-                                    course.image,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: 14.h,
-                                  top: 15.v,
-                                  bottom: 18.v,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "IELTS",
-                                      style: CustomTextStyles.labelLargeOrangeA700,
-                                    ),
-                                    SizedBox(height: 5.v),
-                                    Text(
-                                      course.name,
-                                      style: theme.textTheme.titleMedium,
-                                    ),
-                                    SizedBox(height: 5.v),
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: [
-                                        CustomImageView(
-                                          imagePath: ImageConstant.imgSignalAmberA20001,
-                                          height: 12.adaptSize,
-                                          width: 12.adaptSize,
-                                          margin: EdgeInsets.only(top: 3.v),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            left: 3.h,
-                                            top: 3.v,
-                                          ),
-                                          child: Text(
-                                            course.star.toString(),
-                                            style: theme.textTheme.labelMedium,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 16.h),
-                                          child: Text(
-                                            "|",
-                                            style: CustomTextStyles.titleSmallBlack900,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            left: 16.h,
-                                            top: 3.v,
-                                          ),
-                                          child: Text(
-                                            "${course.totalReview} Reviewer",
-                                            style: theme.textTheme.labelMedium,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 14.v),
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Text(
-                                        "Price: \$${course.price.toString()}",
-                                        style: CustomTextStyles.labelLargeTeal700.copyWith(
-                                          decoration: TextDecoration.underline,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                          child: Image.network(
+                            course.image,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                      CustomImageView(
-                        imagePath: ImageConstant.imgCheckmarkGreen500,
-                        height: 28.adaptSize,
-                        width: 28.adaptSize,
-                        alignment: Alignment.topRight,
-                        margin: EdgeInsets.only(right: 24.h),
+                      SizedBox(height: 8.v),
+                      CustomElevatedButton(
+                        height: 20.v,
+                        width: 55.h,
+                        text: "IELTS",
+                        buttonTextStyle: theme.textTheme.labelSmall!,
                       ),
+                      SizedBox(height: 9.v),
+                      Container(
+                        width: 127.h,
+                        margin: EdgeInsets.only(left: 4.h),
+                        child: Text(
+                          course.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: CustomTextStyles.labelLargeGray900_1.copyWith(
+                            height: 1.60,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 1.v),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "\$${course.price.toString()}",
+                              style: CustomTextStyles.labelLargeBlueA200,
+                            ),
+                            Container(
+                              width: 36.h,
+                              margin: EdgeInsets.only(left: 50.h),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CustomImageView(
+                                    imagePath: ImageConstant.imgSignal,
+                                    height: 12.adaptSize,
+                                    width: 12.adaptSize,
+                                    margin: EdgeInsets.symmetric(vertical: 1.v),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 4.h),
+                                    child: Text(
+                                      "${course.totalReview}",
+                                      style: CustomTextStyles
+                                          .labelLargeGray60001_1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 1.v),
                     ],
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           );
         } else if (snapshot.hasError) {
           return Center(

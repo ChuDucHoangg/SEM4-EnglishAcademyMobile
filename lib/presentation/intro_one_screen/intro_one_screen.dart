@@ -36,7 +36,9 @@ class IntroOneScreen extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
-                style: theme.textTheme.titleSmall,
+                style: CustomTextStyles.bodyLargeBluegray30002.copyWith(
+                  height: 1.50,
+                ),
               ),
             ),
             Spacer(

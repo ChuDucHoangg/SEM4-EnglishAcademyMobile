@@ -24,7 +24,7 @@ class CustomTextFormField extends StatelessWidget {
     this.contentPadding,
     this.borderDecoration,
     this.fillColor,
-    this.filled = true,
+    this.filled = false,
     this.validator,
   }) : super(
     key: key,
@@ -99,7 +99,7 @@ class CustomTextFormField extends StatelessWidget {
         }
       },
       autofocus: autofocus!,
-      style: textStyle ?? CustomTextStyles.labelLargeBluegray20012,
+      style: textStyle ?? CustomTextStyles.bodyLargeBluegray100,
       obscureText: obscureText!,
       textInputAction: textInputAction,
       keyboardType: textInputType,
@@ -110,45 +110,92 @@ class CustomTextFormField extends StatelessWidget {
   );
   InputDecoration get decoration => InputDecoration(
     hintText: hintText ?? "",
-    hintStyle: hintStyle ?? CustomTextStyles.titleSmallBlack900,
+    hintStyle: hintStyle ?? theme.textTheme.bodyLarge,
     prefixIcon: prefix,
     prefixIconConstraints: prefixConstraints,
     suffixIcon: suffix,
     suffixIconConstraints: suffixConstraints,
     isDense: true,
-    contentPadding: contentPadding ??
-        EdgeInsets.symmetric(
-          horizontal: 20.h,
-          vertical: 21.v,
-        ),
-    fillColor: fillColor ?? appTheme.whiteA700,
+    contentPadding: contentPadding ?? EdgeInsets.symmetric(vertical: 18.v),
+    fillColor: fillColor,
     filled: filled,
     border: borderDecoration ??
         OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.h),
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(
+            color: appTheme.blueGray50,
+            width: 1,
+          ),
         ),
     enabledBorder: borderDecoration ??
         OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.h),
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(
+            color: appTheme.blueGray50,
+            width: 1,
+          ),
         ),
     focusedBorder: borderDecoration ??
         OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.h),
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(
+            color: theme.colorScheme.primary,
+            width: 1,
+          ),
         ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12.h),
+      borderSide: BorderSide(
+        color: appTheme.redA200,
+        width: 1,
+      ),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12.h),
+      borderSide: BorderSide(
+        color: appTheme.redA200,
+        width: 1,
+      ),
+    ),
+    errorStyle: TextStyle(
+      color: appTheme.redA200,
+      fontSize: 12.fSize,
+    ),
   );
 }
 
 /// Extension on [CustomTextFormField] to facilitate inclusion of all types of border style etc
 extension TextFormFieldStyleHelper on CustomTextFormField {
-  static OutlineInputBorder get outlineBlackTL16 => OutlineInputBorder(
-    borderRadius: BorderRadius.circular(16.h),
-    borderSide: BorderSide.none,
+  static OutlineInputBorder get outlinePrimaryLR12 => OutlineInputBorder(
+    borderRadius: BorderRadius.horizontal(
+      right: Radius.circular(
+        12.h,
+      ),
+    ),
+    borderSide: BorderSide(
+      color: theme.colorScheme.primary,
+      width: 1,
+    ),
   );
-  static OutlineInputBorder get outlineBlackTL15 => OutlineInputBorder(
-    borderRadius: BorderRadius.circular(15.h),
-    borderSide: BorderSide.none,
+  static OutlineInputBorder get outlineBlueGrayTL12 => OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12.h),
+    borderSide: BorderSide(
+      color: appTheme.blueGray50,
+      width: 1,
+    ),
+  );
+  static OutlineInputBorder get outlineBlueGrayTL14 => OutlineInputBorder(
+    borderRadius: BorderRadius.circular(14.h),
+    borderSide: BorderSide(
+      color: appTheme.blueGray50,
+      width: 1,
+    ),
+  );
+  static OutlineInputBorder get outlinePrimaryTL14 => OutlineInputBorder(
+    borderRadius: BorderRadius.circular(14.h),
+    borderSide: BorderSide(
+      color: theme.colorScheme.primary,
+      width: 1,
+    ),
   );
 }

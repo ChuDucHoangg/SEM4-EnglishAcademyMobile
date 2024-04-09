@@ -49,8 +49,8 @@ class CustomRatingBar extends StatelessWidget {
     minRating: 0,
     direction: Axis.horizontal,
     allowHalfRating: false,
-    itemSize: itemSize ?? 14.v,
-    unratedColor: unselectedColor ?? appTheme.amber700,
+    itemSize: itemSize ?? 20.v,
+    unratedColor: unselectedColor,
     itemCount: itemCount ?? 5,
     updateOnDrag: true,
     itemBuilder: (
@@ -59,7 +59,7 @@ class CustomRatingBar extends StatelessWidget {
         ) {
       return Icon(
         Icons.star,
-        color: color ?? appTheme.orange600,
+        color: color,
       );
     },
     onRatingUpdate: (rating) {
