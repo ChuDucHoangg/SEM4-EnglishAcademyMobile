@@ -34,11 +34,10 @@ class CourseScreen extends StatelessWidget {
             SizedBox(
               child: Align(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.h),
+                  padding: EdgeInsets.symmetric(vertical: 60.v, horizontal: 24.h),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(height: 65.v),
                       CustomSearchView(
                         controller: searchController,
                         hintText: "Search",
@@ -49,9 +48,8 @@ class CourseScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 10.v),
                       _buildTab(context),
-                      SizedBox(height: 26.v),
-                      _buildTitle(context),
                       SizedBox(height: 16.v),
+                      _buildTitle(context),
                       _buildUXDesign(context),
                     ],
                   ),

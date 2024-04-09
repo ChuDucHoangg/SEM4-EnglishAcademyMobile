@@ -95,28 +95,27 @@ class _IntroScreenState extends State<IntroScreen> {
             CustomIconButton(
               height: 60.adaptSize,
               width: 60.adaptSize,
-              padding: EdgeInsets.all(16.h),
+              padding: EdgeInsets.all(10.h),
               decoration: IconButtonStyleHelper.fillIndigo,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (_currentPage < 3) {
-                    _pageController.nextPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.ease,
-                    );
-                  } else {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => InitScreen()),
-                    );
-                  }
-                },
-                child: CustomImageView(
-                  imagePath: ImageConstant.imgArrowRightWhiteA700,
+                child: IconButton(
+                  onPressed: () {
+                    if (_currentPage < 3) {
+                      _pageController.nextPage(
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.ease,
+                      );
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => InitScreen()),
+                      );
+                    }
+                  },
+                  icon: CustomImageView(
+                    imagePath: ImageConstant.imgArrowLeft,
+                  ),
                 ),
               ),
-            ),
           ],
         ),
       );
