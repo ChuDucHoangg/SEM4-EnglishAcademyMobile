@@ -8,8 +8,8 @@ import 'package:english_academy_mobile/core/app_export.dart';
 class CourseScreen extends StatelessWidget {
   CourseScreen({Key? key})
       : super(
-          key: key,
-        );
+    key: key,
+  );
 
   TextEditingController searchController = TextEditingController();
 
@@ -34,16 +34,17 @@ class CourseScreen extends StatelessWidget {
             SizedBox(
               child: Align(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 60.v, horizontal: 24.h),
+                  padding: EdgeInsets.symmetric(horizontal: 24.h),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      SizedBox(height: 65.v),
                       CustomSearchView(
                         controller: searchController,
                         hintText: "Search",
                         hintStyle: CustomTextStyles.bodyMediumBluegray300,
                         borderDecoration:
-                            SearchViewStyleHelper.outlineBlueGrayTL12,
+                        SearchViewStyleHelper.outlineBlueGrayTL12,
                         filled: false,
                       ),
                       SizedBox(height: 10.v),
@@ -86,7 +87,7 @@ class CourseScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CustomOutlinedButton(
-          height: 32.v,
+          height: 37.v,
           width: 77.h,
           text: "Filter",
           leftIcon: Container(
@@ -99,7 +100,7 @@ class CourseScreen extends StatelessWidget {
           ),
         ),
         CustomDropDown(
-          width: 117.h,
+          width: 120.h,
           icon: Container(
             margin: EdgeInsets.only(right: 8.v),
             child: CustomImageView(
@@ -110,9 +111,12 @@ class CourseScreen extends StatelessWidget {
           ),
           hintText: "Sort by",
           items: dropdownItemList,
+          textStyle: TextStyle(
+            fontWeight: FontWeight.w500,
+          ),
         ),
         CustomDropDown(
-          width: 117.h,
+          width: 120.h,
           icon: Container(
             margin: EdgeInsets.only(right: 8.v),
             child: CustomImageView(
@@ -134,7 +138,7 @@ class CourseScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Popular Courses",
+          "Khoá học phổ biến",
           style: theme.textTheme.titleMedium,
         ),
         Spacer(),

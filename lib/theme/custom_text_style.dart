@@ -44,10 +44,10 @@ class CustomTextStyles {
   static get bodyMediumGray60001 => theme.textTheme.bodyMedium!.copyWith(
     color: appTheme.gray60001,
   );
-  static get bodyMediumManropeGray60001 =>
-      theme.textTheme.bodyMedium!.manrope.copyWith(
-        color: appTheme.gray60001,
-      );
+  // static get bodyMediumManropeGray60001 =>
+  //     theme.textTheme.bodyMedium!.manrope.copyWith(
+  //       color: appTheme.gray60001,
+  //     );
   static get bodyMediumOnErrorContainer => theme.textTheme.bodyMedium!.copyWith(
     color: theme.colorScheme.onErrorContainer.withOpacity(0.5),
   );
@@ -55,11 +55,11 @@ class CustomTextStyles {
       theme.textTheme.bodyMedium!.copyWith(
         color: theme.colorScheme.onErrorContainer.withOpacity(1),
       );
-  static get bodyMediumPlusJakartaSans =>
-      theme.textTheme.bodyMedium!.plusJakartaSans;
-  static get bodyMediumff111827 => theme.textTheme.bodyMedium!.copyWith(
-    color: Color(0XFF111827),
-  );
+  // static get bodyMediumPlusJakartaSans =>
+  //     theme.textTheme.bodyMedium!.plusJakartaSans;
+  // static get bodyMediumff111827 => theme.textTheme.bodyMedium!.copyWith(
+  //   color: Color(0XFF111827),
+  // );
   static get bodySmall10 => theme.textTheme.bodySmall!.copyWith(
     fontSize: 10.fSize,
   );
@@ -82,10 +82,10 @@ class CustomTextStyles {
   static get bodySmallGray900 => theme.textTheme.bodySmall!.copyWith(
     color: appTheme.gray900,
   );
-  static get bodySmallSatoshiff6b7280 =>
-      theme.textTheme.bodySmall!.satoshi.copyWith(
-        color: Color(0XFF6B7280),
-      );
+  // static get bodySmallSatoshiff6b7280 =>
+  //     theme.textTheme.bodySmall!.satoshi.copyWith(
+  //       color: Color(0XFF6B7280),
+  //     );
   static get bodySmallff6b7280 => theme.textTheme.bodySmall!.copyWith(
     color: Color(0XFF6B7280),
   );
@@ -151,11 +151,11 @@ class CustomTextStyles {
     color: appTheme.greenA400,
     fontWeight: FontWeight.w500,
   );
-  static get labelLargeManropeRedA200 =>
-      theme.textTheme.labelLarge!.manrope.copyWith(
-        color: appTheme.redA200,
-        fontWeight: FontWeight.w600,
-      );
+  // static get labelLargeManropeRedA200 =>
+  //     theme.textTheme.labelLarge!.manrope.copyWith(
+  //       color: appTheme.redA200,
+  //       fontWeight: FontWeight.w600,
+  //     );
   static get labelLargeMedium => theme.textTheme.labelLarge!.copyWith(
     fontWeight: FontWeight.w500,
   );
@@ -167,11 +167,11 @@ class CustomTextStyles {
         color: theme.colorScheme.onErrorContainer.withOpacity(1),
         fontWeight: FontWeight.w500,
       );
-  static get labelLargePlusJakartaSansOnErrorContainer =>
-      theme.textTheme.labelLarge!.plusJakartaSans.copyWith(
-        color: theme.colorScheme.onErrorContainer.withOpacity(1),
-        fontWeight: FontWeight.w600,
-      );
+  // static get labelLargePlusJakartaSansOnErrorContainer =>
+  //     theme.textTheme.labelLarge!.plusJakartaSans.copyWith(
+  //       color: theme.colorScheme.onErrorContainer.withOpacity(1),
+  //       fontWeight: FontWeight.w600,
+  //     );
   static get labelLargePrimary => theme.textTheme.labelLarge!.copyWith(
     color: theme.colorScheme.primary,
     fontWeight: FontWeight.w500,
@@ -186,11 +186,11 @@ class CustomTextStyles {
   static get labelLargeRedA200_1 => theme.textTheme.labelLarge!.copyWith(
     color: appTheme.redA200,
   );
-  static get labelLargeSFProDisplayBluegray300 =>
-      theme.textTheme.labelLarge!.sFProDisplay.copyWith(
-        color: appTheme.blueGray300,
-        fontWeight: FontWeight.w500,
-      );
+  // static get labelLargeSFProDisplayBluegray300 =>
+  //     theme.textTheme.labelLarge!.sFProDisplay.copyWith(
+  //       color: appTheme.blueGray300,
+  //       fontWeight: FontWeight.w500,
+  //     );
   static get labelMediumAmberA200 => theme.textTheme.labelMedium!.copyWith(
     color: appTheme.amberA200,
     fontWeight: FontWeight.w700,
@@ -216,11 +216,11 @@ class CustomTextStyles {
     color: appTheme.greenA400,
     fontWeight: FontWeight.w700,
   );
-  static get labelMediumManropeOnErrorContainer =>
-      theme.textTheme.labelMedium!.manrope.copyWith(
-        color: theme.colorScheme.onErrorContainer.withOpacity(1),
-        fontWeight: FontWeight.w600,
-      );
+  // static get labelMediumManropeOnErrorContainer =>
+  //     theme.textTheme.labelMedium!.manrope.copyWith(
+  //       color: theme.colorScheme.onErrorContainer.withOpacity(1),
+  //       fontWeight: FontWeight.w600,
+  //     );
   static get labelMediumOnErrorContainer =>
       theme.textTheme.labelMedium!.copyWith(
         color: theme.colorScheme.onErrorContainer.withOpacity(1),
@@ -231,11 +231,11 @@ class CustomTextStyles {
         color: theme.colorScheme.onErrorContainer.withOpacity(1),
         fontSize: 11.fSize,
       );
-  static get labelMediumPlusJakartaSansOnErrorContainer =>
-      theme.textTheme.labelMedium!.plusJakartaSans.copyWith(
-        color: theme.colorScheme.onErrorContainer.withOpacity(1),
-        fontWeight: FontWeight.w700,
-      );
+  // static get labelMediumPlusJakartaSansOnErrorContainer =>
+  //     theme.textTheme.labelMedium!.plusJakartaSans.copyWith(
+  //       color: theme.colorScheme.onErrorContainer.withOpacity(1),
+  //       fontWeight: FontWeight.w700,
+  //     );
   static get labelMediumPrimary => theme.textTheme.labelMedium!.copyWith(
     color: theme.colorScheme.primary,
     fontWeight: FontWeight.w700,
@@ -316,10 +316,10 @@ class CustomTextStyles {
     color: theme.colorScheme.primary,
     fontWeight: FontWeight.w500,
   );
-  static get titleMediumUrbanistOnPrimaryContainer =>
-      theme.textTheme.titleMedium!.urbanist.copyWith(
-        color: theme.colorScheme.onPrimaryContainer,
-      );
+  // static get titleMediumUrbanistOnPrimaryContainer =>
+  //     theme.textTheme.titleMedium!.urbanist.copyWith(
+  //       color: theme.colorScheme.onPrimaryContainer,
+  //     );
   static get titleMediumff111827 => theme.textTheme.titleMedium!.copyWith(
     color: Color(0XFF111827),
     fontWeight: FontWeight.w500,
@@ -360,18 +360,18 @@ class CustomTextStyles {
     color: appTheme.gray60001,
     fontWeight: FontWeight.w500,
   );
-  static get titleSmallManropeBluegray80001 =>
-      theme.textTheme.titleSmall!.manrope.copyWith(
-        color: appTheme.blueGray80001,
-      );
-  static get titleSmallManropeGray60001 =>
-      theme.textTheme.titleSmall!.manrope.copyWith(
-        color: appTheme.gray60001,
-      );
-  static get titleSmallManropeOnErrorContainer =>
-      theme.textTheme.titleSmall!.manrope.copyWith(
-        color: theme.colorScheme.onErrorContainer.withOpacity(1),
-      );
+  // static get titleSmallManropeBluegray80001 =>
+  //     theme.textTheme.titleSmall!.manrope.copyWith(
+  //       color: appTheme.blueGray80001,
+  //     );
+  // static get titleSmallManropeGray60001 =>
+  //     theme.textTheme.titleSmall!.manrope.copyWith(
+  //       color: appTheme.gray60001,
+  //     );
+  // static get titleSmallManropeOnErrorContainer =>
+  //     theme.textTheme.titleSmall!.manrope.copyWith(
+  //       color: theme.colorScheme.onErrorContainer.withOpacity(1),
+  //     );
   static get titleSmallMedium => theme.textTheme.titleSmall!.copyWith(
     fontWeight: FontWeight.w500,
   );
@@ -387,15 +387,15 @@ class CustomTextStyles {
       theme.textTheme.titleSmall!.copyWith(
         color: theme.colorScheme.onPrimaryContainer,
       );
-  static get titleSmallPlusJakartaSans =>
-      theme.textTheme.titleSmall!.plusJakartaSans.copyWith(
-        fontWeight: FontWeight.w500,
-      );
-  static get titleSmallPlusJakartaSans_1 =>
-      theme.textTheme.titleSmall!.plusJakartaSans;
-  static get titleSmallPrimary => theme.textTheme.titleSmall!.copyWith(
-    color: theme.colorScheme.primary,
-  );
+  // static get titleSmallPlusJakartaSans =>
+  //     theme.textTheme.titleSmall!.plusJakartaSans.copyWith(
+  //       fontWeight: FontWeight.w500,
+  //     );
+  // static get titleSmallPlusJakartaSans_1 =>
+  //     theme.textTheme.titleSmall!.plusJakartaSans;
+  // static get titleSmallPrimary => theme.textTheme.titleSmall!.copyWith(
+  //   color: theme.colorScheme.primary,
+  // );
   static get titleSmallPrimaryMedium => theme.textTheme.titleSmall!.copyWith(
     color: theme.colorScheme.primary,
     fontWeight: FontWeight.w500,
@@ -419,37 +419,37 @@ class CustomTextStyles {
 extension on TextStyle {
   TextStyle get inter {
     return copyWith(
-      fontFamily: 'Inter',
+      fontFamily: 'SFProText',
     );
   }
 
-  TextStyle get plusJakartaSans {
-    return copyWith(
-      fontFamily: 'Plus Jakarta Sans',
-    );
-  }
-
-  TextStyle get satoshi {
-    return copyWith(
-      fontFamily: 'Satoshi',
-    );
-  }
-
-  TextStyle get manrope {
-    return copyWith(
-      fontFamily: 'Manrope',
-    );
-  }
-
-  TextStyle get sFProDisplay {
-    return copyWith(
-      fontFamily: 'SF Pro Display',
-    );
-  }
-
-  TextStyle get urbanist {
-    return copyWith(
-      fontFamily: 'Urbanist',
-    );
-  }
+  // TextStyle get plusJakartaSans {
+  //   return copyWith(
+  //     fontFamily: 'Plus Jakarta Sans',
+  //   );
+  // }
+  //
+  // TextStyle get satoshi {
+  //   return copyWith(
+  //     fontFamily: 'Satoshi',
+  //   );
+  // }
+  //
+  // TextStyle get manrope {
+  //   return copyWith(
+  //     fontFamily: 'Manrope',
+  //   );
+  // }
+  //
+  // TextStyle get sFProDisplay {
+  //   return copyWith(
+  //     fontFamily: 'SF Pro Display',
+  //   );
+  // }
+  //
+  // TextStyle get urbanist {
+  //   return copyWith(
+  //     fontFamily: 'Urbanist',
+  //   );
+  // }
 }
