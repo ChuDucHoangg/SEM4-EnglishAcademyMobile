@@ -28,33 +28,33 @@ flutter:
     - assets/images/
     - assets/lottie/
   fonts:
-    - family: Inter
+    - family: SFProText
       fonts:
-        - asset: assets/fonts/InterBold.ttf
+        - asset: assets/fonts/SFProText-Bold.otf
           weight: 700
-        - asset: assets/fonts/InterMedium.ttf
+        - asset: assets/fonts/SFProText-Medium.otf
           weight: 500
-        - asset: assets/fonts/InterRegular.ttf
+        - asset: assets/fonts/SFProText-Regular.otf
           weight: 400
-    - family: Manrope
-      fonts:
-        - asset: assets/fonts/ManropeRegular.ttf
-          weight: 400
-        - asset: assets/fonts/ManropeBold.ttf
-          weight: 700
-        - asset: assets/fonts/ManropeSemiBold.ttf
-          weight: 600
-    - family: Urbanist
-      fonts:
-        - asset: assets/fonts/UrbanistBold.ttf
-          weight: 700
-    - family: Plus Jakarta Sans
-      fonts:
-        - asset: assets/fonts/PlusJakartaSansSemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/PlusJakartaSansMedium.ttf
-          weight: 500
-        - asset: assets/fonts/PlusJakartaSansBold.ttf
-          weight: 700
-        - asset: assets/fonts/PlusJakartaSansRegular.ttf
-          weight: 400
+#    - family: Manrope
+#      fonts:
+#        - asset: assets/fonts/ManropeRegular.ttf
+#          weight: 400
+#        - asset: assets/fonts/ManropeBold.ttf
+#          weight: 700
+#        - asset: assets/fonts/ManropeSemiBold.ttf
+#          weight: 600
+#    - family: Urbanist
+#      fonts:
+#        - asset: assets/fonts/UrbanistBold.ttf
+#          weight: 700
+#    - family: Plus Jakarta Sans
+#      fonts:
+#        - asset: assets/fonts/PlusJakartaSansSemiBold.ttf
+#          weight: 600
+#        - asset: assets/fonts/PlusJakartaSansMedium.ttf
+#          weight: 500
+#        - asset: assets/fonts/PlusJakartaSansBold.ttf
+#          weight: 700
+#        - asset: assets/fonts/PlusJakartaSansRegular.ttf
+#          weight: 400

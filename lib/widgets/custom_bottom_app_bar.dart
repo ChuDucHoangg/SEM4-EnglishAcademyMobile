@@ -43,6 +43,7 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
+      // height: 60,
       shape: CircularNotchedRectangle(),
       child: SizedBox(
         height: 24.v,
@@ -61,7 +62,7 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
                   widget.onChanged?.call(menuItem.type);
                 },
                 child: AnimatedContainer(
-                  duration: Duration(milliseconds: 300),
+                  duration: Duration(milliseconds: 350),
                   padding: EdgeInsets.symmetric(
                     vertical: 10.0,
                     horizontal: 15.0,

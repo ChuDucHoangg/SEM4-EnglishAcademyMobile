@@ -84,7 +84,7 @@ class DataCourseItemWidget extends StatelessWidget {
                       Align(
                         alignment: Alignment.center,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
                               "\$${course.price.toString()}",
