@@ -46,12 +46,12 @@ class AppRoutes {
     homeScreen: (context) => HomeScreen(),
     instructorScreen: (context) => InstructorScreen(),
     courseScreen: (context) => CourseScreen(),
+    courseDetailScreen: (context) {
+      final String? slug =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return CourseDetailScreen(slug: slug!);
+    },
     notificationScreen: (context) => NotificationScreen(),
-    // courseDetailScreen: (context) {
-    //   final String? slug =
-    //       ModalRoute.of(context)?.settings.arguments as String?;
-    //   return CourseDetailScreen(slug: slug!);
-    // },
     // courseLearningScreen: (context) => CourseLearningScreen(),
     profileScreen: (context) => ProfileScreen(),
   };
