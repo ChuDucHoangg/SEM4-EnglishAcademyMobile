@@ -8,8 +8,8 @@ import '../../../service/CourseService.dart';
 class DataCourseItemWidget extends StatelessWidget {
   const DataCourseItemWidget({Key? key})
       : super(
-          key: key,
-        );
+    key: key,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -36,88 +36,95 @@ class DataCourseItemWidget extends StatelessWidget {
               itemCount: courses.length,
               itemBuilder: (context, index) {
                 final CourseModel course = courses[index];
-                return Container(
-                  padding: EdgeInsets.all(7.h),
-                  decoration: AppDecoration.outlineGray100.copyWith(
-                    borderRadius: BorderRadiusStyle.roundedBorder8,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 96.v,
-                        width: 139.h,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.horizontal(
-                            left: Radius.circular(6.h),
-                            right: Radius.circular(6.h),
-                          ),
-                          child: Image.network(
-                            course.image,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 8.v),
-                      CustomElevatedButton(
-                        height: 20.v,
-                        width: 55.h,
-                        text: "IELTS",
-                        buttonTextStyle: theme.textTheme.labelSmall!,
-                      ),
-                      SizedBox(height: 9.v),
-                      Container(
-                        width: 127.h,
-                        margin: EdgeInsets.only(left: 4.h),
-                        child: Text(
-                          course.name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: CustomTextStyles.labelLargeGray900_1.copyWith(
-                            height: 1.60,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 1.v),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "\$${course.price.toString()}",
-                              style: CustomTextStyles.labelLargeBlueA200,
+                return GestureDetector(
+                  onTap: () {
+                    _navigateToCourseDetail(context, course.slug);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(7.h),
+                    decoration: AppDecoration.outlineGray100.copyWith(
+                      borderRadius: BorderRadiusStyle.roundedBorder8,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 96.v,
+                          width: 139.h,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.horizontal(
+                              left: Radius.circular(6.h),
+                              right: Radius.circular(6.h),
                             ),
-                            Container(
-                              width: 36.h,
-                              margin: EdgeInsets.only(left: 50.h),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CustomImageView(
-                                    imagePath: ImageConstant.imgSignal,
-                                    height: 12.adaptSize,
-                                    width: 12.adaptSize,
-                                    margin: EdgeInsets.symmetric(vertical: 1.v),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 4.h),
-                                    child: Text(
-                                      "${course.totalReview}",
-                                      style: CustomTextStyles
-                                          .labelLargeGray60001_1,
-                                    ),
-                                  ),
-                                ],
+                            child: Image.network(
+                              course.image,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 8.v),
+                        CustomElevatedButton(
+                          height: 20.v,
+                          width: 55.h,
+                          text: "IELTS",
+                          buttonTextStyle: theme.textTheme.labelSmall!,
+                        ),
+                        SizedBox(height: 9.v),
+                        Container(
+                          width: 127.h,
+                          margin: EdgeInsets.only(left: 4.h),
+                          child: Text(
+                            course.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                            CustomTextStyles.labelLargeGray900_1.copyWith(
+                              height: 1.60,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 1.v),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                "\$${course.price.toString()}",
+                                style: CustomTextStyles.labelLargeBlueA200,
                               ),
-                            ),
-                          ],
+                              Container(
+                                width: 36.h,
+                                margin: EdgeInsets.only(left: 50.h),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CustomImageView(
+                                      imagePath: ImageConstant.imgSignal,
+                                      height: 12.adaptSize,
+                                      width: 12.adaptSize,
+                                      margin:
+                                      EdgeInsets.symmetric(vertical: 1.v),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 3.h),
+                                      child: Text(
+                                        "${course.star.toString()}",
+                                        style: CustomTextStyles
+                                            .labelLargeGray60001_1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 1.v),
-                    ],
+                        SizedBox(height: 1.v),
+                      ],
+                    ),
                   ),
                 );
               },

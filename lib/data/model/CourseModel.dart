@@ -16,6 +16,15 @@ class CourseModel {
   final String createdBy;
   final String modifiedBy;
   final List<dynamic> reviewList;
+  double calculateTotalStars() {
+    double totalStars = 0;
+    if (reviewList.isNotEmpty) {
+      for (var review in reviewList) {
+        totalStars += (review['score'] ?? 0.0);
+      }
+    }
+    return totalStars;
+  }
   final List<dynamic> topicOnlineDetailList;
 
   CourseModel({
