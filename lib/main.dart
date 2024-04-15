@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/scheduler.dart';
 import 'core/app_export.dart';
 
+
 var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
           theme: theme,
           title: 'English Academy Mobile',
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.launchingScreen,
+          initialRoute: AppRoutes.myLearningOpenQuizResultsScreen,
           routes: AppRoutes.routes,
         );
       },
