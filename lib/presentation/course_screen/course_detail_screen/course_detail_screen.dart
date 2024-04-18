@@ -1,3 +1,4 @@
+import 'package:english_academy_mobile/presentation/course_screen/button_sheet_item.dart';
 import 'package:english_academy_mobile/presentation/course_screen/course_detail_screen/widgets/course_detail_about_item.dart';
 import 'package:english_academy_mobile/presentation/course_screen/course_detail_screen/widgets/course_detail_lessons_item.dart';
 import 'package:english_academy_mobile/presentation/course_screen/course_detail_screen/widgets/course_detail_reviews_item.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
 
 import '../../../data/model/CourseModel.dart';
+import '../../../data/model/TopicModel.dart';
 import '../../../service/CourseService.dart';
 
 class CourseDetailScreen extends StatefulWidget {
@@ -25,12 +27,14 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
     with TickerProviderStateMixin {
   late TabController tabviewController;
   late Future<CourseModel> _courseFuture;
+  late Future<TopicModel> _topicFuture;
 
   @override
   void initState() {
     super.initState();
     tabviewController = TabController(length: 3, vsync: this);
     _courseFuture = CourseService.fetchCourseDetail(widget.slug);
+    _topicFuture = CourseService.fetchTopicDetail(widget.slug);
   }
 
   @override
@@ -477,7 +481,46 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
               text: "Buy \$${course.price.toString()}",
               margin: EdgeInsets.only(bottom: 22.v),
               buttonStyle: CustomButtonStyles.fillPrimary,
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  AppRoutes.checkoutScreen,
+                  arguments: course.slug,
+                );
+              },
             ),
+            // CustomElevatedButton(
+            //   width: 261.h,
+            //   text: "Continue Studying",
+            //   margin: EdgeInsets.only(bottom: 22.v),
+            //   buttonStyle: CustomButtonStyles.fillPrimary,
+            //   onPressed: () {
+            //     showModalBottomSheet(
+            //       context: context,
+            //       builder: (BuildContext context) {
+            //         return FutureBuilder<TopicModel>(
+            //           future: _topicFuture,
+            //           builder: (context, snapshot) {
+            //             if (snapshot.connectionState ==
+            //                 ConnectionState.waiting) {
+            //               return Center(
+            //                 child: CircularProgressIndicator(),
+            //               );
+            //             } else if (snapshot.hasError) {
+            //               return Center(
+            //                 child: Text('Error: ${snapshot.error}'),
+            //               );
+            //             } else {
+            //               final TopicModel topic = snapshot.data!;
+            //               print(topic.slug);
+            //               return ButtonSheetItem(course: topic);
+            //             }
+            //           },
+            //         );
+            //       },
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),

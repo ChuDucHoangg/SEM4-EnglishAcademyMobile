@@ -1,5 +1,4 @@
-import 'package:english_academy_mobile/core/app_export.dart';
-import 'package:english_academy_mobile/presentation/%20instructor_screen/instructor_screen.dart';
+import 'package:english_academy_mobile/presentation/instructor_screen/instructor_screen.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/answer_detail_screen/answer_detail_screen.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/entrance_test_finish/entrance_test_finish.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/entrance_test_ielts_screen/entrance_test_ielts_screen.dart';
@@ -7,9 +6,13 @@ import 'package:english_academy_mobile/presentation/entrance_test_screen/entranc
 import 'package:english_academy_mobile/presentation/entrance_test_screen/entrance_test_toeic_screen/entrance_test_toeic_screen.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/learning_paths_ielts_screen/learning_paths_ielts_screen.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/learning_paths_toeic_screen/learning_paths_toeic_screen.dart';
-import 'package:english_academy_mobile/presentation/intro_scren/intro_screen.dart';
+import 'package:english_academy_mobile/presentation/intro_screen/intro_screen.dart';
 import 'package:english_academy_mobile/presentation/notification_screen/notification_screen.dart';
 import 'package:flutter/material.dart';
+import '../presentation/checkout_screen/checkout_payment_method_screen/checkout_payment_method_screen.dart';
+import '../presentation/checkout_screen/checkout_screen.dart';
+import '../presentation/checkout_screen/thank_you_screen/thank_you_screen.dart';
+import '../presentation/course_screen/course_learning_screen/course_learning_screen.dart';
 import '../presentation/launching_screen/launching_screen.dart';
 import '../presentation/intro_one_screen/intro_one_screen.dart';
 import '../presentation/intro_two_screen/intro_two_screen.dart';
@@ -17,7 +20,6 @@ import '../presentation/intro_three_screen/intro_three_screen.dart';
 import '../presentation/home_screen/home_screen.dart';
 import '../presentation/course_screen/course_screen.dart';
 import '../presentation/course_screen/course_detail_screen/course_detail_screen.dart';
-import 'package:english_academy_mobile/presentation/course_screen/course_leaning_screen/course_learning_screen.dart';
 import '../presentation/profile_screen/profile_screen.dart';
 
 class AppRoutes {
@@ -40,6 +42,12 @@ class AppRoutes {
   static const String courseDetailScreen = '/course_detail_screen';
 
   static const String courseLearningScreen = '/course_learning_screen';
+
+  static const String checkoutScreen = '/checkout_screen';
+
+  static const String checkoutPaymentMethodScreen = '/checkout_payment_method_screen';
+
+  static const String thankYouScreen = '/thank_you_screen';
 
   static const String entranceTestScreen = '/entrance_test_screen';
 
@@ -88,8 +96,23 @@ class AppRoutes {
       ModalRoute.of(context)?.settings.arguments as String?;
       return CourseDetailScreen(slug: slug!);
     },
+    courseLearningScreen: (context) {
+      final String? slug =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return CourseLearningScreen(slug: slug!);
+    },
+    checkoutScreen: (context) {
+      final String? slug =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return CheckoutScreen(slug: slug!);
+    },
+    checkoutPaymentMethodScreen: (context) => CheckoutPaymentMethodScreen(),
+    thankYouScreen: (context) {
+      final String? slug =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return ThankYouScreen(slug: slug!);
+    },
     notificationScreen: (context) => NotificationScreen(),
-    // courseLearningScreen: (context) => CourseLearningScreen(),
     profileScreen: (context) => ProfileScreen(),
   };
 }

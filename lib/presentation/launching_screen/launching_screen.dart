@@ -1,6 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
-import 'package:english_academy_mobile/presentation/intro_scren/intro_screen.dart';
+import 'package:english_academy_mobile/presentation/intro_screen/intro_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
