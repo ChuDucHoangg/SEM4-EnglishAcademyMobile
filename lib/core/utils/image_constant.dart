@@ -698,4 +698,8 @@ class ImageConstant {
   static String imageQuiz = 'assets/images/quiz_ic_quiz.png';
 
   static String imageQuiz2 = 'assets/images/quiz_ic_quiz2.png';
+
+  static String imgStripeLogo = 'assets/images/img_stripe_logo.svg';
+
+  static String imgInAppPurchases = 'assets/images/img_in_app_purchases.svg';
 }
