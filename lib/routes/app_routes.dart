@@ -1,4 +1,12 @@
+import 'package:english_academy_mobile/core/app_export.dart';
 import 'package:english_academy_mobile/presentation/%20instructor_screen/instructor_screen.dart';
+import 'package:english_academy_mobile/presentation/entrance_test_screen/answer_detail_screen/answer_detail_screen.dart';
+import 'package:english_academy_mobile/presentation/entrance_test_screen/entrance_test_finish/entrance_test_finish.dart';
+import 'package:english_academy_mobile/presentation/entrance_test_screen/entrance_test_ielts_screen/entrance_test_ielts_screen.dart';
+import 'package:english_academy_mobile/presentation/entrance_test_screen/entrance_test_screen.dart';
+import 'package:english_academy_mobile/presentation/entrance_test_screen/entrance_test_toeic_screen/entrance_test_toeic_screen.dart';
+import 'package:english_academy_mobile/presentation/entrance_test_screen/learning_paths_ielts_screen/learning_paths_ielts_screen.dart';
+import 'package:english_academy_mobile/presentation/entrance_test_screen/learning_paths_toeic_screen/learning_paths_toeic_screen.dart';
 import 'package:english_academy_mobile/presentation/intro_scren/intro_screen.dart';
 import 'package:english_academy_mobile/presentation/notification_screen/notification_screen.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +41,20 @@ class AppRoutes {
 
   static const String courseLearningScreen = '/course_learning_screen';
 
+  static const String entranceTestScreen = '/entrance_test_screen';
+
+  static const String entranceTestToeicScreen = '/entrance_test_toeic_screen';
+
+  static const String entranceTestIeltsScreen = '/entrance_test_ielts_screen';
+
+  static const String entranceTestFinish = '/entrance_test_finish';
+
+  static const String learningPathsIeltsScreen = '/learning_paths_ielts_screen';
+
+  static const String learningPathsToeicScreen = '/learning_paths_toeic_screen';
+
+  static const String answerDetailScreen = '/answer_detail_screen';
+
   static const String notificationScreen = '/notification_screen';
 
   static const String profileScreen = '/profile_screen';
@@ -45,6 +67,21 @@ class AppRoutes {
     introThreeScreen: (context) => IntroThreeScreen(),
     homeScreen: (context) => HomeScreen(),
     instructorScreen: (context) => InstructorScreen(),
+    entranceTestScreen: (context) => EntranceTestScreen(),
+    AppRoutes.entranceTestToeicScreen: (context) {
+      final String? slug =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return EntranceTestToeicScreen(slug: slug!);
+    },
+    entranceTestIeltsScreen: (context) {
+      final String? slug =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return EntranceTestIeltsScreen(slug: slug!);
+    },
+    entranceTestFinish: (context) => EntranceTestFinish(),
+    learningPathsIeltsScreen: (context) => LearningPathsIeltsScreen(),
+    learningPathsToeicScreen: (context) => LearningPathsToeicScreen(),
+    answerDetailScreen: (context) => AnswerDetailScreen(),
     courseScreen: (context) => CourseScreen(),
     courseDetailScreen: (context) {
       final String? slug =

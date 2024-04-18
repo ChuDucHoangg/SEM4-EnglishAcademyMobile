@@ -414,6 +414,12 @@ class CustomTextStyles {
     color: Color(0XFF6B7280),
     fontWeight: FontWeight.w500,
   );
+  static get titleENT => theme.textTheme.titleSmall!.copyWith(
+    color: Color(0XFF1D2857),
+    fontWeight: FontWeight.w700,
+    fontSize: 20,
+    letterSpacing: 0
+  );
 }
 
 extension on TextStyle {

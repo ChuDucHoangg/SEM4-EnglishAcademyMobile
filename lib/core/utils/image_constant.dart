@@ -694,4 +694,8 @@ class ImageConstant {
       '$imagePath/img_thumbs_up_primary_16x16.svg';
 
   static String imageNotFound = 'assets/images/image_not_found.png';
+
+  static String imageQuiz = 'assets/images/quiz_ic_quiz.png';
+
+  static String imageQuiz2 = 'assets/images/quiz_ic_quiz2.png';
 }

@@ -1,6 +1,6 @@
 import 'package:english_academy_mobile/presentation/course_screen/course_screen.dart';
+import 'package:english_academy_mobile/presentation/entrance_test_screen/entrance_test_screen.dart';
 import 'package:english_academy_mobile/presentation/home_screen/home_screen.dart';
-import 'package:english_academy_mobile/presentation/notification_screen/notification_screen.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/widgets/custom_bottom_app_bar.dart';
@@ -18,7 +18,7 @@ class _InitScreenState extends State<InitScreen> {
   final List<Widget> _screens = [
     HomeScreen(),
     CourseScreen(),
-    NotificationScreen(),
+    EntranceTestScreen(),
     ProfileScreen(),
   ];
 
