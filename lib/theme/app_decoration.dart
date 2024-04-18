@@ -27,6 +27,9 @@ class AppDecoration {
   static BoxDecoration get fillGreen => BoxDecoration(
     color: appTheme.green50,
   );
+  static BoxDecoration get fillGreenB => BoxDecoration(
+    color: appTheme.green900,
+  );
   static BoxDecoration get fillIndigo => BoxDecoration(
     color: appTheme.indigo100,
   );
@@ -394,6 +397,14 @@ class AppDecoration {
     color: appTheme.gray5001,
     border: Border.all(
       color: appTheme.pink50,
+      width: 1.h,
+      strokeAlign: strokeAlignCenter,
+    ),
+  );
+  static BoxDecoration get outlineGreen => BoxDecoration(
+    color: appTheme.greenA400.withOpacity(0.2),
+    border: Border.all(
+      color:  appTheme.greenA400.withOpacity(0.5),
       width: 1.h,
       strokeAlign: strokeAlignCenter,
     ),

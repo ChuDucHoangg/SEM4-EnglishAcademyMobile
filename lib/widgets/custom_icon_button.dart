@@ -160,4 +160,8 @@ extension IconButtonStyleHelper on CustomIconButton {
     color: appTheme.indigo100,
     borderRadius: BorderRadius.circular(10.h),
   );
+  static BoxDecoration get fillBlueAccentTL100 => BoxDecoration(
+    color: Colors.blueAccent.withOpacity(0.8),
+    borderRadius: BorderRadius.circular(100.h),
+  );
 }
