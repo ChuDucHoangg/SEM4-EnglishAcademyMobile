@@ -1,3 +1,4 @@
+import 'package:english_academy_mobile/init_screen.dart';
 import 'package:english_academy_mobile/service/EntranceTestService.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
@@ -5,7 +6,6 @@ import '../../../data/model/EntranceTestModel.dart';
 import '../../../widgets/app_bar/appbar_subtitle_two.dart';
 import '../../../widgets/app_bar/appbar_trailing_image.dart';
 import '../../../widgets/app_bar/custom_app_bar.dart';
-import '../../home_screen/home_screen.dart';
 import 'widgets/data_answers_item_widget.dart';
 
 class AnswerDetailScreen extends StatefulWidget {
@@ -115,7 +115,7 @@ class _AnswerDetailScreenState extends State<AnswerDetailScreen> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
+            MaterialPageRoute(builder: (context) => InitScreen()),
           );
         },
       ),

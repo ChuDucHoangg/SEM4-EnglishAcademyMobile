@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:english_academy_mobile/core/app_export.dart';
-import 'package:english_academy_mobile/presentation/home_screen/home_screen.dart';
+import 'package:english_academy_mobile/init_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
@@ -35,6 +35,7 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
   late AudioPlayer audioPlayer = AudioPlayer();
   late Map<String, int?> selectedAnswers = {};
   late List<TestInputSession> sessionDetails = [];
+  late List<AudioPlayer> audioPlayers = [];
 
   @override
   void initState() {
@@ -45,6 +46,7 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
       setState(() {
         countdownTime = testDetail.time;
         sessionDetails = testDetail.testInputSessionDetails;
+        audioPlayers = List.generate(sessionDetails.length, (index) => AudioPlayer());
       });
       startCountdown();
     });
@@ -52,17 +54,30 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
 
   @override
   void dispose() {
-    audioPlayer.dispose();
+    audioPlayers.forEach((player) {
+      player.dispose();
+    });
     super.dispose();
   }
 
-  Future<void> playAudio(String url) async {
-    await audioPlayer.play(UrlSource(url));
+  Future<void> playAudio(int questionIndex, String url) async {
+    for (int i = 0; i < audioPlayers.length; i++) {
+      if (i != questionIndex) {
+        await audioPlayers[i].stop();
+      }
+    }
+    await audioPlayers[questionIndex].play(UrlSource(url));
   }
 
-  Future<void> pauseAudio() async {
-    await audioPlayer.pause();
+  Future<void> pauseAudio(int questionIndex) async {
+    // await audioPlayer.pause();
+    await audioPlayers[questionIndex].pause();
   }
+
+  void seekToBeginning(int questionIndex) {
+    audioPlayers[questionIndex].seek(Duration.zero);
+  }
+
 
   void startCountdown() {
     startTime = DateTime.now();
@@ -142,7 +157,7 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
+            MaterialPageRoute(builder: (context) => InitScreen()),
           );
         },
       ),
@@ -190,6 +205,7 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
       );
 
       sessionQuestionWidgets.addAll(session.questionTestInputs.map((question) {
+        int questionIndex = session.questionTestInputs.indexOf(question);
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
@@ -210,28 +226,39 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
                 ),
               SizedBox(height: 10),
               if (question.audiomp3 != null && question.audiomp3.isNotEmpty)
-                ElevatedButton(
-                  onPressed: () {
-                    if (audioPlayer.state == PlayerState.playing) {
-                      pauseAudio();
+                InkWell(
+                  onTap: () {
+                    if (audioPlayers[questionIndex].state == PlayerState.playing) {
+                      pauseAudio(questionIndex);
                     } else {
-                      playAudio(question.audiomp3);
+                      playAudio(questionIndex, question.audiomp3);
+                      seekToBeginning(questionIndex);
                     }
                   },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateColor.resolveWith(
-                          (states) => theme.colorScheme.primary,
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: theme.colorScheme.primary,
+                      boxShadow: [
+                        BoxShadow(
+                          color: theme.colorScheme.primary.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
                     ),
-                    shape: MaterialStateProperty.all<CircleBorder>(
-                      CircleBorder(),
+                    child: Center(
+                      child: Icon(
+                        audioPlayers[questionIndex].state == PlayerState.playing
+                            ? Icons.pause
+                            : Icons.play_arrow_rounded,
+                        size: 40,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  child: Icon(
-                    audioPlayer.state == PlayerState.playing
-                        ? Icons.pause
-                        : Icons.play_arrow_rounded,
-                    size: 40,
-                    color: Colors.white,
                   ),
                 ),
               SizedBox(height: 10),
