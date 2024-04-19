@@ -1,4 +1,5 @@
 import 'package:english_academy_mobile/core/app_export.dart';
+import 'package:english_academy_mobile/init_screen.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/answer_detail_screen/answer_detail_screen.dart';
 import 'package:english_academy_mobile/service/EntranceTestService.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -9,7 +10,6 @@ import '../../../theme/theme_helper.dart';
 import '../../../widgets/app_bar/appbar_trailing_image.dart';
 import '../../../widgets/app_bar/custom_app_bar.dart';
 import '../../../widgets/custom_outlined_button.dart';
-import '../../home_screen/home_screen.dart';
 
 class LearningPathsIeltsScreen extends StatelessWidget {
   const LearningPathsIeltsScreen({Key? key})
@@ -403,7 +403,7 @@ class LearningPathsIeltsScreen extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
+            MaterialPageRoute(builder: (context) => InitScreen()),
           );
         },
       ),
@@ -493,7 +493,7 @@ Widget buildNotFoundWidget(BuildContext context) {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => HomeScreen()),
+                MaterialPageRoute(builder: (context) => InitScreen()),
               );
             },
             style: ElevatedButton.styleFrom(
