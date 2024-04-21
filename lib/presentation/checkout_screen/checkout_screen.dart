@@ -1,14 +1,17 @@
 import 'dart:convert';
-
-import 'package:country_pickers/utils/my_alert_dialog.dart';
+import 'package:easy_paypal/easy_paypal.dart';
+import 'package:english_academy_mobile/presentation/checkout_screen/widgets/checkout_course_order_item.dart';
+import 'package:english_academy_mobile/presentation/checkout_screen/widgets/checkout_information_item.dart';
+import 'package:english_academy_mobile/presentation/checkout_screen/widgets/checkout_order_summary_item.dart';
+import 'package:english_academy_mobile/presentation/checkout_screen/widgets/checkout_payment_method_item.dart';
 import 'package:english_academy_mobile/widgets/app_bar/custom_app_bar.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_leading_image.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_one.dart';
-import 'package:english_academy_mobile/widgets/custom_icon_button.dart';
 import 'package:english_academy_mobile/widgets/custom_elevated_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart' as http;
 import '../../data/model/CourseModel.dart';
@@ -25,6 +28,10 @@ class CheckoutScreen extends StatefulWidget {
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
   late Future<CourseModel> _courseFuture;
+  final _easyPaypalPlugin = EasyPaypal();
+
+  bool isPaypalChecked = true;
+  bool isStripeChecked = false;
 
   @override
   void initState() {
@@ -32,11 +39,72 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     _courseFuture = CourseService.fetchCourseDetail(widget.slug);
     Stripe.publishableKey =
         "pk_test_51OVqT0DQZzhwaulm9QNS20I55bgkpOt6eQa1gHTm113njc8xGE3A3YoiJ5WEweMhQizzHnQGtFH0zEw8mXCYFbcB00s9xR5vEC";
+    initPlatformState();
+
+    isPaypalChecked = true;
+    isStripeChecked = false;
   }
 
+  void handleSelectionChange(bool selectedPaypal, bool selectedStripe) {
+    setState(() {
+      if (selectedPaypal) {
+        isPaypalChecked = true;
+        isStripeChecked = false;
+      } else if (selectedStripe) {
+        isPaypalChecked = false;
+        isStripeChecked = true;
+      }
+    });
+  }
+
+  //payment with paypal
+  PPOrder order(double coursePrice) => PPOrder(
+        intent: PPOrderIntent.capture,
+        appContext: PPOrderAppContext(
+          shippingPreference: PPShippingPreference.noShipping,
+        ),
+        purchaseUnitList: [
+          PPPurchaseUnit(
+            orderAmount: PPOrderAmount(
+              currencyCode: PPCurrencyCode.usd,
+              value: coursePrice.toString(),
+            ),
+          ),
+        ],
+      );
+
+  Future<void> initPlatformState() async {
+    try {
+      _easyPaypalPlugin.initConfig(
+          config: PPCheckoutConfig(
+        clientId:
+            'AcvKRJ0Oi28AoLvgQ3LQBRmpHaEEJ7ZZNRLP5V5SZAYjqvwmYJJvJGklKMLvb-plw3XhwmEBskvrwsCK',
+        environment: PPEnvironment.sandbox,
+        returnUrl: 'com.example.easy.paypal://paypalpay',
+      ));
+      _easyPaypalPlugin.setCallback(PPCheckoutCallback(onApprove: (data) async {
+        final CourseModel course = await _courseFuture;
+        var slug = course.slug;
+        await CourseService.buyCourse(1, course.id, "PAYPAL");
+        Navigator.pushNamed(context, AppRoutes.thankYouScreen, arguments: slug);
+        debugPrint('done: $data');
+      }, onError: (data) {
+        debugPrint('onError: $data');
+      }, onCancel: () {
+        debugPrint('onCancel');
+      }, onShippingChange: (data) {
+        debugPrint('onShippingChange: $data');
+      }));
+    } catch (e) {
+      debugPrint(':::: ERROR: $e');
+    }
+    if (!mounted) return;
+  }
+
+  // payment with stripe
   Map<String, dynamic>? paymentIntent;
 
-  void makePayment(double coursePrice) async {
+  void makePaymentStripe(double coursePrice) async {
     try {
       paymentIntent = await createPaymentIntent((coursePrice * 100).toInt());
 
@@ -61,34 +129,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
       final CourseModel course = await _courseFuture;
       var slug = course.slug;
-      await CourseService.buyCourse(1, course.id);
-      Navigator.pushNamed(context, AppRoutes.thankYouScreen,
-          arguments: slug);
+      await CourseService.buyCourse(1, course.id, "STRIPE");
+      Navigator.pushNamed(context, AppRoutes.thankYouScreen, arguments: slug);
       print("Done");
     } catch (e) {
       print("Failed to send payment data: $e");
-      showPurchaseFailedDialog();
     }
-  }
-
-  void showPurchaseFailedDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Purchase Failed"),
-          content: Text("This course has been purchased."),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text("OK"),
-            ),
-          ],
-        );
-      },
-    );
   }
 
   createPaymentIntent(int amount) async {
@@ -173,272 +219,61 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   /// Section Widget
   Widget _buildInformation(BuildContext context) {
-    return Column(children: [
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.h),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Billing Address",
-              style: theme.textTheme.titleMedium,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 2.v),
-              child: Text(
-                "Change",
-                style: CustomTextStyles.labelLargePrimary,
-              ),
-            )
-          ],
-        ),
-      ),
-      SizedBox(height: 15.h),
-      Container(
-        width: 327.h,
-        margin: EdgeInsets.symmetric(horizontal: 23.h),
-        padding: EdgeInsets.symmetric(
-          horizontal: 15.h,
-          vertical: 13.v,
-        ),
-        decoration: AppDecoration.outlineBluegray50.copyWith(
-          borderRadius: BorderRadiusStyle.roundedBorder12,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 6.v),
-            Text(
-              "Jason Mark,",
-              style: theme.textTheme.titleSmall,
-            ),
-            SizedBox(height: 7.v),
-            Container(
-              width: 286.h,
-              margin: EdgeInsets.only(right: 8.h),
-              child: Text(
-                "3702 Oliver Street, Fort Worth, TX, Texas, 76102, 817-352-2015, jasonmark@gmail.com",
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.bodySmall!.copyWith(
-                  height: 1.60,
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    ]);
+    return CheckoutInformationItem();
   }
 
   /// Section Widget
   Widget _buildCourseOrder(BuildContext context, CourseModel course) {
-    return Column(children: [
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Padding(
-          padding: EdgeInsets.only(left: 24.h),
-          child: Text(
-            "Order details",
-            style: theme.textTheme.titleMedium,
-          ),
-        ),
-      ),
-      SizedBox(height: 15.v),
-      Container(
-        margin: EdgeInsets.symmetric(horizontal: 24.h),
-        padding: EdgeInsets.symmetric(
-          horizontal: 16.h,
-          vertical: 17.v,
-        ),
-        decoration: AppDecoration.outlineBluegray503.copyWith(
-          borderRadius: BorderRadiusStyle.roundedBorder12,
-        ),
-        child: Row(
-          children: [
-            Container(
-              height: 56.v,
-              width: 63.h,
-              padding: EdgeInsets.symmetric(vertical: 6.v),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadiusStyle.roundedBorder12,
-                image: DecorationImage(
-                  image: NetworkImage(course.image),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(left: 16.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 204.h,
-                      child: Text(
-                        course.name,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: CustomTextStyles.labelLargeGray900_1.copyWith(
-                          height: 1.60,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 3.v),
-                    Text(
-                      "Price: \$${course.price.toString()}",
-                      style: CustomTextStyles.labelLargePrimary_1,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ]);
+    return CheckoutCourseOrderItem(course: course);
   }
 
   /// Section Widget
   Widget _buildPaymentMethod(BuildContext context) {
-    return Column(children: [
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Padding(
-          padding: EdgeInsets.only(left: 24.h),
-          child: Text(
-            "Payment method",
-            style: theme.textTheme.titleMedium,
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: EdgeInsets.only(left: 24.h),
+            child: Text(
+              "Payment method",
+              style: theme.textTheme.titleMedium,
+            ),
           ),
         ),
-      ),
-      SizedBox(height: 15.v),
-      GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, AppRoutes.checkoutPaymentMethodScreen);
-        },
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 23.h),
-          padding: EdgeInsets.symmetric(
-            horizontal: 15.h,
-            vertical: 16.v,
-          ),
-          decoration: AppDecoration.outlineBluegray50.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder12,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
+        SizedBox(height: 15.v),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24.h),
+          child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 1.v),
-                child: CustomIconButton(
-                  height: 50.adaptSize,
-                  width: 50.adaptSize,
-                  padding: EdgeInsets.all(9.h),
-                  decoration: IconButtonStyleHelper.fillGrayTL8,
-                  child: CustomImageView(
-                    imagePath: ImageConstant.imgStripeLogo,
-                  ),
-                ),
+              CheckoutPaymentMethodItem(
+                paymentMethodName: "Paypal",
+                paymentMethodDescription: "Checked automatically",
+                paymentMethodLogoPath: ImageConstant.imgLogosPaypal,
+                isChecked: isPaypalChecked,
+                onChanged: (selected) {
+                  handleSelectionChange(selected, false);
+                },
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 16.h,
-                  top: 1.v,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Stripe",
-                      style: theme.textTheme.titleSmall,
-                    ),
-                    SizedBox(height: 8.v),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Checked automatically",
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    )
-                  ],
-                ),
+              CheckoutPaymentMethodItem(
+                paymentMethodName: "Stripe",
+                paymentMethodDescription: "Master Card, Visa,...",
+                paymentMethodLogoPath: ImageConstant.imgTelevisionPrimary,
+                isChecked: isStripeChecked,
+                onChanged: (selected) {
+                  handleSelectionChange(false, selected);
+                },
               ),
-              Spacer(),
-              CustomImageView(
-                imagePath: ImageConstant.imgArrowRightBlueGray30001,
-                height: 18.adaptSize,
-                width: 18.adaptSize,
-                margin: EdgeInsets.symmetric(vertical: 12.v),
-              )
             ],
           ),
         ),
-      )
-    ]);
+      ],
+    );
   }
 
   /// Section Widget
   Widget _buildOrderSummary(BuildContext context, CourseModel course) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Stack(
-        alignment: Alignment.topCenter,
-        children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.h),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Order summary",
-                    style: theme.textTheme.titleMedium,
-                  ),
-                  SizedBox(height: 16.v),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.h,
-                      vertical: 4.v,
-                    ),
-                    decoration: AppDecoration.fillGray5002.copyWith(
-                      borderRadius: BorderRadiusStyle.roundedBorder12,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        _buildItem(
-                          context,
-                          label: "Original price",
-                          price: '\$${course.price.toString()}',
-                        ),
-                        _buildItem(
-                          context,
-                          label: "Payment fee",
-                          price: "0.00",
-                        ),
-                        SizedBox(height: 16.v),
-                        _buildItem(
-                          context,
-                          label: "Total buy",
-                          price: '\$${course.price.toString()}',
-                        ),
-                        SizedBox(height: 12.v)
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+    return CheckoutOrderSummaryItem(course: course);
   }
 
   ///Section Widget
@@ -514,47 +349,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 text: "Pay Now",
                 buttonStyle: CustomButtonStyles.fillPrimaryTL24,
                 onPressed: () {
-                  makePayment(course.price);
+                  if (isPaypalChecked) {
+                    _easyPaypalPlugin.checkout(order: order(course.price));
+                  } else if (isStripeChecked) {
+                    makePaymentStripe(course.price);
+                  }
                 },
               ),
             ],
           ),
           SizedBox(height: 15.v)
-        ],
-      ),
-    );
-  }
-
-  /// Common widget
-  Widget _buildItem(
-    BuildContext context, {
-    required String label,
-    required String price,
-  }) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 12.v),
-      decoration: AppDecoration.outlineBluegray502,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 2.v),
-            child: Text(
-              label,
-              style: theme.textTheme.bodySmall!.copyWith(
-                color: appTheme.gray60001,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 1.v),
-            child: Text(
-              price,
-              style: CustomTextStyles.bodySmallGray900.copyWith(
-                color: appTheme.gray900,
-              ),
-            ),
-          )
         ],
       ),
     );

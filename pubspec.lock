@@ -177,6 +177,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.3"
+  easy_paypal:
+    dependency: "direct main"
+    description:
+      name: easy_paypal
+      sha256: "3638a85c0f6c3f26e2849c0e440248d4fcd0ab31f65db55449b8d5fc9f20b34f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.8"
   equatable:
     dependency: transitive
     description:
@@ -440,6 +448,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  msh_checkbox:
+    dependency: "direct main"
+    description:
+      name: msh_checkbox
+      sha256: f546b8d7b6c129a079c5d5d37217656bee417883b11cf506b5ef536915c81cab
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   octo_image:
     dependency: transitive
     description:

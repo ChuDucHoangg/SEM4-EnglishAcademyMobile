@@ -23,6 +23,8 @@ dependencies:
   page_transition: ^2.1.0
   youtube_player_flutter: ^9.0.1
   flutter_stripe: ^10.1.1
+  easy_paypal: ^1.0.8
+  msh_checkbox: ^2.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -9,7 +9,6 @@ import 'package:english_academy_mobile/presentation/entrance_test_screen/learnin
 import 'package:english_academy_mobile/presentation/intro_screen/intro_screen.dart';
 import 'package:english_academy_mobile/presentation/notification_screen/notification_screen.dart';
 import 'package:flutter/material.dart';
-import '../presentation/checkout_screen/checkout_payment_method_screen/checkout_payment_method_screen.dart';
 import '../presentation/checkout_screen/checkout_screen.dart';
 import '../presentation/checkout_screen/thank_you_screen/thank_you_screen.dart';
 import '../presentation/course_screen/course_learning_screen/course_learning_screen.dart';
@@ -44,8 +43,6 @@ class AppRoutes {
   static const String courseLearningScreen = '/course_learning_screen';
 
   static const String checkoutScreen = '/checkout_screen';
-
-  static const String checkoutPaymentMethodScreen = '/checkout_payment_method_screen';
 
   static const String thankYouScreen = '/thank_you_screen';
 
@@ -106,7 +103,6 @@ class AppRoutes {
       ModalRoute.of(context)?.settings.arguments as String?;
       return CheckoutScreen(slug: slug!);
     },
-    checkoutPaymentMethodScreen: (context) => CheckoutPaymentMethodScreen(),
     thankYouScreen: (context) {
       final String? slug =
       ModalRoute.of(context)?.settings.arguments as String?;
