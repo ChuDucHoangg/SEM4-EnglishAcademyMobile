@@ -67,12 +67,12 @@ class CourseService {
     }
   }
 
-  static Future<void> buyCourse(int studentId, int courseId) async {
+  static Future<void> buyCourse(int studentId, int courseId, String paymentMethod) async {
     try {
       final Map<String, dynamic> body = {
         "studentId": studentId,
         "courseOnlineId": courseId,
-        "paymentMethod": "STRIPE"
+        "paymentMethod": paymentMethod
       };
 
       final response = await http.post(
@@ -90,6 +90,18 @@ class CourseService {
       }
     } catch (e) {
       throw Exception("Failed to send payment data: $e");
+    }
+  }
+
+  static Future<bool> checkCourseStudent(String slug) async {
+    final int userId = 1;
+    final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.checkCourseStudent}/$slug/$userId'));
+
+    if (response.statusCode == 200) {
+      final dynamic data = json.decode(response.body)['data'];
+      return data;
+    } else {
+      throw Exception('Failed to check course student');
     }
   }
 }

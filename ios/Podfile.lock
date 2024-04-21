@@ -1,6 +1,9 @@
 PODS:
   - audioplayers_darwin (0.0.1):
     - Flutter
+  - easy_paypal (1.0.0):
+    - Flutter
+    - PayPalCheckout (= 0.112.2)
   - Flutter (1.0.0)
   - flutter_inappwebview_ios (0.0.1):
     - Flutter
@@ -13,6 +16,7 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - PayPalCheckout (0.112.2)
   - sqflite (0.0.3):
     - Flutter
     - FlutterMacOS
@@ -55,6 +59,7 @@ PODS:
 
 DEPENDENCIES:
   - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/ios`)
+  - easy_paypal (from `.symlinks/plugins/easy_paypal/ios`)
   - Flutter (from `Flutter`)
   - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
@@ -64,6 +69,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - OrderedSet
+    - PayPalCheckout
     - Stripe
     - StripeApplePay
     - StripeCore
@@ -76,6 +82,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   audioplayers_darwin:
     :path: ".symlinks/plugins/audioplayers_darwin/ios"
+  easy_paypal:
+    :path: ".symlinks/plugins/easy_paypal/ios"
   Flutter:
     :path: Flutter
   flutter_inappwebview_ios:
@@ -89,10 +97,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
+  easy_paypal: 5b72eb264157d0060fe91a3d7b47935fae22fdaa
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_inappwebview_ios: 97215cf7d4677db55df76782dbd2930c5e1c1ea0
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
+  PayPalCheckout: 9ecb796c36f899426bb2e10aec08cd236b5f022e
   sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
   Stripe: b65e9f748f8f51b51e015b0d72f5474dc0708788
   stripe_ios: 433385aa051f8965915d495744946ee5a5d657db

@@ -4,8 +4,10 @@ import 'package:english_academy_mobile/core/app_export.dart';
 
 class CourseDetailLessonsItem extends StatefulWidget {
   final CourseModel course;
+  final bool isBought;
 
-  const CourseDetailLessonsItem({Key? key, required this.course})
+  const CourseDetailLessonsItem(
+      {Key? key, required this.course, required this.isBought})
       : super(
           key: key,
         );
@@ -72,39 +74,68 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
                   Container(
                     decoration: AppDecoration.outlineBluegray506,
                   ),
-                    for (var item in topic['itemOnlineDTOList'])
-                      Column(children: [
-                        SizedBox(height: 15.v),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.h),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                  for (var item in topic['itemOnlineDTOList'])
+                    Column(children: [
+                      SizedBox(height: 15.v),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              child: item['itemType'] == 0
+                                  ? Icon(
+                                      Icons.play_circle,
+                                      size: 20.adaptSize,
+                                    )
+                                  : Icon(
+                                      Icons.pending_actions_outlined,
+                                      size: 20.adaptSize,
+                                    ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 12.h,
+                                top: 2.v,
+                              ),
+                              child: Text(
+                                truncateText(item['title']),
+                                style:
+                                    CustomTextStyles.labelLargeGray900.copyWith(
+                                  color: appTheme.gray900,
+                                ),
+                              ),
+                            ),
+                            Spacer(),
+                            if (widget.isBought)
                               Container(
                                 child: item['itemType'] == 0
-                                    ? Icon(
-                                  Icons.play_circle,
-                                  size: 20.adaptSize,
-                                )
-                                    : Icon(
-                                  Icons.pending_actions_outlined,
-                                  size: 20.adaptSize,
-                                ),
+                                    ? Text(
+                                        "03:23",
+                                        style: CustomTextStyles
+                                            .labelLargeBluegray300
+                                            .copyWith(
+                                          color: appTheme.blueGray300,
+                                        ),
+                                      )
+                                    : Text(
+                                        "Start Quiz",
+                                        style: CustomTextStyles
+                                            .labelLargeGray900_1,
+                                      ),
                               ),
+                            if (widget.isBought && item['itemType'] == 0)
                               Padding(
-                                padding: EdgeInsets.only(
-                                  left: 12.h,
-                                  top: 2.v,
-                                ),
-                                child: Text(
-                                  truncateText(item['title']),
-                                  style: CustomTextStyles.labelLargeGray900
-                                      .copyWith(
-                                    color: appTheme.gray900,
-                                  ),
+                                padding: EdgeInsets.only(left: 6.h),
+                                child: Icon(
+                                  item['status']
+                                      ? Icons.done_all_outlined
+                                      : Icons.radio_button_off,
+                                  color: appTheme.blueGray500,
+                                  size: 20.adaptSize,
                                 ),
                               ),
-                              Spacer(),
+                            if (!widget.isBought)
                               Text(
                                 "03:23",
                                 style: CustomTextStyles.labelLargeBluegray300
@@ -112,16 +143,17 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
                                   color: appTheme.blueGray300,
                                 ),
                               ),
+                            if (!widget.isBought)
                               CustomImageView(
                                 imagePath: ImageConstant.imgLocationBlueGray300,
                                 height: 16.adaptSize,
                                 width: 16.adaptSize,
                                 margin: EdgeInsets.only(left: 6.h),
                               ),
-                            ],
-                          ),
+                          ],
                         ),
-                      ]),
+                      ),
+                    ]),
                   SizedBox(height: 16.v),
                 ],
               ),

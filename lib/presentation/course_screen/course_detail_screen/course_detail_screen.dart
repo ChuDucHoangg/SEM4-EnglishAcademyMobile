@@ -28,6 +28,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
   late TabController tabviewController;
   late Future<CourseModel> _courseFuture;
   late Future<TopicModel> _topicFuture;
+  late bool _isBought;
 
   @override
   void initState() {
@@ -35,6 +36,18 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
     tabviewController = TabController(length: 3, vsync: this);
     _courseFuture = CourseService.fetchCourseDetail(widget.slug);
     _topicFuture = CourseService.fetchTopicDetail(widget.slug);
+    _initCourseData();
+  }
+
+  Future<void> _initCourseData() async {
+    try {
+      final bool isBought = await CourseService.checkCourseStudent(widget.slug);
+      setState(() {
+        _isBought = isBought;
+      });
+    } catch (e) {
+      print('Error checking course student: $e');
+    }
   }
 
   @override
@@ -136,7 +149,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                       ),
                     ),
                     _buildTabBarView(context, course),
-                    _buildBottomBar(context, course)
+                    _buildBottomBar(context, course, _isBought)
                   ],
                 ),
               ),
@@ -439,7 +452,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
         controller: tabviewController,
         children: [
           CourseDetailAboutItem(course: course),
-          CourseDetailLessonsItem(course: course),
+          CourseDetailLessonsItem(course: course, isBought: _isBought),
           CourseDetailReviewsItem(course: course)
         ],
       ),
@@ -447,7 +460,8 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
   }
 
   /// Section Widget
-  Widget _buildBottomBar(BuildContext context, CourseModel course) {
+  Widget _buildBottomBar(
+      BuildContext context, CourseModel course, bool isBought) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
@@ -476,54 +490,62 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                 ),
               ),
             ),
-            CustomElevatedButton(
-              width: 261.h,
-              text: "Buy \$${course.price.toString()}",
-              margin: EdgeInsets.only(bottom: 22.v),
-              buttonStyle: CustomButtonStyles.fillPrimary,
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  AppRoutes.checkoutScreen,
-                  arguments: course.slug,
-                );
-              },
-            ),
-            // CustomElevatedButton(
-            //   width: 261.h,
-            //   text: "Continue Studying",
-            //   margin: EdgeInsets.only(bottom: 22.v),
-            //   buttonStyle: CustomButtonStyles.fillPrimary,
-            //   onPressed: () {
-            //     showModalBottomSheet(
-            //       context: context,
-            //       builder: (BuildContext context) {
-            //         return FutureBuilder<TopicModel>(
-            //           future: _topicFuture,
-            //           builder: (context, snapshot) {
-            //             if (snapshot.connectionState ==
-            //                 ConnectionState.waiting) {
-            //               return Center(
-            //                 child: CircularProgressIndicator(),
-            //               );
-            //             } else if (snapshot.hasError) {
-            //               return Center(
-            //                 child: Text('Error: ${snapshot.error}'),
-            //               );
-            //             } else {
-            //               final TopicModel topic = snapshot.data!;
-            //               print(topic.slug);
-            //               return ButtonSheetItem(course: topic);
-            //             }
-            //           },
-            //         );
-            //       },
-            //     );
-            //   },
-            // ),
+            isBought
+                ? CustomElevatedButton(
+                    width: 261.h,
+                    text: "Continue Studying",
+                    margin: EdgeInsets.only(bottom: 22.v),
+                    buttonStyle: CustomButtonStyles.fillPrimary,
+                    onPressed: () {
+                      _showBottomSheet();
+                    },
+                  )
+                : CustomElevatedButton(
+                    width: 261.h,
+                    text: "Buy \$${course.price.toString()}",
+                    margin: EdgeInsets.only(bottom: 22.v),
+                    buttonStyle: CustomButtonStyles.fillPrimary,
+                    onPressed: () {
+                      _navigateToCheckoutScreen(course.slug);
+                    },
+                  ),
           ],
         ),
       ),
+    );
+  }
+
+  void _navigateToCheckoutScreen(String courseSlug) {
+    Navigator.pushNamed(
+      context,
+      AppRoutes.checkoutScreen,
+      arguments: courseSlug,
+    );
+  }
+
+  void _showBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return FutureBuilder<TopicModel>(
+          future: _topicFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
+            } else {
+              final TopicModel topic = snapshot.data!;
+              // print(topic.slug);
+              return ButtonSheetItem(course: topic);
+            }
+          },
+        );
+      },
     );
   }
 

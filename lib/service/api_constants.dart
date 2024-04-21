@@ -7,6 +7,7 @@ class ApiConstants {
   static const String itemOnline = "/item-online";
   static const String exercise = "/topic-online";
   static const String buyCourse = "/course-online-student";
+  static const String checkCourseStudent = "/course-online-student/check";
 
   static const String entranceTest = "/test-input";
   static const String entranceTestDetail = "/test-input/detail";
