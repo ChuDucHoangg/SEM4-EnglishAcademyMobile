@@ -1,22 +1,31 @@
-// import 'package:english_academy_mobile/presentation/home_scroll_down_page/home_scroll_down_page.dart';
-// import 'package:english_academy_mobile/presentation/my_learning_list_page/my_learning_list_page.dart';
+import 'package:english_academy_mobile/data/model/CourseOfflineModel.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/widgets/profile_achievement_item.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/widgets/profile_infomation_item.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/widgets/profile_progess_item.dart';
+import 'package:english_academy_mobile/service/CourseOfflineService.dart';
 import 'package:english_academy_mobile/widgets/app_bar/custom_app_bar.dart';
-import 'package:english_academy_mobile/widgets/app_bar/appbar_leading_image.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_one.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_trailing_image.dart';
-import 'widgets/count_item_widget.dart';
-import 'widgets/uxdesign3_item_widget.dart';
-import 'package:english_academy_mobile/widgets/custom_bottom_app_bar.dart';
-import 'package:english_academy_mobile/widgets/custom_floating_button.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
+import '../../widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
 
-// ignore_for_file: must_be_immutable
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key})
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key})
       : super(
           key: key,
         );
+
+  @override
+  ProfileScreenState createState() => ProfileScreenState();
+}
+
+class ProfileScreenState extends State<ProfileScreen>
+    with AutomaticKeepAliveClientMixin<ProfileScreen> {
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
@@ -29,19 +38,19 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: 32.v),
-              _buildProfile(context),
+              _buildInformation(context),
               SizedBox(height: 16.v),
-              _buildMusic(context),
+              _buildAchievement(context),
               SizedBox(height: 15.v),
-              _buildFrameSeventySix(context),
+              _buildProgress(context),
               SizedBox(height: 24.v),
               Divider(
                 color: appTheme.blueGray100,
               ),
               SizedBox(height: 23.v),
-              _buildCount(context),
+              _buildCategory(context),
               SizedBox(height: 16.v),
-              _buildUXDesign(context)
+              _buildContent(context)
             ],
           ),
         ),
@@ -68,369 +77,210 @@ class ProfileScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildProfile(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16.h),
-      decoration: AppDecoration.fillGray5002.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder12,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CustomImageView(
-            imagePath: ImageConstant.imgAvatar9,
-            height: 48.adaptSize,
-            width: 48.adaptSize,
-            radius: BorderRadius.circular(
-              24.h,
-            ),
-            margin: EdgeInsets.symmetric(vertical: 9.v),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 15.h,
-              top: 1.v,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Jason Mark",
-                  style: theme.textTheme.titleSmall,
-                ),
-                SizedBox(height: 9.v),
-                Text(
-                  "jasonmark@mail.com",
-                  style: CustomTextStyles.bodySmallBluegray300_1,
-                ),
-                SizedBox(height: 7.v),
-                Text(
-                  "UI/UX, Development, Finance",
-                  style: CustomTextStyles.labelLargeBluegray500,
-                )
-              ],
-            ),
-          ),
-          Spacer(),
-          CustomImageView(
-            imagePath: ImageConstant.imgSearchBlueGray300,
-            height: 24.adaptSize,
-            width: 24.adaptSize,
-            margin: EdgeInsets.symmetric(vertical: 21.v),
-          )
-        ],
-      ),
-    );
+  Widget _buildInformation(BuildContext context) {
+    return ProfileInfomationItem();
   }
 
   /// Section Widget
-  Widget _buildMusic(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.h,
-            vertical: 11.v,
-          ),
-          decoration: AppDecoration.fillGreen.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder12,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomImageView(
-                    imagePath: ImageConstant.imgMusic,
-                    height: 24.adaptSize,
-                    width: 24.adaptSize,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 2.h,
-                      top: 2.v,
-                      bottom: 1.v,
-                    ),
-                    child: Text(
-                      "11",
-                      style: CustomTextStyles.titleMediumGreenA400,
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 10.v),
-              Text(
-                "Course Completed",
-                style: CustomTextStyles.labelLargeGray60001_1,
-              )
-            ],
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 40.h,
-            vertical: 11.v,
-          ),
-          decoration: AppDecoration.fillYellow.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder12,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomImageView(
-                    imagePath: ImageConstant.imgUserAmberA200,
-                    height: 24.adaptSize,
-                    width: 24.adaptSize,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 2.h,
-                      top: 2.v,
-                      bottom: 1.v,
-                    ),
-                    child: Text(
-                      "4",
-                      style: CustomTextStyles.titleMediumAmberA200,
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 10.v),
-              Text(
-                "Days Streak",
-                style: CustomTextStyles.labelLargeGray60001_1,
-              )
-            ],
-          ),
-        )
-      ],
-    );
+  Widget _buildAchievement(BuildContext context) {
+    return ProfileAchivementItem();
   }
 
   /// Section Widget
-  Widget _buildFrameSeventySix(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 5.h),
-      padding: EdgeInsets.symmetric(
-        horizontal: 5.h,
-        vertical: 11.v,
-      ),
-      decoration: AppDecoration.outlineBluegray50.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder12,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-              left: 6.h,
-              right: 4.h,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: 73.h,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.h,
-                    vertical: 4.v,
-                  ),
-                  decoration: AppDecoration.outlineGray9008.copyWith(
-                    borderRadius: BorderRadiusStyle.circleBorder5,
-                  ),
-                  child: Text(
-                    "UX Design",
-                    style: CustomTextStyles.labelMediumGreenA400,
-                  ),
-                ),
-                Container(
-                  width: 61.h,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.h,
-                    vertical: 5.v,
-                  ),
-                  decoration: AppDecoration.outlineGray9009.copyWith(
-                    borderRadius: BorderRadiusStyle.circleBorder5,
-                  ),
-                  child: Text(
-                    "Finance",
-                    style: CustomTextStyles.labelMediumRedA200,
-                  ),
-                ),
-                Container(
-                  width: 56.h,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.h,
-                    vertical: 4.v,
-                  ),
-                  decoration: AppDecoration.outlineGray90010.copyWith(
-                    borderRadius: BorderRadiusStyle.circleBorder5,
-                  ),
-                  child: Text(
-                    "Design",
-                    style: CustomTextStyles.labelMediumPrimary,
-                  ),
-                ),
-                Container(
-                  width: 62.h,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.h,
-                    vertical: 5.v,
-                  ),
-                  decoration: AppDecoration.outlineGray90011.copyWith(
-                    borderRadius: BorderRadiusStyle.circleBorder5,
-                  ),
-                  child: Text(
-                    "Website",
-                    style: CustomTextStyles.labelMediumAmberA200,
-                  ),
-                )
-              ],
-            ),
-          ),
-          SizedBox(height: 12.v),
-          SizedBox(
-            height: 8.v,
-            width: 303.h,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    height: 8.v,
-                    width: 303.h,
-                    decoration: BoxDecoration(
-                      color: appTheme.gray100,
-                      borderRadius: BorderRadius.circular(
-                        3.h,
-                      ),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(
-                        3.h,
-                      ),
-                      child: LinearProgressIndicator(
-                        value: 0.72,
-                        backgroundColor: appTheme.gray100,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          appTheme.greenA400,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    height: 8.v,
-                    width: 303.h,
-                    decoration: BoxDecoration(
-                      color: appTheme.amberA200,
-                      borderRadius: BorderRadius.circular(
-                        3.h,
-                      ),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(
-                        3.h,
-                      ),
-                      child: LinearProgressIndicator(
-                        value: 0.72,
-                        backgroundColor: appTheme.amberA200,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          appTheme.greenA400,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    height: 8.v,
-                    width: 303.h,
-                    decoration: BoxDecoration(
-                      color: appTheme.gray100,
-                      borderRadius: BorderRadius.circular(
-                        3.h,
-                      ),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(
-                        3.h,
-                      ),
-                      child: LinearProgressIndicator(
-                        value: 0.6,
-                        backgroundColor: appTheme.gray100,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          appTheme.redA200,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    height: 8.v,
-                    width: 303.h,
-                    decoration: BoxDecoration(
-                      color: appTheme.gray100,
-                      borderRadius: BorderRadius.circular(
-                        3.h,
-                      ),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(
-                        3.h,
-                      ),
-                      child: LinearProgressIndicator(
-                        value: 0.5,
-                        backgroundColor: appTheme.gray100,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          appTheme.blueA700,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          SizedBox(height: 6.v)
-        ],
-      ),
-    );
+  Widget _buildProgress(BuildContext context) {
+    return ProfileProgessItem();
   }
 
   /// Section Widget
-  Widget _buildCount(BuildContext context) {
+  Widget _buildCategory(BuildContext context) {
+    List<Map<String, dynamic>> contentList = [
+      {
+        "imagePath": ImageConstant.imgAllCourse,
+        "text": "All",
+        "decoration": AppDecoration.fillPrimary
+      },
+      {
+        "imagePath": ImageConstant.imgMobileCourse,
+        "text": "Online",
+        "decoration": AppDecoration.fillGray10001
+      },
+      {
+        "imagePath": ImageConstant.imgBookCourse,
+        "text": "Offline",
+        "decoration": AppDecoration.fillGray10001
+      },
+    ];
+
     return Wrap(
       runSpacing: 16.v,
       spacing: 16.h,
-      children: List<Widget>.generate(3, (index) => CountItemWidget()),
+      children: contentList.map((content) {
+        return Container(
+          width: 90.h,
+          padding: EdgeInsets.symmetric(
+            vertical: 8.v,
+          ),
+          decoration: content["decoration"].copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder12,
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomImageView(
+                    imagePath: content["imagePath"],
+                    height: 20.adaptSize,
+                    width: 20.adaptSize,
+                    color: appTheme.blueGray300,
+                  ),
+                  Text(
+                    " ${content["text"]}",
+                    style: CustomTextStyles.bodySmallBluegray300_1.copyWith(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        );
+      }).toList(),
     );
   }
 
   /// Section Widget
-  Widget _buildUXDesign(BuildContext context) {
-    return ListView.separated(
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      separatorBuilder: (context, index) {
-        return SizedBox(
-          height: 16.v,
+  Widget _buildContent(BuildContext context) {
+    void _navigateToCourseOfflineDetail(BuildContext context, String slug) {
+      Navigator.pushNamed(context, AppRoutes.profileMyCourseDetailScreen,
+          arguments: slug);
+    }
+    return FutureBuilder<List<CourseOfflineModel>>(
+      future: CourseOfflineService.fetchCoursesOffline(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final List<CourseOfflineModel> courses = snapshot.data!;
+          return ListView.separated(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            separatorBuilder: (context, index) {
+              return SizedBox(
+                height: 16.v,
+              );
+            },
+            itemCount: courses.length,
+            itemBuilder: (context, index) {
+              final CourseOfflineModel course = courses[index];
+              return GestureDetector(
+                onTap: () {
+                  _navigateToCourseOfflineDetail(context, course.slug);
+                },
+                child: Container(
+                  padding: EdgeInsets.all(17.h),
+                  decoration: AppDecoration.outlineGray100.copyWith(
+                    borderRadius: BorderRadiusStyle.roundedBorder12,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 51.h),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 66.adaptSize,
+                              width: 66.adaptSize,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(6.h),
+                                child: Image.network(
+                                  course.image,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              margin: EdgeInsets.only(bottom: 2.v),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 16.h),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CustomElevatedButton(
+                                    height: 20.v,
+                                    width: 55.h,
+                                    text: "UX Design",
+                                    buttonTextStyle: theme.textTheme.labelSmall!,
+                                  ),
+                                  SizedBox(height: 3.v),
+                                  SizedBox(
+                                    width: 157.h,
+                                    child: Text(
+                                      course.name,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: theme.textTheme.titleSmall!.copyWith(
+                                        height: 1.60,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 8.v),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Complete",
+                            style: CustomTextStyles.labelLargeGray60001,
+                          ),
+                          Text(
+                            "75%",
+                            style: CustomTextStyles.labelLargeGray60001,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 12.v),
+                      Container(
+                        height: 8.v,
+                        width: 291.h,
+                        decoration: BoxDecoration(
+                          color: appTheme.gray100,
+                          borderRadius: BorderRadius.circular(
+                            3.h,
+                          ),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                            3.h,
+                          ),
+                          child: LinearProgressIndicator(
+                            value: 0.75,
+                            backgroundColor: appTheme.gray100,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              theme.colorScheme.primary,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('Error: ${snapshot.error}'),
+          );
+        }
+        return Center(
+          child: CircularProgressIndicator(),
         );
-      },
-      itemCount: 2,
-      itemBuilder: (context, index) {
-        return Uxdesign3ItemWidget();
       },
     );
   }
