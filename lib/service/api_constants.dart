@@ -9,6 +9,12 @@ class ApiConstants {
   static const String buyCourse = "/course-online-student";
   static const String checkCourseStudent = "/course-online-student/check";
 
+  static const String courseOfflineStudent = "/course-offline/get-by-class";
+  static const String courseOfflineDetailStudent = "/course-offline/detail";
+  static const String courseOfflineSubjectDetailStudent = "/subject/detail";
+  static const String courseOfflineItemSlotStudent = "/item-slot";
+  static const String createAnswerItemSlotStudent = "/answer-student-item-slot";
+
   static const String entranceTest = "/test-input";
   static const String entranceTestDetail = "/test-input/detail";
   static const String learningPaths = "/test-input/result";

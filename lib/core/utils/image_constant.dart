@@ -702,4 +702,12 @@ class ImageConstant {
   static String imgStripeLogo = 'assets/images/img_stripe_logo.svg';
 
   static String imgInAppPurchases = 'assets/images/img_in_app_purchases.svg';
+
+  static String imgAllCourse = 'assets/images/img_all_course.svg';
+
+  static String imgMobileCourse = 'assets/images/img_mobile_course.svg';
+
+  static String imgBookCourse = 'assets/images/img_book_course.svg';
+
+  static String imgDateCourse = 'assets/images/img_date_course.svg';
 }

@@ -38,7 +38,6 @@ class CheckoutPaymentMethodItem extends StatelessWidget {
               height: 40.adaptSize,
               width: 40.adaptSize,
               padding: EdgeInsets.all(10.h),
-              decoration: IconButtonStyleHelper.fillGrayTL8,
               child: CustomImageView(
                 imagePath: paymentMethodLogoPath,
               ),

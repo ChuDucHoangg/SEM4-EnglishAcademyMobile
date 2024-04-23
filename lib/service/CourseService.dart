@@ -10,7 +10,7 @@ class CourseService {
     final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.courseOnline}'));
 
     if (response.statusCode == 200) {
-      final List<dynamic> coursesJson = json.decode(response.body)['data'];
+      final List<dynamic> coursesJson = json.decode(utf8.decode(response.bodyBytes))['data'];
       return coursesJson.map((json) => CourseModel.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load courses');
@@ -21,7 +21,7 @@ class CourseService {
     final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.courseDetail}/$slug'));
 
     if (response.statusCode == 200) {
-      final dynamic courseJson = json.decode(response.body)['data'];
+      final dynamic courseJson = json.decode(utf8.decode(response.bodyBytes))['data'];
       return CourseModel.fromJson(courseJson);
     } else {
       throw Exception('Failed to load course detail');
@@ -33,7 +33,7 @@ class CourseService {
     final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.topicOnline}/$slug/$UserId'));
 
     if (response.statusCode == 200) {
-      final dynamic topicJson = json.decode(response.body)['data'];
+      final dynamic topicJson = json.decode(utf8.decode(response.bodyBytes))['data'];
       return TopicModel.fromJson(topicJson);
     } else {
       throw Exception('Failed to load topic detail');
@@ -44,7 +44,7 @@ class CourseService {
     final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.itemOnline}/$slug'));
 
     if (response.statusCode == 200) {
-      final dynamic topicJson = json.decode(response.body)['data'];
+      final dynamic topicJson = json.decode(utf8.decode(response.bodyBytes))['data'];
       return ItemModel.fromJson(topicJson);
     } else {
       throw Exception('Failed to load item detail');
@@ -98,7 +98,7 @@ class CourseService {
     final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.checkCourseStudent}/$slug/$userId'));
 
     if (response.statusCode == 200) {
-      final dynamic data = json.decode(response.body)['data'];
+      final dynamic data = json.decode(utf8.decode(response.bodyBytes))['data'];
       return data;
     } else {
       throw Exception('Failed to check course student');

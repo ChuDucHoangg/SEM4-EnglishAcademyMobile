@@ -9,7 +9,7 @@ class EntranceTestService {
     final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.entranceTest}'));
 
     if (response.statusCode == 200) {
-      final List<dynamic> entranceTestJson = json.decode(response.body)['data'];
+      final List<dynamic> entranceTestJson = json.decode(utf8.decode(response.bodyBytes))['data'];
       return entranceTestJson.map((json) => TestInputModel.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load entrance test.');
@@ -21,7 +21,7 @@ class EntranceTestService {
     final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.entranceTestDetail}/$slug'));
     print('${ApiConstants.baseUrl}${ApiConstants.entranceTestDetail}/$slug');
     if (response.statusCode == 200) {
-      final dynamic testJson = json.decode(response.body)['data'];
+      final dynamic testJson = json.decode(utf8.decode(response.bodyBytes))['data'];
       // print('${testJson}');
       return TestInputDetailModel.fromJson(testJson);
     } else {
@@ -35,7 +35,7 @@ class EntranceTestService {
         .get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.learningPaths}/6RDSAgnD'));
 
     if (response.statusCode == 200) {
-      final dynamic learningPathJson = json.decode(response.body)['data'];
+      final dynamic learningPathJson = json.decode(utf8.decode(response.bodyBytes))['data'];
       return LearningPathModel.fromJson(learningPathJson);
     } else {
       throw Exception('Failed to load learning paths.');
@@ -47,7 +47,7 @@ class EntranceTestService {
     final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.answersDetail}/6RDSAgnD'));
 
     if (response.statusCode == 200) {
-      final List<dynamic> AnswerDetailJson = json.decode(response.body)['data'];
+      final List<dynamic> AnswerDetailJson = json.decode(utf8.decode(response.bodyBytes))['data'];
       return AnswerDetailJson.map((json) => AnswersDetailModel.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load entrance test.');

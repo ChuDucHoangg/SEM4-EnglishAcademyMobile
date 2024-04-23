@@ -8,6 +8,9 @@ import 'package:english_academy_mobile/presentation/entrance_test_screen/learnin
 import 'package:english_academy_mobile/presentation/entrance_test_screen/learning_paths_toeic_screen/learning_paths_toeic_screen.dart';
 import 'package:english_academy_mobile/presentation/intro_screen/intro_screen.dart';
 import 'package:english_academy_mobile/presentation/notification_screen/notification_screen.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_detail_screen/profile_my_course_detail_screen.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_detail_screen/profile_subject_learing_screen/profile_subject_learing_screen.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_detail_screen/profile_subject_slot_screen/profile_subject_slot_screen.dart';
 import 'package:flutter/material.dart';
 import '../presentation/checkout_screen/checkout_screen.dart';
 import '../presentation/checkout_screen/thank_you_screen/thank_you_screen.dart';
@@ -64,6 +67,12 @@ class AppRoutes {
 
   static const String profileScreen = '/profile_screen';
 
+  static const String profileMyCourseDetailScreen = '/profile_my_course_detail_screen';
+
+  static const String profileSubjectSlotScreen = '/profile_subject_slot_screen';
+
+  static const String profileSubjectLearningScreen = '/profile_subject_learning_screen';
+
   static Map<String, WidgetBuilder> routes = {
     launchingScreen: (context) => LaunchingScreen(),
     introScreen: (context) => IntroScreen(),
@@ -110,5 +119,20 @@ class AppRoutes {
     },
     notificationScreen: (context) => NotificationScreen(),
     profileScreen: (context) => ProfileScreen(),
+    profileMyCourseDetailScreen: (context) {
+      final String? slug =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return ProfileMyCourseDetailScreen(slug: slug!);
+    },
+    profileSubjectSlotScreen: (context) {
+      final String? slug =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return ProfileSubjectSlotScreen(slug: slug!);
+    },
+    profileSubjectLearningScreen: (context) {
+      final String? slug =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return ProfileSubjectLearningScreen(slug: slug!);
+    },
   };
 }
