@@ -96,6 +96,11 @@ class ButtonSheetItemState extends State<ButtonSheetItem>
           arguments: slug);
     }
 
+    void _navigateToTestDetail(BuildContext context, String slug) {
+      Navigator.pushNamed(context, AppRoutes.testOnlineScreen,
+          arguments: slug);
+    }
+
     List<Widget> lessonWidgets = [];
     String truncateText(String text) {
       if (text.length > 20) {
@@ -105,8 +110,7 @@ class ButtonSheetItemState extends State<ButtonSheetItem>
       }
     }
 
-    for (int i = 0;
-    i < widget.course.topicOnlineDetailResponseList.length;
+    for (int i = 0; i < widget.course.topicOnlineDetailResponseList.length;
     i++) {
       var topic = widget.course.topicOnlineDetailResponseList[i];
       lessonWidgets.add(Column(children: [
@@ -201,6 +205,56 @@ class ButtonSheetItemState extends State<ButtonSheetItem>
                       ),
                     ]),
                   SizedBox(height: 16.v),
+                  for (var item in topic['testOnlineResponseDTOList'])
+                    Column(children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.h),
+                        child: GestureDetector(
+                          onTap: () {
+                            _navigateToTestDetail(context, item['slug']);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                child: Icon(
+                                  Icons.question_mark,
+                                  size: 20.adaptSize,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  left: 12.h,
+                                  top: 2.v,
+                                ),
+                                child: Text(
+                                  truncateText(item['title']),
+                                  style:
+                                  CustomTextStyles.labelLargeGray900.copyWith(
+                                    color: appTheme.gray900,
+                                  ),
+                                ),
+                              ),
+                              Spacer(),
+                              Container(
+                                child: Text(
+                                  "Start Test",
+                                  style:
+                                  CustomTextStyles.labelLargeGray900_1,
+                                ),
+                              ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 6.h),
+                                  child: Icon(Icons.radio_button_off,
+                                    color: appTheme.blueGray500,
+                                    size: 20.adaptSize,
+                                  ),
+                                )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ]),
                 ],
               ),
             ],

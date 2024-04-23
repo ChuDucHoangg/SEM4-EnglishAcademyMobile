@@ -11,6 +11,8 @@ import 'package:english_academy_mobile/presentation/notification_screen/notifica
 import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_detail_screen/profile_my_course_detail_screen.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_detail_screen/profile_subject_learing_screen/profile_subject_learing_screen.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_detail_screen/profile_subject_slot_screen/profile_subject_slot_screen.dart';
+import 'package:english_academy_mobile/presentation/test_online_screen/result_test_online_screen/result_test_online_screen.dart';
+import 'package:english_academy_mobile/presentation/test_online_screen/test_online_screen.dart';
 import 'package:flutter/material.dart';
 import '../presentation/checkout_screen/checkout_screen.dart';
 import '../presentation/checkout_screen/thank_you_screen/thank_you_screen.dart';
@@ -63,6 +65,10 @@ class AppRoutes {
 
   static const String answerDetailScreen = '/answer_detail_screen';
 
+  static const String testOnlineScreen = '/test_online_screen';
+
+  static const String resultTestOnlineScreen = '/result_test_online_screen';
+
   static const String notificationScreen = '/notification_screen';
 
   static const String profileScreen = '/profile_screen';
@@ -96,6 +102,19 @@ class AppRoutes {
     learningPathsIeltsScreen: (context) => LearningPathsIeltsScreen(),
     learningPathsToeicScreen: (context) => LearningPathsToeicScreen(),
     answerDetailScreen: (context) => AnswerDetailScreen(),
+
+    testOnlineScreen: (context) {
+      final String? slug =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return TestOnlineScreen(slug: slug!);
+    },
+
+    resultTestOnlineScreen: (context) {
+      final String? testCode =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return ResultTestOnline(testCode: testCode!);
+    },
+
     courseScreen: (context) => CourseScreen(),
     courseDetailScreen: (context) {
       final String? slug =
