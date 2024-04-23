@@ -155,6 +155,56 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
                       ),
                     ]),
                   SizedBox(height: 16.v),
+                  for (var item in topic['testOnlineDTOList'])
+                    Column(children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              child: Icon(
+                                Icons.question_mark,
+                                size: 20.adaptSize,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 12.h,
+                                top: 2.v,
+                              ),
+                              child: Text(
+                                truncateText(item['title']),
+                                style:
+                                CustomTextStyles.labelLargeGray900.copyWith(
+                                  color: appTheme.gray900,
+                                ),
+                              ),
+                            ),
+                            Spacer(),
+                              Container(
+                                child: Text(
+                                  "Start Test",
+                                  style: CustomTextStyles
+                                      .labelLargeGray900_1,
+                                ),
+                              ),
+                            if (widget.isBought && item['itemType'] == 0)
+                              Padding(
+                                padding: EdgeInsets.only(left: 6.h),
+                                child: Icon(
+                                  item['status']
+                                      ? Icons.done_all_outlined
+                                      : Icons.radio_button_off,
+                                  color: appTheme.blueGray500,
+                                  size: 20.adaptSize,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ]),
+                  SizedBox(height: 16.v),
                 ],
               ),
             ],
