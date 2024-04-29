@@ -85,7 +85,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       _easyPaypalPlugin.setCallback(PPCheckoutCallback(onApprove: (data) async {
         final CourseModel course = await _courseFuture;
         var slug = course.slug;
-        await CourseService.buyCourse(1, course.id, "PAYPAL");
+        await CourseService.buyCourse(course.id, "PAYPAL");
         Navigator.pushNamed(context, AppRoutes.thankYouScreen, arguments: slug);
         debugPrint('done: $data');
       }, onError: (data) {
@@ -129,7 +129,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
       final CourseModel course = await _courseFuture;
       var slug = course.slug;
-      await CourseService.buyCourse(1, course.id, "STRIPE");
+      await CourseService.buyCourse(course.id, "STRIPE");
       Navigator.pushNamed(context, AppRoutes.thankYouScreen, arguments: slug);
       print("Done");
     } catch (e) {

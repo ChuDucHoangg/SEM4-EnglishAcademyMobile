@@ -1,3 +1,4 @@
+import 'package:english_academy_mobile/presentation/auth/login_screen/login_screen.dart';
 import 'package:english_academy_mobile/presentation/home_screen/home_screen.dart';
 import 'package:english_academy_mobile/presentation/launching_screen/launching_screen.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class _IntroScreenState extends State<IntroScreen> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => InitScreen()),
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
                   );
                 },
                 child: Text(
@@ -148,7 +149,7 @@ class _IntroScreenState extends State<IntroScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => InitScreen()),
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
                 );
               },
               buttonStyle: CustomButtonStyles.fillIndigo,

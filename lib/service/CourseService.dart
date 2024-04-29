@@ -3,14 +3,17 @@ import 'package:english_academy_mobile/data/model/ItemModel.dart';
 import 'package:english_academy_mobile/data/model/TopicModel.dart';
 import 'package:http/http.dart' as http;
 import '../data/model/CourseModel.dart';
+import 'AuthService.dart';
 import 'api_constants.dart';
 
 class CourseService {
   static Future<List<CourseModel>> fetchCourses() async {
-    final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.courseOnline}'));
+    final response = await http
+        .get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.courseOnline}'));
 
     if (response.statusCode == 200) {
-      final List<dynamic> coursesJson = json.decode(utf8.decode(response.bodyBytes))['data'];
+      final List<dynamic> coursesJson =
+          json.decode(utf8.decode(response.bodyBytes))['data'];
       return coursesJson.map((json) => CourseModel.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load courses');
@@ -18,10 +21,12 @@ class CourseService {
   }
 
   static Future<CourseModel> fetchCourseDetail(String slug) async {
-    final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.courseDetail}/$slug'));
+    final response = await http.get(
+        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.courseDetail}/$slug'));
 
     if (response.statusCode == 200) {
-      final dynamic courseJson = json.decode(utf8.decode(response.bodyBytes))['data'];
+      final dynamic courseJson =
+          json.decode(utf8.decode(response.bodyBytes))['data'];
       return CourseModel.fromJson(courseJson);
     } else {
       throw Exception('Failed to load course detail');
@@ -29,22 +34,33 @@ class CourseService {
   }
 
   static Future<TopicModel> fetchTopicDetail(String slug) async {
-    final int UserId = 1;
-    final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.topicOnline}/$slug/$UserId'));
+    final int userId = await AuthService.getUserIdFromToken();
+    final String token = await AuthService.getToken();
+    final response = await http.get(
+      Uri.parse(
+          '${ApiConstants.baseUrl}${ApiConstants.topicOnline}/$slug/$userId'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
 
     if (response.statusCode == 200) {
-      final dynamic topicJson = json.decode(utf8.decode(response.bodyBytes))['data'];
+      final dynamic topicJson =
+          json.decode(utf8.decode(response.bodyBytes))['data'];
       return TopicModel.fromJson(topicJson);
     } else {
-      throw Exception('Failed to load topic detail');
+      throw Exception(
+          "Failed to load topic detail: ${response.body}");
     }
   }
 
   static Future<ItemModel> fetchItemDetail(String slug) async {
-    final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.itemOnline}/$slug'));
+    final response = await http.get(
+        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.itemOnline}/$slug'));
 
     if (response.statusCode == 200) {
-      final dynamic topicJson = json.decode(utf8.decode(response.bodyBytes))['data'];
+      final dynamic topicJson =
+          json.decode(utf8.decode(response.bodyBytes))['data'];
       return ItemModel.fromJson(topicJson);
     } else {
       throw Exception('Failed to load item detail');
@@ -52,11 +68,14 @@ class CourseService {
   }
 
   static Future<void> markLessonAsComplete(String slug) async {
-    final int UserId = 1;
+    final int userId = await AuthService.getUserIdFromToken();
+    final String token = await AuthService.getToken();
     final response = await http.put(
-      Uri.parse('${ApiConstants.baseUrl}${ApiConstants.itemOnline}/$slug/$UserId'),
+      Uri.parse(
+          '${ApiConstants.baseUrl}${ApiConstants.itemOnline}/$slug/$userId'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token'
       },
     );
 
@@ -67,10 +86,12 @@ class CourseService {
     }
   }
 
-  static Future<void> buyCourse(int studentId, int courseId, String paymentMethod) async {
+  static Future<void> buyCourse(int courseId, String paymentMethod) async {
+    final int userId = await AuthService.getUserIdFromToken();
+    final String token = await AuthService.getToken();
     try {
       final Map<String, dynamic> body = {
-        "studentId": studentId,
+        "studentId": userId,
         "courseOnlineId": courseId,
         "paymentMethod": paymentMethod
       };
@@ -80,6 +101,7 @@ class CourseService {
         body: json.encode(body),
         headers: {
           "Content-Type": "application/json",
+          'Authorization': 'Bearer $token'
         },
       );
 
@@ -94,15 +116,21 @@ class CourseService {
   }
 
   static Future<bool> checkCourseStudent(String slug) async {
-    final int userId = 1;
-    final response = await http.get(Uri.parse('${ApiConstants.baseUrl}${ApiConstants.checkCourseStudent}/$slug/$userId'));
+    final int userId = await AuthService.getUserIdFromToken();
+    final String token = await AuthService.getToken();
+    final response = await http.get(
+        Uri.parse(
+            '${ApiConstants.baseUrl}${ApiConstants.checkCourseStudent}/$slug/$userId'),
+        headers: {
+          'Authorization': 'Bearer $token',
+        });
 
     if (response.statusCode == 200) {
       final dynamic data = json.decode(utf8.decode(response.bodyBytes))['data'];
       return data;
     } else {
-      throw Exception('Failed to check course student');
+      throw Exception(
+          "Failed to check course student: ${response.body}");
     }
   }
 }
-
