@@ -1,3 +1,5 @@
+import 'package:english_academy_mobile/presentation/auth/login_screen/login_screen.dart';
+import 'package:english_academy_mobile/presentation/auth/register_screen/register_screen.dart';
 import 'package:english_academy_mobile/presentation/instructor_screen/instructor_screen.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/answer_detail_screen/answer_detail_screen.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/entrance_test_finish/entrance_test_finish.dart';
@@ -36,6 +38,10 @@ class AppRoutes {
   static const String introTwoScreen = '/intro_two_screen';
 
   static const String introThreeScreen = '/intro_three_screen';
+
+  static const String loginScreen = '/login_screen';
+
+  static const String registerScreen = '/register_screen';
 
   static const String homeScreen = '/home_screen';
 
@@ -85,6 +91,8 @@ class AppRoutes {
     introOneScreen: (context) => IntroOneScreen(),
     introTwoScreen: (context) => IntroTwoScreen(),
     introThreeScreen: (context) => IntroThreeScreen(),
+    loginScreen: (context) => LoginScreen(),
+    registerScreen: (context) => RegisterScreen(),
     homeScreen: (context) => HomeScreen(),
     instructorScreen: (context) => InstructorScreen(),
     entranceTestScreen: (context) => EntranceTestScreen(),

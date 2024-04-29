@@ -57,9 +57,9 @@ class CustomTextStyles {
       );
   // static get bodyMediumPlusJakartaSans =>
   //     theme.textTheme.bodyMedium!.plusJakartaSans;
-  // static get bodyMediumff111827 => theme.textTheme.bodyMedium!.copyWith(
-  //   color: Color(0XFF111827),
-  // );
+  static get bodyMediumff111827 => theme.textTheme.bodyMedium!.copyWith(
+    color: Color(0XFF111827),
+  );
   static get bodySmall10 => theme.textTheme.bodySmall!.copyWith(
     fontSize: 10.fSize,
   );
