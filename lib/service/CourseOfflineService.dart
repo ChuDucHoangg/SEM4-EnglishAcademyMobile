@@ -8,11 +8,10 @@ import 'api_constants.dart';
 
 class CourseOfflineService {
   static Future<List<CourseOfflineModel>> fetchCoursesOffline() async {
-    final int userId = await AuthService.getUserIdFromToken();
     final String token = await AuthService.getToken();
     final response = await http.get(
       Uri.parse(
-          '${ApiConstants.baseUrl}${ApiConstants.courseOfflineStudent}/$userId'),
+          '${ApiConstants.baseUrl}${ApiConstants.courseOfflineStudent}'),
       headers: {
         'Authorization': 'Bearer $token',
       },
@@ -25,17 +24,16 @@ class CourseOfflineService {
           .map((json) => CourseOfflineModel.fromJson(json))
           .toList();
     } else {
-      throw Exception('Failed to load courses');
+      throw Exception('Failed to load courses: ${response.body}');
     }
   }
 
   static Future<CourseOfflineModel> fetchCourseOfflineDetail(
       String slug) async {
-    final int userId = await AuthService.getUserIdFromToken();
     final String token = await AuthService.getToken();
     final response = await http.get(
       Uri.parse(
-          '${ApiConstants.baseUrl}${ApiConstants.courseOfflineDetailStudent}/$slug/$userId'),
+          '${ApiConstants.baseUrl}${ApiConstants.courseOfflineDetailStudent}/$slug'),
       headers: {
         'Authorization': 'Bearer $token',
       },
@@ -46,17 +44,16 @@ class CourseOfflineService {
           json.decode(utf8.decode(response.bodyBytes))['data'];
       return CourseOfflineModel.fromJson(courseJson);
     } else {
-      throw Exception('Failed to load course detail');
+      throw Exception('Failed to load course detail: ${response.body}');
     }
   }
 
   static Future<SubjectOfflineModel> fetchSubjectOfflineDetail(
       String slug) async {
-    final int userId = await AuthService.getUserIdFromToken();
     final String token = await AuthService.getToken();
     final response = await http.get(
       Uri.parse(
-          '${ApiConstants.baseUrl}${ApiConstants.courseOfflineSubjectDetailStudent}/$slug/$userId'),
+          '${ApiConstants.baseUrl}${ApiConstants.courseOfflineSubjectDetailStudent}/$slug'),
       headers: {
         'Authorization': 'Bearer $token',
       },
@@ -67,17 +64,16 @@ class CourseOfflineService {
           json.decode(utf8.decode(response.bodyBytes))['data'];
       return SubjectOfflineModel.fromJson(subjectJson);
     } else {
-      throw Exception('Failed to load subject detail');
+      throw Exception('Failed to load subject detail: ${response.body}');
     }
   }
 
   static Future<ItemOfflineModel> fetchItemSlotOfflineDetail(
       String slug) async {
-    final int userId = await AuthService.getUserIdFromToken();
     final String token = await AuthService.getToken();
     final response = await http.get(
       Uri.parse(
-          '${ApiConstants.baseUrl}${ApiConstants.courseOfflineItemSlotStudent}/$slug/$userId'),
+          '${ApiConstants.baseUrl}${ApiConstants.courseOfflineItemSlotStudent}/$slug'),
       headers: {
         'Authorization': 'Bearer $token',
       },
@@ -88,7 +84,7 @@ class CourseOfflineService {
           json.decode(utf8.decode(response.bodyBytes))['data'];
       return ItemOfflineModel.fromJson(itemJson);
     } else {
-      throw Exception('Failed to load item detail');
+      throw Exception('Failed to load item detail: ${response.body}');
     }
   }
 

@@ -1,5 +1,6 @@
 import 'package:english_academy_mobile/widgets/custom_text_form_field.dart';
 import 'package:english_academy_mobile/widgets/custom_elevated_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
 import '../../../../service/AuthService.dart';
@@ -16,15 +17,26 @@ class LoginEmailItem extends StatefulWidget {
 
 class LoginEmailItemState extends State<LoginEmailItem>
     with AutomaticKeepAliveClientMixin<LoginEmailItem> {
+  final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   @override
   bool get wantKeepAlive => true;
+  bool hasError = false;
 
   Future<void> loginWithEmail() async {
-    await AuthService.loginWithEmail(
-        emailController.text, passwordController.text, context);
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    try {
+      await AuthService.loginWithEmail(
+          emailController.text, passwordController.text, context);
+    } catch (e) {
+      setState(() {
+        hasError = true;
+      });
+    }
   }
 
   @override
@@ -40,30 +52,33 @@ class LoginEmailItemState extends State<LoginEmailItem>
           child: Container(
             width: double.maxFinite,
             decoration: AppDecoration.fillOnErrorContainer,
-            child: Column(
-              children: [
-                SizedBox(height: 32.v),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.h),
-                  child: Column(
-                    children: [
-                      _buildEmail(context),
-                      SizedBox(height: 16.v),
-                      _buildPassword(context),
-                      SizedBox(height: 19.v),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Forgot Password?",
-                          style: CustomTextStyles.titleMediumPrimary,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  SizedBox(height: 28.v),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.h),
+                    child: Column(
+                      children: [
+                        _buildEmail(context),
+                        SizedBox(height: 16.v),
+                        _buildPassword(context),
+                        SizedBox(height: 16.v),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Forgot Password?",
+                            style: CustomTextStyles.titleMediumPrimary,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 32.v),
-                      _buildSignIn(context),
-                    ],
+                        SizedBox(height: 16.v),
+                        _buildSignIn(context),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -73,62 +88,109 @@ class LoginEmailItemState extends State<LoginEmailItem>
 
   /// Section Widget
   Widget _buildEmail(BuildContext context) {
-    return CustomTextFormField(
-      controller: emailController,
-      hintText: "Your email",
-      hintStyle: CustomTextStyles.bodyLargeBluegray300,
-      textInputType: TextInputType.emailAddress,
-      prefix: Container(
-        margin: EdgeInsets.fromLTRB(16.h, 18.v, 12.h, 18.v),
-        child: CustomImageView(
-          imagePath: ImageConstant.imgCheckmark,
-          height: 20.adaptSize,
-          width: 20.adaptSize,
+    return Column(children: [
+      CustomTextFormField(
+        controller: emailController,
+        hintText: "Your email",
+        hintStyle: CustomTextStyles.bodyLargeBluegray300,
+        textInputType: TextInputType.emailAddress,
+        prefix: Container(
+            margin: EdgeInsets.fromLTRB(16.h, 18.v, 12.h, 18.v),
+            child: CustomImageView(
+              imagePath: ImageConstant.imgCheckmark,
+              height: 20.adaptSize,
+              width: 20.adaptSize,
+            )),
+        prefixConstraints: BoxConstraints(
+          maxHeight: 56.v,
         ),
+        contentPadding: EdgeInsets.only(
+          top: 18.v,
+          right: 30.h,
+          bottom: 18.v,
+        ),
+        borderDecoration: hasError
+            ? OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12.h),
+                borderSide: BorderSide(
+                  color: appTheme.redA200,
+                  width: 1,
+                ),
+              )
+            : null,
+        validator: (value) {
+          if (!hasError && (value == null || value.isEmpty)) {
+            return 'Please enter your email address.';
+          }
+          return null;
+        },
       ),
-      prefixConstraints: BoxConstraints(
-        maxHeight: 56.v,
-      ),
-      contentPadding: EdgeInsets.only(
-        top: 18.v,
-        right: 30.h,
-        bottom: 18.v,
-      ),
-    );
+      if (hasError)
+        Padding(
+          padding: EdgeInsets.only(right: 175.h, top: 5.v),
+          child: Text(
+            "Invalid email or password.",
+            style: TextStyle(color: Colors.red, fontSize: 12.adaptSize),
+          ),
+        ),
+    ]);
   }
 
   /// Section Widget
   Widget _buildPassword(BuildContext context) {
-    return CustomTextFormField(
-      controller: passwordController,
-      hintText: "Your password",
-      hintStyle: CustomTextStyles.bodyLargeBluegray300,
-      textInputAction: TextInputAction.done,
-      textInputType: TextInputType.visiblePassword,
-      prefix: Container(
-        margin: EdgeInsets.fromLTRB(16.h, 18.v, 12.h, 18.v),
-        child: CustomImageView(
-          imagePath: ImageConstant.imgLocation,
-          height: 20.adaptSize,
-          width: 20.adaptSize,
+    return Column(children: [
+      CustomTextFormField(
+        controller: passwordController,
+        hintText: "Your password",
+        hintStyle: CustomTextStyles.bodyLargeBluegray300,
+        textInputAction: TextInputAction.done,
+        textInputType: TextInputType.visiblePassword,
+        prefix: Container(
+            margin: EdgeInsets.fromLTRB(16.h, 18.v, 12.h, 18.v),
+            child: CustomImageView(
+              imagePath: ImageConstant.imgLocation,
+              height: 20.adaptSize,
+              width: 20.adaptSize,
+            )),
+        prefixConstraints: BoxConstraints(
+          maxHeight: 56.v,
         ),
-      ),
-      prefixConstraints: BoxConstraints(
-        maxHeight: 56.v,
-      ),
-      suffix: Container(
-        margin: EdgeInsets.fromLTRB(30.h, 18.v, 16.h, 18.v),
-        child: CustomImageView(
-          imagePath: ImageConstant.imgEye,
-          height: 20.adaptSize,
-          width: 20.adaptSize,
+        suffix: Container(
+            margin: EdgeInsets.fromLTRB(30.h, 18.v, 16.h, 18.v),
+            child: CustomImageView(
+              imagePath: ImageConstant.imgEye,
+              height: 20.adaptSize,
+              width: 20.adaptSize,
+            ),),
+        suffixConstraints: BoxConstraints(
+          maxHeight: 56.v,
         ),
+        obscureText: true,
+        borderDecoration: hasError
+            ? OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12.h),
+                borderSide: BorderSide(
+                  color: appTheme.redA200,
+                  width: 1,
+                ),
+              )
+            : null,
+        validator: (value) {
+          if (!hasError && (value == null || value.isEmpty)) {
+            return 'Please enter your password.';
+          }
+          return null;
+        },
       ),
-      suffixConstraints: BoxConstraints(
-        maxHeight: 56.v,
-      ),
-      obscureText: true,
-    );
+      if (hasError)
+        Padding(
+          padding: EdgeInsets.only(right: 175.h, top: 5.v),
+          child: Text(
+            "Invalid email or password.",
+            style: TextStyle(color: Colors.red, fontSize: 12.adaptSize),
+          ),
+        ),
+    ]);
   }
 
   /// Section Widget

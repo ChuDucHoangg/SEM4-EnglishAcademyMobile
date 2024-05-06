@@ -275,7 +275,8 @@ class ProfileScreenState extends State<ProfileScreen>
           );
         } else if (snapshot.hasError) {
           return Center(
-            child: Text('Error: ${snapshot.error}'),
+            // child: Text('Error: ${snapshot.error}'),
+            child: Text(''),
           );
         }
         return Center(

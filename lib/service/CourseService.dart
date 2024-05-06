@@ -55,8 +55,12 @@ class CourseService {
   }
 
   static Future<ItemModel> fetchItemDetail(String slug) async {
+    final String token = await AuthService.getToken();
     final response = await http.get(
-        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.itemOnline}/$slug'));
+        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.itemOnline}/$slug'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },);
 
     if (response.statusCode == 200) {
       final dynamic topicJson =
@@ -68,11 +72,10 @@ class CourseService {
   }
 
   static Future<void> markLessonAsComplete(String slug) async {
-    final int userId = await AuthService.getUserIdFromToken();
     final String token = await AuthService.getToken();
     final response = await http.put(
       Uri.parse(
-          '${ApiConstants.baseUrl}${ApiConstants.itemOnline}/$slug/$userId'),
+          '${ApiConstants.baseUrl}${ApiConstants.itemOnline}/$slug'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
@@ -116,11 +119,10 @@ class CourseService {
   }
 
   static Future<bool> checkCourseStudent(String slug) async {
-    final int userId = await AuthService.getUserIdFromToken();
     final String token = await AuthService.getToken();
     final response = await http.get(
         Uri.parse(
-            '${ApiConstants.baseUrl}${ApiConstants.checkCourseStudent}/$slug/$userId'),
+            '${ApiConstants.baseUrl}${ApiConstants.checkCourseStudent}/$slug'),
         headers: {
           'Authorization': 'Bearer $token',
         });
