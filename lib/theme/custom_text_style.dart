@@ -8,6 +8,9 @@ import 'package:english_academy_mobile/theme/theme_helper.dart';
 
 class CustomTextStyles {
   // Body text style
+  static get bodyLargePrimary => theme.textTheme.bodyLarge!.copyWith(
+    color: theme.colorScheme.primary,
+  );
   static get bodyLargeBluegray100 => theme.textTheme.bodyLarge!.copyWith(
     color: appTheme.blueGray100,
   );

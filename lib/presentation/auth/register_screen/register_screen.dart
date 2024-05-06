@@ -58,62 +58,7 @@ class RegisterScreenState extends State<RegisterScreen>
                 ),
               ),
               // SizedBox(height: 12.v),
-              SizedBox(height: 350.v, child: RegisterEmailItem()),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.h),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 150.h,
-                      width: 313.h,
-                      margin: EdgeInsets.only(left: 4.h, right: 3.h),
-                      child: RichText(
-                        text: TextSpan(children: [
-                          TextSpan(
-                            text: "By signing up you agree to Overskill's",
-                            style: CustomTextStyles.bodyMediumff111827,
-                          ),
-                          TextSpan(
-                              text: " Terms of Services",
-                              style: CustomTextStyles.titleSmallff111827),
-                          TextSpan(
-                              text: " and ",
-                              style: CustomTextStyles.bodyMediumff111827),
-                          TextSpan(
-                              text: "Privacy Policy",
-                              style: CustomTextStyles.titleSmallff111827)
-                        ]),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    SizedBox(height: 19.v),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "Already have an account?",
-                            style: CustomTextStyles.bodyLargeff111827,
-                          ),
-                          TextSpan(
-                            text: " ",
-                          ),
-                          TextSpan(
-                              text: "Sign In",
-                              style: CustomTextStyles.titleMediumff1d2857_1,
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => LoginScreen()));
-                                }),
-                        ],
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-              )
+              SizedBox(height: 650.v, child: RegisterEmailItem()),
             ],
           ),
         ),

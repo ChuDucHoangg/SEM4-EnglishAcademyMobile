@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:english_academy_mobile/core/app_export.dart';
 import 'package:flutter/material.dart';
 
+import '../../../service/AuthService.dart';
 import '../../../theme/app_decoration.dart';
 import '../../../theme/custom_text_style.dart';
 
@@ -18,7 +21,29 @@ class ProfileInfomationItemState extends State<ProfileInfomationItem>
     with AutomaticKeepAliveClientMixin<ProfileInfomationItem> {
   @override
   bool get wantKeepAlive => true;
+  String _fullname = '';
+  String _email = '';
 
+  @override
+  void initState() {
+    super.initState();
+    _getUserInfo();
+  }
+
+  void _getUserInfo() async {
+    try {
+      final String token = await AuthService.getToken();
+      final Map<String, dynamic> tokenData = json.decode(
+          ascii.decode(base64.decode(base64.normalize(token.split(".")[1]))));
+
+      setState(() {
+        _fullname = tokenData['Fullname'];
+        _email = tokenData['sub'];
+      });
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,17 +72,17 @@ class ProfileInfomationItemState extends State<ProfileInfomationItem>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Jason Mark",
+                  _fullname,
                   style: theme.textTheme.titleSmall,
                 ),
                 SizedBox(height: 9.v),
                 Text(
-                  "jasonmark@mail.com",
+                  _email,
                   style: CustomTextStyles.bodySmallBluegray300_1,
                 ),
                 SizedBox(height: 7.v),
                 Text(
-                  "UI/UX, Development, Finance",
+                  "Student",
                   style: CustomTextStyles.labelLargeBluegray500,
                 )
               ],

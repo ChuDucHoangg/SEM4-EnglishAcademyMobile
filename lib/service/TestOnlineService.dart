@@ -7,16 +7,15 @@ import 'AuthService.dart';
 
 class TestOnlineService {
   static Future<TestOnlineModel> fetchTestOnline(String slug) async {
-    final int userId = await AuthService.getUserIdFromToken();
     final String token = await AuthService.getToken();
     final response = await http.get(
       Uri.parse(
-          '${ApiConstants.baseUrl}${ApiConstants.testOnline}/$slug/$userId'),
+          '${ApiConstants.baseUrl}${ApiConstants.testOnline}/$slug'),
       headers: {
         'Authorization': 'Bearer $token',
       },
     );
-    print('${ApiConstants.baseUrl}${ApiConstants.testOnline}/$slug/$userId');
+    print('${ApiConstants.baseUrl}${ApiConstants.testOnline}/$slug');
     if (response.statusCode == 200) {
       final dynamic testJson =
           json.decode(utf8.decode(response.bodyBytes))['data'];

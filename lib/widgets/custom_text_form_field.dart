@@ -99,7 +99,7 @@ class CustomTextFormField extends StatelessWidget {
         }
       },
       autofocus: autofocus!,
-      style: textStyle ?? CustomTextStyles.bodyLargeBluegray100,
+      style: textStyle ?? CustomTextStyles.bodyLargePrimary,
       obscureText: obscureText!,
       textInputAction: textInputAction,
       keyboardType: textInputType,
