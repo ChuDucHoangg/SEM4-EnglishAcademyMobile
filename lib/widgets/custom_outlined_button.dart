@@ -57,17 +57,22 @@ class CustomOutlinedButton extends BaseButton {
       style: buttonStyle,
       onPressed: isDisabled ?? false ? null : onPressed ?? () {},
       child: Row(
+        mainAxisSize: MainAxisSize.min, // Đặt MainAxisSize.min cho Row
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           leftIcon ?? const SizedBox.shrink(),
-          Text(
-            text,
-            style: buttonTextStyle ?? CustomTextStyles.labelLargeGray60001,
+          Flexible(
+            child: Text(
+              text,
+              style: buttonTextStyle ?? CustomTextStyles.labelLargeGray60001,
+              overflow: TextOverflow.ellipsis, // overflow có thể là ellipsis hoặc clip
+            ),
           ),
           rightIcon ?? const SizedBox.shrink(),
         ],
       ),
     ),
   );
+
 }
