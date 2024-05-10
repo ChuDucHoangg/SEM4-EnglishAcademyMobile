@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
+import 'package:english_academy_mobile/theme/theme_helper.dart';
 
 // ignore: must_be_immutable
 class AppbarSubtitleOne extends StatelessWidget {
@@ -29,7 +30,7 @@ class AppbarSubtitleOne extends StatelessWidget {
         child: Text(
           text,
           style: theme.textTheme.titleMedium!.copyWith(
-            color: appTheme.gray900,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
         ),
       ),

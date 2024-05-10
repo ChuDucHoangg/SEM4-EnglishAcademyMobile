@@ -5,8 +5,8 @@ import 'package:english_academy_mobile/widgets/custom_search_view.dart';
 import 'package:english_academy_mobile/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
-
 import '../../widgets/app_bar/custom_app_bar_home_screen.dart';
+import 'package:english_academy_mobile/theme/theme_helper.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key})
@@ -229,6 +229,7 @@ class HomeScreen extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.all(18.h),
                     decoration: AppDecoration.outlineGray.copyWith(
+                      // color: Theme.of(context).colorScheme.primaryContainer,
                       borderRadius: BorderRadiusStyle.roundedBorder12,
                     ),
                     child: Column(
@@ -270,6 +271,7 @@ class HomeScreen extends StatelessWidget {
                                         overflow: TextOverflow.ellipsis,
                                         style: theme.textTheme.titleSmall!
                                             .copyWith(
+                                          // color: Theme.of(context).colorScheme.onPrimaryContainer,
                                           height: 1.60,
                                         ),
                                       ),
@@ -288,12 +290,16 @@ class HomeScreen extends StatelessWidget {
                               padding: EdgeInsets.only(bottom: 1.v),
                               child: Text(
                                 "23 of 33 lessons",
-                                style: CustomTextStyles.labelLargeGray60001,
+                                style: CustomTextStyles.labelLargeGray60001.copyWith(
+                                    // color: Theme.of(context).colorScheme.onPrimaryContainer,
+                                ),
                               ),
                             ),
                             Text(
                               "75% completed",
-                              style: CustomTextStyles.labelLargeGray60001,
+                              style: CustomTextStyles.labelLargeGray60001.copyWith(
+                                // color: Theme.of(context).colorScheme.onPrimaryContainer,
+                              ),
                             ),
                           ],
                         ),
@@ -368,7 +374,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               Container(
                 padding: EdgeInsets.all(11.h),
-                decoration: AppDecoration.outlineGray100.copyWith(
+                decoration: AppDecoration.outlineGray100.copyWith(// Thay đổi màu nền ở đây
                   borderRadius: BorderRadiusStyle.roundedBorder12,
                 ),
                 child: Column(

@@ -1,3 +1,5 @@
+
+
 import 'package:english_academy_mobile/presentation/auth/login_screen/login_screen.dart';
 import 'package:english_academy_mobile/presentation/auth/register_screen/register_screen.dart';
 import 'package:english_academy_mobile/presentation/instructor_screen/instructor_screen.dart';
@@ -27,6 +29,9 @@ import '../presentation/home_screen/home_screen.dart';
 import '../presentation/course_screen/course_screen.dart';
 import '../presentation/course_screen/course_detail_screen/course_detail_screen.dart';
 import '../presentation/profile_screen/profile_screen.dart';
+import '../presentation/profile_screen/widgets/profile_more.dart';
+
+
 
 class AppRoutes {
   static const String launchingScreen = '/launching_screen';
@@ -84,6 +89,8 @@ class AppRoutes {
   static const String profileSubjectSlotScreen = '/profile_subject_slot_screen';
 
   static const String profileSubjectLearningScreen = '/profile_subject_learning_screen';
+
+  static const String profileMoreScreen = '/profile_more';
 
   static Map<String, WidgetBuilder> routes = {
     launchingScreen: (context) => LaunchingScreen(),
@@ -161,5 +168,6 @@ class AppRoutes {
       ModalRoute.of(context)?.settings.arguments as String?;
       return ProfileSubjectLearningScreen(slug: slug!);
     },
+    profileMoreScreen : (context) => ProfileMoreScreen(),
   };
 }

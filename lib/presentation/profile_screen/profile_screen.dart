@@ -1,6 +1,7 @@
 import 'package:english_academy_mobile/data/model/CourseOfflineModel.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/widgets/profile_achievement_item.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/widgets/profile_infomation_item.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/widgets/profile_more.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/widgets/profile_progess_item.dart';
 import 'package:english_academy_mobile/service/CourseOfflineService.dart';
 import 'package:english_academy_mobile/widgets/app_bar/custom_app_bar.dart';
@@ -71,6 +72,9 @@ class ProfileScreenState extends State<ProfileScreen>
         AppbarTrailingImage(
           imagePath: ImageConstant.imgNotificationGray900,
           margin: EdgeInsets.symmetric(horizontal: 24.h),
+          onTap: () {
+            _navigateToProfileMoreScreen(context);
+         },
         )
       ],
     );
@@ -283,6 +287,12 @@ class ProfileScreenState extends State<ProfileScreen>
           child: CircularProgressIndicator(),
         );
       },
+    );
+  }
+  void _navigateToProfileMoreScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ProfileMoreScreen()),
     );
   }
 }
