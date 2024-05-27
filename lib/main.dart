@@ -12,7 +12,7 @@ void main() {
 
   runApp(
     ChangeNotifierProvider(
-      create: (_) => ThemeProvider(initTheme: ThemeData.light()),
+      create: (_) => ThemeProvider(initTheme: ThemeData.from(colorScheme: ColorSchemes.primaryColorScheme)),
       child: MyApp(),
     ),
   );

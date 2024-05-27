@@ -32,7 +32,6 @@ import '../presentation/profile_screen/profile_screen.dart';
 import '../presentation/profile_screen/widgets/profile_more.dart';
 
 
-
 class AppRoutes {
   static const String launchingScreen = '/launching_screen';
 
@@ -91,6 +90,8 @@ class AppRoutes {
   static const String profileSubjectLearningScreen = '/profile_subject_learning_screen';
 
   static const String profileMoreScreen = '/profile_more';
+
+  static const String languageScreen ='/language_screen';
 
   static Map<String, WidgetBuilder> routes = {
     launchingScreen: (context) => LaunchingScreen(),
