@@ -214,16 +214,16 @@ class ColorSchemes {
   static final primaryColorScheme = ColorScheme.light(
     // Primary colors
 
-    primary: Color(0XFF1D2857),
-    primaryContainer: Color(0xFFFFFFFF), // màu nền giao diện
+    primary: Color(0XFF1D2857), // mau nen giao dien
+    primaryContainer: Color(0X1EFFFFFF), // mau cac container
 
 
     // Error colors
-    errorContainer: Color(0XFFE31837),
+    errorContainer: Color(0XFFE31837), //mau bao' loi
     onErrorContainer: Color(0X1EFFFFFF),
 
     // On colors(text colors)
-    onPrimary: Color(0XFFE3E5E7), // màu chữ
+    onPrimary: Color(0xDD000000), // màu chữ
     onPrimaryContainer: Color(0XFF0F172A),
   );
   static final darkColorScheme = ColorScheme.dark(
@@ -232,8 +232,8 @@ class ColorSchemes {
     primaryContainer: Color(0xFF374151),
 
     // Error colors
-    error: Color(0XFFE31837),
-    onError: Color(0X1EFFFFFF),
+    errorContainer: Color(0XFFE31837),
+    onErrorContainer: Color(0X1EFFFFFF),
 
     // On colors(text colors)
     onPrimary: Color(0xFFFFFFFF),

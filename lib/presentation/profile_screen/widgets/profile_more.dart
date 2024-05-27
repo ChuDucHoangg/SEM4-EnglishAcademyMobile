@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
 import 'package:english_academy_mobile/theme/theme_helper.dart';
 import 'package:provider/provider.dart';
-
-import '../../../theme/theme_notifer.dart';
 import '../../../theme/theme_provider.dart';
 
 class ProfileMoreScreen extends StatefulWidget {
@@ -28,15 +26,16 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return
+      // SafeArea(
+      // child:
+      Scaffold(
         appBar: _buildAppbar(context),
         body: SizedBox(
           width: SizeUtils.width,
           child: SingleChildScrollView(
-            padding: EdgeInsets.only(top: 32.v),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 24.h),
+              padding: EdgeInsets.symmetric(horizontal: 24.h, vertical: 32.h),
               color: Theme.of(context).colorScheme.primaryContainer,
               child: Column(
                 children: [
@@ -65,12 +64,14 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
                   _buildSetting4(context),
                   SizedBox(height: 15.v),
                   _buildSetting5(context),
+                  SizedBox(height: 15.v),
+                  _buildSetting6(context),
                 ],
               ),
             ),
           ),
         ),
-      ),
+      // ),
     );
   }
 
@@ -96,7 +97,7 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 13.h),
       decoration: AppDecoration.outlineBluegray50.copyWith(
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: BorderRadiusStyle.roundedBorder12,
       ),
       child: Column(
@@ -105,7 +106,7 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
           _buildItem(
             context,
             upload: ImageConstant.imgLockBlueGray300,
-            label: "Personal Details",
+            label: "Personal Details" ,
           ),
           _buildItem(
             context,
@@ -164,11 +165,6 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _buildItem(
-            context,
-            upload: ImageConstant.imgGlobe,
-            label: "Language",
-          ),
           Container(
             padding: EdgeInsets.only(
               top: 16.v,
@@ -200,13 +196,12 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
               ],
             ),
           ),
-          SizedBox(height: 16.v),
+          // SizedBox(height: 16.v),
           _buildItem(
             context,
             upload: ImageConstant.imgNotificationsOutline,
             label: "Notification",
           ),
-          SizedBox(height: 16.v),
         ],
       ),
     );
@@ -221,10 +216,27 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
       child: _buildItem(
         context,
         upload: ImageConstant.imgSignalBlueGray300,
-        label: "Rate Courser",
+        label: "...",
       ),
     );
   }
+
+  Widget _buildSetting6(BuildContext context) {
+    return GestureDetector(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 13.h),
+        decoration: AppDecoration.outlineBluegray50.copyWith(
+          borderRadius: BorderRadiusStyle.roundedBorder8,
+        ),
+        child: _buildItem(
+          context,
+          upload: ImageConstant.imgGlobe,
+          label: "..",
+        ),
+      ),
+    );
+  }
+
 
   Widget _buildItem(BuildContext context,
       {required String upload, required String label}) {

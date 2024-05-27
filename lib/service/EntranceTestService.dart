@@ -10,6 +10,7 @@ class EntranceTestService {
 
     if (response.statusCode == 200) {
       final List<dynamic> entranceTestJson = json.decode(utf8.decode(response.bodyBytes))['data'];
+      print(entranceTestJson);
       return entranceTestJson.map((json) => TestInputModel.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load entrance test.');

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-// import 'package:flutter_quill_extensions/flutter_quill_embeds.dart';
+import 'package:flutter_quill_extensions/flutter_quill_embeds.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:vsc_quill_delta_to_html/vsc_quill_delta_to_html.dart';
 import 'package:intl/intl.dart';
@@ -284,7 +284,7 @@ class ProfileSubjectLearningScreenState
                       ),
                       multiRowsDisplay: false,
                       toolbarSize: 30.h,
-                      // embedButtons: FlutterQuillEmbeds.toolbarButtons(),
+                      embedButtons: FlutterQuillEmbeds.toolbarButtons(),
                     ),
                   ),
                   SizedBox(height: 12.v),
@@ -299,7 +299,7 @@ class ProfileSubjectLearningScreenState
                         QuillEditor.basic(
                           configurations: QuillEditorConfigurations(
                             controller: _controller,
-                            readOnly: false,
+                            // readOnly: false,
                             autoFocus: true,
                             sharedConfigurations:
                                 const QuillSharedConfigurations(

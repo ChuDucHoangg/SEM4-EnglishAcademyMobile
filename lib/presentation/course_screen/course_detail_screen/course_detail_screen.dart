@@ -506,7 +506,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                     margin: EdgeInsets.only(bottom: 22.v),
                     buttonStyle: CustomButtonStyles.fillPrimary,
                     onPressed: () {
-                      // _navigateToCheckoutScreen(course.slug);
+                      _navigateToCheckoutScreen(course.slug);
                     },
                   ),
           ],
