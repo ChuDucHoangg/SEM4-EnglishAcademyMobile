@@ -1,5 +1,6 @@
 import 'package:english_academy_mobile/core/utils/image_constant.dart';
 import 'package:english_academy_mobile/core/utils/size_utils.dart';
+import 'package:english_academy_mobile/presentation/personal_data_edit_screen/personal_data_edit_screen.dart';
 import 'package:english_academy_mobile/widgets/app_bar/custom_app_bar.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_leading_image.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_one.dart';
@@ -9,7 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
 import 'package:english_academy_mobile/theme/theme_helper.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../service/AuthService.dart';
 import '../../../theme/theme_provider.dart';
+import '../../auth/change_password_screen/changePassword.dart';
+import '../../auth/login_screen/login_screen.dart';
 
 class ProfileMoreScreen extends StatefulWidget {
   ProfileMoreScreen({Key? key}) : super(key: key);
@@ -63,9 +68,13 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
                   SizedBox(height: 15.v),
                   _buildSetting4(context),
                   SizedBox(height: 15.v),
-                  _buildSetting5(context),
+                  ElevatedButton(
+                    onPressed: () {
+                      _logout(context);
+                    },
+                    child: Text('Logout'),
+                  ),
                   SizedBox(height: 15.v),
-                  _buildSetting6(context),
                 ],
               ),
             ),
@@ -103,7 +112,7 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _buildItem(
+          _buildItem3(
             context,
             upload: ImageConstant.imgLockBlueGray300,
             label: "Personal Details" ,
@@ -202,39 +211,28 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
             upload: ImageConstant.imgNotificationsOutline,
             label: "Notification",
           ),
+          _buildItem2(
+            context,
+            upload: ImageConstant.imgNotificationsOutline,
+            label: "Change Password",
+          )
         ],
       ),
     );
   }
 
-  Widget _buildSetting5(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 13.h),
-      decoration: AppDecoration.outlineBluegray50.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder8,
-      ),
-      child: _buildItem(
-        context,
-        upload: ImageConstant.imgSignalBlueGray300,
-        label: "...",
-      ),
-    );
-  }
 
-  Widget _buildSetting6(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 13.h),
-        decoration: AppDecoration.outlineBluegray50.copyWith(
-          borderRadius: BorderRadiusStyle.roundedBorder8,
-        ),
-        child: _buildItem(
-          context,
-          upload: ImageConstant.imgGlobe,
-          label: "..",
-        ),
-      ),
-    );
+
+  Future<void> _logout(BuildContext context) async {
+    try {
+      await AuthService.removeTokenFromSharedPreferences();
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+            (Route<dynamic> route) => false,
+      );
+    } catch (e) {
+      print('Error logging out: $e');
+    }
   }
 
 
@@ -275,6 +273,93 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
             margin: EdgeInsets.symmetric(vertical: 3.v),
           ),
         ],
+      ),
+    );
+  }
+
+
+  Widget _buildItem2(BuildContext context,
+      {required String upload, required String label}) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ChangePasswordScreen()),
+        );
+      },
+      child: Container(
+        padding: EdgeInsets.only(
+          top: 16.v,
+          bottom: 15.v,
+        ),
+        decoration: AppDecoration.outlineBluegray502,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomImageView(
+              imagePath: upload,
+              height: 22.adaptSize,
+              width: 22.adaptSize,
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 16.h,
+                top: 2.v,
+                bottom: 2.v,
+              ),
+              child: Text(
+                label,
+                style: CustomTextStyles.titleSmallBluegray800.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+            ),
+            Spacer(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildItem3(BuildContext context,
+      {required String upload, required String label}) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PersonalDataEditScreen()),
+        );
+      },
+      child: Container(
+        padding: EdgeInsets.only(
+          top: 16.v,
+          bottom: 15.v,
+        ),
+        decoration: AppDecoration.outlineBluegray502,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomImageView(
+              imagePath: upload,
+              height: 22.adaptSize,
+              width: 22.adaptSize,
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 16.h,
+                top: 2.v,
+                bottom: 2.v,
+              ),
+              child: Text(
+                label,
+                style: CustomTextStyles.titleSmallBluegray800.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+            ),
+            Spacer(),
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 
 
+import 'package:english_academy_mobile/presentation/auth/change_password_screen/changePassword.dart';
 import 'package:english_academy_mobile/presentation/auth/login_screen/login_screen.dart';
 import 'package:english_academy_mobile/presentation/auth/register_screen/register_screen.dart';
 import 'package:english_academy_mobile/presentation/instructor_screen/instructor_screen.dart';
@@ -12,6 +13,7 @@ import 'package:english_academy_mobile/presentation/entrance_test_screen/learnin
 import 'package:english_academy_mobile/presentation/entrance_test_screen/learning_paths_toeic_screen/learning_paths_toeic_screen.dart';
 import 'package:english_academy_mobile/presentation/intro_screen/intro_screen.dart';
 import 'package:english_academy_mobile/presentation/notification_screen/notification_screen.dart';
+import 'package:english_academy_mobile/presentation/personal_data_edit_screen/personal_data_edit_screen.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_detail_screen/profile_my_course_detail_screen.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_detail_screen/profile_subject_learing_screen/profile_subject_learing_screen.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_detail_screen/profile_subject_slot_screen/profile_subject_slot_screen.dart';
@@ -30,6 +32,7 @@ import '../presentation/course_screen/course_screen.dart';
 import '../presentation/course_screen/course_detail_screen/course_detail_screen.dart';
 import '../presentation/profile_screen/profile_screen.dart';
 import '../presentation/profile_screen/widgets/profile_more.dart';
+import '../presentation/personal_data_edit_screen/personal_data_edit_screen.dart';
 
 
 class AppRoutes {
@@ -91,7 +94,9 @@ class AppRoutes {
 
   static const String profileMoreScreen = '/profile_more';
 
-  static const String languageScreen ='/language_screen';
+  static const String personalDataEditScreen = '/personal_data_edit_screen';
+
+  static const String changePasswordScreen ='/change_password_screen';
 
   static Map<String, WidgetBuilder> routes = {
     launchingScreen: (context) => LaunchingScreen(),
@@ -101,6 +106,7 @@ class AppRoutes {
     introThreeScreen: (context) => IntroThreeScreen(),
     loginScreen: (context) => LoginScreen(),
     registerScreen: (context) => RegisterScreen(),
+    changePasswordScreen: (context) => ChangePasswordScreen(),
     homeScreen: (context) => HomeScreen(),
     instructorScreen: (context) => InstructorScreen(),
     entranceTestScreen: (context) => EntranceTestScreen(),
@@ -170,5 +176,6 @@ class AppRoutes {
       return ProfileSubjectLearningScreen(slug: slug!);
     },
     profileMoreScreen : (context) => ProfileMoreScreen(),
+    personalDataEditScreen : (context) => PersonalDataEditScreen(),
   };
 }

@@ -45,5 +45,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>Chúng tôi cần quyền truy cập thư viện ảnh của bạn để cho phép bạn chọn ảnh đại diện.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Chúng tôi cần quyền truy cập camera của bạn để cho phép bạn chụp ảnh đại diện.</string>
 </dict>
 </plist>

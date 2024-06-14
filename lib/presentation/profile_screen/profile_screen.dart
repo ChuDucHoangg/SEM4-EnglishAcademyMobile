@@ -72,9 +72,6 @@ class ProfileScreenState extends State<ProfileScreen>
         AppbarTrailingImage(
           imagePath: ImageConstant.imgNotificationGray900,
           margin: EdgeInsets.symmetric(horizontal: 24.h),
-          onTap: () {
-            _navigateToProfileMoreScreen(context);
-         },
         )
       ],
     );
@@ -289,10 +286,5 @@ class ProfileScreenState extends State<ProfileScreen>
       },
     );
   }
-  void _navigateToProfileMoreScreen(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ProfileMoreScreen()),
-    );
-  }
+
 }
