@@ -32,6 +32,7 @@ dependencies:
   flutter_quill_extensions: ^9.3.7
   shared_preferences: ^2.2.3
   zego_uikit_prebuilt_video_conference: ^2.7.4
+  image_picker: ^1.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -72,7 +73,3 @@ flutter:
 #          weight: 700
 #        - asset: assets/fonts/PlusJakartaSansRegular.ttf
 #          weight: 400
-localization:
-  arb-dir: lib/l10n
-  template-arb-file: intl_en.arb
-  output-localization-file: app_localizations.dart

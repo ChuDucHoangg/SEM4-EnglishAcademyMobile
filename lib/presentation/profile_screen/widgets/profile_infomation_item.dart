@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:english_academy_mobile/core/app_export.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/widgets/profile_more.dart';
 import 'package:flutter/material.dart';
 
 import '../../../service/AuthService.dart';
@@ -44,6 +45,7 @@ class ProfileInfomationItemState extends State<ProfileInfomationItem>
       print('Error: $e');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -94,9 +96,18 @@ class ProfileInfomationItemState extends State<ProfileInfomationItem>
             height: 24.adaptSize,
             width: 24.adaptSize,
             margin: EdgeInsets.symmetric(vertical: 21.v),
+            onTap: () {
+              _navigateToProfileMoreScreen(context);
+            },
           )
         ],
       ),
+    );
+  }
+  void _navigateToProfileMoreScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ProfileMoreScreen()),
     );
   }
 }

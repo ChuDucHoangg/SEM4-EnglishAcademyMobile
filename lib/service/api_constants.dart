@@ -24,4 +24,8 @@ class ApiConstants {
 
   static const String registerStudent = "/auth/student/signup";
   static const String loginStudent = "/auth/student/signip";
+  static const String changePassword = "/student/change-password";
+
+  static const String profile ="/student/profile";
+  static const String updateProfile ="/student/update-profile";
 }
