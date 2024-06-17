@@ -165,13 +165,13 @@ class _TestOnlineScreenState extends State<TestOnlineScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Entrance Test IELTS",
-            style: TextStyle(fontSize: 18, color: Colors.white),
+            "${test.title}",
+            style: TextStyle(fontSize: 15, color: Colors.white),
           ),
           SizedBox(width: 10),
           Text(
             formatHouse(Duration(seconds: countdownTime)),
-            style: TextStyle(fontSize: 18, color: Colors.white),
+            style: TextStyle(fontSize: 15, color: Colors.white),
           ),
         ],
       ),
