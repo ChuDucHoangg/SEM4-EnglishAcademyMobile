@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:english_academy_mobile/core/app_export.dart';
-import 'package:english_academy_mobile/init_screen.dart';
+import 'package:english_academy_mobile/service/AuthService.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
@@ -36,6 +36,11 @@ class _EntranceTestIeltsScreenState extends State<EntranceTestIeltsScreen> {
   late Map<String, int?> selectedAnswers = {};
   late List<TestInputSession> sessionDetails = [];
   late List<AudioPlayer> audioPlayers = [];
+  List<int> currentQuestionIndices = [];
+  int currentSessionIndex = 0;
+  bool canGoBack = false;
+  bool canGoForward = true;
+  Color disabledColor = Colors.grey;
 
   @override
   void initState() {
@@ -47,6 +52,9 @@ class _EntranceTestIeltsScreenState extends State<EntranceTestIeltsScreen> {
         countdownTime = testDetail.time;
         sessionDetails = testDetail.testInputSessionDetails;
         audioPlayers = List.generate(sessionDetails.length, (index) => AudioPlayer());
+        currentQuestionIndices = List.filled(sessionDetails.length, 0);
+        canGoBack = false;
+        canGoForward = sessionDetails.length > 1;
       });
       startCountdown();
     });
@@ -127,7 +135,7 @@ class _EntranceTestIeltsScreenState extends State<EntranceTestIeltsScreen> {
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _buildQuestionList(context, test.testInputSessionDetails),
+                      children: _buildSessionList(context, test.testInputSessionDetails),
                     ),
                   ),
                   SizedBox(height: 20),
@@ -154,10 +162,7 @@ class _EntranceTestIeltsScreenState extends State<EntranceTestIeltsScreen> {
         imagePath: ImageConstant.imgArrowRightOnerrorcontainer,
         margin: EdgeInsets.symmetric(horizontal: 10),
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => InitScreen()),
-          );
+            Navigator.pop(context);
         },
       ),
       centerTitle: true,
@@ -184,97 +189,168 @@ class _EntranceTestIeltsScreenState extends State<EntranceTestIeltsScreen> {
     );
   }
 
-  List<Widget> _buildQuestionList(BuildContext context, List<TestInputSession> sessions) {
-    List<List<Widget>> sessionWidgets = sessions.map((session) {
-      List<Widget> sessionQuestionWidgets = [];
+  List<Widget> _buildSessionList(BuildContext context, List<TestInputSession> sessions) {
+    List<Widget> sessionWidgets = [];
+    sessionWidgets.add(_buildSession(context, sessions[currentSessionIndex]));
 
-      sessionQuestionWidgets.add(
+    sessionWidgets.add(
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          _buildPrevButton(context),
+          _buildNextButton(context),
+        ],
+      ),
+    );
+    return sessionWidgets;
+  }
+
+  Widget _buildSession(BuildContext context, TestInputSession session) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Center(
-            child: Text(
-              session.sessionName,
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
-              ),
+          child: Text(
+            session.sessionName,
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ),
-      );
-
-      sessionQuestionWidgets.addAll(session.questionTestInputs.map((question) {
-        int questionIndex = session.questionTestInputs.indexOf(question);
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Question ${session.questionTestInputs.indexOf(question) + 1}: ${question.title}',
-                style: TextStyle(height: 1.5, fontSize: 17, letterSpacing: 0),
-              ),
-              SizedBox(height: 5),
-              if (question.image != null && question.image.isNotEmpty)
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.network(
-                    question.image,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              SizedBox(height: 10),
-              if (question.audiomp3 != null && question.audiomp3.isNotEmpty)
-                InkWell(
-                  onTap: () {
-                    if (audioPlayers[questionIndex].state == PlayerState.playing) {
-                      pauseAudio(questionIndex);
-                    } else {
-                      playAudio(questionIndex, question.audiomp3);
-                      seekToBeginning(questionIndex);
-                    }
-                  },
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: theme.colorScheme.primary,
-                      boxShadow: [
-                        BoxShadow(
-                          color: theme.colorScheme.primary.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Icon(
-                        audioPlayers[questionIndex].state == PlayerState.playing
-                            ? Icons.pause
-                            : Icons.play_arrow_rounded,
-                        size: 40,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              SizedBox(height: 10),
-              _buildAnswers(context, session, question),
-            ],
-          ),
-        );
-      }));
-
-      return sessionQuestionWidgets;
-    }).toList();
-
-    return sessionWidgets.expand((widgetList) => widgetList).toList();
+        for (int j = 0; j < session.questionTestInputs.length; j++)
+          _buildQuestion(context, session, session.questionTestInputs[j]),
+      ],
+    );
   }
 
-  Widget _buildAnswers(BuildContext context, TestInputSession session,
-      QuestionTestInput question) {
+  Widget _buildQuestion(BuildContext context, TestInputSession session, QuestionTestInput question) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Text(
+            // question.title,
+            'Question ${session.questionTestInputs.indexOf(question) + 1}: ${question.title}',
+            style: TextStyle(
+              height: 1.5,
+              fontSize: 17,
+              letterSpacing: 0,
+            ),
+          ),
+        ),
+        SizedBox(height: 5),
+        if (question.image != null && question.image.isNotEmpty)
+          ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Image.network(
+              question.image,
+              fit: BoxFit.cover,
+            ),
+          ),
+        SizedBox(height: 10),
+        if (question.audiomp3 != null && question.audiomp3.isNotEmpty)
+          InkWell(
+            onTap: () {
+              if (audioPlayers[session.questionTestInputs.indexOf(question)].state == PlayerState.playing) {
+                pauseAudio(session.questionTestInputs.indexOf(question));
+              } else {
+                playAudio(session.questionTestInputs.indexOf(question), question.audiomp3);
+                seekToBeginning(session.questionTestInputs.indexOf(question));
+              }
+            },
+            child: Container(
+              margin: EdgeInsets.only(left: 20),
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: theme.colorScheme.primary,
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.colorScheme.primary.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Icon(
+                  audioPlayers[session.questionTestInputs.indexOf(question)].state == PlayerState.playing
+                      ? Icons.pause
+                      : Icons.play_arrow_rounded,
+                  size: 40,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        SizedBox(height: 10),
+        _buildAnswers(context, session, question),
+      ],
+    );
+  }
+
+  Widget _buildNextButton(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(20),
+      width: 40,
+      height: 40,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: canGoForward ? theme.colorScheme.primary : disabledColor,
+      ),
+      child: IconButton(
+        onPressed: canGoForward ? () {
+          if (currentSessionIndex < sessionDetails.length - 1) {
+            setState(() {
+              currentSessionIndex++;
+              canGoBack = true;
+              canGoForward = currentSessionIndex < sessionDetails.length - 1;
+            });
+          }
+        } : null,
+        icon: Icon(Icons.arrow_forward, color: Colors.white),
+        padding: EdgeInsets.zero,
+        iconSize: 20,
+        splashRadius: 20,
+      ),
+    );
+  }
+
+  Widget _buildPrevButton(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(20),
+      width: 40,
+      height: 40,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: canGoBack ? theme.colorScheme.primary : disabledColor,
+      ),
+      child: IconButton(
+        onPressed: canGoBack ? () {
+          if (currentSessionIndex > 0) {
+            setState(() {
+              currentSessionIndex--;
+              canGoForward = true;
+              canGoBack = currentSessionIndex > 0;
+            });
+          }
+        } : null,
+        icon: Icon(Icons.arrow_back, color: Colors.white),
+        padding: EdgeInsets.zero,
+        iconSize: 20,
+        splashRadius: 20,
+      ),
+    );
+  }
+
+
+  Widget _buildAnswers(BuildContext context, TestInputSession session, QuestionTestInput question) {
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -312,7 +388,7 @@ class _EntranceTestIeltsScreenState extends State<EntranceTestIeltsScreen> {
             });
           },
           child: Container(
-            margin: EdgeInsets.only(top: 20),
+            margin: EdgeInsets.only(top: 20, left: 20, right: 20),
             padding: EdgeInsets.symmetric(
               horizontal: 15.h,
               vertical: 17.v,
@@ -434,14 +510,17 @@ class _EntranceTestIeltsScreenState extends State<EntranceTestIeltsScreen> {
         'time': DateTime.now().difference(startTime).inSeconds,
         'createAnswerStudentList': answers,
       };
-
-      // print(requestBody);
+      final String token = await AuthService.getToken();
+      print(requestBody);
 
       try {
-        var response = await Dio().post('${ApiConstants.baseUrl}${ApiConstants.entranceTestDetail}/${widget.slug}/1',
+        var response = await Dio().post('${ApiConstants.baseUrl}${ApiConstants.entranceTestDetail}/${widget.slug}',
           data: json.encode(requestBody),
           options: Options(
-            headers: {'Content-Type': 'application/json'},
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Authorization': 'Bearer $token'
+            },
           ),
         );
 

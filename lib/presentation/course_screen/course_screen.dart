@@ -138,7 +138,7 @@ class CourseScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Khoá học phổ biến",
+          "Popular courses",
           style: theme.textTheme.titleMedium,
         ),
         Spacer(),
