@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:english_academy_mobile/core/app_export.dart';
 import 'package:english_academy_mobile/data/model/TestOnlineModel.dart';
-import 'package:english_academy_mobile/init_screen.dart';
 import 'package:english_academy_mobile/presentation/test_online_screen/result_test_online_screen/result_test_online_screen.dart';
+import 'package:english_academy_mobile/service/AuthService.dart';
 import 'package:english_academy_mobile/service/TestOnlineService.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -154,10 +154,7 @@ class _TestOnlineScreenState extends State<TestOnlineScreen> {
         imagePath: ImageConstant.imgArrowRightOnerrorcontainer,
         margin: EdgeInsets.symmetric(horizontal: 10),
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => InitScreen()),
-          );
+          Navigator.pop(context);
         },
       ),
       centerTitle: true,
@@ -439,14 +436,16 @@ class _TestOnlineScreenState extends State<TestOnlineScreen> {
         'time': DateTime.now().difference(startTime).inSeconds,
         'createAnswerStudentList': answers,
       };
-
-      print(requestBody);
+      final String token = await AuthService.getToken();
 
       try {
-        var response = await Dio().post('${ApiConstants.baseUrl}${ApiConstants.testOnline}/test-of-toeic-ngu-phap-co-ban/1',
+        var response = await Dio().post('${ApiConstants.baseUrl}${ApiConstants.testOnline}/${widget.slug}',
           data: json.encode(requestBody),
           options: Options(
-            headers: {'Content-Type': 'application/json'},
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Authorization': 'Bearer $token'
+            },
           ),
         );
 

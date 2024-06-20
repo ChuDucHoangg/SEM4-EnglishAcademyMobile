@@ -9,8 +9,7 @@ class TestOnlineService {
   static Future<TestOnlineModel> fetchTestOnline(String slug) async {
     final String token = await AuthService.getToken();
     final response = await http.get(
-      Uri.parse(
-          '${ApiConstants.baseUrl}${ApiConstants.testOnline}/$slug'),
+      Uri.parse('${ApiConstants.baseUrl}${ApiConstants.testOnline}/$slug'),
       headers: {
         'Authorization': 'Bearer $token',
       },
@@ -27,8 +26,14 @@ class TestOnlineService {
   }
 
   static Future<TestOnlineResult> fetchResultTestOnline(String slug) async {
-    final response = await http.get(Uri.parse(
-        '${ApiConstants.baseUrl}${ApiConstants.resultTestOnline}/$slug'));
+    final String token = await AuthService.getToken();
+    final response = await http.get(
+      Uri.parse(
+          '${ApiConstants.baseUrl}${ApiConstants.resultTestOnline}/$slug'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
 
     if (response.statusCode == 200) {
       final dynamic resultTestJson =

@@ -34,11 +34,10 @@ class CourseService {
   }
 
   static Future<TopicModel> fetchTopicDetail(String slug) async {
-    final int userId = await AuthService.getUserIdFromToken();
     final String token = await AuthService.getToken();
     final response = await http.get(
       Uri.parse(
-          '${ApiConstants.baseUrl}${ApiConstants.topicOnline}/$slug/$userId'),
+          '${ApiConstants.baseUrl}${ApiConstants.topicOnline}/$slug'),
       headers: {
         'Authorization': 'Bearer $token',
       },

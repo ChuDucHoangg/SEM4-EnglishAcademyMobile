@@ -163,7 +163,7 @@ class ResultTestOnline extends StatelessWidget {
                                         bottom: 3.v,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: theme.colorScheme.primaryContainer,
+                                        color: theme.colorScheme.primary,
                                         borderRadius: BorderRadius.circular(
                                           6.h,
                                         ),
