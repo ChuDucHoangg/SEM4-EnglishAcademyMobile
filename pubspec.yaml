@@ -32,7 +32,9 @@ dependencies:
   flutter_quill_extensions: ^9.3.7
   shared_preferences: ^2.2.3
   zego_uikit_prebuilt_video_conference: ^2.7.4
-  image_picker: ^1.1.2
+  animated_custom_dropdown: 3.1.1
+  carousel_slider: ^4.2.1
+  quickalert: ^1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

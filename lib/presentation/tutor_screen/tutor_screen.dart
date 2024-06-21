@@ -4,12 +4,12 @@ import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_one.dart'
 import 'package:english_academy_mobile/widgets/custom_search_view.dart';
 import 'package:english_academy_mobile/widgets/custom_outlined_button.dart';
 import 'package:english_academy_mobile/widgets/custom_drop_down.dart';
-import 'widgets/fortyfive_item_widget.dart';
+import 'widgets/data_tutors_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
 
-class InstructorScreen extends StatelessWidget {
-  InstructorScreen({Key? key})
+class TutorScreen extends StatelessWidget {
+  TutorScreen({Key? key})
       : super(
     key: key,
   );
@@ -59,7 +59,7 @@ class InstructorScreen extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
                 SizedBox(height: 17.v),
-                _buildFortyFive(context)
+                _buildDataTutors(context)
               ],
             ),
           ),
@@ -74,7 +74,7 @@ class InstructorScreen extends StatelessWidget {
       height: 40.h,
       title: AppbarSubtitleOne(
         margin: EdgeInsets.only(left: 22.h),
-        text: "Instructor",
+        text: "Tutor",
       ),
       actions: [
         AppbarTrailingImage(
@@ -111,7 +111,7 @@ class InstructorScreen extends StatelessWidget {
         CustomDropDown(
           width: 117.h,
           icon: Container(
-            margin: EdgeInsets.only(right: 8.v),
+            margin: EdgeInsets.only(right: 5.v),
             child: CustomImageView(
               imagePath: ImageConstant.imgArrowdownGray60001,
               height: 16.adaptSize,
@@ -124,7 +124,7 @@ class InstructorScreen extends StatelessWidget {
         CustomDropDown(
           width: 117.h,
           icon: Container(
-            margin: EdgeInsets.only(right: 8.v),
+            margin: EdgeInsets.only(right: 5.v),
             child: CustomImageView(
               imagePath: ImageConstant.imgArrowdownGray60001,
               height: 16.adaptSize,
@@ -139,20 +139,8 @@ class InstructorScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildFortyFive(BuildContext context) {
-    return ListView.separated(
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      separatorBuilder: (context, index) {
-        return SizedBox(
-          height: 16.v,
-        );
-      },
-      itemCount: 6,
-      itemBuilder: (context, index) {
-        return FortyfiveItemWidget();
-      },
-    );
+  Widget _buildDataTutors(BuildContext context) {
+    return DataTutorsItemWidget();
   }
 
   /// Navigates back to the previous screen.

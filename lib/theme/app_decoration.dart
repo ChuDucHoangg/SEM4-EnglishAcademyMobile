@@ -125,6 +125,18 @@ class AppDecoration {
     border: Border(
       top: BorderSide(
         color: appTheme.blueGray50,
+        width: 5.h,
+      ),
+      left: BorderSide(
+        color: appTheme.blueGray50,
+        width: 1.h,
+      ),
+      right: BorderSide(
+        color: appTheme.blueGray50,
+        width: 1.h,
+      ),
+      bottom: BorderSide(
+        color: appTheme.blueGray50,
         width: 1.h,
       ),
     ),
@@ -365,7 +377,7 @@ class AppDecoration {
   static BoxDecoration get outlineOnErrorContainer => BoxDecoration(
     color: theme.colorScheme.primary,
     border: Border.all(
-      color: theme.colorScheme.onErrorContainer,
+      color: appTheme.blueGray50,
       width: 1.h,
     ),
   );
@@ -411,7 +423,7 @@ class AppDecoration {
   );
   static BoxDecoration get outlinePrimary => BoxDecoration(
     border: Border.all(
-      color: theme.colorScheme.primary,
+      color: appTheme.blueGray300,
       width: 1.h,
     ),
   );
