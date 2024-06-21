@@ -1,3 +1,4 @@
+import 'package:english_academy_mobile/presentation/tutor_screen/tutor_screen.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_two.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_five.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_image.dart';
@@ -349,11 +350,21 @@ class HomeScreen extends StatelessWidget {
             "Recently added",
             style: theme.textTheme.titleMedium,
           ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 3.v),
-            child: Text(
-              "See more",
-              style: CustomTextStyles.titleSmallPrimaryMedium,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TutorScreen(),
+                ),
+              );
+            },
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 3.v),
+              child: Text(
+                "See more",
+                style: CustomTextStyles.titleSmallPrimaryMedium,
+              ),
             ),
           ),
         ],

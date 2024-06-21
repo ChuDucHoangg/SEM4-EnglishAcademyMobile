@@ -3,7 +3,7 @@
 import 'package:english_academy_mobile/presentation/auth/change_password_screen/changePassword.dart';
 import 'package:english_academy_mobile/presentation/auth/login_screen/login_screen.dart';
 import 'package:english_academy_mobile/presentation/auth/register_screen/register_screen.dart';
-import 'package:english_academy_mobile/presentation/instructor_screen/instructor_screen.dart';
+import 'package:english_academy_mobile/presentation/tutor_screen/tutor_detail_screen/tutor_detail_screen.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/answer_detail_screen/answer_detail_screen.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/entrance_test_finish/entrance_test_finish.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/entrance_test_ielts_screen/entrance_test_ielts_screen.dart';
@@ -32,8 +32,7 @@ import '../presentation/course_screen/course_screen.dart';
 import '../presentation/course_screen/course_detail_screen/course_detail_screen.dart';
 import '../presentation/profile_screen/profile_screen.dart';
 import '../presentation/profile_screen/widgets/profile_more.dart';
-import '../presentation/personal_data_edit_screen/personal_data_edit_screen.dart';
-
+import '../presentation/tutor_screen/tutor_screen.dart';
 
 class AppRoutes {
   static const String launchingScreen = '/launching_screen';
@@ -52,7 +51,11 @@ class AppRoutes {
 
   static const String homeScreen = '/home_screen';
 
-  static const String instructorScreen = '/instructor_screen';
+  static const String tutorScreen = '/tutor_screen';
+
+  static const String tutorDetailScreen = '/tutor_detail_screen';
+
+  static const String animationTutorHire = '/animation_tutor_hire';
 
   static const String courseScreen = '/course_screen';
 
@@ -108,7 +111,12 @@ class AppRoutes {
     registerScreen: (context) => RegisterScreen(),
     changePasswordScreen: (context) => ChangePasswordScreen(),
     homeScreen: (context) => HomeScreen(),
-    instructorScreen: (context) => InstructorScreen(),
+    tutorScreen: (context) => TutorScreen(),
+    tutorDetailScreen: (context) {
+      final String? code =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return TutorDetailScreen(code: code!);
+    },
     entranceTestScreen: (context) => EntranceTestScreen(),
     AppRoutes.entranceTestToeicScreen: (context) {
       final String? slug =

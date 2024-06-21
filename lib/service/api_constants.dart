@@ -1,5 +1,6 @@
 class ApiConstants {
   static const String baseUrl = "http://localhost:8080/api/v1";
+  // static const String baseUrl = "http://171.229.111.80:8080/api/v1";
 
   static const String courseOnline = "/any/course-online";
   static const String courseDetail = "/any/course-online/detail";
@@ -16,6 +17,12 @@ class ApiConstants {
   static const String createAnswerItemSlotStudent = "/answer-student-item-slot";
   static const String testOnline = "/test-online/detail";
   static const String resultTestOnline = "/test-online/result";
+
+  static const String tutorList = "/any/tutor";
+  static const String tutorDetail = "/any/tutor-detail";
+  static const String packageTutor = "/any/package/by-tutor";
+  static const String availabilityTutor = "/any/availability";
+  static const String createBooking = "/booking";
 
   static const String entranceTest = "/test-input";
   static const String entranceTestDetail = "/test-input/detail";
