@@ -35,85 +35,95 @@ class LoginScreenState extends State<LoginScreen>
     return Scaffold(
       appBar: _buildAppBar(context),
       body: SingleChildScrollView(
-        child: SizedBox(
-          width: double.maxFinite,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 26.v),
-              Padding(
-                padding: EdgeInsets.only(left: 25.h),
-                child: Text(
-                  "Hi! Welcome Back",
-                  style: theme.textTheme.headlineMedium,
-                ),
-              ),
-              SizedBox(height: 12.v),
-              Container(
-                width: 305.h,
-                margin: EdgeInsets.only(
-                  left: 25.h,
-                  right: 45.h,
-                ),
-                child: Text(
-                  "We happy to see you again! to use your account, you should sign in first.",
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: CustomTextStyles.bodyLargeBluegray30002.copyWith(
-                    height: 1.50,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onPrimaryContainer
+          ),
+          child: SizedBox(
+            width: double.maxFinite,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 26.v),
+                Padding(
+                  padding: EdgeInsets.only(left: 25.h),
+                  child: Text(
+                    "Hi! Welcome Back",
+                    style: theme.textTheme.headlineMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 22.v),
-              _buildTabview(context),
-              SizedBox(
-                height: 320.v,
-                child: TabBarView(
-                  controller: tabviewController,
-                  children: [
-                    LoginEmailItem(),
-                    LoginPhoneNumberItem(),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.h),
-                child: Column(
-                  children: [
-                    SizedBox(height: 20.v),
-                    _buildOr(context),
-                    SizedBox(height: 26.v),
-                    _buildBtnSocial(context),
-                    SizedBox(height: 19.v),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "Don’t have an account?",
-                            style: CustomTextStyles.bodyLargeff111827,
-                          ),
-                          TextSpan(
-                            text: " ",
-                          ),
-                          TextSpan(
-                              text: "Sign Up",
-                              style: CustomTextStyles.titleMediumff1d2857_1,
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              RegisterScreen()));
-                                }),
-                        ],
-                      ),
-                      textAlign: TextAlign.left,
+                SizedBox(height: 12.v),
+                Container(
+                  width: 305.h,
+                  margin: EdgeInsets.only(
+                    left: 25.h,
+                    right: 45.h,
+                  ),
+                  child: Text(
+                    "We happy to see you again! to use your account, you should sign in first.",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: CustomTextStyles.bodyLargeBluegray30002.copyWith(
+                      height: 1.50,
                     ),
-                  ],
+                  ),
                 ),
-              )
-            ],
+                SizedBox(height: 22.v),
+                _buildTabview(context),
+                SizedBox(
+                  height: 320.v,
+                  child: TabBarView(
+                    controller: tabviewController,
+                    children: [
+                      LoginEmailItem(),
+                      LoginPhoneNumberItem(),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.h),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20.v),
+                      _buildOr(context),
+                      SizedBox(height: 26.v),
+                      _buildBtnSocial(context),
+                      SizedBox(height: 19.v),
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Don’t have an account?",
+                              style: CustomTextStyles.bodyLargeBluegray30002
+                            ),
+                            TextSpan(
+                              text: " ",
+                            ),
+                            TextSpan(
+                                text: "Sign Up",
+                                style: CustomTextStyles.bodyLargeff111827.copyWith(
+                                  color: Theme.of(context).colorScheme.onPrimary,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                RegisterScreen()));
+                                  }),
+                          ],
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      SizedBox(height: 54.v),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -149,7 +159,7 @@ class LoginScreenState extends State<LoginScreen>
       child: TabBar(
         controller: tabviewController,
         labelPadding: EdgeInsets.zero,
-        labelColor: theme.colorScheme.primary,
+        labelColor: Color(0xFF1565C0),
         labelStyle: TextStyle(
           fontSize: 14.fSize,
           fontFamily: 'Inter',
@@ -174,6 +184,9 @@ class LoginScreenState extends State<LoginScreen>
           Tab(
             child: Text(
               "Email",
+              style: TextStyle(
+
+              ),
             ),
           ),
           Tab(
@@ -237,12 +250,15 @@ class LoginScreenState extends State<LoginScreen>
           margin: EdgeInsets.only(right: 28.h),
           child: CustomImageView(
             imagePath: ImageConstant.imgFoundationSocialApple,
+            color: Theme.of(context).colorScheme.onPrimary,
             height: 24.adaptSize,
             width: 24.adaptSize,
           ),
         ),
         buttonStyle: CustomButtonStyles.outlineBlueGray,
-        buttonTextStyle: theme.textTheme.titleMedium!,
+        buttonTextStyle: theme.textTheme.titleMedium!.copyWith(
+          color: Theme.of(context).colorScheme.onPrimary
+        ),
       ),
     );
   }
@@ -262,7 +278,9 @@ class LoginScreenState extends State<LoginScreen>
           ),
         ),
         buttonStyle: CustomButtonStyles.outlineGray,
-        buttonTextStyle: theme.textTheme.titleMedium!,
+        buttonTextStyle: theme.textTheme.titleMedium!.copyWith(
+            color: Theme.of(context).colorScheme.onPrimary
+        ),
       ),
     );
   }

@@ -42,8 +42,9 @@ class DataCourseItemWidget extends StatelessWidget {
                   },
                   child: Container(
                     padding: EdgeInsets.all(7.h),
-                    decoration: AppDecoration.outlineGray100.copyWith(
-                      borderRadius: BorderRadiusStyle.roundedBorder8,
+                    decoration: AppDecoration.outlineGray90010.copyWith(
+                        borderRadius: BorderRadiusStyle.roundedBorder12,
+                        color: Theme.of(context).colorScheme.primaryContainer
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -65,11 +66,26 @@ class DataCourseItemWidget extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 8.v),
-                        CustomElevatedButton(
-                          height: 20.v,
-                          width: 55.h,
-                          text: "IELTS",
-                          buttonTextStyle: theme.textTheme.labelSmall!,
+                        Container(
+                            padding: EdgeInsets.symmetric(horizontal: 4),
+                            decoration: BoxDecoration(
+                              color: appTheme.greenA400,
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: appTheme.gray900.withOpacity(0.08),
+                                  spreadRadius: -4,
+                                  blurRadius: 9,
+                                ),
+                              ],
+                            ),
+                            child: Text(
+                              "IELTS" ,
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color:Theme.of(context).colorScheme.onPrimary
+                              ),
+                            ),
                         ),
                         SizedBox(height: 9.v),
                         Container(
@@ -82,6 +98,7 @@ class DataCourseItemWidget extends StatelessWidget {
                             style:
                             CustomTextStyles.labelLargeGray900_1.copyWith(
                               height: 1.60,
+                              color: Theme.of(context).colorScheme.onPrimary,
                             ),
                           ),
                         ),

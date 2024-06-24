@@ -8,6 +8,7 @@ class AppbarLeadingImage extends StatelessWidget {
     this.imagePath,
     this.margin,
     this.onTap,
+    this.color,
   }) : super(
     key: key,
   );
@@ -18,6 +19,7 @@ class AppbarLeadingImage extends StatelessWidget {
 
   Function? onTap;
 
+  Color? color;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -31,6 +33,7 @@ class AppbarLeadingImage extends StatelessWidget {
           height: 24.adaptSize,
           width: 24.adaptSize,
           fit: BoxFit.contain,
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
       ),
     );

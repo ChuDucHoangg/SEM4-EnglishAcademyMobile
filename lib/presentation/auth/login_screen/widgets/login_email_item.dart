@@ -8,8 +8,8 @@ import '../../../../service/AuthService.dart';
 class LoginEmailItem extends StatefulWidget {
   const LoginEmailItem({Key? key})
       : super(
-          key: key,
-        );
+    key: key,
+  );
 
   @override
   LoginEmailItemState createState() => LoginEmailItemState();

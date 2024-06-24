@@ -54,16 +54,16 @@ class CustomElevatedButton extends BaseButton {
       style: buttonStyle,
       onPressed: isDisabled ?? false ? null : onPressed ?? () {},
       child: Row(
-        mainAxisSize: MainAxisSize.min, // Đặt MainAxisSize.min cho Row
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           leftIcon ?? const SizedBox.shrink(),
-          Flexible( // Sử dụng Flexible cho Text để nó có thể co giãn
+          Flexible(
             child: Text(
               text,
               style: buttonTextStyle ?? CustomTextStyles.titleMediumOnErrorContainer_1,
-              overflow: TextOverflow.ellipsis, // overflow có thể là ellipsis hoặc clip
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           rightIcon ?? const SizedBox.shrink(),

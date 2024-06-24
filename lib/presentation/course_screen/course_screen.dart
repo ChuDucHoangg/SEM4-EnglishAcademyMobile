@@ -28,6 +28,7 @@ class CourseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
       body: SizedBox(
         child: Stack(
           children: [
@@ -42,7 +43,9 @@ class CourseScreen extends StatelessWidget {
                       CustomSearchView(
                         controller: searchController,
                         hintText: "Search",
-                        hintStyle: CustomTextStyles.bodyMediumBluegray300,
+                        hintStyle: CustomTextStyles.bodyMediumBluegray300.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
                         borderDecoration:
                         SearchViewStyleHelper.outlineBlueGrayTL12,
                         filled: false,
@@ -57,24 +60,24 @@ class CourseScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 74.v,
-                width: double.maxFinite,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment(0.5, 0.09),
-                    end: Alignment(0.5, 0.92),
-                    colors: [
-                      theme.colorScheme.onErrorContainer.withOpacity(0),
-                      theme.colorScheme.onErrorContainer.withOpacity(0.7),
-                      theme.colorScheme.onErrorContainer.withOpacity(1),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.bottomCenter,
+            //   child: Container(
+            //     height: 74.v,
+            //     width: double.maxFinite,
+            //     decoration: BoxDecoration(
+            //       gradient: LinearGradient(
+            //         begin: Alignment(0.5, 0.09),
+            //         end: Alignment(0.5, 0.92),
+            //         colors: [
+            //           theme.colorScheme.onErrorContainer.withOpacity(0),
+            //           theme.colorScheme.onErrorContainer.withOpacity(0.7),
+            //           theme.colorScheme.onErrorContainer.withOpacity(1),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

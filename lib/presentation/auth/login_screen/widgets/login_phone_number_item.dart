@@ -34,7 +34,9 @@ class LoginPhoneNumberItemState extends State<LoginPhoneNumberItem>
           ),
           child: Container(
             width: double.maxFinite,
-            decoration: AppDecoration.fillOnErrorContainer,
+            decoration: AppDecoration.fillOnErrorContainer.copyWith(
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
+            ),
             child: Column(
               children: [
                 SizedBox(height: 32.v),
@@ -50,11 +52,14 @@ class LoginPhoneNumberItemState extends State<LoginPhoneNumberItem>
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "Forgot Password?",
-                          style: CustomTextStyles.titleMediumPrimary,
+                          style: CustomTextStyles.titleMediumPrimary.copyWith(
+                            color: Color(0xFF1976D2),
+                          ),
                         ),
                       ),
                       SizedBox(height: 32.v),
                       _buildSignIn(context),
+                      SizedBox(height: 45.v),
                     ],
                   ),
                 ),

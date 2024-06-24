@@ -70,38 +70,45 @@ class CustomDropDown extends StatelessWidget {
     return alignment != null
         ? Align(
       alignment: alignment ?? Alignment.center,
-      child: dropDownWidget,
+      child: dropDownWidget(context),
     )
-        : dropDownWidget;
+        : dropDownWidget(context);
   }
 
-  Widget get dropDownWidget => SizedBox(
+
+  Widget dropDownWidget(BuildContext context) => SizedBox(
     width: width ?? double.maxFinite,
     child: DropdownButtonFormField(
       focusNode: focusNode,
       icon: icon,
       autofocus: autofocus!,
-      style: textStyle ?? CustomTextStyles.labelLargeGray60001,
+      style: textStyle ?? CustomTextStyles.labelLargeGray60001.copyWith(
+        // color: Theme.of(context).colorScheme.onPrimary,
+      ),
       items: items?.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(
             value,
             overflow: TextOverflow.ellipsis,
-            style: hintStyle ?? theme.textTheme.titleMedium,
+            style: hintStyle ?? theme.textTheme.titleMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onPrimary
+            ),
           ),
         );
       }).toList(),
-      decoration: decoration,
+      decoration: decoration(context),
       validator: validator,
       onChanged: (value) {
         onChanged!(value.toString());
       },
     ),
   );
-  InputDecoration get decoration => InputDecoration(
+  InputDecoration decoration(BuildContext context) => InputDecoration(
     hintText: hintText ?? "",
-    hintStyle: hintStyle ?? theme.textTheme.titleSmall,
+    hintStyle: hintStyle ?? theme.textTheme.titleSmall?.copyWith(
+      color: Theme.of(context).colorScheme.onPrimary
+    ),
     prefixIcon: prefix,
     prefixIconConstraints: prefixConstraints,
     suffixIcon: suffix,
