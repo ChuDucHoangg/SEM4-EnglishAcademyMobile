@@ -6,14 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/widgets/custom_bottom_app_bar.dart';
 
 class InitScreen extends StatefulWidget {
-  const InitScreen({Key? key}) : super(key: key);
+  final int initialIndex;
+
+  const InitScreen({Key? key, this.initialIndex = 0}) : super(key: key);
 
   @override
   _InitScreenState createState() => _InitScreenState();
 }
 
 class _InitScreenState extends State<InitScreen> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
 
   final List<Widget> _screens = [
     HomeScreen(),
@@ -21,6 +23,12 @@ class _InitScreenState extends State<InitScreen> {
     EntranceTestScreen(),
     ProfileScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+  }
 
   @override
   Widget build(BuildContext context) {

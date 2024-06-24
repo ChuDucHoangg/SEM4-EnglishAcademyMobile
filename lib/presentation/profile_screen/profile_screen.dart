@@ -1,4 +1,5 @@
 import 'package:english_academy_mobile/data/model/CourseOfflineModel.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_screen/profile_my_course_list_screen.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/widgets/profile_achievement_item.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/widgets/profile_infomation_item.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/widgets/profile_more.dart';
@@ -25,11 +26,14 @@ class ProfileScreen extends StatefulWidget {
 
 class ProfileScreenState extends State<ProfileScreen>
     with AutomaticKeepAliveClientMixin<ProfileScreen> {
+  int selectedTabIndex = 0;
+
   @override
   bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: _buildAppBar(context),
       body: SingleChildScrollView(
@@ -44,11 +48,11 @@ class ProfileScreenState extends State<ProfileScreen>
               _buildAchievement(context),
               SizedBox(height: 15.v),
               _buildProgress(context),
-              SizedBox(height: 24.v),
+              SizedBox(height: 15.v),
               Divider(
                 color: appTheme.blueGray100,
               ),
-              SizedBox(height: 23.v),
+              SizedBox(height: 15.v),
               _buildCategory(context),
               SizedBox(height: 16.v),
               _buildContent(context)
@@ -96,19 +100,46 @@ class ProfileScreenState extends State<ProfileScreen>
   Widget _buildCategory(BuildContext context) {
     List<Map<String, dynamic>> contentList = [
       {
-        "imagePath": ImageConstant.imgAllCourse,
-        "text": "All",
-        "decoration": AppDecoration.fillPrimary
+        "icon": Icons.storage_outlined,
+        "text": "My Course",
+        "decoration": selectedTabIndex == 0
+            ? AppDecoration.fillPrimary
+            : AppDecoration.fillGray10001,
+        "textColor":
+            selectedTabIndex == 0 ? Colors.white : appTheme.blueGray500,
+        "onTap": () {
+          setState(() {
+            selectedTabIndex = 0;
+          });
+        }
       },
       {
-        "imagePath": ImageConstant.imgMobileCourse,
-        "text": "Online",
-        "decoration": AppDecoration.fillGray10001
+        "icon": Icons.people_outline_rounded,
+        "text": "Booking",
+        "decoration": selectedTabIndex == 1
+            ? AppDecoration.fillPrimary
+            : AppDecoration.fillGray10001,
+        "textColor":
+            selectedTabIndex == 1 ? Colors.white : appTheme.blueGray500,
+        "onTap": () {
+          setState(() {
+            selectedTabIndex = 1;
+          });
+        }
       },
       {
-        "imagePath": ImageConstant.imgBookCourse,
-        "text": "Offline",
-        "decoration": AppDecoration.fillGray10001
+        "icon": Icons.view_timeline_outlined,
+        "text": "TimeTable",
+        "decoration": selectedTabIndex == 2
+            ? AppDecoration.fillPrimary
+            : AppDecoration.fillGray10001,
+        "textColor":
+            selectedTabIndex == 2 ? Colors.white : appTheme.blueGray500,
+        "onTap": () {
+          setState(() {
+            selectedTabIndex = 2;
+          });
+        }
       },
     ];
 
@@ -116,35 +147,36 @@ class ProfileScreenState extends State<ProfileScreen>
       runSpacing: 16.v,
       spacing: 16.h,
       children: contentList.map((content) {
-        return Container(
-          width: 90.h,
-          padding: EdgeInsets.symmetric(
-            vertical: 8.v,
-          ),
-          decoration: content["decoration"].copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder12,
-          ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomImageView(
-                    imagePath: content["imagePath"],
-                    height: 20.adaptSize,
-                    width: 20.adaptSize,
-                    color: appTheme.blueGray300,
+        return GestureDetector(
+          onTap: content["onTap"],
+          child: Container(
+            width: 95.h,
+            padding: EdgeInsets.symmetric(
+              vertical: 8.v,
+            ),
+            decoration: content["decoration"].copyWith(
+              borderRadius: BorderRadiusStyle.roundedBorder12,
+            ),
+            child: Column(
+              children: [
+                Icon(
+                  content["icon"],
+                  color: content["textColor"],
+                  size: 22.adaptSize,
+                ),
+                SizedBox(
+                  height: 8.h,
+                ),
+                Text(
+                  " ${content["text"]}",
+                  style: CustomTextStyles.bodySmallBluegray300_1.copyWith(
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.bold,
+                    color: content["textColor"],
                   ),
-                  Text(
-                    " ${content["text"]}",
-                    style: CustomTextStyles.bodySmallBluegray300_1.copyWith(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                ],
-              ),
-            ],
+                )
+              ],
+            ),
           ),
         );
       }).toList(),
@@ -153,138 +185,15 @@ class ProfileScreenState extends State<ProfileScreen>
 
   /// Section Widget
   Widget _buildContent(BuildContext context) {
-    void _navigateToCourseOfflineDetail(BuildContext context, String slug) {
-      Navigator.pushNamed(context, AppRoutes.profileMyCourseDetailScreen,
-          arguments: slug);
+    switch (selectedTabIndex) {
+      case 0:
+        return ProfileMyCourseListScreen();
+      case 1:
+        return Text("Tab Booking");
+      case 2:
+        return Text("Tab TimeTable");
+      default:
+        return SizedBox.shrink();
     }
-    return FutureBuilder<List<CourseOfflineModel>>(
-      future: CourseOfflineService.fetchCoursesOffline(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          final List<CourseOfflineModel> courses = snapshot.data!;
-          return ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            separatorBuilder: (context, index) {
-              return SizedBox(
-                height: 16.v,
-              );
-            },
-            itemCount: courses.length,
-            itemBuilder: (context, index) {
-              final CourseOfflineModel course = courses[index];
-              return GestureDetector(
-                onTap: () {
-                  _navigateToCourseOfflineDetail(context, course.slug);
-                },
-                child: Container(
-                  padding: EdgeInsets.all(17.h),
-                  decoration: AppDecoration.outlineGray100.copyWith(
-                    borderRadius: BorderRadiusStyle.roundedBorder12,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(right: 51.h),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 66.adaptSize,
-                              width: 66.adaptSize,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(6.h),
-                                child: Image.network(
-                                  course.image,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              margin: EdgeInsets.only(bottom: 2.v),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 16.h),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomElevatedButton(
-                                    height: 20.v,
-                                    width: 55.h,
-                                    text: "UX Design",
-                                    buttonTextStyle: theme.textTheme.labelSmall!,
-                                  ),
-                                  SizedBox(height: 3.v),
-                                  SizedBox(
-                                    width: 157.h,
-                                    child: Text(
-                                      course.name,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: theme.textTheme.titleSmall!.copyWith(
-                                        height: 1.60,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 8.v),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Complete",
-                            style: CustomTextStyles.labelLargeGray60001,
-                          ),
-                          Text(
-                            "75%",
-                            style: CustomTextStyles.labelLargeGray60001,
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 12.v),
-                      Container(
-                        height: 8.v,
-                        width: 291.h,
-                        decoration: BoxDecoration(
-                          color: appTheme.gray100,
-                          borderRadius: BorderRadius.circular(
-                            3.h,
-                          ),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                            3.h,
-                          ),
-                          child: LinearProgressIndicator(
-                            value: 0.75,
-                            backgroundColor: appTheme.gray100,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              theme.colorScheme.primary,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
-        } else if (snapshot.hasError) {
-          return Center(
-            // child: Text('Error: ${snapshot.error}'),
-            child: Text(''),
-          );
-        }
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
   }
-
 }

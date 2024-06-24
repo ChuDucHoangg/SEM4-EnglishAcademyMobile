@@ -99,7 +99,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen>
                                     ),
                                     SizedBox(height: 8.v),
                                     Text(
-                                      "Teacher English",
+                                      tutor.teachingSubject,
                                       style: CustomTextStyles
                                           .bodySmallBluegray30002,
                                     )
@@ -121,8 +121,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen>
                   ),
                 ),
               ),
-              floatingActionButton: FloatingActionButton(
-                backgroundColor: Colors.white,
+              floatingActionButton: ExtendedFloatingActionButton(
                 onPressed: () {
                   Navigator.of(context).push(PageRouteBuilder(
                     pageBuilder: (context, animation, secondaryAnimation) {
@@ -131,8 +130,15 @@ class _TutorDetailScreenState extends State<TutorDetailScreen>
                     opaque: false,
                   ));
                 },
-                child: Icon(Icons.add, color: Colors.blue),
+                label: Text(
+                  'HIRE TUTOR',
+                  style: TextStyle(color: Colors.white),
+                ),
+                icon: Icon(Icons.edit, color: Colors.white),
+                backgroundColor: Color(0xFF1E2857),
               ),
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.endFloat,
             );
           }
         });
@@ -329,5 +335,29 @@ class _TutorDetailScreenState extends State<TutorDetailScreen>
 
   onTapArrowLeft(BuildContext context) {
     Navigator.pop(context);
+  }
+}
+
+class ExtendedFloatingActionButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final Widget label;
+  final Widget icon;
+  final Color backgroundColor;
+
+  ExtendedFloatingActionButton({
+    required this.onPressed,
+    required this.label,
+    required this.icon,
+    required this.backgroundColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton.extended(
+      onPressed: onPressed,
+      label: label,
+      icon: icon,
+      backgroundColor: backgroundColor,
+    );
   }
 }

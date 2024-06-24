@@ -14,9 +14,9 @@ import 'package:english_academy_mobile/presentation/entrance_test_screen/learnin
 import 'package:english_academy_mobile/presentation/intro_screen/intro_screen.dart';
 import 'package:english_academy_mobile/presentation/notification_screen/notification_screen.dart';
 import 'package:english_academy_mobile/presentation/personal_data_edit_screen/personal_data_edit_screen.dart';
-import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_detail_screen/profile_my_course_detail_screen.dart';
-import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_detail_screen/profile_subject_learing_screen/profile_subject_learing_screen.dart';
-import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_detail_screen/profile_subject_slot_screen/profile_subject_slot_screen.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_screen/profile_my_course_detail_screen.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_screen/profile_subject_learing_screen/profile_subject_learing_screen.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_screen/profile_subject_slot_screen/profile_subject_slot_screen.dart';
 import 'package:english_academy_mobile/presentation/test_online_screen/result_test_online_screen/result_test_online_screen.dart';
 import 'package:english_academy_mobile/presentation/test_online_screen/test_online_screen.dart';
 import 'package:flutter/material.dart';

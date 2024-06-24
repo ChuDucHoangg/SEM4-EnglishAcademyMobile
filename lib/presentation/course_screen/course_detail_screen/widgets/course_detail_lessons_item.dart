@@ -9,8 +9,8 @@ class CourseDetailLessonsItem extends StatefulWidget {
   const CourseDetailLessonsItem(
       {Key? key, required this.course, required this.isBought})
       : super(
-    key: key,
-  );
+          key: key,
+        );
 
   @override
   CourseDetailLessonsItemState createState() => CourseDetailLessonsItemState();
@@ -27,7 +27,7 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
     super.initState();
     if (widget.course.topicOnlineDetailList.isNotEmpty) {
       _isExpandedList =
-      List<bool>.filled(widget.course.topicOnlineDetailList.length, false);
+          List<bool>.filled(widget.course.topicOnlineDetailList.length, false);
       _isExpandedList[0] = true;
     }
   }
@@ -85,13 +85,13 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
                             Container(
                               child: item['itemType'] == 0
                                   ? Icon(
-                                Icons.play_circle,
-                                size: 20.adaptSize,
-                              )
+                                      Icons.play_circle,
+                                      size: 20.adaptSize,
+                                    )
                                   : Icon(
-                                Icons.pending_actions_outlined,
-                                size: 20.adaptSize,
-                              ),
+                                      Icons.pending_actions_outlined,
+                                      size: 20.adaptSize,
+                                    ),
                             ),
                             Padding(
                               padding: EdgeInsets.only(
@@ -101,7 +101,7 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
                               child: Text(
                                 truncateText(item['title']),
                                 style:
-                                CustomTextStyles.labelLargeGray900.copyWith(
+                                    CustomTextStyles.labelLargeGray900.copyWith(
                                   color: appTheme.gray900,
                                 ),
                               ),
@@ -111,24 +111,24 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
                               Container(
                                 child: item['itemType'] == 0
                                     ? Text(
-                                  "03:23",
-                                  style: CustomTextStyles
-                                      .labelLargeBluegray300
-                                      .copyWith(
-                                    color: appTheme.blueGray300,
-                                  ),
-                                )
+                                        "03:23",
+                                        style: CustomTextStyles
+                                            .labelLargeBluegray300
+                                            .copyWith(
+                                          color: appTheme.blueGray300,
+                                        ),
+                                      )
                                     : Text(
-                                  "Start Quiz",
-                                  style: CustomTextStyles
-                                      .labelLargeGray900_1,
-                                ),
+                                        "Start Quiz",
+                                        style: CustomTextStyles
+                                            .labelLargeGray900_1,
+                                      ),
                               ),
                             if (widget.isBought && item['itemType'] == 0)
                               Padding(
                                 padding: EdgeInsets.only(left: 6.h),
                                 child: Icon(
-                                  item['status']
+                                  (item['status'] ?? false)
                                       ? Icons.done_all_outlined
                                       : Icons.radio_button_off,
                                   color: appTheme.blueGray500,
@@ -176,7 +176,7 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
                               child: Text(
                                 truncateText(item['title']),
                                 style:
-                                CustomTextStyles.labelLargeGray900.copyWith(
+                                    CustomTextStyles.labelLargeGray900.copyWith(
                                   color: appTheme.gray900,
                                 ),
                               ),

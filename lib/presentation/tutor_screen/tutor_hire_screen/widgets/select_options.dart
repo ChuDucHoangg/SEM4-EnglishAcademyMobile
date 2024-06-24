@@ -94,156 +94,160 @@ class _SelectOptionsState extends State<SelectOptions> {
         //     padding: const EdgeInsets.all(8.0),
         //     child: Text('Selected Package: ${_selectedPackage!.name}'),
         //   ),
-        AnimatedSize(
-          duration: Duration(milliseconds: 500),
-          curve: Curves.decelerate,
-          child: Visibility(
-            visible: _selectedDropdownValue == 'Package',
-            child: SizedBox(
-              height: 160.h,
-              child: CarouselSlider(
-                options: CarouselOptions(
-                    aspectRatio: 24 / 9,
-                    enlargeCenterPage: true,
-                    enableInfiniteScroll: false),
-                items: _packages.map((package) {
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedPackage = package;
-                      });
-                      widget.onPackageSelected(package);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10,
-                            spreadRadius: 2,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          Stack(
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFF1E2857),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(15),
-                                    topRight: Radius.circular(15),
-                                  ),
+        _packages.isNotEmpty
+            ? AnimatedSize(
+                duration: Duration(milliseconds: 500),
+                curve: Curves.decelerate,
+                child: Visibility(
+                  visible: _selectedDropdownValue == 'Package',
+                  child: SizedBox(
+                    height: 160.h,
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                          aspectRatio: 24 / 9,
+                          enlargeCenterPage: true,
+                          enableInfiniteScroll: false),
+                      items: _packages.map((package) {
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _selectedPackage = package;
+                            });
+                            widget.onPackageSelected(package);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 10,
+                                  spreadRadius: 2,
                                 ),
-                              ),
-                              Positioned(
-                                top: 10,
-                                left: 10,
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFF5B6C8C),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Text(
-                                    package.name,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      height: 100,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xFF1E2857),
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(15),
+                                          topRight: Radius.circular(15),
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    Positioned(
+                                      top: 10,
+                                      left: 10,
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 8, vertical: 4),
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFF5B6C8C),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Text(
+                                          package.name,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 10,
+                                      left: 300,
+                                      child: MSHCheckbox(
+                                        size: 25,
+                                        value: _selectedPackage == package,
+                                        colorConfig: MSHColorConfig
+                                            .fromCheckedUncheckedDisabled(
+                                          checkedColor: Color(0xFF5B6C8C),
+                                        ),
+                                        style: MSHCheckboxStyle.fillScaleCheck,
+                                        onChanged: (selected) {
+                                          setState(() {
+                                            _selectedPackage =
+                                                selected ? package : null;
+                                            widget.onPackageSelected(
+                                                selected ? package : null);
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 40,
+                                      left: 10,
+                                      child: Text(
+                                        '\$${package.hourlyRate.toStringAsFixed(2)}',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 28,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 75,
+                                      left: 10,
+                                      child: Text(
+                                        truncateText(package.description),
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              Positioned(
-                                top: 10,
-                                left: 300,
-                                child: MSHCheckbox(
-                                  size: 25,
-                                  value: _selectedPackage == package,
-                                  colorConfig: MSHColorConfig
-                                      .fromCheckedUncheckedDisabled(
-                                    checkedColor: Color(0xFF5B6C8C),
-                                  ),
-                                  style: MSHCheckboxStyle.fillScaleCheck,
-                                  onChanged: (selected) {
-                                    setState(() {
-                                      _selectedPackage =
-                                          selected ? package : null;
-                                      widget.onPackageSelected(
-                                          selected ? package : null);
-                                    });
-                                  },
+                                Spacer(),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      'Number Session: ${package.numSessions}',
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    Text("                 "),
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 8, vertical: 4),
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Text(
+                                        'MN24H',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              Positioned(
-                                top: 40,
-                                left: 10,
-                                child: Text(
-                                  '\$${package.hourlyRate.toStringAsFixed(2)}',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                top: 75,
-                                left: 10,
-                                child: Text(
-                                  truncateText(package.description),
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10,
-                                  ),
-                                ),
-                              ),
-                            ],
+                                Spacer(),
+                              ],
+                            ),
                           ),
-                          Spacer(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                'Number Session: ${package.numSessions}',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                ),
-                              ),
-                              Text("                 "),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 4),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[300],
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Text(
-                                  'MN24H',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Spacer(),
-                        ],
-                      ),
+                        );
+                      }).toList(),
                     ),
-                  );
-                }).toList(),
-              ),
-            ),
-          ),
-        ),
+                  ),
+                ),
+              )
+            : Text(''),
       ],
     );
   }
