@@ -16,7 +16,8 @@ class ThemeHelper {
 
   // A map of custom color themes supported by the app
   Map<String, PrimaryColors> _supportedCustomColor = {
-    'primary': PrimaryColors()
+    'primary': PrimaryColors(),
+    'dark': PrimaryColors()
   };
 
 // A map of color schemes supported by the app
@@ -215,29 +216,29 @@ class ColorSchemes {
     // Primary colors
 
     primary: Color(0XFF1D2857), // mau nen giao dien
-    primaryContainer: Color(0X1EFFFFFF), // mau cac container
+    primaryContainer: Color(0xFFFFFFFF), // mau cac container
 
 
     // Error colors
-    errorContainer: Color(0XFFE31837), //mau bao' loi
+    errorContainer: Color(0XFF1D2857),
     onErrorContainer: Color(0X1EFFFFFF),
 
     // On colors(text colors)
     onPrimary: Color(0xDD000000), // màu chữ
-    onPrimaryContainer: Color(0XFF0F172A),
+    onPrimaryContainer: Color(0X1EFFFFFF), //màu nền dưới chữ
   );
   static final darkColorScheme = ColorScheme.dark(
     // Primary colors
     primary: Color(0XFF1D2857),
-    primaryContainer: Color(0xFF374151),
+    primaryContainer: Color(0xFF1b232d),
 
     // Error colors
-    errorContainer: Color(0XFFE31837),
+    errorContainer: Color(0xFF1b232d),
     onErrorContainer: Color(0X1EFFFFFF),
 
     // On colors(text colors)
     onPrimary: Color(0xFFFFFFFF),
-    onPrimaryContainer: Color(0xFFFFFFFF),
+    onPrimaryContainer: Color(0xFF131920),
   );
 }
 

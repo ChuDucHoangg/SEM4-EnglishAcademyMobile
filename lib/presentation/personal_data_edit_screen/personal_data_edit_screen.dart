@@ -66,6 +66,12 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
                   ),
                   child: Column(
                     children: [
+                      CustomImageView(
+                        imagePath: ImageConstant.imgAvatar48x48,
+                        height: 96.adaptSize,
+                        width: 96.adaptSize,
+                        radius: BorderRadius.circular(40.h),
+                      ),
                       _buildcode(context, profile),
                       _buildname(context, profile),
                       _buildemail(context, profile),
@@ -312,7 +318,7 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
                     SizedBox(width: 10.h),
                     ElevatedButton(
                       onPressed: () {
-                        _updategender(context);
+                        _updateGender(context); // Call update function here
                       },
                       child: Text('Save'),
                     ),
@@ -349,31 +355,18 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
       ),
     );
   }
-  void _updategender(BuildContext context) async {
-    final newGender = genderController.text;
-    if (newGender.isNotEmpty) {
-      try {
-        await ProfileService.updategender(newGender, context);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Gender updated successfully')),
-        );
-        setState(() {
-          _isEditingGender = false;
-          _profileFuture = ProfileService.fetchProfileDetail(); // Refresh profile data
-        });
-      } catch (e) {
-        print('Error updating gender: $e');
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error updating gender: $e')),
-        );
-      }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please select your gender')),
-      );
+  void _updateGender(BuildContext context) async {
+    try {
+      await ProfileService.updateField('gender', genderController.text, context);
+      setState(() {
+        _isEditingGender = false;
+        _profileFuture = ProfileService.fetchProfileDetail();
+
+      });
+    } catch (e) {
+      print('Error updating gender: $e');
     }
   }
-
 
   Widget _buildphone(BuildContext context, ProfileModel profile) {
     return Container(
@@ -417,7 +410,7 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
                     SizedBox(width: 10.h),
                     ElevatedButton(
                       onPressed: () {
-                        _updatePhoneNumber(context);
+                        _updatePhone(context); // Call update function here
                       },
                       child: Text('Save'),
                     ),
@@ -453,9 +446,20 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
       ),
     );
   }
+  void _updatePhone(BuildContext context) async {
+    try {
+      await ProfileService.updateField('phone', phoneController.text, context);
+      setState(() {
+        _isEditingPhone = false;
+        _profileFuture = ProfileService.fetchProfileDetail();
+
+      });
+    } catch (e) {
+      print('Error updating phone: $e');
+    }
+  }
 
   Widget _buildaddress(BuildContext context, ProfileModel profile) {
-    print(profile.address);
     return Container(
       padding: EdgeInsets.only(
         top: 16.v,
@@ -497,7 +501,7 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
                     SizedBox(width: 10.h),
                     ElevatedButton(
                       onPressed: () {
-                        _updateAddress(context);
+                        _updateAddress(context); // Call update function here
                       },
                       child: Text('Save'),
                     ),
@@ -535,46 +539,17 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
   }
 
   void _updateAddress(BuildContext context) async {
-    final newAddress = addressController.text;
-    if (newAddress.isNotEmpty) {
-      try {
-        await ProfileService.updateaddress(newAddress, context);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Address updated successfully')),
-        );
-        setState(() {
-          _isEditing = false;
-        });
-      } catch (e) {
-        print('Error updating address: $e');
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error updating address: $e')),
-        );
-      }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter your address')),
-      );
+    try {
+      await ProfileService.updateField('address', addressController.text, context);
+      setState(() {
+        _isEditing = false;
+        _profileFuture = ProfileService.fetchProfileDetail();
+      });
+    } catch (e) {
+      print('Error updating address: $e');
     }
   }
 
-  void _updatePhoneNumber(BuildContext context) async {
-    final newPhoneNumber = phoneController.text;
-    if (newPhoneNumber.isNotEmpty) {
-      try {
-        await ProfileService.updatephoneNumber(newPhoneNumber, context);
-        setState(() {
-          _isEditingPhone = false;
-        });
-      } catch (e) {
-        print('Error updating phone number: $e');
-      }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter your phone number')),
-      );
-    }
-  }
 
   onTapArrowLeft (BuildContext context){
     Navigator.pop(context);

@@ -96,7 +96,9 @@ class CustomSearchView extends StatelessWidget {
         }
       },
       autofocus: autofocus!,
-      style: textStyle ?? theme.textTheme.bodyMedium,
+      style: textStyle ?? theme.textTheme.bodyMedium?.copyWith(
+        color: Theme.of(context).colorScheme.onPrimary,
+      ),
       keyboardType: textInputType,
       maxLines: maxLines ?? 1,
       decoration: decoration,

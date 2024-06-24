@@ -40,6 +40,7 @@ class ProfileScreenState extends State<ProfileScreen>
         child: Container(
           width: double.maxFinite,
           padding: EdgeInsets.symmetric(horizontal: 24.h),
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
           child: Column(
             children: [
               SizedBox(height: 32.v),

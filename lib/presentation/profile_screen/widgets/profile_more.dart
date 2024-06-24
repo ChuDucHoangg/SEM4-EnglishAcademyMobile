@@ -4,13 +4,12 @@ import 'package:english_academy_mobile/presentation/personal_data_edit_screen/pe
 import 'package:english_academy_mobile/widgets/app_bar/custom_app_bar.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_leading_image.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_one.dart';
+import 'package:english_academy_mobile/widgets/custom_elevated_button.dart';
 import 'package:english_academy_mobile/widgets/custom_switch.dart';
 import 'package:english_academy_mobile/widgets/custom_checkbox_button.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
-import 'package:english_academy_mobile/theme/theme_helper.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../service/AuthService.dart';
 import '../../../theme/theme_provider.dart';
 import '../../auth/change_password_screen/changePassword.dart';
@@ -24,9 +23,8 @@ class ProfileMoreScreen extends StatefulWidget {
 }
 
 class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
-  ThemeHelper _themeHelper = ThemeHelper();
 
-  bool isSelectedSwitch = false;
+  bool isSwitched = false;
   bool privacy = false;
 
   @override
@@ -41,7 +39,7 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
           child: SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 24.h, vertical: 32.h),
-              color: Theme.of(context).colorScheme.primaryContainer,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
               child: Column(
                 children: [
                   _buildSetting1(context),
@@ -68,11 +66,13 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
                   SizedBox(height: 15.v),
                   _buildSetting4(context),
                   SizedBox(height: 15.v),
-                  ElevatedButton(
+                  CustomElevatedButton(
                     onPressed: () {
                       _logout(context);
                     },
-                    child: Text('Logout'),
+                    text: 'Logout',
+                    buttonStyle: CustomButtonStyles.fillPrimary,
+                    // child: Text('Logout'),
                   ),
                   SizedBox(height: 15.v),
                 ],
@@ -106,7 +106,7 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 13.h),
       decoration: AppDecoration.outlineBluegray50.copyWith(
-        color: Theme.of(context).colorScheme.primaryContainer,
+        color: Theme.of(context).colorScheme.onPrimaryContainer,
         borderRadius: BorderRadiusStyle.roundedBorder12,
       ),
       child: Column(
@@ -151,10 +151,11 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
               ),
               Spacer(),
               CustomSwitch(
-                value: isSelectedSwitch,
+                value: isSwitched,
                 onChange: (value) {
                   Provider.of<ThemeProvider>(context, listen: false)
                       .toggleTheme(context);
+                  isSwitched = value;
                 },
               )
             ],

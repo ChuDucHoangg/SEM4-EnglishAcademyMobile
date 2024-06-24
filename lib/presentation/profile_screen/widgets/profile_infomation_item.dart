@@ -50,8 +50,9 @@ class ProfileInfomationItemState extends State<ProfileInfomationItem>
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16.h),
-      decoration: AppDecoration.fillGray5002.copyWith(
+      decoration: AppDecoration.outlineGray90010.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder12,
+          color: Theme.of(context).colorScheme.primaryContainer
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -75,7 +76,9 @@ class ProfileInfomationItemState extends State<ProfileInfomationItem>
               children: [
                 Text(
                   _fullname,
-                  style: theme.textTheme.titleSmall,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
                 SizedBox(height: 9.v),
                 Text(
@@ -85,7 +88,9 @@ class ProfileInfomationItemState extends State<ProfileInfomationItem>
                 SizedBox(height: 7.v),
                 Text(
                   "Student",
-                  style: CustomTextStyles.labelLargeBluegray500,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 )
               ],
             ),

@@ -27,8 +27,9 @@ class ProfileProgessItemState extends State<ProfileProgessItem>
         horizontal: 5.h,
         vertical: 11.v,
       ),
-      decoration: AppDecoration.outlineBluegray50.copyWith(
+      decoration: AppDecoration.outlineGray90010.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder12,
+          color: Theme.of(context).colorScheme.primaryContainer,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

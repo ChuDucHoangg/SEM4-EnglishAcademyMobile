@@ -44,6 +44,7 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
   Widget build(BuildContext context) {
     return BottomAppBar(
       // height: 60,
+      color: Theme.of(context).colorScheme.onPrimaryContainer,
       shape: CircularNotchedRectangle(),
       child: SizedBox(
         height: 24.v,
@@ -80,6 +81,7 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
                           imagePath: isSelected
                               ? menuItem.activeIcon
                               : menuItem.icon,
+                          color: isSelected ? Colors.white : Colors.grey,
                         ),
                       ),
                       if (isSelected)

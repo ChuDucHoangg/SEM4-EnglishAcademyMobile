@@ -1,4 +1,3 @@
-import 'package:english_academy_mobile/presentation/tutor_screen/tutor_screen.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_two.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_five.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_image.dart';
@@ -9,11 +8,13 @@ import 'package:english_academy_mobile/core/app_export.dart';
 import '../../widgets/app_bar/custom_app_bar_home_screen.dart';
 import 'package:english_academy_mobile/theme/theme_helper.dart';
 
+import '../tutor_screen/tutor_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key})
       : super(
-          key: key,
-        );
+    key: key,
+  );
 
   TextEditingController searchController = TextEditingController();
 
@@ -24,6 +25,7 @@ class HomeScreen extends StatelessWidget {
       appBar: _buildAppBar(context),
       body: SingleChildScrollView(
         child: Container(
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
           child: Column(
             children: [
               Column(
@@ -51,8 +53,9 @@ class HomeScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return Container(
                           padding: EdgeInsets.all(11.h),
-                          decoration: AppDecoration.outlineGray100.copyWith(
-                            borderRadius: BorderRadiusStyle.roundedBorder8,
+                          decoration: AppDecoration.outlineGray90010.copyWith(
+                            borderRadius: BorderRadiusStyle.roundedBorder12,
+                            color: Theme.of(context).colorScheme.primaryContainer,
                           ),
                           child: Row(
                             children: [
@@ -62,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                                 padding: EdgeInsets.all(6.h),
                                 decoration: AppDecoration.fillIndigo.copyWith(
                                   borderRadius:
-                                      BorderRadiusStyle.roundedBorder8,
+                                  BorderRadiusStyle.roundedBorder8,
                                 ),
                                 child: CustomImageView(
                                   imagePath: ImageConstant.imgImage5,
@@ -79,7 +82,9 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 child: Text(
                                   "Design",
-                                  style: theme.textTheme.titleSmall,
+                                  style: theme.textTheme.titleSmall?.copyWith(
+                                    color: Theme.of(context).colorScheme.onPrimary,
+                                  ),
                                 ),
                               ),
                             ],
@@ -229,8 +234,8 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: 16.v),
                   Container(
                     padding: EdgeInsets.all(18.h),
-                    decoration: AppDecoration.outlineGray.copyWith(
-                      // color: Theme.of(context).colorScheme.primaryContainer,
+                    decoration: AppDecoration.outlineGray90010.copyWith(
+                      color: Theme.of(context).colorScheme.primaryContainer,
                       borderRadius: BorderRadiusStyle.roundedBorder12,
                     ),
                     child: Column(
@@ -259,9 +264,9 @@ class HomeScreen extends StatelessWidget {
                                       width: 46.h,
                                       text: "Website",
                                       buttonStyle:
-                                          CustomButtonStyles.outlineGrayTL4,
+                                      CustomButtonStyles.outlineGrayTL4,
                                       buttonTextStyle:
-                                          CustomTextStyles.labelSmallAmberA200,
+                                      CustomTextStyles.labelSmallAmberA200,
                                     ),
                                     SizedBox(height: 3.v),
                                     SizedBox(
@@ -272,7 +277,7 @@ class HomeScreen extends StatelessWidget {
                                         overflow: TextOverflow.ellipsis,
                                         style: theme.textTheme.titleSmall!
                                             .copyWith(
-                                          // color: Theme.of(context).colorScheme.onPrimaryContainer,
+                                          color: Theme.of(context).colorScheme.onPrimary,
                                           height: 1.60,
                                         ),
                                       ),
@@ -292,14 +297,12 @@ class HomeScreen extends StatelessWidget {
                               child: Text(
                                 "23 of 33 lessons",
                                 style: CustomTextStyles.labelLargeGray60001.copyWith(
-                                    // color: Theme.of(context).colorScheme.onPrimaryContainer,
                                 ),
                               ),
                             ),
                             Text(
                               "75% completed",
                               style: CustomTextStyles.labelLargeGray60001.copyWith(
-                                // color: Theme.of(context).colorScheme.onPrimaryContainer,
                               ),
                             ),
                           ],
@@ -348,7 +351,9 @@ class HomeScreen extends StatelessWidget {
         children: [
           Text(
             "Recently added",
-            style: theme.textTheme.titleMedium,
+            style: theme.textTheme.titleMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
           ),
           GestureDetector(
             onTap: () {
@@ -378,15 +383,16 @@ class HomeScreen extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.only(left: 24.h),
+        padding: EdgeInsets.only(left: 24.h , bottom: 5.h , top: 5.h),
         child: IntrinsicWidth(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 padding: EdgeInsets.all(11.h),
-                decoration: AppDecoration.outlineGray100.copyWith(// Thay đổi màu nền ở đây
+                decoration: AppDecoration.outlineGray90010.copyWith(
                   borderRadius: BorderRadiusStyle.roundedBorder12,
+                  color: Theme.of(context).colorScheme.primaryContainer,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -402,23 +408,37 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 12.v),
-                    CustomElevatedButton(
-                      height: 24.v,
-                      width: 60.h,
-                      text: "Finance",
-                      buttonStyle: CustomButtonStyles.outlineGrayTL5,
-                      buttonTextStyle: CustomTextStyles.labelMediumRedA200,
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                      decoration: BoxDecoration(
+                        color: Colors.redAccent,
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: appTheme.gray900.withOpacity(0.08),
+                            spreadRadius: -4,
+                            blurRadius: 9,
+                          ),
+                        ],
+                      ),
+                      child: Text(
+                        "Fiance" ,
+                        style: CustomTextStyles.labelMediumRedA200.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
                     ),
                     SizedBox(height: 14.v),
                     Container(
                       width: 181.h,
                       margin: EdgeInsets.only(left: 4.h),
                       child: Text(
-                        "The Complete Investment Banking Course 2023",
+                        "The Complete Investment Banking Course z023",
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.titleSmall!.copyWith(
                           height: 1.60,
+                          color: Theme.of(context).colorScheme.onPrimary,
                         ),
                       ),
                     ),
@@ -466,9 +486,10 @@ class HomeScreen extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.only(left: 20.h),
-                padding: EdgeInsets.all(12.h),
-                decoration: AppDecoration.outlineGray900.copyWith(
+                padding: EdgeInsets.all(12.h ,),
+                decoration: AppDecoration.outlineGray90010.copyWith(
                   borderRadius: BorderRadiusStyle.roundedBorder12,
+                  color: Theme.of(context).colorScheme.primaryContainer,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -484,12 +505,25 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 12.v),
-                    CustomElevatedButton(
-                      height: 24.v,
-                      width: 60.h,
-                      text: "Finance",
-                      buttonStyle: CustomButtonStyles.outlineGrayTL5,
-                      buttonTextStyle: CustomTextStyles.labelMediumRedA200,
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 4),
+                      decoration: BoxDecoration(
+                        color: appTheme.redA200,
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: appTheme.gray900.withOpacity(0.08),
+                            spreadRadius: -4,
+                            blurRadius: 9,
+                          ),
+                        ],
+                      ),
+                      child: Text(
+                        "Finance" ,
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
+                      ),
                     ),
                     SizedBox(height: 13.v),
                     Container(
@@ -501,6 +535,7 @@ class HomeScreen extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.titleSmall!.copyWith(
                           height: 1.60,
+                          color: Theme.of(context).colorScheme.onPrimary,
                         ),
                       ),
                     ),
@@ -571,13 +606,16 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Featured course",
-                    style: theme.textTheme.titleMedium,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
                   ),
                   SizedBox(height: 17.v),
                   Container(
                     padding: EdgeInsets.all(11.h),
-                    decoration: AppDecoration.outlineGray100.copyWith(
+                    decoration: AppDecoration.outlineGray90010.copyWith(
                       borderRadius: BorderRadiusStyle.roundedBorder12,
+                      color: Theme.of(context).colorScheme.primaryContainer,
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -610,6 +648,7 @@ class HomeScreen extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.titleMedium!.copyWith(
                               height: 1.50,
+                              color: Theme.of(context).colorScheme.onPrimary,
                             ),
                           ),
                         ),
@@ -670,25 +709,25 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              height: 74.v,
-              width: double.maxFinite,
-              margin: EdgeInsets.only(top: 16.v),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment(0.5, 0.09),
-                  end: Alignment(0.5, 0.92),
-                  colors: [
-                    theme.colorScheme.onErrorContainer.withOpacity(0),
-                    theme.colorScheme.onErrorContainer.withOpacity(0.7),
-                    theme.colorScheme.onErrorContainer.withOpacity(1)
-                  ],
-                ),
-              ),
-            ),
-          )
+          // Align(
+          //   alignment: Alignment.topCenter,
+          //   child: Container(
+          //     height: 74.v,
+          //     width: double.maxFinite,
+          //     margin: EdgeInsets.only(top: 16.v),
+          //     decoration: BoxDecoration(
+          //       gradient: LinearGradient(
+          //         begin: Alignment(0.5, 0.09),
+          //         end: Alignment(0.5, 0.92),
+          //         colors: [
+          //           theme.colorScheme.onErrorContainer.withOpacity(0),
+          //           theme.colorScheme.onErrorContainer.withOpacity(0.7),
+          //           theme.colorScheme.onErrorContainer.withOpacity(1)
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
