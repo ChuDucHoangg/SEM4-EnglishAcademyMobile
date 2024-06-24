@@ -8,6 +8,7 @@ import 'package:english_academy_mobile/presentation/tutor_screen/tutor_hire_scre
 import 'package:english_academy_mobile/widgets/custom_elevated_button.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../data/model/TurtorModel.dart';
+import '../../../init_screen.dart';
 import '../../../service/TutorService.dart';
 import '../../../widgets/app_bar/appbar_leading_image.dart';
 import '../../../widgets/app_bar/appbar_trailing_image.dart';
@@ -163,14 +164,23 @@ class _TutorHireScreenState extends State<TutorHireScreen>
                             _selectedScheduleIds,
                           );
                           QuickAlert.show(
-                            context: context,
-                            type: QuickAlertType.success,
-                            title: "Successfully",
-                            text: "Request sent successfully!",
-                            confirmBtnColor: Color(0XFF1E2857),
-                            borderRadius: 25.0,
-                            width: 320,
-                          );
+                              context: context,
+                              type: QuickAlertType.success,
+                              title: "Successfully",
+                              text: "Request sent successfully!",
+                              confirmBtnColor: Color(0XFF1E2857),
+                              borderRadius: 25.0,
+                              width: 320,
+                              onConfirmBtnTap: () {
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        InitScreen(initialIndex: 3),
+                                  ),
+                                  (Route<dynamic> route) => false,
+                                );
+                              });
                         } catch (e) {
                           print("Failed to send data: $e");
                           QuickAlert.show(

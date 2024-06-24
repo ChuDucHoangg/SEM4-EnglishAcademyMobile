@@ -162,7 +162,7 @@ class ProfileMyCourseDetailScreenState
           child: GridView.builder(
             shrinkWrap: true,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              mainAxisExtent: 179.v,
+              mainAxisExtent: 180.v,
               crossAxisCount: 1,
               mainAxisSpacing: 16.h,
               crossAxisSpacing: 16.h,

@@ -18,7 +18,7 @@ class TopicModel {
     return TopicModel(
       name: json['name'] ?? '',
       slug: json['slug'] ?? '',
-      status: json['status'] ?? '',
+      status: json['status'] ?? false,
       progress: json['progress'] ?? 0,
       topicOnlineDetailResponseList: topicOnlineDetailResponseList,
     );

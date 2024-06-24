@@ -29,6 +29,8 @@ class ApiConstants {
   static const String learningPaths = "/test-input/result";
   static const String answersDetail = "/test-input/result-detail";
 
+  static const String bookingList = "/student/booking";
+
   static const String registerStudent = "/auth/student/signup";
   static const String loginStudent = "/auth/student/signip";
   static const String changePassword = "/student/change-password";

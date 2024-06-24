@@ -1,6 +1,7 @@
 import 'package:english_academy_mobile/core/app_export.dart';
 import 'package:english_academy_mobile/data/model/TurtorModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class CertificateItemWidget extends StatefulWidget {
   final TutorModel tutor;
@@ -31,9 +32,9 @@ class _CertificateItemWidgetState extends State<CertificateItemWidget>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  HtmlWidget(
                     widget.tutor.cetificate,
-                    style: theme.textTheme.titleMedium,
+                    textStyle: theme.textTheme.titleMedium,
                   ),
                   SizedBox(
                     height: 30.v,
