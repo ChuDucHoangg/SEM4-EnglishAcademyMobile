@@ -172,12 +172,12 @@ class HomeScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => TutorScreen(),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TutorScreen(),
+                              ),
+                            );
                           },
                           child: Padding(
                             padding: EdgeInsets.only(bottom: 3.v),
@@ -299,7 +299,6 @@ class HomeScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  SizedBox(height: 19.v),
                   _buildUXDesign(context),
                 ],
               ),
