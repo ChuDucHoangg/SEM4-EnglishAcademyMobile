@@ -11,6 +11,7 @@ class CourseModel {
   final String language;
   final int status;
   final String trailer;
+  final String categoryName;
   final DateTime createdDate;
   final DateTime modifiedDate;
   final String createdBy;
@@ -40,6 +41,7 @@ class CourseModel {
     required this.language,
     required this.status,
     required this.trailer,
+    required this.categoryName,
     required this.createdDate,
     required this.modifiedDate,
     required this.createdBy,
@@ -64,6 +66,7 @@ class CourseModel {
       language: json['language'] ?? '',
       status: json['status'] ?? 0,
       trailer: json['trailer'] ?? '',
+      categoryName: json['categoryName'] ?? '',
       createdDate: json['createdDate'] != null ? DateTime.parse(json['createdDate']) : DateTime.now(),
       modifiedDate: json['modifiedDate'] != null ? DateTime.parse(json['modifiedDate']) : DateTime.now(),
       createdBy: json['createdBy'] ?? '',

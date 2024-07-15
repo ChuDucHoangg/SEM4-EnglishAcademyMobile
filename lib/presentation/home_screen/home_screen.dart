@@ -1,10 +1,13 @@
 import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_two.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_five.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_image.dart';
+import 'package:english_academy_mobile/widgets/custom_icon_button.dart';
 import 'package:english_academy_mobile/widgets/custom_search_view.dart';
 import 'package:english_academy_mobile/widgets/custom_elevated_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
+import 'package:flutter/widgets.dart';
 import '../../widgets/app_bar/custom_app_bar_home_screen.dart';
 import 'package:english_academy_mobile/theme/theme_helper.dart';
 
@@ -13,13 +16,31 @@ import '../tutor_screen/tutor_screen.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key})
       : super(
-    key: key,
-  );
+          key: key,
+        );
 
   TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, String>> _categoryOption = [
+      {
+        "title": "Courses",
+        "image": ImageConstant.imgBannerOnline,
+      },
+      {
+        "title": "Learning",
+        "image": ImageConstant.imgBannerLearning,
+      },
+      {
+        "title": "Assessment",
+        "image": ImageConstant.imgBannerAssessment,
+      },
+      {
+        "title": "Tutoring",
+        "image": ImageConstant.imgBannerTutoring,
+      },
+    ];
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: _buildAppBar(context),
@@ -32,71 +53,252 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   _buildWebsite(context),
                   SizedBox(height: 19.v),
-                  _buildTitle(context),
-                  SizedBox(height: 12.v),
-                  _buildFinance(context),
-                  SizedBox(height: 19.v),
-                  _buildTitle(context),
-                  SizedBox(height: 19.v),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24.h),
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisExtent: 61.v,
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 12.h,
-                        crossAxisSpacing: 12.h,
-                      ),
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: 4,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          padding: EdgeInsets.all(11.h),
-                          decoration: AppDecoration.outlineGray90010.copyWith(
-                            borderRadius: BorderRadiusStyle.roundedBorder12,
-                            color: Theme.of(context).colorScheme.primaryContainer,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Course Category",
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary,
                           ),
-                          child: Row(
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => TutorScreen(),
+                            //   ),
+                            // );
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 3.v),
+                            child: Text(
+                              "See more",
+                              style: CustomTextStyles.titleSmallPrimaryMedium,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 12.v),
+                  SizedBox(
+                    height: 105,
+                    child: ListView.separated(
+                      padding: EdgeInsets.only(left: 27.h, right: 30.h),
+                      separatorBuilder: (context, index) {
+                        return SizedBox(
+                          width: 25.h,
+                        );
+                      },
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _categoryOption.length,
+                      itemBuilder: (context, index) {
+                        final category = _categoryOption[index];
+                        return SizedBox(
+                          child: Column(
                             children: [
-                              Container(
-                                height: 36.adaptSize,
-                                width: 36.adaptSize,
-                                padding: EdgeInsets.all(6.h),
-                                decoration: AppDecoration.fillIndigo.copyWith(
-                                  borderRadius:
-                                  BorderRadiusStyle.roundedBorder8,
-                                ),
+                              CustomIconButton(
+                                width: 56.adaptSize,
+                                height: 56.adaptSize,
+                                padding: EdgeInsets.all(11.h),
+                                decoration:
+                                    IconButtonStyleHelper.outlineBlueGray,
                                 child: CustomImageView(
-                                  imagePath: ImageConstant.imgImage5,
-                                  height: 24.adaptSize,
-                                  width: 24.adaptSize,
-                                  alignment: Alignment.center,
+                                  imagePath: category['image']!,
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: 16.h,
-                                  top: 10.v,
-                                  bottom: 8.v,
-                                ),
-                                child: Text(
-                                  "Design",
-                                  style: theme.textTheme.titleSmall?.copyWith(
-                                    color: Theme.of(context).colorScheme.onPrimary,
-                                  ),
-                                ),
+                              SizedBox(
+                                height: 10.v,
                               ),
+                              Text(
+                                category['title']!,
+                                style:
+                                    CustomTextStyles.titleSmallGray60001Medium,
+                              )
                             ],
                           ),
                         );
                       },
                     ),
                   ),
-                  SizedBox(height: 19.v),
-                  _buildTitle(context),
-                  SizedBox(height: 19.v),
+                  SizedBox(height: 12.v),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Popular Course",
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => TutorScreen(),
+                            //   ),
+                            // );
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 3.v),
+                            child: Text(
+                              "See more",
+                              style: CustomTextStyles.titleSmallPrimaryMedium,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   _buildFinance(context),
+                  SizedBox(height: 19.v),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "OUTSTANDING TUTOR",
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => TutorScreen(),
+                            //   ),
+                            // );
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 3.v),
+                            child: Text(
+                              "See more",
+                              style: CustomTextStyles.titleSmallPrimaryMedium,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 19.v),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.h),
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        mainAxisExtent: 81.v,
+                        crossAxisCount: 1,
+                        mainAxisSpacing: 12.h,
+                        crossAxisSpacing: 12.h,
+                      ),
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: 1,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: EdgeInsets.all(11.h),
+                          decoration: AppDecoration.outlineGray90010.copyWith(
+                            borderRadius: BorderRadiusStyle.roundedBorder12,
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer,
+                          ),
+                          child: Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10.h),
+                                child: CustomImageView(
+                                  imagePath:
+                                      "https://images.pexels.com/photos/3830483/pexels-photo-3830483.jpeg",
+                                  height: 50.adaptSize,
+                                  width: 50.adaptSize,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Column(children: [
+                                Container(
+                                  width: 207.h,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 5.v,
+                                      bottom: 8.v,
+                                    ),
+                                    child: Text(
+                                      "Nguyễn Phương Thảo",
+                                      style:
+                                          theme.textTheme.titleSmall?.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 207.h,
+                                  margin:
+                                      EdgeInsets.symmetric(horizontal: 10.h),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 10.h,
+                                          vertical: 4.v,
+                                        ),
+                                        decoration: AppDecoration
+                                            .outlinePrimaryContainer
+                                            .copyWith(
+                                          borderRadius:
+                                              BorderRadiusStyle.circleBorder5,
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            "Basic",
+                                            style: CustomTextStyles
+                                                .labelMediumPrimary,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 10.h,
+                                          vertical: 4.v,
+                                        ),
+                                        decoration: AppDecoration
+                                            .outlineBlueGray
+                                            .copyWith(
+                                          borderRadius:
+                                              BorderRadiusStyle.circleBorder5,
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            "English 1",
+                                            style: CustomTextStyles
+                                                .labelMediumPrimary,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ]),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                   SizedBox(height: 19.v),
                   _buildUXDesign(context),
                 ],
@@ -245,9 +447,11 @@ class HomeScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             CustomImageView(
-                              imagePath: ImageConstant.imgImage,
+                              imagePath:
+                                  "https://storage.googleapis.com/materials-elements/course/cover/UJl3gmScJYoAnX3PlC2uiC94ZB5tfKmu8yWAydcF.jpg",
                               height: 66.adaptSize,
                               width: 66.adaptSize,
+                              fit: BoxFit.cover,
                               radius: BorderRadius.circular(
                                 8.h,
                               ),
@@ -255,29 +459,39 @@ class HomeScreen extends StatelessWidget {
                             ),
                             Expanded(
                               child: Padding(
-                                padding: EdgeInsets.only(left: 16.h),
+                                padding: EdgeInsets.only(left: 12.h),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    CustomElevatedButton(
-                                      height: 20.v,
-                                      width: 46.h,
-                                      text: "Website",
-                                      buttonStyle:
-                                      CustomButtonStyles.outlineGrayTL4,
-                                      buttonTextStyle:
-                                      CustomTextStyles.labelSmallAmberA200,
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 20.h,
+                                        vertical: 4.v,
+                                      ),
+                                      decoration: AppDecoration
+                                          .outlinePrimaryContainer
+                                          .copyWith(
+                                        borderRadius:
+                                            BorderRadiusStyle.circleBorder5,
+                                      ),
+                                      child: Text(
+                                        "IELTS",
+                                        style:
+                                            CustomTextStyles.labelMediumPrimary,
+                                      ),
                                     ),
                                     SizedBox(height: 3.v),
                                     SizedBox(
                                       width: 209.h,
                                       child: Text(
-                                        "Fundamentals of HTML & CSS From Scratch",
+                                        "Nền Tảng Toiec 300",
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         style: theme.textTheme.titleSmall!
                                             .copyWith(
-                                          color: Theme.of(context).colorScheme.onPrimary,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimary,
                                           height: 1.60,
                                         ),
                                       ),
@@ -294,16 +508,13 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Padding(
                               padding: EdgeInsets.only(bottom: 1.v),
-                              child: Text(
-                                "23 of 33 lessons",
-                                style: CustomTextStyles.labelLargeGray60001.copyWith(
-                                ),
-                              ),
+                              child: Text("23 of 33 lessons",
+                                  style: CustomTextStyles.labelLargeGray60001),
                             ),
                             Text(
                               "75% completed",
-                              style: CustomTextStyles.labelLargeGray60001.copyWith(
-                              ),
+                              style: CustomTextStyles.labelLargeGray60001
+                                  .copyWith(),
                             ),
                           ],
                         ),
@@ -383,7 +594,7 @@ class HomeScreen extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.only(left: 24.h , bottom: 5.h , top: 5.h),
+        padding: EdgeInsets.only(left: 24.h, bottom: 5.h, top: 5.h),
         child: IntrinsicWidth(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -400,31 +611,28 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomImageView(
-                      imagePath: ImageConstant.imgImage128x216,
+                      imagePath:
+                          "https://storage.googleapis.com/materials-elements/course/cover/UJl3gmScJYoAnX3PlC2uiC94ZB5tfKmu8yWAydcF.jpg",
                       height: 128.v,
                       width: 216.h,
                       radius: BorderRadius.circular(
                         8.h,
                       ),
+                      fit: BoxFit.cover,
                     ),
                     SizedBox(height: 12.v),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-                      decoration: BoxDecoration(
-                        color: Colors.redAccent,
-                        borderRadius: BorderRadius.circular(5),
-                        boxShadow: [
-                          BoxShadow(
-                            color: appTheme.gray900.withOpacity(0.08),
-                            spreadRadius: -4,
-                            blurRadius: 9,
-                          ),
-                        ],
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.h,
+                        vertical: 4.v,
                       ),
-                      child: Text(
-                        "Fiance" ,
-                        style: CustomTextStyles.labelMediumRedA200.copyWith(
-                          color: Theme.of(context).colorScheme.onPrimary,
+                      decoration: AppDecoration.outlineGray9009.copyWith(
+                        borderRadius: BorderRadiusStyle.circleBorder5,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "IELTS",
+                          style: CustomTextStyles.labelMediumRedA200,
                         ),
                       ),
                     ),
@@ -433,7 +641,7 @@ class HomeScreen extends StatelessWidget {
                       width: 181.h,
                       margin: EdgeInsets.only(left: 4.h),
                       child: Text(
-                        "The Complete Investment Banking Course z023",
+                        "Nền Tảng Toeic 300",
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.titleSmall!.copyWith(
@@ -449,7 +657,7 @@ class HomeScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            "120.00",
+                            "30.00",
                             style: CustomTextStyles.titleSmallBlueA700,
                           ),
                           Spacer(),
@@ -465,11 +673,11 @@ class HomeScreen extends StatelessWidget {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: "4.8 ",
+                                    text: "5.0 ",
                                     style: theme.textTheme.labelLarge,
                                   ),
                                   TextSpan(
-                                    text: "(31,882)",
+                                    text: "(1,0)",
                                     style: CustomTextStyles.bodySmallff6b7280,
                                   ),
                                 ],
@@ -486,7 +694,9 @@ class HomeScreen extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.only(left: 20.h),
-                padding: EdgeInsets.all(12.h ,),
+                padding: EdgeInsets.all(
+                  12.h,
+                ),
                 decoration: AppDecoration.outlineGray90010.copyWith(
                   borderRadius: BorderRadiusStyle.roundedBorder12,
                   color: Theme.of(context).colorScheme.primaryContainer,
@@ -497,31 +707,28 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomImageView(
-                      imagePath: ImageConstant.imgImage1,
+                      imagePath:
+                          "https://storage.googleapis.com/materials-elements/course/cover/evRt4WBIIqV6svjGH7DraiY1wRpQRPjFBm2SzyKZ.jpg",
                       height: 128.v,
                       width: 216.h,
                       radius: BorderRadius.circular(
                         8.h,
                       ),
+                      fit: BoxFit.cover,
                     ),
                     SizedBox(height: 12.v),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 4),
-                      decoration: BoxDecoration(
-                        color: appTheme.redA200,
-                        borderRadius: BorderRadius.circular(5),
-                        boxShadow: [
-                          BoxShadow(
-                            color: appTheme.gray900.withOpacity(0.08),
-                            spreadRadius: -4,
-                            blurRadius: 9,
-                          ),
-                        ],
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.h,
+                        vertical: 4.v,
                       ),
-                      child: Text(
-                        "Finance" ,
-                        style: TextStyle(
-                          fontSize: 12,
+                      decoration: AppDecoration.outlineGray9009.copyWith(
+                        borderRadius: BorderRadiusStyle.circleBorder5,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "TOEIC",
+                          style: CustomTextStyles.labelMediumRedA200,
                         ),
                       ),
                     ),
@@ -530,7 +737,7 @@ class HomeScreen extends StatelessWidget {
                       width: 208.h,
                       margin: EdgeInsets.only(left: 4.h),
                       child: Text(
-                        "Guide to Integrate API in Back End Development",
+                        "Nền Tảng IELTS",
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.titleSmall!.copyWith(
@@ -546,7 +753,7 @@ class HomeScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            "96.00",
+                            "45.00",
                             style: CustomTextStyles.titleSmallBlueA700,
                           ),
                           Spacer(),
@@ -562,11 +769,11 @@ class HomeScreen extends StatelessWidget {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: "4.8 ",
+                                    text: "0.0 ",
                                     style: theme.textTheme.labelLarge,
                                   ),
                                   TextSpan(
-                                    text: "(31,882)",
+                                    text: "(0,0)",
                                     style: CustomTextStyles.bodySmallff6b7280,
                                   ),
                                 ],
@@ -605,7 +812,7 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Featured course",
+                    "Our App",
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: Theme.of(context).colorScheme.onPrimary,
                     ),
@@ -623,7 +830,7 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomImageView(
-                          imagePath: ImageConstant.imgImage140x303,
+                          imagePath: ImageConstant.imgApp,
                           height: 140.v,
                           width: 303.h,
                           radius: BorderRadius.circular(
@@ -631,19 +838,51 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 12.v),
-                        CustomElevatedButton(
-                          height: 24.v,
-                          width: 73.h,
-                          text: "UX Design",
-                          buttonTextStyle:
-                          CustomTextStyles.labelMediumGreenA400,
+                        Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10.h,
+                                vertical: 4.v,
+                              ),
+                              decoration: AppDecoration.outlinePrimaryContainer
+                                  .copyWith(
+                                borderRadius: BorderRadiusStyle.circleBorder5,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "AppStore",
+                                  style: CustomTextStyles.labelMediumPrimary,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10.h,
+                                vertical: 4.v,
+                              ),
+                              decoration: AppDecoration.outlinePrimaryContainer
+                                  .copyWith(
+                                borderRadius: BorderRadiusStyle.circleBorder5,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "Google Play",
+                                  style: CustomTextStyles.labelMediumPrimary,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 12.v),
                         Container(
                           width: 295.h,
                           margin: EdgeInsets.symmetric(horizontal: 4.h),
                           child: Text(
-                            "Complete Web Design: From Figma to Webflow",
+                            "Learn From Anywhere",
                             maxLines: null,
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.titleMedium!.copyWith(
@@ -658,7 +897,7 @@ class HomeScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                "98.00",
+                                "",
                                 textAlign: TextAlign.right,
                                 style: CustomTextStyles.titleMediumBlueA700,
                               ),
@@ -679,20 +918,9 @@ class HomeScreen extends StatelessWidget {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: "4.",
-                                        style: theme.textTheme.labelLarge,
-                                      ),
-                                      TextSpan(
-                                        text: "7",
-                                        style: theme.textTheme.labelLarge,
-                                      ),
-                                      TextSpan(
-                                        text: " ",
-                                      ),
-                                      TextSpan(
-                                        text: "(12,657)",
+                                        text: "Visit Website",
                                         style:
-                                        CustomTextStyles.bodySmallff6b7280,
+                                            CustomTextStyles.labelMediumPrimary,
                                       )
                                     ],
                                   ),

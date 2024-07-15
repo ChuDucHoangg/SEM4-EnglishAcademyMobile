@@ -159,7 +159,7 @@ class LoginScreenState extends State<LoginScreen>
       child: TabBar(
         controller: tabviewController,
         labelPadding: EdgeInsets.zero,
-        labelColor: Color(0xFF1565C0),
+        labelColor: Color(0xFF1E2857),
         labelStyle: TextStyle(
           fontSize: 14.fSize,
           fontFamily: 'Inter',

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class BookingModel {
   final int id;
   final int tutorId;
@@ -30,7 +32,9 @@ class BookingModel {
   });
 
   factory BookingModel.fromJson(Map<String, dynamic> json) {
-    final List<dynamic> lessonDays = json['lessonDays'] ?? [];
+    final List<dynamic> lessonDays = json['lessonDays'] != null
+        ? jsonDecode(json['lessonDays'])
+        : [];
     return BookingModel(
       id: json['id'] ?? 0,
       tutorId: json['tutorId'] ?? 0,

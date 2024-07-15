@@ -8,8 +8,8 @@ import 'package:english_academy_mobile/core/app_export.dart';
 class CourseScreen extends StatelessWidget {
   CourseScreen({Key? key})
       : super(
-    key: key,
-  );
+          key: key,
+        );
 
   TextEditingController searchController = TextEditingController();
 
@@ -43,17 +43,19 @@ class CourseScreen extends StatelessWidget {
                       CustomSearchView(
                         controller: searchController,
                         hintText: "Search",
-                        hintStyle: CustomTextStyles.bodyMediumBluegray300.copyWith(
+                        hintStyle:
+                            CustomTextStyles.bodyMediumBluegray300.copyWith(
                           color: Theme.of(context).colorScheme.onPrimary,
                         ),
                         borderDecoration:
-                        SearchViewStyleHelper.outlineBlueGrayTL12,
+                            SearchViewStyleHelper.outlineBlueGrayTL12,
                         filled: false,
                       ),
                       SizedBox(height: 10.v),
                       _buildTab(context),
                       SizedBox(height: 16.v),
                       _buildTitle(context),
+                      SizedBox(height: 12.v),
                       _buildUXDesign(context),
                     ],
                   ),

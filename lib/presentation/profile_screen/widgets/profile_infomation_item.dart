@@ -57,14 +57,15 @@ class ProfileInfomationItemState extends State<ProfileInfomationItem>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CustomImageView(
-            imagePath: ImageConstant.imgAvatar9,
-            height: 48.adaptSize,
-            width: 48.adaptSize,
-            radius: BorderRadius.circular(
-              24.h,
+          ClipRRect(
+            borderRadius:
+            BorderRadius.all(Radius.circular(50)),
+            child: Image.network(
+              width: 50,
+              height: 50,
+              "https://static2.yan.vn/YanNews/2167221/202102/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg",
+              fit: BoxFit.cover,
             ),
-            margin: EdgeInsets.symmetric(vertical: 9.v),
           ),
           Padding(
             padding: EdgeInsets.only(

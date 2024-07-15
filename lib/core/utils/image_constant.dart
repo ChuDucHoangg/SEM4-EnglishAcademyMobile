@@ -46,6 +46,16 @@ class ImageConstant {
 
   static String imgGroup478 = '$imagePath/img_group_478.svg';
 
+  static String imgBannerOnline = '$imagePath/counter-02.png';
+
+  static String imgBannerLearning = '$imagePath/counter-04.png';
+
+  static String imgBannerAssessment = '$imagePath/counter-03.png';
+
+  static String imgBannerTutoring = '$imagePath/counter-01.png';
+
+  static String imgApp = '$imagePath/app.png';
+
   // 17. Home - Scroll Down images
   static String imgImage2 = '$imagePath/img_image_2.png';
 
