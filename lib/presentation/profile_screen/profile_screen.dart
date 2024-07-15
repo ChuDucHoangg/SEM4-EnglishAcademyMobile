@@ -1,4 +1,5 @@
 import 'package:english_academy_mobile/data/model/CourseOfflineModel.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/profile_my_booking_screen/profile_my_booking_screen.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/profile_my_course_screen/profile_my_course_list_screen.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/widgets/profile_achievement_item.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/widgets/profile_infomation_item.dart';
@@ -190,7 +191,7 @@ class ProfileScreenState extends State<ProfileScreen>
       case 0:
         return ProfileMyCourseListScreen();
       case 1:
-        return Text("Tab Booking");
+        return ProfileMyBookingListScreen();
       case 2:
         return Text("Tab TimeTable");
       default:

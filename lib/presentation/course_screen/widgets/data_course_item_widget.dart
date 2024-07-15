@@ -8,8 +8,8 @@ import '../../../service/CourseService.dart';
 class DataCourseItemWidget extends StatelessWidget {
   const DataCourseItemWidget({Key? key})
       : super(
-    key: key,
-  );
+          key: key,
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +25,7 @@ class DataCourseItemWidget extends StatelessWidget {
           final List<CourseModel> courses = snapshot.data!;
           return Expanded(
             child: GridView.builder(
+              padding: EdgeInsets.all(0),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisExtent: 208.v,
@@ -44,8 +45,7 @@ class DataCourseItemWidget extends StatelessWidget {
                     padding: EdgeInsets.all(7.h),
                     decoration: AppDecoration.outlineGray90010.copyWith(
                         borderRadius: BorderRadiusStyle.roundedBorder12,
-                        color: Theme.of(context).colorScheme.primaryContainer
-                    ),
+                        color: Theme.of(context).colorScheme.primaryContainer),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,25 +67,16 @@ class DataCourseItemWidget extends StatelessWidget {
                         ),
                         SizedBox(height: 8.v),
                         Container(
-                            padding: EdgeInsets.symmetric(horizontal: 4),
-                            decoration: BoxDecoration(
-                              color: appTheme.greenA400,
-                              borderRadius: BorderRadius.circular(5),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: appTheme.gray900.withOpacity(0.08),
-                                  spreadRadius: -4,
-                                  blurRadius: 9,
-                                ),
-                              ],
-                            ),
-                            child: Text(
-                              "IELTS" ,
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color:Theme.of(context).colorScheme.onPrimary
-                              ),
-                            ),
+                          padding:
+                              EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+                          decoration:
+                              AppDecoration.outlinePrimaryContainer.copyWith(
+                            borderRadius: BorderRadiusStyle.circleBorder5,
+                          ),
+                          child: Text(
+                            course.categoryName,
+                            style: CustomTextStyles.labelMediumPrimary,
+                          ),
                         ),
                         SizedBox(height: 9.v),
                         Container(
@@ -96,7 +87,7 @@ class DataCourseItemWidget extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style:
-                            CustomTextStyles.labelLargeGray900_1.copyWith(
+                                CustomTextStyles.labelLargeGray900_1.copyWith(
                               height: 1.60,
                               color: Theme.of(context).colorScheme.onPrimary,
                             ),
@@ -123,7 +114,7 @@ class DataCourseItemWidget extends StatelessWidget {
                                       height: 12.adaptSize,
                                       width: 12.adaptSize,
                                       margin:
-                                      EdgeInsets.symmetric(vertical: 1.v),
+                                          EdgeInsets.symmetric(vertical: 1.v),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(left: 3.h),
