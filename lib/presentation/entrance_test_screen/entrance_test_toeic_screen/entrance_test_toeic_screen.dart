@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:english_academy_mobile/core/app_export.dart';
+import 'package:english_academy_mobile/presentation/entrance_test_screen/learning_paths_toeic_screen/learning_paths_toeic_screen.dart';
 import 'package:english_academy_mobile/service/AuthService.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -14,8 +15,6 @@ import '../../../theme/theme_helper.dart';
 import '../../../widgets/app_bar/appbar_trailing_image.dart';
 import '../../../widgets/app_bar/custom_app_bar.dart';
 import 'package:audioplayers/audioplayers.dart';
-
-import '../entrance_test_finish/entrance_test_finish.dart';
 
 class EntranceTestToeicScreen extends StatefulWidget {
   final String slug;
@@ -515,7 +514,7 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
       print(requestBody);
 
       try {
-        var response = await Dio().post('${ApiConstants.baseUrl}${ApiConstants.entranceTestDetail}/${widget.slug}',
+        var response = await Dio().post('${ApiConstants.baseUrl}${ApiConstants.entranceTestSubmit}/${widget.slug}',
           data: json.encode(requestBody),
           options: Options(
             headers: <String, String>{
@@ -527,10 +526,12 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
 
         // Kiểm tra kết quả của request
         if (response.statusCode == 200) {
-          print('Submit answers successfully!');
+          String code = response.data['data'];
+          print('Submit answers successfully! Code: $code');
+
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => EntranceTestFinish()),
+            MaterialPageRoute(builder: (context) => LearningPathsToeicScreen(code: code)),
           );
         } else {
           print('Failed to submit answers: ${response.statusCode}');

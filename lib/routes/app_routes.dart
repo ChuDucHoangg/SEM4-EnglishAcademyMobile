@@ -128,10 +128,34 @@ class AppRoutes {
       ModalRoute.of(context)?.settings.arguments as String?;
       return EntranceTestIeltsScreen(slug: slug!);
     },
-    entranceTestFinish: (context) => EntranceTestFinish(),
-    learningPathsIeltsScreen: (context) => LearningPathsIeltsScreen(),
-    learningPathsToeicScreen: (context) => LearningPathsToeicScreen(),
-    answerDetailScreen: (context) => AnswerDetailScreen(),
+    // entranceTestFinish: (context) => EntranceTestFinish(),
+    // learningPathsIeltsScreen: (context) => LearningPathsIeltsScreen(),
+    // learningPathsToeicScreen: (context) => LearningPathsToeicScreen(),
+    // answerDetailScreen: (context) => AnswerDetailScreen(),
+
+    entranceTestFinish: (context) {
+      final String? code =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return EntranceTestFinish(code: code!);
+    },
+
+    learningPathsToeicScreen: (context) {
+      final String? code =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return LearningPathsToeicScreen(code: code!);
+    },
+
+    learningPathsIeltsScreen: (context) {
+      final String? code =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return LearningPathsIeltsScreen(code: code!);
+    },
+
+    answerDetailScreen: (context) {
+      final String? code =
+      ModalRoute.of(context)?.settings.arguments as String?;
+      return AnswerDetailScreen(code: code!);
+    },
 
     testOnlineScreen: (context) {
       final String? slug =
