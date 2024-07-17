@@ -12,7 +12,9 @@ import '../../../widgets/app_bar/custom_app_bar.dart';
 import '../../../widgets/custom_outlined_button.dart';
 
 class LearningPathsToeicScreen extends StatelessWidget {
-  const LearningPathsToeicScreen({Key? key})
+  final String code;
+
+  const LearningPathsToeicScreen({Key? key, required this.code})
       : super(
           key: key,
         );
@@ -20,7 +22,7 @@ class LearningPathsToeicScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: EntranceTestService.fetchLearningPaths(),
+        future: EntranceTestService.fetchLearningPaths(code),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final learningPath = snapshot.data!;
@@ -367,7 +369,7 @@ class LearningPathsToeicScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => AnswerDetailScreen()),
+                          MaterialPageRoute(builder: (context) => AnswerDetailScreen(code: code)),
                         );
                       },
                     ),

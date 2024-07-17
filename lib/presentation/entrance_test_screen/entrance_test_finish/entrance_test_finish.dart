@@ -14,7 +14,8 @@ import '../../../widgets/custom_image_view.dart';
 import '../../../widgets/custom_text_form_field.dart';
 
 class EntranceTestFinish extends StatelessWidget {
-  EntranceTestFinish({super.key});
+  final String code;
+  EntranceTestFinish({super.key, required this.code});
 
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -165,7 +166,7 @@ class EntranceTestFinish extends StatelessWidget {
                                   onPressed: () {
                                     Navigator.pushReplacement(
                                       context,
-                                      MaterialPageRoute(builder: (context) => LearningPathsIeltsScreen()),
+                                      MaterialPageRoute(builder: (context) => LearningPathsIeltsScreen(code: code)),
                                     );
                                   },
                                   text: "Continue",

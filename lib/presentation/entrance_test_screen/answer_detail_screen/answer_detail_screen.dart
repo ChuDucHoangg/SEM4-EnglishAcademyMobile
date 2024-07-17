@@ -9,7 +9,8 @@ import '../../../widgets/app_bar/custom_app_bar.dart';
 import 'widgets/data_answers_item_widget.dart';
 
 class AnswerDetailScreen extends StatefulWidget {
-  const AnswerDetailScreen({Key? key}) : super(key: key);
+  final String code;
+  const AnswerDetailScreen({Key? key, required this.code}) : super(key: key);
 
   @override
   _AnswerDetailScreenState createState() => _AnswerDetailScreenState();
@@ -21,7 +22,7 @@ class _AnswerDetailScreenState extends State<AnswerDetailScreen> {
   @override
   void initState() {
     super.initState();
-    _answerDetailFuture = EntranceTestService.fetchAnswerDetail();
+    _answerDetailFuture = EntranceTestService.fetchAnswerDetail(widget.code);
   }
 
   @override

@@ -12,7 +12,8 @@ import '../../../widgets/app_bar/custom_app_bar.dart';
 import '../../../widgets/custom_outlined_button.dart';
 
 class LearningPathsIeltsScreen extends StatelessWidget {
-  const LearningPathsIeltsScreen({Key? key})
+  final String code;
+  const LearningPathsIeltsScreen({Key? key, required this.code})
       : super(
           key: key,
         );
@@ -20,7 +21,7 @@ class LearningPathsIeltsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: EntranceTestService.fetchLearningPaths(),
+        future: EntranceTestService.fetchLearningPaths(code),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final learningPath = snapshot.data!;
@@ -374,7 +375,7 @@ class LearningPathsIeltsScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => AnswerDetailScreen()),
+                          MaterialPageRoute(builder: (context) => AnswerDetailScreen(code: code)),
                         );
                       },
                     ),
