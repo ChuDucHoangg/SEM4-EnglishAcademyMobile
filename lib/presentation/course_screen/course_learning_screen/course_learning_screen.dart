@@ -106,11 +106,12 @@ class CourseLearningScreenState extends State<CourseLearningScreen>
         padding: EdgeInsets.all(24.h),
         child: Column(
           children: questionList.map((question) {
-
             void checkAnswer(Map<String, dynamic> question) {
-              int? selectedAnswerIndex = selectedAnswers[question['id'].toString()];
+              int? selectedAnswerIndex =
+                  selectedAnswers[question['id'].toString()];
               if (selectedAnswerIndex != null) {
-                String selectedAnswer = question['answer${selectedAnswerIndex + 1}'];
+                String selectedAnswer =
+                    question['answer${selectedAnswerIndex + 1}'];
                 String correctAnswer = question['answerCorrect'];
 
                 bool isCorrect = selectedAnswer == correctAnswer;
@@ -122,19 +123,19 @@ class CourseLearningScreenState extends State<CourseLearningScreen>
                   message = "The answer is not correct!";
                 }
 
-
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   backgroundColor: Colors.transparent,
                   elevation: 0,
                   content: Container(
-                    padding: EdgeInsets.symmetric(vertical: 15.v, horizontal: 10.h),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 15.v, horizontal: 10.h),
                     decoration: isCorrect
                         ? AppDecoration.fillPrimary.copyWith(
-                      borderRadius: BorderRadiusStyle.roundedBorder12,
-                    )
+                            borderRadius: BorderRadiusStyle.roundedBorder12,
+                          )
                         : AppDecoration.fillRedA.copyWith(
-                      borderRadius: BorderRadiusStyle.roundedBorder12,
-                    ),
+                            borderRadius: BorderRadiusStyle.roundedBorder12,
+                          ),
                     child: Center(
                       child: Text(
                         message,
@@ -250,28 +251,30 @@ class CourseLearningScreenState extends State<CourseLearningScreen>
                       },
                     ),
                     if (selectedAnswers[question['id'].toString()] != null)
-                      Column(children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 13.v, horizontal: 12.h),
-                          decoration: AppDecoration.fillPrimary.copyWith(
-                            borderRadius: BorderRadiusStyle.roundedBorder12,
-                          ),
-                          margin: EdgeInsets.only(left: 152.h, top: 15.h),
-                          child: GestureDetector(
-                            onTap: () {
-                              checkAnswer(question);
-                            },
-                            child: Text(
-                              "Check Answer",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
+                      Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 13.v, horizontal: 12.h),
+                            decoration: AppDecoration.fillPrimary.copyWith(
+                              borderRadius: BorderRadiusStyle.roundedBorder12,
+                            ),
+                            margin: EdgeInsets.only(left: 152.h, top: 15.h),
+                            child: GestureDetector(
+                              onTap: () {
+                                checkAnswer(question);
+                              },
+                              child: Text(
+                                "Check Answer",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
-                        ),
-                      ],)
+                        ],
+                      )
                   ],
                 ),
               ),
@@ -352,6 +355,7 @@ class CourseLearningScreenState extends State<CourseLearningScreen>
             height: 28.v,
             margin: EdgeInsets.only(right: 30.h),
             child: TabBar(
+              tabAlignment: TabAlignment.start,
               controller: tabviewController,
               isScrollable: true,
               labelColor: theme.colorScheme.onErrorContainer.withOpacity(1),
@@ -373,6 +377,7 @@ class CourseLearningScreenState extends State<CourseLearningScreen>
                   6.h,
                 ),
               ),
+              dividerColor: Colors.transparent,
               tabs: [
                 Tab(
                   child: Text(

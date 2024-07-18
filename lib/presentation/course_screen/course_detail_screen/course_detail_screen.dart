@@ -406,23 +406,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
         indicatorPadding: EdgeInsets.all(
           4.0.h,
         ),
-        indicator: BoxDecoration(
-          color: theme.colorScheme.onErrorContainer.withOpacity(1),
-          borderRadius: BorderRadius.circular(
-            6.h,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: appTheme.gray900.withOpacity(0.04),
-              spreadRadius: 2.h,
-              blurRadius: 2.h,
-              offset: Offset(
-                1,
-                2,
-              ),
-            )
-          ],
-        ),
+        dividerColor: Colors.transparent,
         tabs: [
           Tab(
             child: Text(

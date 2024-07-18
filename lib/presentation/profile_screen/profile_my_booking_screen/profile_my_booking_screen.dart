@@ -3,10 +3,6 @@ import 'package:english_academy_mobile/data/model/BookingModel.dart';
 import 'package:english_academy_mobile/service/BookingService.dart';
 import 'package:flutter/material.dart';
 
-import '../../../theme/app_decoration.dart';
-import '../../../theme/custom_text_style.dart';
-import '../../../theme/theme_helper.dart';
-
 class ProfileMyBookingListScreen extends StatefulWidget {
   const ProfileMyBookingListScreen({Key? key})
       : super(
@@ -30,10 +26,10 @@ class ProfileMyBookingListScreenState extends State<ProfileMyBookingListScreen>
 
   @override
   Widget build(BuildContext context) {
-    // void _navigateToBookingDetail(BuildContext context, String code) {
-    //   Navigator.pushNamed(context, AppRoutes.bookingDetailScreen,
-    //       arguments: code);
-    // }
+    void _navigateToBookingDetail(BuildContext context, int id) {
+      Navigator.pushNamed(context, AppRoutes.profileBookingDetailScreen,
+          arguments: id);
+    }
 
     String truncateText(String text) {
       if (text.length > 10) {
@@ -61,7 +57,7 @@ class ProfileMyBookingListScreenState extends State<ProfileMyBookingListScreen>
               final BookingModel booking = bookings[index];
               return GestureDetector(
                   onTap: () {
-                    // _navigateToBookingDetail(context, booking.id);
+                    _navigateToBookingDetail(context, booking.id);
                   },
                   child: Container(
                     padding: EdgeInsets.all(15),
@@ -122,7 +118,7 @@ class ProfileMyBookingListScreenState extends State<ProfileMyBookingListScreen>
                           padding: EdgeInsets.only(top: 30, bottom: 2),
                           child: Text(
                             booking.status,
-                            style: CustomTextStyles.labelLargeGray60001,
+                            style: CustomTextStyles.labelMediumPrimary,
                           ),
                         ),
                       ],
@@ -132,8 +128,8 @@ class ProfileMyBookingListScreenState extends State<ProfileMyBookingListScreen>
           );
         } else if (snapshot.hasError) {
           return Center(
-            child: Text('Error: ${snapshot.error}'),
-            // child: Text(''),
+            // child: Text('Error: ${snapshot.error}'),
+            child: Text(''),
           );
         }
         return Center(

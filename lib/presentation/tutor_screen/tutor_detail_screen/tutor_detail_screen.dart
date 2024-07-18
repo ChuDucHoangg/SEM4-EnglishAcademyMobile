@@ -172,14 +172,19 @@ class _TutorDetailScreenState extends State<TutorDetailScreen>
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadiusStyle.customBorderTL32,
-              image: DecorationImage(
-                image: NetworkImage(tutor.avatar),
-                fit: BoxFit.cover,
-              ),
+            ),
+            child: CustomImageView(
+              imagePath: tutor.avatar,
+              height: 413.v,
+              width: 316.h,
+              fit: BoxFit.cover,
+              radius: BorderRadiusStyle.customBorderTL32,
             ),
           ),
           Align(
             child: Container(
+              height: 413.v,
+              width: 316.h,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment(0.5, 0),
@@ -287,6 +292,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen>
         controller: tabviewController,
         labelPadding: EdgeInsets.zero,
         labelColor: appTheme.gray900,
+        dividerColor: Colors.transparent,
         labelStyle: TextStyle(
             fontSize: 12.fSize,
             fontFamily: 'Inter',
@@ -297,17 +303,6 @@ class _TutorDetailScreenState extends State<TutorDetailScreen>
             fontFamily: 'Inter',
             fontWeight: FontWeight.w700),
         indicatorPadding: EdgeInsets.all(4.0.h),
-        // indicator: BoxDecoration(
-        //     color: theme.colorScheme.onErrorContainer.withOpacity(1),
-        //     borderRadius: BorderRadius.circular(6.h),
-        //     boxShadow: [
-        //       BoxShadow(
-        //           color: appTheme.gray900.withOpacity(0.04),
-        //           spreadRadius: 2.h,
-        //           blurRadius: 2.h,
-        //           offset: Offset(1, 2))
-        //     ]
-        // ),
         tabs: [
           Tab(
             child: Text("Experience"),

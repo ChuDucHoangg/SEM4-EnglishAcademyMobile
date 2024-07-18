@@ -59,8 +59,8 @@ class DataCourseItemWidget extends StatelessWidget {
                               left: Radius.circular(6.h),
                               right: Radius.circular(6.h),
                             ),
-                            child: Image.network(
-                              course.image,
+                            child: CustomImageView(
+                              imagePath: course.image,
                               fit: BoxFit.cover,
                             ),
                           ),
