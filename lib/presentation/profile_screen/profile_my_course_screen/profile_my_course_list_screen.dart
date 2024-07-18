@@ -10,11 +10,12 @@ import '../../../widgets/custom_elevated_button.dart';
 class ProfileMyCourseListScreen extends StatefulWidget {
   const ProfileMyCourseListScreen({Key? key})
       : super(
-    key: key,
-  );
+          key: key,
+        );
 
   @override
-  ProfileMyCourseListScreenState createState() => ProfileMyCourseListScreenState();
+  ProfileMyCourseListScreenState createState() =>
+      ProfileMyCourseListScreenState();
 }
 
 class ProfileMyCourseListScreenState extends State<ProfileMyCourseListScreen>
@@ -28,6 +29,7 @@ class ProfileMyCourseListScreenState extends State<ProfileMyCourseListScreen>
       Navigator.pushNamed(context, AppRoutes.profileMyCourseDetailScreen,
           arguments: slug);
     }
+
     return FutureBuilder<List<CourseOfflineModel>>(
       future: CourseOfflineService.fetchCoursesOffline(),
       builder: (context, snapshot) {
@@ -66,8 +68,8 @@ class ProfileMyCourseListScreenState extends State<ProfileMyCourseListScreen>
                               width: 66.adaptSize,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(6.h),
-                                child: Image.network(
-                                  course.image,
+                                child: CustomImageView(
+                                  imagePath: course.image,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -78,11 +80,22 @@ class ProfileMyCourseListScreenState extends State<ProfileMyCourseListScreen>
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  CustomElevatedButton(
-                                    height: 20.v,
-                                    width: 55.h,
-                                    text: "UX Design",
-                                    buttonTextStyle: theme.textTheme.labelSmall!,
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20.h,
+                                      vertical: 4.v,
+                                    ),
+                                    decoration: AppDecoration
+                                        .outlinePrimaryContainer
+                                        .copyWith(
+                                      borderRadius:
+                                          BorderRadiusStyle.circleBorder5,
+                                    ),
+                                    child: Text(
+                                      course.language,
+                                      style:
+                                          CustomTextStyles.labelMediumPrimary,
+                                    ),
                                   ),
                                   SizedBox(height: 3.v),
                                   SizedBox(
@@ -91,7 +104,8 @@ class ProfileMyCourseListScreenState extends State<ProfileMyCourseListScreen>
                                       course.name,
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
-                                      style: theme.textTheme.titleSmall!.copyWith(
+                                      style:
+                                          theme.textTheme.titleSmall!.copyWith(
                                         height: 1.60,
                                       ),
                                     ),

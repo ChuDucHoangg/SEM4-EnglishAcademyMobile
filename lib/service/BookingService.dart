@@ -22,4 +22,22 @@ class BookingService {
       throw Exception('Failed to load bookings');
     }
   }
+
+  static Future<BookingModel> fetchBookingDetail(int id) async {
+    final String token = await AuthService.getToken();
+    final response = await http.get(
+      Uri.parse('${ApiConstants.baseUrl}${ApiConstants.bookingDetail}/$id'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final dynamic bookingJson =
+          json.decode(utf8.decode(response.bodyBytes))['data'];
+      return BookingModel.fromJson(bookingJson);
+    } else {
+      throw Exception('Failed to load booking detail');
+    }
+  }
 }

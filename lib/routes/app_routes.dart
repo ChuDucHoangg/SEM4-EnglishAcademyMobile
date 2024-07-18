@@ -1,8 +1,7 @@
-
-
 import 'package:english_academy_mobile/presentation/auth/change_password_screen/changePassword.dart';
 import 'package:english_academy_mobile/presentation/auth/login_screen/login_screen.dart';
 import 'package:english_academy_mobile/presentation/auth/register_screen/register_screen.dart';
+import 'package:english_academy_mobile/presentation/profile_screen/profile_my_booking_screen/my_booking_detail.dart';
 import 'package:english_academy_mobile/presentation/tutor_screen/tutor_detail_screen/tutor_detail_screen.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/answer_detail_screen/answer_detail_screen.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/entrance_test_finish/entrance_test_finish.dart';
@@ -94,6 +93,8 @@ class AppRoutes {
   static const String profileSubjectSlotScreen = '/profile_subject_slot_screen';
 
   static const String profileSubjectLearningScreen = '/profile_subject_learning_screen';
+
+  static const String profileBookingDetailScreen = '/profile_booking_detail_screen';
 
   static const String profileMoreScreen = '/profile_more';
 
@@ -206,6 +207,11 @@ class AppRoutes {
       final String? slug =
       ModalRoute.of(context)?.settings.arguments as String?;
       return ProfileSubjectLearningScreen(slug: slug!);
+    },
+    profileBookingDetailScreen: (context) {
+      final int? id =
+      ModalRoute.of(context)?.settings.arguments as int?;
+      return MyBookingDetail(id: id!);
     },
     profileMoreScreen : (context) => ProfileMoreScreen(),
     personalDataEditScreen : (context) => PersonalDataEditScreen(),

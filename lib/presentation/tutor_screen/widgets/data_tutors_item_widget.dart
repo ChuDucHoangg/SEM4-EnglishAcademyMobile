@@ -46,97 +46,97 @@ class DataTutorsItemWidget extends StatelessWidget {
                     _navigateToTutorDetail(context, tutor.code);
                   },
                   child: Container(
-                padding: EdgeInsets.all(15.h),
-                decoration: AppDecoration.outlineBluegray501.copyWith(
-                  borderRadius: BorderRadiusStyle.roundedBorder12,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 48.adaptSize,
-                      width: 48.adaptSize,
-                      child: Stack(
-                        alignment: Alignment.bottomCenter,
-                        children: [
-                          ClipRRect(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(24.h)),
-                            child: Image.network(
-                              width: 48.h,
-                              height: 48.h,
-                              tutor.avatar,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          CustomElevatedButton(
-                            height: 16.v,
-                            width: 40.h,
-                            text: "4.5",
-                            leftIcon: Container(
-                              margin: EdgeInsets.only(right: 4.h),
-                              child: CustomImageView(
-                                imagePath: ImageConstant
-                                    .imgSignalOnerrorcontainer,
-                                height: 8.adaptSize,
-                                width: 8.adaptSize,
-                              ),
-                            ),
-                            buttonStyle:
-                            CustomButtonStyles.fillAmberA,
-                            buttonTextStyle: CustomTextStyles
-                                .labelMediumOnErrorContainer,
-                          ),
-                        ],
-                      ),
+                    padding: EdgeInsets.all(15.h),
+                    decoration: AppDecoration.outlineBluegray501.copyWith(
+                      borderRadius: BorderRadiusStyle.roundedBorder12,
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 12.h,
-                        top: 2.v,
-                        bottom: 2.v,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            tutor.fullname,
-                            style: theme.textTheme.titleSmall,
-                          ),
-                          SizedBox(height: 10.v),
-                          Row(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 48.adaptSize,
+                          width: 48.adaptSize,
+                          child: Stack(
+                            alignment: Alignment.bottomCenter,
                             children: [
-                              Icon(
-                                Icons.location_on_outlined,
-                                color: Colors.grey[600],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 4.h),
-                                child: Text(
-                                  tutor.address,
-                                  style: CustomTextStyles.labelLargeGray60001,
+                              ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(24.h)),
+                                child: CustomImageView(
+                                  width: 48.h,
+                                  height: 48.h,
+                                  imagePath: tutor.avatar,
+                                  fit: BoxFit.cover,
                                 ),
+                              ),
+                              CustomElevatedButton(
+                                height: 16.v,
+                                width: 40.h,
+                                text: "4.5",
+                                leftIcon: Container(
+                                  margin: EdgeInsets.only(right: 4.h),
+                                  child: CustomImageView(
+                                    imagePath:
+                                        ImageConstant.imgSignalOnerrorcontainer,
+                                    height: 8.adaptSize,
+                                    width: 8.adaptSize,
+                                  ),
+                                ),
+                                buttonStyle: CustomButtonStyles.fillAmberA,
+                                buttonTextStyle: CustomTextStyles
+                                    .labelMediumOnErrorContainer,
                               ),
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: 12.h,
+                            top: 2.v,
+                            bottom: 2.v,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                tutor.fullname,
+                                style: theme.textTheme.titleSmall,
+                              ),
+                              SizedBox(height: 10.v),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.location_on_outlined,
+                                    color: Colors.grey[600],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 4.h),
+                                    child: Text(
+                                      tutor.address,
+                                      style:
+                                          CustomTextStyles.labelLargeGray60001,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: 2.h,
+                            top: 30.v,
+                            bottom: 2.v,
+                          ),
+                          child: Text(
+                            truncateText(tutor.teachingSubject),
+                            style: CustomTextStyles.labelLargeGray60001,
+                          ),
+                        ),
+                      ],
                     ),
-                    Spacer(),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 2.h,
-                        top: 30.v,
-                        bottom: 2.v,
-                      ),
-                      child: Text(
-                        truncateText(tutor.teachingSubject),
-                        style: CustomTextStyles.labelLargeGray60001,
-                      ),
-                    ),
-                  ],
-                ),
-              ));
+                  ));
             },
           );
         } else if (snapshot.hasError) {

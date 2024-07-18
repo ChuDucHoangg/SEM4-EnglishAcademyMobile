@@ -11,7 +11,6 @@ class ButtonSheetItem extends StatefulWidget {
   ButtonSheetItemState createState() => ButtonSheetItemState();
 }
 
-
 class ButtonSheetItemState extends State<ButtonSheetItem>
     with AutomaticKeepAliveClientMixin<ButtonSheetItem> {
   @override
@@ -22,8 +21,8 @@ class ButtonSheetItemState extends State<ButtonSheetItem>
   void initState() {
     super.initState();
     if (widget.course.topicOnlineDetailResponseList.isNotEmpty) {
-      _isExpandedList =
-          List<bool>.filled(widget.course.topicOnlineDetailResponseList.length, false);
+      _isExpandedList = List<bool>.filled(
+          widget.course.topicOnlineDetailResponseList.length, false);
       _isExpandedList[0] = true;
     }
   }
@@ -65,23 +64,21 @@ class ButtonSheetItemState extends State<ButtonSheetItem>
                   child: ElevatedButton(
                     child: Text(
                       "Cancel",
-                      style: CustomTextStyles.titleSmallPrimaryMedium,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700),
                     ),
                     onPressed: () {
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
+                      backgroundColor: Color(0xFF1E2857),
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-          SizedBox(height: 22.v),
-          Divider(
-            indent: 24.h,
-            endIndent: 24.h,
           ),
           _buildItemTopic(context),
           SizedBox(height: 22.v),
@@ -97,8 +94,7 @@ class ButtonSheetItemState extends State<ButtonSheetItem>
     }
 
     void _navigateToTestDetail(BuildContext context, String slug) {
-      Navigator.pushNamed(context, AppRoutes.testOnlineScreen,
-          arguments: slug);
+      Navigator.pushNamed(context, AppRoutes.testOnlineScreen, arguments: slug);
     }
 
     List<Widget> lessonWidgets = [];
@@ -110,8 +106,9 @@ class ButtonSheetItemState extends State<ButtonSheetItem>
       }
     }
 
-    for (int i = 0; i < widget.course.topicOnlineDetailResponseList.length;
-    i++) {
+    for (int i = 0;
+        i < widget.course.topicOnlineDetailResponseList.length;
+        i++) {
       var topic = widget.course.topicOnlineDetailResponseList[i];
       lessonWidgets.add(Column(children: [
         SizedBox(height: 17.v),
@@ -150,13 +147,13 @@ class ButtonSheetItemState extends State<ButtonSheetItem>
                               Container(
                                 child: item['itemType'] == 0
                                     ? Icon(
-                                  Icons.play_circle,
-                                  size: 20.adaptSize,
-                                )
+                                        Icons.play_circle,
+                                        size: 20.adaptSize,
+                                      )
                                     : Icon(
-                                  Icons.pending_actions_outlined,
-                                  size: 20.adaptSize,
-                                ),
+                                        Icons.pending_actions_outlined,
+                                        size: 20.adaptSize,
+                                      ),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(
@@ -165,8 +162,8 @@ class ButtonSheetItemState extends State<ButtonSheetItem>
                                 ),
                                 child: Text(
                                   truncateText(item['title']),
-                                  style:
-                                  CustomTextStyles.labelLargeGray900.copyWith(
+                                  style: CustomTextStyles.labelLargeGray900
+                                      .copyWith(
                                     color: appTheme.gray900,
                                   ),
                                 ),
@@ -175,18 +172,18 @@ class ButtonSheetItemState extends State<ButtonSheetItem>
                               Container(
                                 child: item['itemType'] == 0
                                     ? Text(
-                                  "03:23",
-                                  style: CustomTextStyles
-                                      .labelLargeBluegray300
-                                      .copyWith(
-                                    color: appTheme.blueGray300,
-                                  ),
-                                )
+                                        "03:23",
+                                        style: CustomTextStyles
+                                            .labelLargeBluegray300
+                                            .copyWith(
+                                          color: appTheme.blueGray300,
+                                        ),
+                                      )
                                     : Text(
-                                  "Start Quiz",
-                                  style:
-                                  CustomTextStyles.labelLargeGray900_1,
-                                ),
+                                        "Start Quiz",
+                                        style: CustomTextStyles
+                                            .labelLargeGray900_1,
+                                      ),
                               ),
                               if (item['itemType'] == 0)
                                 Padding(
@@ -229,8 +226,8 @@ class ButtonSheetItemState extends State<ButtonSheetItem>
                                 ),
                                 child: Text(
                                   truncateText(item['title']),
-                                  style:
-                                  CustomTextStyles.labelLargeGray900.copyWith(
+                                  style: CustomTextStyles.labelLargeGray900
+                                      .copyWith(
                                     color: appTheme.gray900,
                                   ),
                                 ),
@@ -239,8 +236,7 @@ class ButtonSheetItemState extends State<ButtonSheetItem>
                               Container(
                                 child: Text(
                                   "Start Test",
-                                  style:
-                                  CustomTextStyles.labelLargeGray900_1,
+                                  style: CustomTextStyles.labelLargeGray900_1,
                                 ),
                               ),
                             ],

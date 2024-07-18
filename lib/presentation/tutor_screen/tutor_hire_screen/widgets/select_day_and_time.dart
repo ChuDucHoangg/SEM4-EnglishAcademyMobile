@@ -45,7 +45,7 @@ class _SelectDayAndTimeState extends State<SelectDayAndTime>
   Future<void> _fetchAvailability() async {
     try {
       final availability =
-      await TutorService.fetchAvailabilityDetail(widget.tutor.code);
+          await TutorService.fetchAvailabilityDetail(widget.tutor.code);
       setState(() {
         _availability = availability;
       });
@@ -109,7 +109,7 @@ class _SelectDayAndTimeState extends State<SelectDayAndTime>
     ][_tabController.index];
 
     List<AvailabilityTutorModel> selectedDaySchedule =
-    getScheduleForSelectedDay(selectedDay);
+        getScheduleForSelectedDay(selectedDay);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,11 +129,14 @@ class _SelectDayAndTimeState extends State<SelectDayAndTime>
           ),
         ),
         TabBar(
+          padding: EdgeInsets.symmetric(horizontal: 25),
+          tabAlignment: TabAlignment.start,
           controller: _tabController,
           isScrollable: true,
           indicator: BoxDecoration(
             color: Colors.transparent,
           ),
+          dividerColor: Colors.transparent,
           tabs: [
             DateButton(day: 'Monday', tabController: _tabController, index: 0),
             DateButton(day: 'Tuesday', tabController: _tabController, index: 1),
@@ -161,28 +164,28 @@ class _SelectDayAndTimeState extends State<SelectDayAndTime>
               SizedBox(height: 10),
               selectedDaySchedule.isNotEmpty
                   ? Wrap(
-                spacing: 12,
-                runSpacing: 10,
-                children: selectedDaySchedule.map((schedule) {
-                  String startTime = schedule.startTime.substring(0, 5);
-                  String endTime = schedule.endTime.substring(0, 5);
-                  String time = '$startTime - $endTime';
-                  return TimeButton(
-                    time: time,
-                    isSelected:
-                    _selectedSchedules[selectedDay]?.contains(time) ??
-                        false,
-                    onSelected: (selectedTime) =>
-                        _handleTimeSelected(selectedTime, schedule.id),
-                  );
-                }).toList(),
-              )
+                      spacing: 12,
+                      runSpacing: 10,
+                      children: selectedDaySchedule.map((schedule) {
+                        String startTime = schedule.startTime.substring(0, 5);
+                        String endTime = schedule.endTime.substring(0, 5);
+                        String time = '$startTime - $endTime';
+                        return TimeButton(
+                          time: time,
+                          isSelected:
+                              _selectedSchedules[selectedDay]?.contains(time) ??
+                                  false,
+                          onSelected: (selectedTime) =>
+                              _handleTimeSelected(selectedTime, schedule.id),
+                        );
+                      }).toList(),
+                    )
                   : Center(
-                child: Text(
-                  "There is currently no data available.",
-                  style: TextStyle(color: Colors.grey, fontSize: 18),
-                ),
-              ),
+                      child: Text(
+                        "There is currently no data available.",
+                        style: TextStyle(color: Colors.grey, fontSize: 18),
+                      ),
+                    ),
             ],
           ),
         ),
@@ -190,4 +193,3 @@ class _SelectDayAndTimeState extends State<SelectDayAndTime>
     );
   }
 }
-
