@@ -44,7 +44,7 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
   Widget build(BuildContext context) {
     return BottomAppBar(
       // height: 60,
-      color: Theme.of(context).colorScheme.onPrimaryContainer,
+      color: Colors.grey[200],
       shape: CircularNotchedRectangle(),
       child: SizedBox(
         height: 24.v,
