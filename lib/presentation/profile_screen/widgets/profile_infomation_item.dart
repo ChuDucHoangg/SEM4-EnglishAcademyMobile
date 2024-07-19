@@ -60,10 +60,10 @@ class ProfileInfomationItemState extends State<ProfileInfomationItem>
           ClipRRect(
             borderRadius:
             BorderRadius.all(Radius.circular(50)),
-            child: Image.network(
+            child: CustomImageView(
               width: 50,
               height: 50,
-              "https://static2.yan.vn/YanNews/2167221/202102/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg",
+              imagePath: "https://static2.yan.vn/YanNews/2167221/202102/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg",
               fit: BoxFit.cover,
             ),
           ),

@@ -180,6 +180,7 @@ class LoginScreenState extends State<LoginScreen>
             ),
           ),
         ),
+        dividerColor: Colors.transparent,
         tabs: [
           Tab(
             child: Text(

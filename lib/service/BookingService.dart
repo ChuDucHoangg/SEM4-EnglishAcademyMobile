@@ -40,4 +40,22 @@ class BookingService {
       throw Exception('Failed to load booking detail');
     }
   }
+
+  static Future<bool> checkRoomCode(String roomCode) async {
+    final String token = await AuthService.getToken();
+    final response = await http.get(
+      Uri.parse(
+          '${ApiConstants.baseUrl}${ApiConstants.checkStudent}/$roomCode'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseBody = json.decode(response.body);
+      return responseBody['status'];
+    } else {
+      throw Exception('Failed to check room code');
+    }
+  }
 }
