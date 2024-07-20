@@ -57,7 +57,8 @@ class ProfileScreenState extends State<ProfileScreen>
               SizedBox(height: 15.v),
               _buildCategory(context),
               SizedBox(height: 16.v),
-              _buildContent(context)
+              _buildContent(context),
+              SizedBox(height: 50.v),
             ],
           ),
         ),

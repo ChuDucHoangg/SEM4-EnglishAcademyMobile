@@ -23,63 +23,59 @@ class ProfileMoreScreen extends StatefulWidget {
 }
 
 class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
-
   bool isSwitched = false;
   bool privacy = false;
 
   @override
   Widget build(BuildContext context) {
-    return
-      // SafeArea(
-      // child:
-      Scaffold(
-        appBar: _buildAppbar(context),
-        body: SizedBox(
-          width: SizeUtils.width,
-          child: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 24.h, vertical: 32.h),
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
-              child: Column(
-                children: [
-                  _buildSetting1(context),
-                  SizedBox(height: 15.v),
-                  _buildSetting(
-                    context,
-                    file: ImageConstant.imgGridBlueGray300,
-                    label: "Referral Code",
-                    profile: ImageConstant.imgCalendarBlueGray300,
-                    label1: "Learning Reminder",
-                    settings: ImageConstant.imgTelevisionBlueGray30022x22,
-                    label2: "Voucher Code",
-                  ),
-                  SizedBox(height: 15.v),
-                  _buildSetting(
-                    context,
-                    file: ImageConstant.imgFileBlueGray300,
-                    label: "Investor Academy",
-                    profile: ImageConstant.imgProfileBlueGray300,
-                    label1: "FAQS",
-                    settings: ImageConstant.imgSettingsBlueGray300,
-                    label2: "Help Center",
-                  ),
-                  SizedBox(height: 15.v),
-                  _buildSetting4(context),
-                  SizedBox(height: 15.v),
-                  CustomElevatedButton(
-                    onPressed: () {
-                      _logout(context);
-                    },
-                    text: 'Logout',
-                    buttonStyle: CustomButtonStyles.fillPrimary,
-                    // child: Text('Logout'),
-                  ),
-                  SizedBox(height: 15.v),
-                ],
-              ),
+    return Scaffold(
+      appBar: _buildAppbar(context),
+      body: SizedBox(
+        width: SizeUtils.width,
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 24.h, vertical: 32.h),
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
+            child: Column(
+              children: [
+                _buildSetting1(context),
+                SizedBox(height: 15.v),
+                _buildSetting(
+                  context,
+                  file: ImageConstant.imgGridBlueGray300,
+                  label: "Referral Code",
+                  profile: ImageConstant.imgCalendarBlueGray300,
+                  label1: "Learning Reminder",
+                  settings: ImageConstant.imgTelevisionBlueGray30022x22,
+                  label2: "Voucher Code",
+                ),
+                SizedBox(height: 15.v),
+                _buildSetting(
+                  context,
+                  file: ImageConstant.imgFileBlueGray300,
+                  label: "Investor Academy",
+                  profile: ImageConstant.imgProfileBlueGray300,
+                  label1: "FAQS",
+                  settings: ImageConstant.imgSettingsBlueGray300,
+                  label2: "Help Center",
+                ),
+                SizedBox(height: 15.v),
+                _buildSetting4(context),
+                SizedBox(height: 15.v),
+                CustomElevatedButton(
+                  onPressed: () {
+                    _logout(context);
+                  },
+                  text: 'Logout',
+                  buttonStyle: CustomButtonStyles.fillPrimary,
+                  // child: Text('Logout'),
+                ),
+                SizedBox(height: 15.v),
+              ],
             ),
           ),
         ),
+      ),
       // ),
     );
   }
@@ -96,9 +92,8 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
       ),
       centerTitle: true,
       title: AppbarSubtitleOne(
-        text: "Profile" ,
+        text: "Profile",
       ),
-
     );
   }
 
@@ -106,7 +101,7 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 13.h),
       decoration: AppDecoration.outlineBluegray50.copyWith(
-        color: Theme.of(context).colorScheme.onPrimaryContainer,
+        color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: BorderRadiusStyle.roundedBorder12,
       ),
       child: Column(
@@ -115,7 +110,7 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
           _buildItem3(
             context,
             upload: ImageConstant.imgLockBlueGray300,
-            label: "Personal Details" ,
+            label: "Personal Details",
           ),
           _buildItem(
             context,
@@ -168,74 +163,35 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
 
   Widget _buildSetting4(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 13.h),
+      padding: EdgeInsets.symmetric(horizontal: 11.h),
       decoration: AppDecoration.outlineBluegray50.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder12,
+        color: Theme.of(context).colorScheme.primaryContainer,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            padding: EdgeInsets.only(
-              top: 16.v,
-              bottom: 15.v,
-            ),
-            decoration: AppDecoration.outlineBluegray502,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomCheckboxButton(
-                  text: "Privacy",
-                  value: privacy,
-                  padding: EdgeInsets.symmetric(vertical: 1.v),
-                  textStyle: CustomTextStyles.titleSmallBluegray800.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  ),
-                  onChange: (value) {
-                    setState(() {
-                      privacy = value;
-                    });
-                  },
-                ),
-                CustomImageView(
-                  imagePath: ImageConstant.imgArrowdownBlueGray300,
-                  height: 16.adaptSize,
-                  width: 16.adaptSize,
-                  margin: EdgeInsets.symmetric(vertical: 3.v),
-                ),
-              ],
-            ),
-          ),
-          // SizedBox(height: 16.v),
-          _buildItem(
-            context,
-            upload: ImageConstant.imgNotificationsOutline,
-            label: "Notification",
-          ),
           _buildItem2(
             context,
-            upload: ImageConstant.imgNotificationsOutline,
+            upload: ImageConstant.imgEye,
             label: "Change Password",
-          )
+          ),
         ],
       ),
     );
   }
-
-
 
   Future<void> _logout(BuildContext context) async {
     try {
       await AuthService.removeTokenFromSharedPreferences();
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => LoginScreen()),
-            (Route<dynamic> route) => false,
+        (Route<dynamic> route) => false,
       );
     } catch (e) {
       print('Error logging out: $e');
     }
   }
-
 
   Widget _buildItem(BuildContext context,
       {required String upload, required String label}) {
@@ -278,7 +234,6 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
     );
   }
 
-
   Widget _buildItem2(BuildContext context,
       {required String upload, required String label}) {
     return GestureDetector(
@@ -293,7 +248,6 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
           top: 16.v,
           bottom: 15.v,
         ),
-        decoration: AppDecoration.outlineBluegray502,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -376,6 +330,7 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
       padding: EdgeInsets.symmetric(horizontal: 13.h),
       decoration: AppDecoration.outlineBluegray50.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder12,
+        color: Theme.of(context).colorScheme.primaryContainer,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -404,12 +359,6 @@ class _ProfileMoreScreenState extends State<ProfileMoreScreen> {
                   ),
                 ),
                 Spacer(),
-                CustomImageView(
-                  imagePath: file,
-                  height: 16.adaptSize,
-                  width: 16.adaptSize,
-                  margin: EdgeInsets.symmetric(vertical: 3.v),
-                ),
               ],
             ),
           ),
