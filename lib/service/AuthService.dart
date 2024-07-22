@@ -44,7 +44,8 @@ class AuthService {
     }
   }
 
-  static Future<void> changePassword(String currentPassword, String newPassword, String confirmPassword,  BuildContext context) async {
+  static Future<void> changePassword(String currentPassword, String newPassword,
+      String confirmPassword, BuildContext context) async {
     try {
       final String? token = await getToken();
 
@@ -73,7 +74,7 @@ class AuthService {
         );
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => LoginScreen()),
-              (Route<dynamic> route) => false,
+          (Route<dynamic> route) => false,
         );
       } else if (response.statusCode == 400) {
         final Map<String, dynamic> responseData = json.decode(response.body);
@@ -86,8 +87,8 @@ class AuthService {
     }
   }
 
-  static Future<void> registerWithEmail(
-      String fullname, String email, String password, BuildContext context) async {
+  static Future<void> registerWithEmail(String fullname, String email,
+      String password, BuildContext context) async {
     try {
       final Map<String, dynamic> body = {
         'fullname': fullname.trim(),
@@ -119,7 +120,6 @@ class AuthService {
     }
   }
 
-
   static Future<void> _saveTokenToSharedPreferences(String token) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
@@ -130,31 +130,23 @@ class AuthService {
     await prefs.remove('auth_token');
   }
 
-
-
   static Future<String> getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString('token');
-    if (token != null && token.isNotEmpty ) {
+    if (token != null && token.isNotEmpty) {
       return token;
     }
     throw Exception('Token not found');
   }
-
-
 
   static Future<int> getUserIdFromToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString('token');
     if (token != null) {
       final Map<String, dynamic> tokenData = json.decode(
-          ascii.decode(base64.decode(base64.normalize(token.split(".")[1])))
-      );
+          ascii.decode(base64.decode(base64.normalize(token.split(".")[1]))));
       return tokenData['Id'];
     }
     throw Exception('Token not found');
   }
-
-
-
 }

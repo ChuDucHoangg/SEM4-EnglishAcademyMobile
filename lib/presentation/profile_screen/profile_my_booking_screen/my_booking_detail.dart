@@ -8,7 +8,6 @@ import '../../../widgets/app_bar/appbar_leading_image.dart';
 import '../../../widgets/app_bar/appbar_subtitle_one.dart';
 import '../../../widgets/app_bar/custom_app_bar.dart';
 import '../../../widgets/custom_icon_button.dart';
-import '../../tutor_screen/tutor_detail_screen/tutor_detail_screen.dart';
 import '../../tutor_screen/tutor_hire_screen/tutor_hire_screen.dart';
 
 class MyBookingDetail extends StatefulWidget {

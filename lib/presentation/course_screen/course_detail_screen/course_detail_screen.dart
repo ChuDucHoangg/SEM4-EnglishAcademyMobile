@@ -68,23 +68,35 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
             return Scaffold(
               appBar: _buildAppBar(context),
               body: Padding(
-                padding: EdgeInsets.only(top: 24.v),
-                child: Stack(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.h),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildImage(context, course),
-                          SizedBox(height: 23.v),
-                          _buildCategory(context, course),
-                          SizedBox(height: 12.v),
-                          Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: NestedScrollView(
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) {
+                    return <Widget>[
+                      SliverToBoxAdapter(child: _buildImage(context, course)),
+                      SliverToBoxAdapter(child: SizedBox(height: 13.v)),
+                      SliverToBoxAdapter(
+                          child: _buildCategory(context, course)),
+                      SliverPersistentHeader(
+                        pinned: true,
+                        floating: false,
+                        delegate: _SliverAppBarDelegate(
+                          minHeight: 20.0,
+                          maxHeight: 20.0,
+                          child: Container(height: 12.v, color: Colors.white,),
+                        ),
+                      ),
+                      SliverPersistentHeader(
+                        pinned: true,
+                        floating: false,
+                        delegate: _SliverAppBarDelegate(
+                          minHeight: 50.0,
+                          maxHeight: 50.0,
+                          child: Container(
+                            color: Colors.white,
                             width: 297.h,
                             margin: EdgeInsets.only(
-                              left: 8.h,
+                              // left: 8.h,
                               right: 38.h,
                             ),
                             child: Text(
@@ -96,61 +108,115 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                               ),
                             ),
                           ),
-                          SizedBox(height: 10.v),
-                          _buildDetail(context, course),
-                          SizedBox(height: 13.v),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.h),
-                            child: Container(
-                              height: 8.v,
-                              width: 327.h,
-                              decoration: BoxDecoration(
-                                color: appTheme.blueGray50,
-                                borderRadius: BorderRadius.circular(
-                                  3.h,
-                                ),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                  3.h,
-                                ),
-                                child: LinearProgressIndicator(
-                                  value: 0.75,
-                                  backgroundColor: appTheme.blueGray50,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    theme.colorScheme.primary,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 10.v),
-                          Padding(
-                            padding: EdgeInsets.only(left: 8.h),
-                            child: RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "30% ",
-                                    style: theme.textTheme.labelLarge,
-                                  ),
-                                  TextSpan(
-                                    text: "from 24 sessions",
-                                    style: CustomTextStyles.labelLargeMedium,
-                                  )
-                                ],
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                          SizedBox(height: 30.v),
-                          _buildTabview(context),
-                        ],
+                        ),
                       ),
-                    ),
-                    _buildTabBarView(context, course),
+                      SliverPersistentHeader(
+                        pinned: true,
+                        floating: false,
+                        delegate: _SliverAppBarDelegate(
+                          minHeight: 20.0,
+                          maxHeight: 20.0,
+                          child: _buildDetail(context, course),
+                        ),
+                      ),
+                      SliverPersistentHeader(
+                        pinned: true,
+                        floating: false,
+                        delegate: _SliverAppBarDelegate(
+                          minHeight: 10.0,
+                          maxHeight: 10.0,
+                          child: Container(height: 12.v,color: Colors.white,),
+                        ),
+                      ),
+                      SliverPersistentHeader(
+                        pinned: true,
+                        floating: false,
+                        delegate: _SliverAppBarDelegate(
+                          minHeight: 10.0,
+                          maxHeight: 10.0,
+                          child: Container(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8.h),
+                              child: Container(
+                                height: 8.v,
+                                width: 327.h,
+                                decoration: BoxDecoration(
+                                  color: appTheme.blueGray50,
+                                  borderRadius: BorderRadius.circular(
+                                    3.h,
+                                  ),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                    3.h,
+                                  ),
+                                  child: LinearProgressIndicator(
+                                    value: 0.75,
+                                    backgroundColor: appTheme.blueGray50,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      theme.colorScheme.primary,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SliverPersistentHeader(
+                        pinned: true,
+                        floating: false,
+                        delegate: _SliverAppBarDelegate(
+                          minHeight: 10.0,
+                          maxHeight: 10.0,
+                          child: Container(height: 12.v, color: Colors.white,),
+                        ),
+                      ),
+                      SliverPersistentHeader(
+                        pinned: true,
+                        floating: false,
+                        delegate: _SliverAppBarDelegate(
+                          minHeight: 40.0,
+                          maxHeight: 40.0,
+                          child: Container(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 8.h),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "30% ",
+                                      style: theme.textTheme.labelLarge,
+                                    ),
+                                    TextSpan(
+                                      text: "from 24 sessions",
+                                      style: CustomTextStyles.labelLargeMedium,
+                                    )
+                                  ],
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SliverPersistentHeader(
+                        pinned: true,
+                        floating: false,
+                        delegate: _SliverAppBarDelegate(
+                          minHeight: 50.0,
+                          maxHeight: 50.0,
+                          child: _buildTabview(context),
+                        ),
+                      ),
+                    ];
+                  },
+                  body: Column(children: [
+                    Expanded(child: _buildTabBarView(context, course)),
                     _buildBottomBar(context, course, _isBought)
-                  ],
+                  ]),
                 ),
               ),
             );
@@ -183,13 +249,12 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
     return Card(
       clipBehavior: Clip.antiAlias,
       elevation: 0,
-      margin: EdgeInsets.only(left: 8.h),
+      margin: EdgeInsets.only(top: 8.h),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusStyle.roundedBorder12,
       ),
       child: Container(
         height: 210.v,
-        width: 327.h,
         padding: EdgeInsets.symmetric(vertical: 60.v),
         decoration: BoxDecoration(
           borderRadius: BorderRadiusStyle.roundedBorder12,
@@ -260,7 +325,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
     }
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.h),
+      padding: EdgeInsets.symmetric(horizontal: 0.h),
       child: Row(
         children: [
           CustomElevatedButton(
@@ -298,81 +363,84 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
     int totalReviews = 0;
     totalLessons += course.topicOnlineDetailList.length;
     totalReviews += course.reviewList.length;
-    return Row(
-      children: [
-        CustomImageView(
-          imagePath: ImageConstant.imgSignal,
-          height: 16.adaptSize,
-          width: 16.adaptSize,
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 4.h),
-          child: RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: course.star.toString(),
-                  style: theme.textTheme.labelLarge,
-                ),
-                TextSpan(
-                  text: " ($totalReviews)",
-                  style: CustomTextStyles.labelLargeMedium,
-                )
-              ],
+    return Container(
+      color: Colors.white,
+      child: Row(
+        children: [
+          CustomImageView(
+            imagePath: ImageConstant.imgSignal,
+            height: 16.adaptSize,
+            width: 16.adaptSize,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 4.h),
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: course.star.toString(),
+                    style: theme.textTheme.labelLarge,
+                  ),
+                  TextSpan(
+                    text: " ($totalReviews)",
+                    style: CustomTextStyles.labelLargeMedium,
+                  )
+                ],
+              ),
+              textAlign: TextAlign.left,
             ),
-            textAlign: TextAlign.left,
           ),
-        ),
-        SizedBox(
-          child: Divider(
-            color: appTheme.blueGray100,
-            indent: 14.h,
-          ),
-        ),
-        CustomImageView(
-          imagePath: ImageConstant.imgSearch,
-          height: 16.adaptSize,
-          width: 16.adaptSize,
-          margin: EdgeInsets.only(left: 11.h),
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 8.h),
-          child: RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: "1,765 ",
-                  style: theme.textTheme.labelLarge,
-                ),
-                TextSpan(
-                  text: "enrolled",
-                  style: CustomTextStyles.labelLargeMedium,
-                )
-              ],
+          SizedBox(
+            child: Divider(
+              color: appTheme.blueGray100,
+              indent: 14.h,
             ),
-            textAlign: TextAlign.left,
           ),
-        ),
-        SizedBox(
-          child: Divider(
-            color: appTheme.blueGray100,
-            indent: 14.h,
+          CustomImageView(
+            imagePath: ImageConstant.imgSearch,
+            height: 16.adaptSize,
+            width: 16.adaptSize,
+            margin: EdgeInsets.only(left: 11.h),
           ),
-        ),
-        CustomImageView(
-          imagePath: ImageConstant.imgUserGray6000116x16,
-          height: 16.adaptSize,
-          width: 16.adaptSize,
-          margin: EdgeInsets.only(left: 11.h),
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 8.h),
-          child: Text(
-            "$totalLessons+ Lessons",
-            style: CustomTextStyles.labelLargeGray60001_1,
+          Padding(
+            padding: EdgeInsets.only(left: 8.h),
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: "1,765 ",
+                    style: theme.textTheme.labelLarge,
+                  ),
+                  TextSpan(
+                    text: "enrolled",
+                    style: CustomTextStyles.labelLargeMedium,
+                  )
+                ],
+              ),
+              textAlign: TextAlign.left,
+            ),
           ),
-        )
-      ],
+          SizedBox(
+            child: Divider(
+              color: appTheme.blueGray100,
+              indent: 14.h,
+            ),
+          ),
+          CustomImageView(
+            imagePath: ImageConstant.imgUserGray6000116x16,
+            height: 16.adaptSize,
+            width: 16.adaptSize,
+            margin: EdgeInsets.only(left: 11.h),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 8.h),
+            child: Text(
+              "$totalLessons+ Lessons",
+              style: CustomTextStyles.labelLargeGray60001_1,
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -381,7 +449,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
     return Container(
       height: 40.v,
       width: 327.h,
-      margin: EdgeInsets.only(left: 8.h),
+      // margin: EdgeInsets.only(left: 8.h),
       decoration: BoxDecoration(
         color: appTheme.gray5002,
         borderRadius: BorderRadius.circular(
@@ -430,16 +498,13 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
 
   /// Section Widget
   Widget _buildTabBarView(BuildContext context, CourseModel course) {
-    return Container(
-      margin: EdgeInsets.only(top: 450.v),
-      child: TabBarView(
-        controller: tabviewController,
-        children: [
-          CourseDetailAboutItem(course: course),
-          CourseDetailLessonsItem(course: course, isBought: _isBought),
-          CourseDetailReviewsItem(course: course)
-        ],
-      ),
+    return TabBarView(
+      controller: tabviewController,
+      children: [
+        CourseDetailAboutItem(course: course),
+        CourseDetailLessonsItem(course: course, isBought: _isBought),
+        CourseDetailReviewsItem(course: course)
+      ],
     );
   }
 
@@ -449,9 +514,9 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        width: double.maxFinite,
+        // width: double.maxFinite,
         padding: EdgeInsets.symmetric(
-          horizontal: 24.h,
+          horizontal: 4.h,
           vertical: 12.v,
         ),
         decoration: AppDecoration.outlineGray9004,
@@ -536,5 +601,36 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
   /// Navigates back to the previous screen.
   onTapArrowLeft(BuildContext context) {
     Navigator.pop(context);
+  }
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+
+  _SliverAppBarDelegate({
+    required this.minHeight,
+    required this.maxHeight,
+    required this.child,
+  });
+
+  @override
+  double get minExtent => minHeight;
+
+  @override
+  double get maxExtent => maxHeight;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return SizedBox.expand(child: child);
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight ||
+        minHeight != oldDelegate.minHeight ||
+        child != oldDelegate.child;
   }
 }

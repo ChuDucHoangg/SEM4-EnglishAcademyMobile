@@ -17,6 +17,7 @@ class ApiConstants {
   static const String createAnswerItemSlotStudent = "/answer-student-item-slot";
   static const String testOnline = "/test-online/detail";
   static const String resultTestOnline = "/test-online/result";
+  static const String certificateOnline = "/certificate-online/complete-course";
 
   static const String tutorList = "/any/tutor";
   static const String tutorDetail = "/any/tutor-detail";

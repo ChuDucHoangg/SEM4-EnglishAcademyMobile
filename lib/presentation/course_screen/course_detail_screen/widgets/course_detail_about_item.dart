@@ -11,8 +11,8 @@ class CourseDetailAboutItem extends StatefulWidget {
 
   const CourseDetailAboutItem({Key? key, required this.course})
       : super(
-    key: key,
-  );
+          key: key,
+        );
 
   @override
   CourseDetailAboutItemState createState() => CourseDetailAboutItemState();
@@ -53,7 +53,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 24.h),
+                    padding: EdgeInsets.only(left: 4.h),
                     child: Text(
                       "Descriptions",
                       style: theme.textTheme.titleMedium,
@@ -66,7 +66,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                   child: Container(
                     width: 313.h,
                     margin: EdgeInsets.only(
-                      left: 24.h,
+                      left: 4.h,
                       right: 38.h,
                     ),
                     child: Text(
@@ -74,7 +74,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                       maxLines: 7,
                       overflow: TextOverflow.ellipsis,
                       style:
-                      CustomTextStyles.titleSmallGray60001Medium.copyWith(
+                          CustomTextStyles.titleSmallGray60001Medium.copyWith(
                         height: 1.60,
                       ),
                     ),
@@ -86,7 +86,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                   child: Container(
                     width: 313.h,
                     margin: EdgeInsets.only(
-                      left: 24.h,
+                      left: 4.h,
                       right: 38.h,
                     ),
                     child: Text(
@@ -94,7 +94,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                       maxLines: 7,
                       overflow: TextOverflow.ellipsis,
                       style:
-                      CustomTextStyles.titleSmallGray60001Medium.copyWith(
+                          CustomTextStyles.titleSmallGray60001Medium.copyWith(
                         height: 1.60,
                       ),
                     ),
@@ -106,7 +106,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 24.h),
+                    padding: EdgeInsets.only(left: 4.h),
                     child: Text(
                       "Key points",
                       style: theme.textTheme.titleMedium,
@@ -115,7 +115,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                 ),
                 SizedBox(height: 16.v),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.h),
+                  padding: EdgeInsets.symmetric(horizontal: 4.h),
                   child: CustomCheckboxButton(
                     text: "Critical Thinking",
                     value: criticalThinking,
@@ -126,7 +126,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                 ),
                 SizedBox(height: 8.v),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.h),
+                  padding: EdgeInsets.symmetric(horizontal: 4.h),
                   child: CustomCheckboxButton(
                     text: "User Experience Research",
                     value: checkmark,
@@ -137,7 +137,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                 ),
                 SizedBox(height: 8.v),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.h),
+                  padding: EdgeInsets.symmetric(horizontal: 4.h),
                   child: CustomCheckboxButton(
                     text: "User Interface Design",
                     value: userInterfaceDesign,
@@ -148,7 +148,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                 ),
                 SizedBox(height: 8.v),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.h),
+                  padding: EdgeInsets.symmetric(horizontal: 4.h),
                   child: CustomCheckboxButton(
                     text: "Usability Testing",
                     value: usabilityTesting,
@@ -159,7 +159,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                 ),
                 SizedBox(height: 8.v),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.h),
+                  padding: EdgeInsets.symmetric(horizontal: 4.h),
                   child: CustomCheckboxButton(
                     text: "And many more...",
                     value: andmanymore,
@@ -174,7 +174,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 24.h),
+                    padding: EdgeInsets.only(left: 4.h),
                     child: Text(
                       "Instructor",
                       style: theme.textTheme.titleMedium,
@@ -183,7 +183,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                 ),
                 SizedBox(height: 11.v),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 23.h),
+                  // margin: EdgeInsets.symmetric(horizontal: 3.h),
                   padding: EdgeInsets.all(15.h),
                   decoration: AppDecoration.outlineBluegray501.copyWith(
                     borderRadius: BorderRadiusStyle.roundedBorder12,
@@ -213,14 +213,15 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                               text: "4.5",
                               buttonStyle: CustomButtonStyles.fillAmberA,
                               buttonTextStyle:
-                              CustomTextStyles.labelSmallOnErrorContainer,
+                                  CustomTextStyles.labelSmallOnErrorContainer,
                               alignment: Alignment.bottomCenter,
                             ),
                           ],
                         ),
                       ),
+                      SizedBox(width: 20.h),
                       Padding(
-                        padding: EdgeInsets.only(left: 12.h),
+                        padding: EdgeInsets.only(left: 0.h),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -245,7 +246,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                                       "585k students",
                                       textAlign: TextAlign.right,
                                       style:
-                                      CustomTextStyles.labelLargeGray60001,
+                                          CustomTextStyles.labelLargeGray60001,
                                     ),
                                   ),
                                   Spacer(),
@@ -261,7 +262,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                                       "12 courses",
                                       textAlign: TextAlign.right,
                                       style:
-                                      CustomTextStyles.labelLargeGray60001,
+                                          CustomTextStyles.labelLargeGray60001,
                                     ),
                                   ),
                                 ],
@@ -273,7 +274,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                     ],
                   ),
                 ),
-                SizedBox(height: 120.v),
+                // SizedBox(height: 20.v),
               ],
             ),
           ],

@@ -38,7 +38,7 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: 10.v),
+          padding: EdgeInsets.only(top: 0.v),
           child: Column(
             children: [
               Column(
@@ -46,7 +46,7 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 24.h),
+                      padding: EdgeInsets.only(left: 4.h),
                       child: Text(
                         "Ratings",
                         style: CustomTextStyles.titleMediumOnPrimaryContainer,
@@ -74,9 +74,9 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
     totalReviews += course.reviewList.length;
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 24.h),
+      margin: EdgeInsets.symmetric(horizontal: 14.h),
       padding: EdgeInsets.symmetric(
-        horizontal: 50.h,
+        horizontal: 20.h,
         vertical: 19.v,
       ),
       decoration: AppDecoration.outlineBluegray503.copyWith(
@@ -95,7 +95,7 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
           ),
           SizedBox(height: 4.v),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 26.h),
+            padding: EdgeInsets.symmetric(horizontal: 0.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -177,7 +177,7 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
                     ),
                     child: Container(
                       height: 7.v,
-                      width: 130.h,
+                      width: 150.h,
                       decoration: BoxDecoration(
                         color: appTheme.gray100,
                         borderRadius: BorderRadius.circular(
@@ -228,7 +228,7 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
                     ),
                     child: Container(
                       height: 7.v,
-                      width: 130.h,
+                      width: 150.h,
                       decoration: BoxDecoration(
                         color: appTheme.gray100,
                         borderRadius: BorderRadius.circular(
@@ -277,7 +277,7 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
                   ),
                   child: Container(
                     height: 7.v,
-                    width: 130.h,
+                    width: 150.h,
                     decoration: BoxDecoration(
                       color: appTheme.gray100,
                       borderRadius: BorderRadius.circular(
@@ -325,7 +325,7 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
                   ),
                   child: Container(
                     height: 7.v,
-                    width: 130.h,
+                    width: 150.h,
                     decoration: BoxDecoration(
                       color: appTheme.gray100,
                       borderRadius: BorderRadius.circular(
@@ -373,7 +373,7 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
                   ),
                   child: Container(
                     height: 7.v,
-                    width: 130.h,
+                    width: 150.h,
                     decoration: BoxDecoration(
                       color: appTheme.gray100,
                       borderRadius: BorderRadius.circular(
@@ -458,8 +458,12 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
 
     for (int i = 0; i < widget.course.reviewList.length; i++) {
       var item = widget.course.reviewList[i];
-      final createdDate = item['createdDate'] != null ? DateTime.parse(item['createdDate']) : null;
-      final formattedDate = createdDate != null ? DateFormat('dd/MM/yyyy').format(createdDate) : '';
+      final createdDate = item['createdDate'] != null
+          ? DateTime.parse(item['createdDate'])
+          : null;
+      final formattedDate = createdDate != null
+          ? DateFormat('dd/MM/yyyy').format(createdDate)
+          : '';
       reviewWidgets.add(Column(children: [
         SizedBox(height: 19.v),
         Container(
@@ -469,7 +473,8 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
         Row(
           children: [
             CustomImageView(
-              imagePath: ImageConstant.imgAvatar40x40,
+              imagePath:
+                  "https://static2.yan.vn/YanNews/2167221/202102/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg",
               height: 40.adaptSize,
               width: 40.adaptSize,
               radius: BorderRadius.circular(
@@ -478,15 +483,15 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
               margin: EdgeInsets.only(bottom: 1.v),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 16.h),
+              padding: EdgeInsets.only(left: 10.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Merrill Kervin",
+                    (item['createdBy']),
                     style: theme.textTheme.titleSmall,
                   ),
-                  SizedBox(height: 10.v),
+                  SizedBox(height: 5.v),
                   Text(
                     formattedDate,
                     style: CustomTextStyles.labelLargeGray60001,
@@ -495,21 +500,33 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
               ),
             ),
             Spacer(),
-            CustomElevatedButton(
-              height: 20.v,
-              width: 43.h,
-              text: (item['score']).toString(),
-              margin: EdgeInsets.only(bottom: 23.v),
-              leftIcon: Container(
-                margin: EdgeInsets.only(right: 4.h),
-                child: CustomImageView(
-                  imagePath: ImageConstant.imgSignalOnerrorcontainer,
-                  height: 10.adaptSize,
-                  width: 10.adaptSize,
-                ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 15.h,
+                vertical: 4.v,
               ),
-              buttonStyle: CustomButtonStyles.fillAmberA,
-              buttonTextStyle: CustomTextStyles.labelMediumOnErrorContainer,
+              decoration: AppDecoration.outlineAmberA200.copyWith(
+                borderRadius: BorderRadiusStyle.circleBorder5,
+              ),
+              child: Row(children: [
+                Container(
+                  child: CustomImageView(
+                    imagePath: ImageConstant.imgSignalOnerrorcontainer,
+                    height: 10.adaptSize,
+                    width: 10.adaptSize,
+                  ),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  (item['score']).toString(),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w800),
+                ),
+              ]),
             ),
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:english_academy_mobile/data/model/TopicModel.dart';
+import 'package:english_academy_mobile/presentation/course_screen/course_learning_screen/course_complete_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
 
@@ -252,6 +253,75 @@ class ButtonSheetItemState extends State<ButtonSheetItem>
         ),
       ]));
     }
+
+    lessonWidgets.add(
+      Column(
+        children: [
+          SizedBox(height: 17.v),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 15.h),
+            decoration: AppDecoration.outlineBluegray501.copyWith(
+              borderRadius: BorderRadiusStyle.roundedBorder12,
+            ),
+            child: ExpansionTile(
+              shape: RoundedRectangleBorder(
+                side: BorderSide.none,
+              ),
+              title: Text(
+                "Complete The Course",
+                style: theme.textTheme.titleSmall!,
+              ),
+              children: [
+                Container(
+                  decoration: AppDecoration.outlineBluegray506,
+                ),
+                Column(
+                  children: [
+                    SizedBox(height: 15.v),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.h),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CourseCompleteScreen(
+                                    courseSlug: widget.course.slug)),
+                          );
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.card_membership,
+                              size: 20.adaptSize,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 12.h,
+                                top: 2.v,
+                              ),
+                              child: Text(
+                                "Get a certificate",
+                                style:
+                                    CustomTextStyles.labelLargeGray900.copyWith(
+                                  color: appTheme.gray900,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 16.v),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
 
     return Padding(
       padding: EdgeInsets.only(top: 10.v),
