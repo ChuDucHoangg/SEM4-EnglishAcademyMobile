@@ -442,6 +442,13 @@ class AppDecoration {
       width: 1.h,
     ),
   );
+  static BoxDecoration get outlineAmberA200 => BoxDecoration(
+    color: appTheme.amberA200,
+    // border: Border.all(
+    //   color: theme.colorScheme.primary,
+    //   width: 1.h,
+    // ),
+  );
 }
 
 class BorderRadiusStyle {

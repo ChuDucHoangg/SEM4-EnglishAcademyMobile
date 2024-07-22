@@ -55,7 +55,7 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
       lessonWidgets.add(Column(children: [
         SizedBox(height: 17.v),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 23.h),
+          margin: EdgeInsets.symmetric(horizontal: 4.h),
           decoration: AppDecoration.outlineBluegray501.copyWith(
             borderRadius: BorderRadiusStyle.roundedBorder12,
           ),
@@ -128,9 +128,7 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
                               Padding(
                                 padding: EdgeInsets.only(left: 6.h),
                                 child: Icon(
-                                  (item['status'] ?? false)
-                                      ? Icons.done_all_outlined
-                                      : Icons.radio_button_off,
+                                  Icons.storage_rounded,
                                   color: appTheme.blueGray500,
                                   size: 20.adaptSize,
                                 ),
@@ -224,7 +222,7 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 24.h),
+                    padding: EdgeInsets.only(left: 4.h),
                     child: Text(
                       "Lessons in the course",
                       style: theme.textTheme.titleMedium,

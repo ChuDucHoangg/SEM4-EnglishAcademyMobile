@@ -15,9 +15,9 @@ class RoomScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ZegoUIKitPrebuiltVideoConference(
-      appID: 1832232243,
+      appID: 738547881,
       appSign:
-          "a9ba758ef23a2ac03860936627146d9317980c632837c56fd7f0ccba4097be00",
+          "78ae9f0dd89039e1a93f25db732bfea60b531e6c4b473c62ffab2ad9f6e0fd1d",
       userID: userID,
       userName: username,
       conferenceID: codeRoom,
