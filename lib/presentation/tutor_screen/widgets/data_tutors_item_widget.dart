@@ -1,6 +1,5 @@
 import 'package:english_academy_mobile/data/model/TurtorModel.dart';
 import 'package:english_academy_mobile/service/TutorService.dart';
-import 'package:english_academy_mobile/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
 
@@ -69,22 +68,34 @@ class DataTutorsItemWidget extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              CustomElevatedButton(
-                                height: 16.v,
-                                width: 40.h,
-                                text: "4.5",
-                                leftIcon: Container(
-                                  margin: EdgeInsets.only(right: 4.h),
-                                  child: CustomImageView(
-                                    imagePath:
-                                        ImageConstant.imgSignalOnerrorcontainer,
-                                    height: 8.adaptSize,
-                                    width: 8.adaptSize,
-                                  ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 3.h, vertical: 2.h),
+                                width: 45,
+                                decoration:
+                                    AppDecoration.outlineAmberA200.copyWith(
+                                  borderRadius: BorderRadiusStyle.circleBorder5,
                                 ),
-                                buttonStyle: CustomButtonStyles.fillAmberA,
-                                buttonTextStyle: CustomTextStyles
-                                    .labelMediumOnErrorContainer,
+                                child: Row(children: [
+                                  Container(
+                                    child: CustomImageView(
+                                      imagePath: ImageConstant
+                                          .imgSignalOnerrorcontainer,
+                                      height: 9.adaptSize,
+                                      width: 9.adaptSize,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    "4.5",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w800),
+                                  ),
+                                ]),
                               ),
                             ],
                           ),

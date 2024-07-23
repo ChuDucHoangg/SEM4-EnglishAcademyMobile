@@ -206,7 +206,7 @@ class ProfileSubjectSlotScreenState extends State<ProfileSubjectSlotScreen>
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
-                                Icons.pending_actions_outlined,
+                                _getIconBasedOnItemType(item['itemType']),
                                 size: 20.adaptSize,
                               ),
                               Padding(
@@ -216,8 +216,7 @@ class ProfileSubjectSlotScreenState extends State<ProfileSubjectSlotScreen>
                                 ),
                                 child: Text(
                                   item['title'],
-                                  style:
-                                      CustomTextStyles.labelLargeGray900.copyWith(
+                                  style: CustomTextStyles.labelLargeGray900.copyWith(
                                     color: appTheme.gray900,
                                   ),
                                 ),
@@ -243,6 +242,20 @@ class ProfileSubjectSlotScreenState extends State<ProfileSubjectSlotScreen>
 
     return Column(children: slotWidgets);
   }
+
+  IconData _getIconBasedOnItemType(int itemType) {
+    switch (itemType) {
+      case 0:
+        return Icons.edit_document;
+      case 1:
+        return Icons.pending_actions_outlined;
+      case 2:
+        return Icons.help_outline;
+      default:
+        return Icons.pending_actions_outlined; // Default icon
+    }
+  }
+
 
   /// Navigates back to the previous screen.
   onTapArrowLeft(BuildContext context) {

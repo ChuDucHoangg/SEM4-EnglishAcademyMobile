@@ -16,6 +16,7 @@ import 'package:intl/intl.dart';
 import '../../../../service/CourseOfflineService.dart';
 import '../../../../widgets/app_bar/appbar_subtitle_two.dart';
 import '../../../../widgets/app_bar/custom_app_bar_home_screen.dart';
+import '../../../../widgets/custom_text_form_field.dart';
 
 class ProfileSubjectLearningScreen extends StatefulWidget {
   final String slug;
@@ -38,6 +39,16 @@ class ProfileSubjectLearningScreenState
   bool isLastMinute = false;
   late QuillController _controller;
   final FocusNode _focusNode = FocusNode();
+  final TextEditingController _textController = TextEditingController();
+  bool isInputValid = true;
+  String? _errorMessage;
+
+  bool _isValidUrl(String url) {
+    final urlPattern =
+        r'^(http(s)?:\/\/)?([a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?$';
+    final regex = RegExp(urlPattern);
+    return regex.hasMatch(url);
+  }
 
   @override
   void initState() {
@@ -54,6 +65,7 @@ class ProfileSubjectLearningScreenState
     _controller.dispose();
     _focusNode.dispose();
     _timer.cancel();
+    _textController.dispose();
     super.dispose();
   }
 
@@ -159,24 +171,27 @@ class ProfileSubjectLearningScreenState
                           horizontal: 10.h, vertical: 20.h),
                       child: Column(
                         children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 6.h, bottom: 15.h),
-                              child: Text(
-                                "*Time remaining: $remainingTimeString",
-                                style: isExpired
-                                    ? CustomTextStyles.labelLargeRedA200
-                                        .copyWith(fontSize: 15.h)
-                                    : CustomTextStyles.labelLargePrimary
-                                        .copyWith(fontSize: 15.h),
+                          if (item.itemType != 0)
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding:
+                                    EdgeInsets.only(left: 6.h, bottom: 15.h),
+                                child: Text(
+                                  "*Time remaining: $remainingTimeString",
+                                  style: isExpired
+                                      ? CustomTextStyles.labelLargeRedA200
+                                          .copyWith(fontSize: 15.h)
+                                      : CustomTextStyles.labelLargePrimary
+                                          .copyWith(fontSize: 15.h),
+                                ),
                               ),
                             ),
-                          ),
                           _buildContent(context, item.content),
                           if (!isExpired) _buildAnswer(context, item),
-                          _buildDiscuss(context,
-                              item.answerStudentItemSlotResponseListList),
+                          if (item.itemType != 0 && item.itemType != 2)
+                            _buildDiscuss(context,
+                                item.answerStudentItemSlotResponseListList),
                         ],
                       ),
                     ),
@@ -245,7 +260,6 @@ class ProfileSubjectLearningScreenState
     );
   }
 
-  /// Section Widget
   Widget _buildAnswer(BuildContext context, ItemOfflineModel item) {
     return Padding(
       padding: EdgeInsets.only(top: 20.v),
@@ -269,59 +283,122 @@ class ProfileSubjectLearningScreenState
               decoration: AppDecoration.outlineBluegray506,
             ),
             SizedBox(height: 12.v),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 13.h),
-              decoration: AppDecoration.outlineBluegray506.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder12,
-              ),
-              child: Column(
-                children: [
-                  QuillToolbar.simple(
-                    configurations: QuillSimpleToolbarConfigurations(
-                      controller: _controller,
-                      sharedConfigurations: const QuillSharedConfigurations(
-                        locale: Locale('de'),
+            if (item.itemType == 1) ...[
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 13.h),
+                decoration: AppDecoration.outlineBluegray506.copyWith(
+                  borderRadius: BorderRadiusStyle.roundedBorder12,
+                ),
+                child: Column(
+                  children: [
+                    QuillToolbar.simple(
+                      configurations: QuillSimpleToolbarConfigurations(
+                        controller: _controller,
+                        sharedConfigurations: const QuillSharedConfigurations(
+                          locale: Locale('de'),
+                        ),
+                        multiRowsDisplay: false,
+                        toolbarSize: 30.h,
+                        embedButtons: FlutterQuillEmbeds.toolbarButtons(),
                       ),
-                      multiRowsDisplay: false,
-                      toolbarSize: 30.h,
-                      embedButtons: FlutterQuillEmbeds.toolbarButtons(),
                     ),
-                  ),
-                  SizedBox(height: 12.v),
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 12.h, vertical: 13.h),
-                    decoration: AppDecoration.fillGray100.copyWith(
-                      borderRadius: BorderRadiusStyle.roundedBorder12,
-                    ),
-                    child: Column(
-                      children: [
-                        QuillEditor.basic(
-                          configurations: QuillEditorConfigurations(
-                            controller: _controller,
-                            // readOnly: false,
-                            autoFocus: true,
-                            sharedConfigurations:
-                                const QuillSharedConfigurations(
-                              locale: Locale('de'),
+                    SizedBox(height: 12.v),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.h, vertical: 13.h),
+                      decoration: AppDecoration.fillGray100.copyWith(
+                        borderRadius: BorderRadiusStyle.roundedBorder12,
+                      ),
+                      child: Column(
+                        children: [
+                          QuillEditor.basic(
+                            configurations: QuillEditorConfigurations(
+                              controller: _controller,
+                              autoFocus: true,
+                              sharedConfigurations:
+                                  const QuillSharedConfigurations(
+                                locale: Locale('de'),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 12.h),
-            GestureDetector(
-              onTap: () {
-                String answerContent = QuillDeltaToHtmlConverter(
-                        _controller.document.toDelta().toJson())
-                    .convert();
-                _submitAnswer(context, item.id, answerContent);
-              },
-              child: Container(
+              SizedBox(height: 12.h),
+              GestureDetector(
+                onTap: () {
+                  String answerContent = QuillDeltaToHtmlConverter(
+                          _controller.document.toDelta().toJson())
+                      .convert();
+                  _submitAnswer(context, item.id, answerContent);
+                },
+                child: Container(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 10.v, horizontal: 10.h),
+                    decoration: AppDecoration.fillPrimary.copyWith(
+                      borderRadius: BorderRadiusStyle.roundedBorder12,
+                    ),
+                    margin: EdgeInsets.only(left: 209.h),
+                    child: Text(
+                      "Submit Answer",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold),
+                    )),
+              ),
+            ] else ...[
+              CustomTextFormField(
+                hintText: "Submit Link Answer123",
+                autofocus: false,
+                hintStyle: CustomTextStyles.bodyLargeBluegray300,
+                contentPadding: EdgeInsets.only(bottom: 25.v, left: 15.v),
+                controller: _textController,
+                borderDecoration: isInputValid != true
+                    ? OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12.h),
+                        borderSide: BorderSide(
+                          color: appTheme.redA200,
+                          width: 1,
+                        ),
+                      )
+                    : null,
+              ),
+              if (!isInputValid)
+                Padding(
+                  padding: EdgeInsets.only(top: 8.h, left: 3.h),
+                  child: Text(
+                    _errorMessage.toString(),
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 12.h,
+                    ),
+                  ),
+                ),
+              SizedBox(height: 12.h),
+              GestureDetector(
+                onTap: () {
+                  if (_textController.text.isEmpty) {
+                    setState(() {
+                      isInputValid = false;
+                      _errorMessage = 'Please enter your answer!';
+                    });
+                  } else if (!_isValidUrl(_textController.text)) {
+                    setState(() {
+                      isInputValid = false;
+                      _errorMessage = 'Please enter a valid link!';
+                    });
+                  } else {
+                    setState(() {
+                      isInputValid = true;
+                    });
+                    _submitAnswer(context, item.id, _textController.text);
+                  }
+                },
+                child: Container(
                   padding:
                       EdgeInsets.symmetric(vertical: 10.v, horizontal: 10.h),
                   decoration: AppDecoration.fillPrimary.copyWith(
@@ -334,8 +411,10 @@ class ProfileSubjectLearningScreenState
                         color: Colors.white,
                         fontSize: 14.0,
                         fontWeight: FontWeight.bold),
-                  )),
-            ),
+                  ),
+                ),
+              ),
+            ],
           ],
         ),
       ),
@@ -370,8 +449,8 @@ class ProfileSubjectLearningScreenState
               Column(
                 children: answerList.map((answer) {
                   String answerContent = answer['content'];
-                  DateFormat inputFormat =
-                      DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+
+                  DateFormat inputFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss");
                   DateTime dateTime = inputFormat.parse(answer['time']);
 
                   DateFormat outputFormat =
@@ -395,7 +474,8 @@ class ProfileSubjectLearningScreenState
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomImageView(
-                                  imagePath: ImageConstant.imgAvatar32x32,
+                                  imagePath:
+                                      "https://static2.yan.vn/YanNews/2167221/202102/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg",
                                   height: 32.adaptSize,
                                   width: 32.adaptSize,
                                   radius: BorderRadius.circular(
