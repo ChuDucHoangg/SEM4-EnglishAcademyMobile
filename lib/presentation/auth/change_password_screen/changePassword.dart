@@ -63,19 +63,17 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      appBar: _buildAppbar(context),
       body: SizedBox(
         width: SizeUtils.width,
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
           child: Container(
-            width: double.maxFinite,
-            decoration: AppDecoration.fillOnErrorContainer,
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
             child: Form(
               key: _formKey,
               child: Column(
@@ -85,15 +83,15 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 24.h),
                     child: Column(
                       children: [
-                        _buildAppbar(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 160.v),
                         _buildCurrentPassword(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 30.v),
                         _buildNewPassword(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 30.v),
                         _buildConfirmPassword(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 30.v),
                         _buildChangePasswordButton(context),
+                        SizedBox(height: 390.v),
                       ],
                     ),
                   ),
@@ -103,6 +101,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
           ),
         ),
       ),
+      // ),
     );
   }
 

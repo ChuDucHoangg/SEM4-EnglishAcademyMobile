@@ -57,32 +57,27 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
             );
           } else {
             final ProfileModel profile = snapshot.data!;
-              return SingleChildScrollView(
-                child: Container(
-                  width: double.maxFinite,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 24.h,
-                    vertical: 48.v,
-                  ),
-                  child: Column(
-                    children: [
-                      CustomImageView(
-                        imagePath: ImageConstant.imgAvatar48x48,
-                        height: 96.adaptSize,
-                        width: 96.adaptSize,
-                        radius: BorderRadius.circular(40.h),
-                      ),
-                      _buildcode(context, profile),
-                      _buildname(context, profile),
-                      _buildemail(context, profile),
-                      _buildbirthday(context, profile),
-                      _buildgender(context, profile),
-                      _buildphone(context, profile),
-                      _buildaddress(context, profile),
-                    ],
-                  ),
+            return SingleChildScrollView(
+              child: Container(
+                width: double.maxFinite,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 24.h,
+                  vertical: 48.v,
                 ),
-              );
+                child: Column(
+                  children: [
+                    _buildcode(context, profile),
+                    _buildname(context, profile),
+                    _buildemail(context, profile),
+                    _buildbirthday(context, profile),
+                    _buildgender(context, profile),
+                    _buildphone(context, profile),
+                    _buildaddress(context, profile),
+                  ],
+                ),
+              ),
+            );
           }
         },
       ),
@@ -131,12 +126,16 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
               children: [
                 Text(
                   "Student Code",
-                  style: CustomTextStyles.bodySmallBluegray300_1,
+                  style: CustomTextStyles.bodySmallBluegray300_1.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
                 SizedBox(height: 25.v),
                 Text(
                   profile.code,
-                  style: CustomTextStyles.labelLargeBluegray500,
+                  style: CustomTextStyles.labelLargeBluegray500.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 )
               ],
             ),
@@ -172,12 +171,16 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
               children: [
                 Text(
                   "Name",
-                  style: CustomTextStyles.bodySmallBluegray300_1,
+                  style: CustomTextStyles.bodySmallBluegray300_1.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
                 SizedBox(height: 25.v),
                 Text(
                   profile.fullName,
-                  style: CustomTextStyles.labelLargeBluegray500,
+                  style: CustomTextStyles.labelLargeBluegray500.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 )
               ],
             ),
@@ -213,12 +216,16 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
               children: [
                 Text(
                   "Email",
-                  style: CustomTextStyles.bodySmallBluegray300_1,
+                  style: CustomTextStyles.bodySmallBluegray300_1.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
                 SizedBox(height: 25.v),
                 Text(
                   profile.email,
-                  style: CustomTextStyles.labelLargeBluegray500,
+                  style: CustomTextStyles.labelLargeBluegray500.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 )
               ],
             ),
@@ -254,12 +261,16 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
               children: [
                 Text(
                   "Birthday",
-                  style: CustomTextStyles.bodySmallBluegray300_1,
+                  style: CustomTextStyles.bodySmallBluegray300_1.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
                 SizedBox(height: 25.v),
                 Text(
                   profile.dayOfBirth.toString(),
-                  style: CustomTextStyles.labelLargeBluegray500,
+                  style: CustomTextStyles.labelLargeBluegray500.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 )
               ],
             ),
@@ -277,7 +288,9 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
         top: 16.v,
         bottom: 15.v,
       ),
-      decoration: AppDecoration.outlineBluegray502,
+      decoration: AppDecoration.outlineBluegray502.copyWith(
+        color: Theme.of(context).colorScheme.onPrimaryContainer,
+      ),
       child: Row(
         children: [
           Expanded(
@@ -290,7 +303,9 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
                   items: ['Female', 'Male', 'Other'].map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value),
+                      child: Text(value, style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      )),
                     );
                   }).toList(),
                   onChanged: (newValue) {
@@ -307,19 +322,40 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    ElevatedButton(
+                    TextButton(
                       onPressed: () {
                         setState(() {
                           _isEditingGender = false;
                         });
                       },
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 2, horizontal: 5)),
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey),
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        textStyle: MaterialStateProperty.all<TextStyle>(CustomTextStyles.labelMediumPrimary),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(// Độ bo tròn của viền nút (nếu không sử dụng hằng số)
+                          ),
+                        ),
+                      ),
                       child: Text('Cancel'),
                     ),
                     SizedBox(width: 10.h),
-                    ElevatedButton(
+                    TextButton(
                       onPressed: () {
-                        _updateGender(context); // Call update function here
+                        _updategender(context);
                       },
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 2, horizontal: 5)),
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey),
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        textStyle: MaterialStateProperty.all<TextStyle>(CustomTextStyles.labelMediumPrimary),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                      ),
                       child: Text('Save'),
                     ),
                   ],
@@ -331,12 +367,16 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
               children: [
                 Text(
                   "Gender",
-                  style: CustomTextStyles.bodySmallBluegray300_1,
+                  style: CustomTextStyles.bodySmallBluegray300_1.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
                 SizedBox(height: 25.v),
                 Text(
                   profile.gender,
-                  style: CustomTextStyles.labelLargeBluegray500,
+                  style: CustomTextStyles.labelLargeBluegray500.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
               ],
             ),
@@ -355,19 +395,30 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
       ),
     );
   }
-  void _updateGender(BuildContext context) async {
-    try {
-      await ProfileService.updateField('gender', genderController.text, context);
-      setState(() {
-        _isEditingGender = false;
-        _profileFuture = ProfileService.fetchProfileDetail();
-
-      });
-    } catch (e) {
-      print('Error updating gender: $e');
+  void _updategender(BuildContext context) async {
+    final newGender = genderController.text;
+    if (newGender.isNotEmpty) {
+      try {
+        await ProfileService.updategender(newGender, context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Gender updated successfully')),
+        );
+        setState(() {
+          _isEditingGender = false;
+          _profileFuture = ProfileService.fetchProfileDetail(); // Refresh profile data
+        });
+      } catch (e) {
+        print('Error updating gender: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error updating gender: $e')),
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please select your gender')),
+      );
     }
   }
-
   Widget _buildphone(BuildContext context, ProfileModel profile) {
     return Container(
       padding: EdgeInsets.only(
@@ -399,19 +450,40 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    ElevatedButton(
+                    TextButton(
                       onPressed: () {
                         setState(() {
                           _isEditingPhone = false;
                         });
                       },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey),
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        textStyle: MaterialStateProperty.all<TextStyle>(CustomTextStyles.labelMediumPrimary),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                      ),
                       child: Text('Cancel'),
                     ),
                     SizedBox(width: 10.h),
-                    ElevatedButton(
+                    TextButton(
                       onPressed: () {
-                        _updatePhone(context); // Call update function here
+                        _updatePhoneNumber(context);
                       },
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 2, horizontal: 5)),
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey),
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        textStyle: MaterialStateProperty.all<TextStyle>(CustomTextStyles.labelMediumPrimary),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                      ),
                       child: Text('Save'),
                     ),
                   ],
@@ -423,12 +495,16 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
               children: [
                 Text(
                   "Phone Number",
-                  style: CustomTextStyles.bodySmallBluegray300_1,
+                  style: CustomTextStyles.bodySmallBluegray300_1.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
                 SizedBox(height: 25.v),
                 Text(
                   profile.phone,
-                  style: CustomTextStyles.labelLargeBluegray500,
+                  style: CustomTextStyles.labelLargeBluegray500.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
               ],
             ),
@@ -446,20 +522,25 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
       ),
     );
   }
-  void _updatePhone(BuildContext context) async {
-    try {
-      await ProfileService.updateField('phone', phoneController.text, context);
-      setState(() {
-        _isEditingPhone = false;
-        _profileFuture = ProfileService.fetchProfileDetail();
-
-      });
-    } catch (e) {
-      print('Error updating phone: $e');
+  void _updatePhoneNumber(BuildContext context) async {
+    final newPhoneNumber = phoneController.text;
+    if (newPhoneNumber.isNotEmpty) {
+      try {
+        await ProfileService.updatephoneNumber(newPhoneNumber, context);
+        setState(() {
+          _isEditingPhone = false;
+        });
+      } catch (e) {
+        print('Error updating phone number: $e');
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please enter your phone number')),
+      );
     }
   }
-
   Widget _buildaddress(BuildContext context, ProfileModel profile) {
+    print(profile.address);
     return Container(
       padding: EdgeInsets.only(
         top: 16.v,
@@ -490,19 +571,41 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    ElevatedButton(
+                    TextButton(
                       onPressed: () {
                         setState(() {
                           _isEditing = false;
                         });
                       },
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 2, horizontal: 5)),
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey),
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        textStyle: MaterialStateProperty.all<TextStyle>(CustomTextStyles.labelMediumPrimary),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                      ),
                       child: Text('Cancel'),
                     ),
                     SizedBox(width: 10.h),
-                    ElevatedButton(
+                    TextButton(
                       onPressed: () {
-                        _updateAddress(context); // Call update function here
+                        _updateAddress(context);
                       },
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 2, horizontal: 5)),
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey),
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        textStyle: MaterialStateProperty.all<TextStyle>(CustomTextStyles.labelMediumPrimary),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                      ),
                       child: Text('Save'),
                     ),
                   ],
@@ -514,12 +617,16 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
               children: [
                 Text(
                   "Address",
-                  style: CustomTextStyles.bodySmallBluegray300_1,
+                  style: CustomTextStyles.bodySmallBluegray300_1.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
                 SizedBox(height: 25.v),
                 Text(
                   profile.address,
-                  style: CustomTextStyles.labelLargeBluegray500,
+                  style: CustomTextStyles.labelLargeBluegray500.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
               ],
             ),
@@ -537,22 +644,33 @@ class PersonalDataEditScreenState extends State<PersonalDataEditScreen>
       ),
     );
   }
-
   void _updateAddress(BuildContext context) async {
-    try {
-      await ProfileService.updateField('address', addressController.text, context);
-      setState(() {
-        _isEditing = false;
-        _profileFuture = ProfileService.fetchProfileDetail();
-      });
-    } catch (e) {
-      print('Error updating address: $e');
+    final newAddress = addressController.text;
+    if (newAddress.isNotEmpty) {
+      try {
+        await ProfileService.updateaddress(newAddress, context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Address updated successfully')),
+        );
+        setState(() {
+          _isEditing = false;
+        });
+      } catch (e) {
+        print('Error updating address: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error updating address: $e')),
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please enter your address')),
+      );
     }
   }
+
 
 
   onTapArrowLeft (BuildContext context){
     Navigator.pop(context);
   }
 }
-
