@@ -1,3 +1,4 @@
+import 'package:english_academy_mobile/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../data/model/TurtorModel.dart';
@@ -35,10 +36,10 @@ class InformationTutor extends StatelessWidget {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(50)),
-                        child: Image.network(
+                        child: CustomImageView(
                           width: 70,
                           height: 70,
-                          tutor.avatar,
+                          imagePath: tutor.avatar,
                           fit: BoxFit.cover,
                         ),
                       ),

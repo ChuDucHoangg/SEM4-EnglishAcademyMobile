@@ -53,15 +53,12 @@ class _TutorDetailScreenState extends State<TutorDetailScreen>
             final TutorModel tutor = snapshot.data!;
             return Scaffold(
               appBar: _buildAppBar(context),
-              body: SizedBox(
-                width: SizeUtils.width,
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.only(top: 16.v),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 413.v,
-                        width: 316.h,
+              body: NestedScrollView(
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    SliverToBoxAdapter(
+                      child: SizedBox(
                         child: Stack(
                           alignment: Alignment.bottomLeft,
                           children: [
@@ -69,28 +66,42 @@ class _TutorDetailScreenState extends State<TutorDetailScreen>
                             Align(
                               alignment: Alignment.bottomLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(left: 10.h),
+                                padding: EdgeInsets.only(left: 40.h),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    CustomElevatedButton(
-                                      height: 24.v,
-                                      width: 56.h,
-                                      text: "4.5",
-                                      leftIcon: Container(
-                                        margin: EdgeInsets.only(right: 4.h),
-                                        child: CustomImageView(
-                                          imagePath: ImageConstant
-                                              .imgSignalOnerrorcontainer,
-                                          height: 10.adaptSize,
-                                          width: 10.adaptSize,
-                                        ),
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 10.h,
+                                        vertical: 4.v,
                                       ),
-                                      buttonStyle:
-                                          CustomButtonStyles.fillAmberA,
-                                      buttonTextStyle: CustomTextStyles
-                                          .labelLargeOnErrorContainer,
+                                      width: 64,
+                                      decoration: AppDecoration.outlineAmberA200
+                                          .copyWith(
+                                        borderRadius:
+                                            BorderRadiusStyle.circleBorder5,
+                                      ),
+                                      child: Row(children: [
+                                        Container(
+                                          child: CustomImageView(
+                                            imagePath: ImageConstant
+                                                .imgSignalOnerrorcontainer,
+                                            height: 10.adaptSize,
+                                            width: 10.adaptSize,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          "4.5",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w800),
+                                        ),
+                                      ]),
                                     ),
                                     SizedBox(height: 9.v),
                                     Text(
@@ -110,16 +121,26 @@ class _TutorDetailScreenState extends State<TutorDetailScreen>
                           ],
                         ),
                       ),
-                      SizedBox(height: 17.v),
-                      _buildStats(context),
-                      SizedBox(
+                    ),
+                    SliverToBoxAdapter(child: SizedBox(height: 17.v)),
+                    SliverToBoxAdapter(child: _buildStats(context)),
+                    SliverToBoxAdapter(
+                      child: SizedBox(
                         height: 16.v,
                       ),
-                      _builTabview(context),
-                      _builTabBarView(context, tutor)
-                    ],
-                  ),
-                ),
+                    ),
+                    SliverPersistentHeader(
+                      pinned: true,
+                      floating: false,
+                      delegate: _SliverAppBarDelegate(
+                        minHeight: 50.0,
+                        maxHeight: 50.0,
+                        child: _builTabview(context),
+                      ),
+                    ),
+                  ];
+                },
+                body: _builTabBarView(context, tutor),
               ),
               floatingActionButton: ExtendedFloatingActionButton(
                 onPressed: () {
@@ -281,36 +302,38 @@ class _TutorDetailScreenState extends State<TutorDetailScreen>
   }
 
   Widget _builTabview(BuildContext context) {
-    return Container(
-      height: 40.v,
-      width: 327.h,
-      decoration: BoxDecoration(
-        color: appTheme.gray5002,
-        borderRadius: BorderRadius.circular(10.h),
-      ),
-      child: TabBar(
-        controller: tabviewController,
-        labelPadding: EdgeInsets.zero,
-        labelColor: appTheme.gray900,
-        dividerColor: Colors.transparent,
-        labelStyle: TextStyle(
-            fontSize: 12.fSize,
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w700),
-        unselectedLabelColor: appTheme.blueGray300,
-        unselectedLabelStyle: TextStyle(
-            fontSize: 12.fSize,
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w700),
-        indicatorPadding: EdgeInsets.all(4.0.h),
-        tabs: [
-          Tab(
-            child: Text("Experience"),
-          ),
-          Tab(
-            child: Text("Certificate"),
-          )
-        ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24.h),
+      child: Container(
+        height: 40.v,
+        decoration: BoxDecoration(
+          color: appTheme.gray5002,
+          borderRadius: BorderRadius.circular(10.h),
+        ),
+        child: TabBar(
+          controller: tabviewController,
+          labelPadding: EdgeInsets.zero,
+          labelColor: appTheme.gray900,
+          dividerColor: Colors.transparent,
+          labelStyle: TextStyle(
+              fontSize: 12.fSize,
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w700),
+          unselectedLabelColor: appTheme.blueGray300,
+          unselectedLabelStyle: TextStyle(
+              fontSize: 12.fSize,
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w700),
+          indicatorPadding: EdgeInsets.all(4.0.h),
+          tabs: [
+            Tab(
+              child: Text("Experience"),
+            ),
+            Tab(
+              child: Text("Certificate"),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -354,5 +377,36 @@ class ExtendedFloatingActionButton extends StatelessWidget {
       icon: icon,
       backgroundColor: backgroundColor,
     );
+  }
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+
+  _SliverAppBarDelegate({
+    required this.minHeight,
+    required this.maxHeight,
+    required this.child,
+  });
+
+  @override
+  double get minExtent => minHeight;
+
+  @override
+  double get maxExtent => maxHeight;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return SizedBox.expand(child: child);
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight ||
+        minHeight != oldDelegate.minHeight ||
+        child != oldDelegate.child;
   }
 }
