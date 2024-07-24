@@ -2,11 +2,8 @@ import 'dart:async';
 
 import 'package:english_academy_mobile/data/model/ItemOfflineModel.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_trailing_image.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill_extensions/flutter_quill_embeds.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -34,6 +31,7 @@ class ProfileSubjectLearningScreen extends StatefulWidget {
 class ProfileSubjectLearningScreenState
     extends State<ProfileSubjectLearningScreen> with TickerProviderStateMixin {
   late Future<ItemOfflineModel> _itemFuture;
+  late Future<ListScoreModel> _scoreFuture;
   late Timer _timer;
   bool isExpired = false;
   bool isLastMinute = false;
@@ -54,6 +52,11 @@ class ProfileSubjectLearningScreenState
   void initState() {
     super.initState();
     _itemFuture = CourseOfflineService.fetchItemSlotOfflineDetail(widget.slug);
+    _itemFuture.then((item) {
+      setState(() {
+        _scoreFuture = CourseOfflineService.fetchListScoreStudent(item.slug);
+      });
+    });
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {});
     });
@@ -118,6 +121,7 @@ class ProfileSubjectLearningScreenState
               )),
         ),
       );
+      // throw Exception("Failed to send answer data: $e");
     }
   }
 
@@ -192,6 +196,24 @@ class ProfileSubjectLearningScreenState
                           if (item.itemType != 0 && item.itemType != 2)
                             _buildDiscuss(context,
                                 item.answerStudentItemSlotResponseListList),
+                          // FutureBuilder<ListScoreModel>(
+                          //   future: _scoreFuture,
+                          //   builder: (context, scoreSnapshot) {
+                          //     if (scoreSnapshot.connectionState ==
+                          //         ConnectionState.waiting) {
+                          //       return Center(
+                          //           child: CircularProgressIndicator());
+                          //     } else if (scoreSnapshot.hasError) {
+                          //       return Center(
+                          //           child:
+                          //               Text('Error: ${scoreSnapshot.error}'));
+                          //     } else {
+                          //       final ListScoreModel score =
+                          //           scoreSnapshot.data!;
+                          //       return _buildScoreDisplay(score);
+                          //     }
+                          //   },
+                          // ),
                         ],
                       ),
                     ),
@@ -227,6 +249,22 @@ class ProfileSubjectLearningScreenState
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildScoreDisplay(ListScoreModel score) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Scores:",
+              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+          Text("1-Star Count: ${score.star1Count}"),
+          Text("2-Star Count: ${score.star2Count}"),
+          Text("3-Star Count: ${score.star3Count}"),
+        ],
+      ),
     );
   }
 
@@ -531,7 +569,13 @@ class ProfileSubjectLearningScreenState
                                     top: 6.v,
                                     bottom: 18.v,
                                   ),
-                                )
+                                ),
+                                // Text(
+                                //   "Vote",
+                                //   style: TextStyle(
+                                //       color: Colors.blue,
+                                //       fontWeight: FontWeight.w600),
+                                // )
                               ],
                             ),
                           ),
