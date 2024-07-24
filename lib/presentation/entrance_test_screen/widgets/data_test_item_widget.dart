@@ -13,6 +13,14 @@ class DataTestItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String truncateText(String text) {
+      if (text.length > 18) {
+        return text.substring(0, 18) + '...';
+      } else {
+        return text;
+      }
+    }
+
     return FutureBuilder<List<TestInputModel>>(
       future: EntranceTestService.fetchEntranceTest(),
       builder: (context, snapshot) {
@@ -72,7 +80,7 @@ class DataTestItemWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                test.title ?? '',
+                                truncateText(test.title) ?? '',
                                 style: CustomTextStyles.titleENT,
                               ),
 
@@ -98,7 +106,7 @@ class DataTestItemWidget extends StatelessWidget {
                               ),
                               SizedBox(height: 4.v),
                               Text(
-                                "Description: " + test.description ?? '',
+                                "Description: " + truncateText(test.description) ?? '',
                                 style: CustomTextStyles.labelLargeBluegray300,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,

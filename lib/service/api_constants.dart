@@ -14,6 +14,7 @@ class ApiConstants {
   static const String courseOfflineDetailStudent = "/course-offline/detail";
   static const String courseOfflineSubjectDetailStudent = "/subject/detail";
   static const String courseOfflineItemSlotStudent = "/item-slot";
+  static const String listScoreItemSlotStudent = "/answer-student-item-slot/list-score";
   static const String createAnswerItemSlotStudent = "/answer-student-item-slot";
   static const String testOnline = "/test-online/detail";
   static const String resultTestOnline = "/test-online/result";

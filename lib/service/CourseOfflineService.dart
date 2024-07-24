@@ -10,8 +10,7 @@ class CourseOfflineService {
   static Future<List<CourseOfflineModel>> fetchCoursesOffline() async {
     final String token = await AuthService.getToken();
     final response = await http.get(
-      Uri.parse(
-          '${ApiConstants.baseUrl}${ApiConstants.courseOfflineStudent}'),
+      Uri.parse('${ApiConstants.baseUrl}${ApiConstants.courseOfflineStudent}'),
       headers: {
         'Authorization': 'Bearer $token',
       },
@@ -95,6 +94,7 @@ class CourseOfflineService {
         "itemSlotId": itemSlotId,
         "content": content,
       };
+      final String token = await AuthService.getToken();
 
       final response = await http.post(
         Uri.parse(
@@ -102,6 +102,7 @@ class CourseOfflineService {
         body: json.encode(body),
         headers: {
           "Content-Type": "application/json",
+          'Authorization': 'Bearer $token'
         },
       );
 
@@ -112,6 +113,25 @@ class CourseOfflineService {
       }
     } catch (e) {
       throw Exception("Failed to send answer data: $e");
+    }
+  }
+
+  static Future<ListScoreModel> fetchListScoreStudent(String slug) async {
+    final String token = await AuthService.getToken();
+    final response = await http.get(
+      Uri.parse(
+          '${ApiConstants.baseUrl}${ApiConstants.listScoreItemSlotStudent}/$slug'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final dynamic listScoreJson =
+      json.decode(utf8.decode(response.bodyBytes))['data'];
+      return ListScoreModel.fromJson(listScoreJson);
+    } else {
+      throw Exception('Failed to load list score: ${response.body}');
     }
   }
 }

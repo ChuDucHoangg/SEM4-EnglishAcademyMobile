@@ -32,7 +32,8 @@ class ItemOfflineModel {
   });
 
   factory ItemOfflineModel.fromJson(Map<String, dynamic> json) {
-    final List<dynamic> answerStudentItemSlotResponseListList = json['answerStudentItemSlotResponseListList'] ?? [];
+    final List<dynamic> answerStudentItemSlotResponseListList =
+        json['answerStudentItemSlotResponseListList'] ?? [];
     return ItemOfflineModel(
       id: json['id'] ?? 0,
       title: json['title'] ?? '',
@@ -41,13 +42,45 @@ class ItemOfflineModel {
       itemType: json['itemType'] ?? 0,
       orderTop: json['orderTop'] ?? 0,
       pathUrl: json['pathUrl'] ?? '',
-      startDate: json['startDate'] != null ? DateTime.parse(json['startDate']) : DateTime.now(),
-      endDate: json['endDate'] != null ? DateTime.parse(json['endDate']) : DateTime.now(),
-      createdDate: json['createdDate'] != null ? DateTime.parse(json['createdDate']) : DateTime.now(),
-      modifiedDate: json['modifiedDate'] != null ? DateTime.parse(json['modifiedDate']) : DateTime.now(),
+      startDate: json['startDate'] != null
+          ? DateTime.parse(json['startDate'])
+          : DateTime.now(),
+      endDate: json['endDate'] != null
+          ? DateTime.parse(json['endDate'])
+          : DateTime.now(),
+      createdDate: json['createdDate'] != null
+          ? DateTime.parse(json['createdDate'])
+          : DateTime.now(),
+      modifiedDate: json['modifiedDate'] != null
+          ? DateTime.parse(json['modifiedDate'])
+          : DateTime.now(),
       createdBy: json['createdBy'] ?? '',
       modifiedBy: json['modifiedBy'] ?? '',
-      answerStudentItemSlotResponseListList: answerStudentItemSlotResponseListList,
+      answerStudentItemSlotResponseListList:
+          answerStudentItemSlotResponseListList,
+    );
+  }
+}
+
+class ListScoreModel {
+  final int id;
+  final int star1Count;
+  final int star2Count;
+  final int star3Count;
+
+  ListScoreModel({
+    required this.id,
+    required this.star1Count,
+    required this.star2Count,
+    required this.star3Count,
+  });
+
+  factory ListScoreModel.fromJson(Map<String, dynamic> json) {
+    return ListScoreModel(
+      id: json['id'] ?? 0,
+      star1Count: json['star1Count'] ?? 0,
+      star2Count: json['star2Count'] ?? 0,
+      star3Count: json['star3Count'] ?? 0,
     );
   }
 }
