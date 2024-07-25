@@ -1,6 +1,8 @@
 import 'package:english_academy_mobile/core/app_export.dart';
+import 'package:english_academy_mobile/data/model/EntranceTestModel.dart';
 import 'package:english_academy_mobile/init_screen.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/answer_detail_screen/answer_detail_screen.dart';
+import 'package:english_academy_mobile/presentation/entrance_test_screen/widgets/data_course_suggest_item_widget.dart';
 import 'package:english_academy_mobile/service/EntranceTestService.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +29,7 @@ class LearningPathsToeicScreen extends StatelessWidget {
           if (snapshot.hasData) {
             final learningPath = snapshot.data!;
             final type = learningPath.type;
+            final courseSuggest = learningPath.courseOnlineList;
 
             if (type == 1) {
               return buildNotFoundWidget(context);
@@ -373,6 +376,8 @@ class LearningPathsToeicScreen extends StatelessWidget {
                         );
                       },
                     ),
+                    SizedBox(height: 30.v),
+                    _buildCourseSuggest(courseSuggest),
                   ],
                 ),
               ),
@@ -493,4 +498,8 @@ Widget buildNotFoundWidget(BuildContext context) {
       ),
     ),
   );
+}
+
+Widget _buildCourseSuggest(List<CourseSuggest> courses) {
+  return DataCourseSuggestItemWidget(courses: courses);
 }

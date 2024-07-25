@@ -1,6 +1,7 @@
 import 'package:english_academy_mobile/core/app_export.dart';
+import 'package:english_academy_mobile/data/model/EntranceTestModel.dart';
 import 'package:english_academy_mobile/init_screen.dart';
-import 'package:english_academy_mobile/presentation/entrance_test_screen/answer_detail_screen/answer_detail_screen.dart';
+import 'package:english_academy_mobile/presentation/entrance_test_screen/widgets/data_course_suggest_item_widget.dart';
 import 'package:english_academy_mobile/service/EntranceTestService.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ import '../../../theme/theme_helper.dart';
 import '../../../widgets/app_bar/appbar_trailing_image.dart';
 import '../../../widgets/app_bar/custom_app_bar.dart';
 import '../../../widgets/custom_outlined_button.dart';
+import '../../course_screen/course_detail_screen/course_detail_screen.dart';
+import '../answer_detail_screen/answer_detail_screen.dart';
 
 class LearningPathsIeltsScreen extends StatelessWidget {
   final String code;
@@ -26,6 +29,7 @@ class LearningPathsIeltsScreen extends StatelessWidget {
           if (snapshot.hasData) {
             final learningPath = snapshot.data!;
             final type = learningPath.type;
+            final courseSuggest = learningPath.courseOnlineList;
 
             if (type == 0) {
               return buildNotFoundWidget(context);
@@ -357,7 +361,7 @@ class LearningPathsIeltsScreen extends StatelessWidget {
                                         style: (learningPath.score >= 8 && learningPath.score <= 9)
                                             ? CustomTextStyles.labelLargePrimary_1
                                             : CustomTextStyles.labelLargeGray60001_1,
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -379,9 +383,11 @@ class LearningPathsIeltsScreen extends StatelessWidget {
                         );
                       },
                     ),
+                    SizedBox(height: 30.v),
+                    _buildCourseSuggest(courseSuggest),
                   ],
                 ),
-              ),
+              )
             );
           } else if (snapshot.hasError) {
             return Center(
@@ -516,4 +522,9 @@ Widget buildNotFoundWidget(BuildContext context) {
       ),
     ),
   );
+}
+
+// Section Widget
+Widget _buildCourseSuggest(List<CourseSuggest> courses) {
+  return DataCourseSuggestItemWidget(courses: courses);
 }
