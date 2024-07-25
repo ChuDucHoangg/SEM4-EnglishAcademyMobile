@@ -1,6 +1,7 @@
 import 'package:english_academy_mobile/presentation/auth/change_password_screen/changePassword.dart';
 import 'package:english_academy_mobile/presentation/auth/login_screen/login_screen.dart';
 import 'package:english_academy_mobile/presentation/auth/register_screen/register_screen.dart';
+import 'package:english_academy_mobile/presentation/checkout_screen/thank_you_screen/thank_you_screen_booking.dart';
 import 'package:english_academy_mobile/presentation/profile_screen/profile_my_booking_screen/my_booking_detail.dart';
 import 'package:english_academy_mobile/presentation/tutor_screen/tutor_detail_screen/tutor_detail_screen.dart';
 import 'package:english_academy_mobile/presentation/entrance_test_screen/answer_detail_screen/answer_detail_screen.dart';
@@ -66,6 +67,8 @@ class AppRoutes {
 
   static const String thankYouScreen = '/thank_you_screen';
 
+  static const String thankYouScreenBooking = '/thank_you_screen_booking';
+
   static const String entranceTestScreen = '/entrance_test_screen';
 
   static const String entranceTestToeicScreen = '/entrance_test_toeic_screen';
@@ -88,19 +91,22 @@ class AppRoutes {
 
   static const String profileScreen = '/profile_screen';
 
-  static const String profileMyCourseDetailScreen = '/profile_my_course_detail_screen';
+  static const String profileMyCourseDetailScreen =
+      '/profile_my_course_detail_screen';
 
   static const String profileSubjectSlotScreen = '/profile_subject_slot_screen';
 
-  static const String profileSubjectLearningScreen = '/profile_subject_learning_screen';
+  static const String profileSubjectLearningScreen =
+      '/profile_subject_learning_screen';
 
-  static const String profileBookingDetailScreen = '/profile_booking_detail_screen';
+  static const String profileBookingDetailScreen =
+      '/profile_booking_detail_screen';
 
   static const String profileMoreScreen = '/profile_more';
 
   static const String personalDataEditScreen = '/personal_data_edit_screen';
 
-  static const String changePasswordScreen ='/change_password_screen';
+  static const String changePasswordScreen = '/change_password_screen';
 
   static Map<String, WidgetBuilder> routes = {
     launchingScreen: (context) => LaunchingScreen(),
@@ -115,18 +121,18 @@ class AppRoutes {
     tutorScreen: (context) => TutorScreen(),
     tutorDetailScreen: (context) {
       final String? code =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return TutorDetailScreen(code: code!);
     },
     entranceTestScreen: (context) => EntranceTestScreen(),
     AppRoutes.entranceTestToeicScreen: (context) {
       final String? slug =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return EntranceTestToeicScreen(slug: slug!);
     },
     entranceTestIeltsScreen: (context) {
       final String? slug =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return EntranceTestIeltsScreen(slug: slug!);
     },
     // entranceTestFinish: (context) => EntranceTestFinish(),
@@ -136,84 +142,84 @@ class AppRoutes {
 
     entranceTestFinish: (context) {
       final String? code =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return EntranceTestFinish(code: code!);
     },
 
     learningPathsToeicScreen: (context) {
       final String? code =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return LearningPathsToeicScreen(code: code!);
     },
 
     learningPathsIeltsScreen: (context) {
       final String? code =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return LearningPathsIeltsScreen(code: code!);
     },
 
     answerDetailScreen: (context) {
       final String? code =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return AnswerDetailScreen(code: code!);
     },
 
     testOnlineScreen: (context) {
       final String? slug =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return TestOnlineScreen(slug: slug!);
     },
 
     resultTestOnlineScreen: (context) {
       final String? testCode =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return ResultTestOnline(testCode: testCode!);
     },
 
     courseScreen: (context) => CourseScreen(),
     courseDetailScreen: (context) {
       final String? slug =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return CourseDetailScreen(slug: slug!);
     },
     courseLearningScreen: (context) {
       final String? slug =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return CourseLearningScreen(slug: slug!);
     },
     checkoutScreen: (context) {
       final String? slug =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return CheckoutScreen(slug: slug!);
     },
     thankYouScreen: (context) {
       final String? slug =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return ThankYouScreen(slug: slug!);
     },
+    thankYouScreenBooking: (context) => ThankYouScreenBooking(),
     notificationScreen: (context) => NotificationScreen(),
     profileScreen: (context) => ProfileScreen(),
     profileMyCourseDetailScreen: (context) {
       final String? slug =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return ProfileMyCourseDetailScreen(slug: slug!);
     },
     profileSubjectSlotScreen: (context) {
       final String? slug =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return ProfileSubjectSlotScreen(slug: slug!);
     },
     profileSubjectLearningScreen: (context) {
       final String? slug =
-      ModalRoute.of(context)?.settings.arguments as String?;
+          ModalRoute.of(context)?.settings.arguments as String?;
       return ProfileSubjectLearningScreen(slug: slug!);
     },
     profileBookingDetailScreen: (context) {
-      final int? id =
-      ModalRoute.of(context)?.settings.arguments as int?;
+      final int? id = ModalRoute.of(context)?.settings.arguments as int?;
       return MyBookingDetail(id: id!);
     },
-    profileMoreScreen : (context) => ProfileMoreScreen(),
-    personalDataEditScreen : (context) => PersonalDataEditScreen(),
+    profileMoreScreen: (context) => ProfileMoreScreen(),
+    personalDataEditScreen: (context) => PersonalDataEditScreen(),
   };
 }

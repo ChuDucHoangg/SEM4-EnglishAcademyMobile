@@ -1,5 +1,6 @@
 class ApiConstants {
   static const String baseUrl = "http://localhost:8080/api/v1";
+
   // static const String baseUrl = "http://171.229.108.37:8080/api/v1";
 
   static const String courseOnline = "/any/course-online";
@@ -14,7 +15,8 @@ class ApiConstants {
   static const String courseOfflineDetailStudent = "/course-offline/detail";
   static const String courseOfflineSubjectDetailStudent = "/subject/detail";
   static const String courseOfflineItemSlotStudent = "/item-slot";
-  static const String listScoreItemSlotStudent = "/answer-student-item-slot/list-score";
+  static const String listScoreItemSlotStudent =
+      "/answer-student-item-slot/list-score";
   static const String createAnswerItemSlotStudent = "/answer-student-item-slot";
   static const String testOnline = "/test-online/detail";
   static const String resultTestOnline = "/test-online/result";
@@ -34,12 +36,15 @@ class ApiConstants {
 
   static const String bookingList = "/student/booking";
   static const String bookingDetail = "/student/booking";
+  static const String bookingWaiting = "/student/booking-waiting";
+  static const String bookingWaitingDetail = "/package-student/student";
+  static const String paymentBooking = "/payment";
   static const String checkStudent = "/lession-booking/detail/check";
 
   static const String registerStudent = "/auth/student/signup";
   static const String loginStudent = "/auth/student/signip";
   static const String changePassword = "/student/change-password";
 
-  static const String profile ="/student/profile";
-  static const String updateProfile ="/student/update-profile";
+  static const String profile = "/student/profile";
+  static const String updateProfile = "/student/update-profile";
 }
