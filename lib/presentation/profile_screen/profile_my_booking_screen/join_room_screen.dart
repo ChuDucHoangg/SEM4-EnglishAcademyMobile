@@ -62,7 +62,7 @@ class _JoinRoomScreenState extends State<JoinRoomScreen> {
       }
     } catch (e) {
       setState(() {
-        _errorMessage = 'Failed to check room code';
+        _errorMessage = 'This room has not been opened yet';
       });
     } finally {
       setState(() {

@@ -50,7 +50,7 @@ class ProfileAchivementItemState extends State<ProfileAchivementItem>
                       bottom: 1.v,
                     ),
                     child: Text(
-                      "11",
+                      "1",
                       style: CustomTextStyles.titleMediumGreenA400,
                     ),
                   )
