@@ -35,9 +35,20 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildScrollView(context),
+      body: SingleChildScrollView(
+        child: Container(
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
+          child: Column(
+            children: [
+              _buildScrollView(context),
+              SizedBox(height: 10,)
+            ],
+          ),
+        ),
+      ),
     );
   }
+
 
   /// Section Widget
   Widget _buildScrollView(BuildContext context) {
@@ -58,6 +69,7 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
           margin: EdgeInsets.symmetric(horizontal: 23.h),
           decoration: AppDecoration.outlineBluegray501.copyWith(
             borderRadius: BorderRadiusStyle.roundedBorder12,
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -68,11 +80,14 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
                 ),
                 title: Text(
                   truncateText(topic['name']),
-                  style: theme.textTheme.titleSmall!,
+                  style: theme.textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
                 children: [
                   Container(
-                    decoration: AppDecoration.outlineBluegray506,
+                    decoration: AppDecoration.outlineBluegray506.copyWith(
+                    ),
                   ),
                   for (var item in topic['itemOnlineDTOList'])
                     Column(children: [
@@ -227,7 +242,9 @@ class CourseDetailLessonsItemState extends State<CourseDetailLessonsItem>
                     padding: EdgeInsets.only(left: 24.h),
                     child: Text(
                       "Lessons in the course",
-                      style: theme.textTheme.titleMedium,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
                     ),
                   ),
                 ),

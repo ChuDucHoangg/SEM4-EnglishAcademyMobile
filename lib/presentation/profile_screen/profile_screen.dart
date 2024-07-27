@@ -177,13 +177,14 @@ class ProfileScreenState extends State<ProfileScreen>
                     fontWeight: FontWeight.bold,
                     color: content["textColor"],
                   ),
-                )
+                ),
               ],
             ),
           ),
         );
       }).toList(),
     );
+
   }
 
   /// Section Widget

@@ -224,8 +224,10 @@ class ColorSchemes {
     onErrorContainer: Color(0X1EFFFFFF),
 
     // On colors(text colors)
-    onPrimary: Color(0xDD000000), // màu chữ
-    onPrimaryContainer: Color(0X1EFFFFFF), //màu nền dưới chữ
+    onPrimary: Color(0xDD000000),
+    onPrimaryContainer: Color(0X1EFFFFFF),
+
+    surface: Color(0XFFF9FAFB),
   );
   static final darkColorScheme = ColorScheme.dark(
     // Primary colors
@@ -239,6 +241,8 @@ class ColorSchemes {
     // On colors(text colors)
     onPrimary: Color(0xFFFFFFFF),
     onPrimaryContainer: Color(0xFF131920),
+
+    surface: Color(0XFF292D32),
   );
 }
 

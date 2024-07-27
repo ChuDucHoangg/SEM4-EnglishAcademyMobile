@@ -67,90 +67,93 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
             final CourseModel course = snapshot.data!;
             return Scaffold(
               appBar: _buildAppBar(context),
-              body: Padding(
-                padding: EdgeInsets.only(top: 24.v),
-                child: Stack(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.h),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildImage(context, course),
-                          SizedBox(height: 23.v),
-                          _buildCategory(context, course),
-                          SizedBox(height: 12.v),
-                          Container(
-                            width: 297.h,
-                            margin: EdgeInsets.only(
-                              left: 8.h,
-                              right: 38.h,
-                            ),
-                            child: Text(
-                              course.name,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: theme.textTheme.titleLarge!.copyWith(
-                                height: 1.35,
+              body: Container(
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 24.v),
+                  child: Stack(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.h),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buildImage(context, course),
+                            SizedBox(height: 23.v),
+                            _buildCategory(context, course),
+                            SizedBox(height: 12.v),
+                            Container(
+                              width: 297.h,
+                              margin: EdgeInsets.only(
+                                left: 8.h,
+                                right: 38.h,
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 10.v),
-                          _buildDetail(context, course),
-                          SizedBox(height: 13.v),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.h),
-                            child: Container(
-                              height: 8.v,
-                              width: 327.h,
-                              decoration: BoxDecoration(
-                                color: appTheme.blueGray50,
-                                borderRadius: BorderRadius.circular(
-                                  3.h,
+                              child: Text(
+                                course.name,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: theme.textTheme.titleLarge!.copyWith(
+                                  height: 1.35,
                                 ),
                               ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                  3.h,
+                            ),
+                            SizedBox(height: 10.v),
+                            _buildDetail(context, course),
+                            SizedBox(height: 13.v),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8.h),
+                              child: Container(
+                                height: 8.v,
+                                width: 327.h,
+                                decoration: BoxDecoration(
+                                  color: appTheme.blueGray50,
+                                  borderRadius: BorderRadius.circular(
+                                    3.h,
+                                  ),
                                 ),
-                                child: LinearProgressIndicator(
-                                  value: 0.75,
-                                  backgroundColor: appTheme.blueGray50,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    theme.colorScheme.primary,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                    3.h,
+                                  ),
+                                  child: LinearProgressIndicator(
+                                    value: 0.75,
+                                    backgroundColor: appTheme.blueGray50,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      theme.colorScheme.primary,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(height: 10.v),
-                          Padding(
-                            padding: EdgeInsets.only(left: 8.h),
-                            child: RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "30% ",
-                                    style: theme.textTheme.labelLarge,
-                                  ),
-                                  TextSpan(
-                                    text: "from 24 sessions",
-                                    style: CustomTextStyles.labelLargeMedium,
-                                  )
-                                ],
+                            SizedBox(height: 10.v),
+                            Padding(
+                              padding: EdgeInsets.only(left: 8.h),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "30% ",
+                                      style: theme.textTheme.labelLarge,
+                                    ),
+                                    TextSpan(
+                                      text: "from 24 sessions",
+                                      style: CustomTextStyles.labelLargeMedium,
+                                    )
+                                  ],
+                                ),
+                                textAlign: TextAlign.left,
                               ),
-                              textAlign: TextAlign.left,
                             ),
-                          ),
-                          SizedBox(height: 30.v),
-                          _buildTabview(context),
-                        ],
+                            SizedBox(height: 30.v),
+                            _buildTabview(context),
+                          ],
+                        ),
                       ),
-                    ),
-                    _buildTabBarView(context, course),
-                    _buildBottomBar(context, course, _isBought)
-                  ],
+                      _buildTabBarView(context, course),
+                      _buildBottomBar(context, course, _isBought)
+                    ],
+                  ),
                 ),
               ),
             );
@@ -383,7 +386,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
       width: 327.h,
       margin: EdgeInsets.only(left: 8.h),
       decoration: BoxDecoration(
-        color: appTheme.gray5002,
+        color: Theme.of(context).colorScheme.onPrimaryContainer,
         borderRadius: BorderRadius.circular(
           10.h,
         ),
@@ -391,7 +394,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
       child: TabBar(
         controller: tabviewController,
         labelPadding: EdgeInsets.zero,
-        labelColor: appTheme.gray900,
+        labelColor: Theme.of(context).colorScheme.onPrimary,
         labelStyle: TextStyle(
           fontSize: 12.fSize,
           fontFamily: 'Inter',
@@ -431,7 +434,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
   /// Section Widget
   Widget _buildTabBarView(BuildContext context, CourseModel course) {
     return Container(
-      margin: EdgeInsets.only(top: 450.v),
+      margin: EdgeInsets.only(top: 480.v),
       child: TabBarView(
         controller: tabviewController,
         children: [
@@ -454,7 +457,9 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
           horizontal: 24.h,
           vertical: 12.v,
         ),
-        decoration: AppDecoration.outlineGray9004,
+        decoration: AppDecoration.outlineGray9004.copyWith(
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,

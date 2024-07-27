@@ -37,31 +37,36 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(top: 10.v),
-          child: Column(
-            children: [
-              Column(
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 24.h),
-                      child: Text(
-                        "Ratings",
-                        style: CustomTextStyles.titleMediumOnPrimaryContainer,
+        child: Container(
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
+          child: Padding(
+            padding: EdgeInsets.only(top: 10.v),
+            child: Column(
+              children: [
+                Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 24.h),
+                        child: Text(
+                          "Ratings",
+                          style: CustomTextStyles.titleMediumOnPrimaryContainer.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 16.v),
-                  _buildReview(context, widget.course),
-                  SizedBox(height: 25.v),
-                  _buildHeader(context),
-                  _buildPersonReview(context),
-                  SizedBox(height: 120.v),
-                ],
-              ),
-            ],
+                    SizedBox(height: 16.v),
+                    _buildReview(context, widget.course),
+                    SizedBox(height: 25.v),
+                    _buildHeader(context),
+                    _buildPersonReview(context),
+                    SizedBox(height: 120.v),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -81,6 +86,7 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
       ),
       decoration: AppDecoration.outlineBluegray503.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder12,
+        color: Theme.of(context).colorScheme.primaryContainer,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -91,6 +97,7 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
               fontSize: 13.fSize,
               fontFamily: 'Inter',
               fontWeight: FontWeight.w700,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
           ),
           SizedBox(height: 4.v),
@@ -133,6 +140,7 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
             padding: EdgeInsets.symmetric(vertical: 4.v),
             decoration: AppDecoration.fillGray5002.copyWith(
               borderRadius: BorderRadiusStyle.roundedBorder12,
+              color: Theme.of(context).colorScheme.surface,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -484,7 +492,9 @@ class CourseDetailReviewsItemState extends State<CourseDetailReviewsItem>
                 children: [
                   Text(
                     "Merrill Kervin",
-                    style: theme.textTheme.titleSmall,
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary
+                    ),
                   ),
                   SizedBox(height: 10.v),
                   Text(

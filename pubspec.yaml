@@ -27,9 +27,9 @@ dependencies:
   easy_paypal: ^1.0.8
   msh_checkbox: ^2.0.1
   flutter_widget_from_html: ^0.14.11
-  flutter_quill: ^9.3.7
+#  flutter_quill: ^9.3.7
   vsc_quill_delta_to_html: ^1.0.4
-  flutter_quill_extensions: ^9.3.7
+#  flutter_quill_extensions: ^9.3.7
   shared_preferences: ^2.2.3
   zego_uikit_prebuilt_video_conference: ^2.7.4
   animated_custom_dropdown: 3.1.1
