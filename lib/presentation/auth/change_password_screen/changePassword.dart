@@ -126,7 +126,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return Column(children: [
       CustomTextFormField(
         controller: currentPasswordController,
-        hintText: "Mật khẩu hiện tại",
+        hintText: "Current password",
         hintStyle: CustomTextStyles.bodyLargeBluegray300,
         textInputAction: TextInputAction.done,
         textInputType: TextInputType.visiblePassword,
@@ -163,7 +163,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
             : null,
         validator: (value) {
           if (!currentPasswordError && (value == null || value.isEmpty)) {
-            return 'Vui lòng nhập mật khẩu hiện tại.';
+            return 'Please enter current password.';
           }
           return null;
         },
@@ -172,7 +172,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
         Padding(
           padding: EdgeInsets.only(right: 175.h, top: 5.v),
           child: Text(
-            "Mật khẩu hiện tại không chính xác.",
+            "Current password is incorrect.",
             style: TextStyle(color: Colors.red, fontSize: 12.adaptSize),
           ),
         ),
@@ -183,7 +183,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return Column(children: [
       CustomTextFormField(
         controller: newPasswordController,
-        hintText: "Mật khẩu mới",
+        hintText: "New password",
         hintStyle: CustomTextStyles.bodyLargeBluegray300,
         textInputAction: TextInputAction.done,
         textInputType: TextInputType.visiblePassword,
@@ -220,9 +220,9 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
             : null,
         validator: (value) {
           if (!newPasswordError && (value == null || value.isEmpty)) {
-            return 'Vui lòng nhập mật khẩu mới.';
+            return 'Please enter new password.';
           }if (value != null && value.length < 6) {
-            return 'Mật khẩu phải có ít nhất 6 ký tự.';
+            return 'Passwords must be at least 6 characters.';
           }
           return null;
         },
@@ -231,7 +231,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
         Padding(
           padding: EdgeInsets.only(right: 175.h, top: 5.v),
           child: Text(
-            "Mật khẩu mới không hợp lệ.",
+            "New password is invalid.",
             style: TextStyle(color: Colors.red, fontSize: 12.adaptSize),
           ),
         ),
@@ -243,7 +243,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return Column(children: [
       CustomTextFormField(
         controller: confirmPasswordController,
-        hintText: "Nhập lại mật khẩu mới",
+        hintText: "Enter a new password",
         hintStyle: CustomTextStyles.bodyLargeBluegray300,
         textInputAction: TextInputAction.done,
         textInputType: TextInputType.visiblePassword,
@@ -281,11 +281,11 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
             : null,
         validator: (value) {
           if (!confirmPasswordError && (value == null || value.isEmpty)) {
-            return 'Vui lòng nhập lại mật khẩu mới.';
+            return 'Please re-enter new password.';
           }
           // Kiểm tra sự khớp nhau giữa mật khẩu mới và mật khẩu xác nhận
           if (value != newPasswordController.text) {
-            return 'Mật khẩu xác nhận không khớp.';
+            return 'Confirmation password does not match.';
           }
           return null;
         },
@@ -294,7 +294,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
         Padding(
           padding: EdgeInsets.only(right: 175.h, top: 5.v),
           child: Text(
-            "Mật khẩu nhập lại không hợp lệ.",
+            "The password entered is invalid.",
             style: TextStyle(color: Colors.red, fontSize: 12.adaptSize),
           ),
         ),
@@ -304,7 +304,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget _buildChangePasswordButton(BuildContext context) {
     return CustomElevatedButton(
       onPressed: () => changePassword(),
-      text: "Đổi mật khẩu",
+      text: "Change Password",
       buttonStyle: CustomButtonStyles.fillPrimary,
     );
   }
