@@ -194,7 +194,7 @@ class ProfileScreenState extends State<ProfileScreen>
       case 1:
         return ProfileMyBookingListScreen();
       case 2:
-        return Text("Tab TimeTable");
+        return Text("Coming soon...");
       default:
         return SizedBox.shrink();
     }
