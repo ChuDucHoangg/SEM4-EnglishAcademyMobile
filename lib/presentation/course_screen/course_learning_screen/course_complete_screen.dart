@@ -8,6 +8,7 @@ import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../service/AuthService.dart';
+import '../../../service/api_constants.dart';
 import '../../../widgets/app_bar/appbar_leading_image.dart';
 import '../../../widgets/app_bar/appbar_subtitle_one.dart';
 import '../../../widgets/app_bar/custom_app_bar.dart';
@@ -39,7 +40,7 @@ class CourseCompleteScreenState extends State<CourseCompleteScreen> {
   Future<void> _checkCourseCompletion() async {
     final String token = await AuthService.getToken();
     final url = Uri.parse(
-        'http://localhost:8080/api/v1/certificate-online/complete-course/${widget.courseSlug}');
+        '${ApiConstants.baseUrl}/certificate-online/complete-course/${widget.courseSlug}');
     final response = await http.post(
       url,
       headers: {
@@ -70,7 +71,7 @@ class CourseCompleteScreenState extends State<CourseCompleteScreen> {
 
   Future<void> _submitReview() async {
     final String token = await AuthService.getToken();
-    final url = Uri.parse('http://localhost:8080/api/v1/review');
+    final url = Uri.parse('${ApiConstants.baseUrl}/api/v1/review');
     final response = await http.post(
       url,
       headers: {

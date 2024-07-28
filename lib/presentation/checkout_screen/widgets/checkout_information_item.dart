@@ -1,11 +1,49 @@
+import 'dart:convert';
+
 import 'package:english_academy_mobile/core/app_export.dart';
 import 'package:flutter/material.dart';
 
+import '../../../service/AuthService.dart';
 import '../../../theme/app_decoration.dart';
 
-class CheckoutInformationItem extends StatelessWidget {
+class CheckoutInformationItem extends StatefulWidget {
+  const CheckoutInformationItem({Key? key})
+      : super(
+          key: key,
+        );
 
-  const CheckoutInformationItem({Key? key}) : super(key: key);
+  @override
+  CheckoutInformationItemState createState() => CheckoutInformationItemState();
+}
+
+class CheckoutInformationItemState extends State<CheckoutInformationItem> {
+  String _fullname = '';
+  String _email = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserInfo();
+  }
+
+  void _getUserInfo() async {
+    try {
+      final String token = await AuthService.getToken();
+      final List<String> parts = token.split(".");
+      final String normalizedToken = base64Url.normalize(parts[1]);
+      final String decodedToken =
+          utf8.decode(base64Url.decode(normalizedToken));
+
+      final Map<String, dynamic> tokenData = json.decode(decodedToken);
+
+      setState(() {
+        _fullname = tokenData['Fullname'];
+        _email = tokenData['sub'];
+      });
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +84,7 @@ class CheckoutInformationItem extends StatelessWidget {
           children: [
             SizedBox(height: 6.v),
             Text(
-              "Jason Mark,",
+              "${_fullname},",
               style: theme.textTheme.titleSmall,
             ),
             SizedBox(height: 7.v),
@@ -54,7 +92,7 @@ class CheckoutInformationItem extends StatelessWidget {
               width: 286.h,
               margin: EdgeInsets.only(right: 8.h),
               child: Text(
-                "3702 Oliver Street, Fort Worth, TX, Texas, 76102, 817-352-2015, jasonmark@gmail.com",
+                "3702 Oliver Street, Fort Worth, TX, Texas, 76102, 817-352-2015, ${_email}",
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.bodySmall!.copyWith(

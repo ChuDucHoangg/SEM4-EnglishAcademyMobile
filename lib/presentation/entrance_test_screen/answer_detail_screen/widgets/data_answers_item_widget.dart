@@ -13,6 +13,13 @@ class DataAnswersItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String truncateText(String text) {
+      if (text.length > 25) {
+        return text.substring(0, 25) + '...';
+      } else {
+        return text;
+      }
+    }
     return Container(
       margin: EdgeInsets.only(top: 20),
       padding: EdgeInsets.symmetric(
@@ -49,7 +56,7 @@ class DataAnswersItemWidget extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 16.h),
             child: Text(
-              optionText,
+              truncateText(optionText),
               style: CustomTextStyles.titleMediumMedium,
             ),
           ),
