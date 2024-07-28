@@ -467,7 +467,7 @@ class ProfileSubjectLearningScreenState
                                   );
                                 } else {
                                   return Center(
-                                    child: Text('No data available'),
+                                    child: Container(),
                                   );
                                 }
                               },
@@ -774,10 +774,21 @@ class ProfileSubjectLearningScreenState
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        answer['createdBy'],
-                                        style: CustomTextStyles
-                                            .labelLargeGray900_1,
+                                      Row(
+                                        children: [
+                                          Text(
+                                            answer['createdBy'],
+                                            style: CustomTextStyles
+                                                .labelLargeGray900_1,
+                                          ),
+                                          if (answer['studentId'].toString() ==
+                                              studentIdFromToken)
+                                          Text(
+                                            " (You)",
+                                            style: CustomTextStyles
+                                                .labelLargeGray900_1,
+                                          ),
+                                        ],
                                       ),
                                       SizedBox(height: 3.v),
                                       SizedBox(
@@ -1017,10 +1028,21 @@ class ProfileSubjectLearningScreenState
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        answer['createdBy'],
-                                        style: CustomTextStyles
-                                            .labelLargeGray900_1,
+                                      Row(
+                                        children: [
+                                          Text(
+                                            answer['createdBy'],
+                                            style: CustomTextStyles
+                                                .labelLargeGray900_1,
+                                          ),
+                                          if (answer['studentId'].toString() ==
+                                              studentIdFromToken)
+                                            Text(
+                                              " (You)",
+                                              style: CustomTextStyles
+                                                  .labelLargeGray900_1,
+                                            ),
+                                        ],
                                       ),
                                       SizedBox(height: 3.v),
                                       SizedBox(
@@ -1165,6 +1187,8 @@ class ProfileSubjectLearningScreenState
     _controller.dispose();
     _focusNode.dispose();
     _timer.cancel();
+    _itemStream.drain();
+    _scoreStream.drain();
     _textController.dispose();
     super.dispose();
   }

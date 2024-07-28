@@ -67,25 +67,28 @@ class CourseOfflineService {
     }
   }
 
-  static Stream<ItemOfflineModel> fetchItemSlotOfflineDetailStream(
-      String slug) async* {
+  static Stream<ItemOfflineModel> fetchItemSlotOfflineDetailStream(String slug) async* {
     final String token = await AuthService.getToken();
     while (true) {
-      final response = await http.get(
-        Uri.parse(
-            '${ApiConstants.baseUrl}${ApiConstants.courseOfflineItemSlotStudent}/$slug'),
-        headers: {'Authorization': 'Bearer $token'},
-      );
-      if (response.statusCode == 200) {
-        final dynamic itemJson =
-            json.decode(utf8.decode(response.bodyBytes))['data'];
-        yield ItemOfflineModel.fromJson(itemJson);
-      } else {
-        throw Exception('Failed to load item detail: ${response.body}');
+      try {
+        final response = await http.get(
+          Uri.parse('${ApiConstants.baseUrl}${ApiConstants.courseOfflineItemSlotStudent}/$slug'),
+          headers: {'Authorization': 'Bearer $token'},
+        );
+        if (response.statusCode == 200) {
+          final dynamic itemJson = json.decode(utf8.decode(response.bodyBytes))['data'];
+          yield ItemOfflineModel.fromJson(itemJson);
+        } else {
+          throw Exception('Failed to load item detail: ${response.body}');
+        }
+      } catch (e) {
+        // print('Error: $e');
+        // yield* Stream.error(e);
       }
-      await Future.delayed(Duration(seconds: 0));
+      await Future.delayed(Duration(milliseconds: 10));
     }
   }
+
 
   static Future<void> createAnswerItemSlotStudent(
       int itemSlotId, String content) async {
@@ -116,23 +119,25 @@ class CourseOfflineService {
     }
   }
 
-  static Stream<ListScoreModel> fetchListScoreStudentStream(
-      String slug) async* {
+  static Stream<ListScoreModel> fetchListScoreStudentStream(String slug) async* {
     final String token = await AuthService.getToken();
     while (true) {
-      final response = await http.get(
-        Uri.parse(
-            '${ApiConstants.baseUrl}${ApiConstants.listScoreItemSlotStudent}/$slug'),
-        headers: {'Authorization': 'Bearer $token'},
-      );
-      if (response.statusCode == 200) {
-        final dynamic listScoreJson =
-            json.decode(utf8.decode(response.bodyBytes))['data'];
-        yield ListScoreModel.fromJson(listScoreJson);
-      } else {
-        throw Exception('Failed to load list score: ${response.body}');
+      try {
+        final response = await http.get(
+          Uri.parse('${ApiConstants.baseUrl}${ApiConstants.listScoreItemSlotStudent}/$slug'),
+          headers: {'Authorization': 'Bearer $token'},
+        );
+        if (response.statusCode == 200) {
+          final dynamic listScoreJson = json.decode(utf8.decode(response.bodyBytes))['data'];
+          yield ListScoreModel.fromJson(listScoreJson);
+        } else {
+          throw Exception('Failed to load list score: ${response.body}');
+        }
+      } catch (e) {
+        // print('Error: $e');
+        yield* Stream.error(e);
       }
-      await Future.delayed(Duration(seconds: 0));
+      await Future.delayed(Duration(milliseconds: 1000));
     }
   }
 
