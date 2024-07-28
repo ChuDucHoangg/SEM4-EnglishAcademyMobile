@@ -2,23 +2,64 @@ import 'package:english_academy_mobile/widgets/app_bar/appbar_trailing_image.dar
 import 'package:english_academy_mobile/widgets/app_bar/custom_app_bar.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_one.dart';
 import 'package:english_academy_mobile/widgets/custom_search_view.dart';
-import 'package:english_academy_mobile/widgets/custom_outlined_button.dart';
-import 'package:english_academy_mobile/widgets/custom_drop_down.dart';
 import 'widgets/data_tutors_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
+import 'package:english_academy_mobile/data/model/TurtorModel.dart';
+import 'package:english_academy_mobile/service/TutorService.dart';
 
-class TutorScreen extends StatelessWidget {
-  TutorScreen({Key? key})
-      : super(
-    key: key,
-  );
+class TutorScreen extends StatefulWidget {
+  TutorScreen({Key? key}) : super(key: key);
 
+  @override
+  _TutorScreenState createState() => _TutorScreenState();
+}
+
+class _TutorScreenState extends State<TutorScreen> {
   TextEditingController searchController = TextEditingController();
+  List<TutorModel> allTutors = [];
+  List<TutorModel> filteredTutors = [];
 
-  List<String> dropdownItemList = ["Item One", "Item Two", "Item Three"];
+  @override
+  void initState() {
+    super.initState();
+    fetchTutors();
+    searchController.addListener(_onSearchChanged);
+  }
 
-  List<String> dropdownItemList1 = ["Item One", "Item Two", "Item Three"];
+  @override
+  void dispose() {
+    searchController.removeListener(_onSearchChanged);
+    searchController.dispose();
+    super.dispose();
+  }
+
+  void _onSearchChanged() {
+    filterTutors();
+  }
+
+  Future<void> fetchTutors() async {
+    allTutors = await TutorService.fetchTutors();
+    setState(() {
+      filteredTutors = allTutors;
+    });
+  }
+
+  void filterTutors() {
+    List<TutorModel> results = [];
+    if (searchController.text.isEmpty) {
+      results = allTutors;
+    } else {
+      results = allTutors
+          .where((tutor) => tutor.fullname
+              .toLowerCase()
+              .contains(searchController.text.toLowerCase()))
+          .toList();
+    }
+    setState(() {
+      filteredTutors = results;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +80,9 @@ class TutorScreen extends StatelessWidget {
                   hintStyle: CustomTextStyles.bodyMediumBluegray300,
                   borderDecoration: SearchViewStyleHelper.outlineBlueGrayTL12,
                   filled: false,
+                  autofocus: false,
                 ),
-                SizedBox(height: 24.v),
-                _buildTab(context),
-                SizedBox(height: 27.v),
+                SizedBox(height: 17.v),
                 RichText(
                   text: TextSpan(
                     children: [
@@ -51,15 +91,16 @@ class TutorScreen extends StatelessWidget {
                         style: CustomTextStyles.titleSmallff6b7280,
                       ),
                       TextSpan(
-                        text: "13,376 instructor",
+                        text:
+                            "${filteredTutors.length} instructor${filteredTutors.length == 1 ? '' : 's'}",
                         style: CustomTextStyles.titleSmallff111827,
-                      )
+                      ),
                     ],
                   ),
                   textAlign: TextAlign.left,
                 ),
                 SizedBox(height: 17.v),
-                _buildDataTutors(context)
+                DataTutorsItemWidget(tutors: filteredTutors),
               ],
             ),
           ),
@@ -83,68 +124,5 @@ class TutorScreen extends StatelessWidget {
         )
       ],
     );
-  }
-
-  /// Section Widget
-  Widget _buildFilter(BuildContext context) {
-    return CustomOutlinedButton(
-      height: 32.v,
-      width: 77.h,
-      text: "Filter",
-      leftIcon: Container(
-        margin: EdgeInsets.only(right: 8.h),
-        child: CustomImageView(
-          imagePath: ImageConstant.imgUserGray60001,
-          height: 14.adaptSize,
-          width: 14.adaptSize,
-        ),
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildTab(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        _buildFilter(context),
-        CustomDropDown(
-          width: 117.h,
-          icon: Container(
-            margin: EdgeInsets.only(right: 5.v),
-            child: CustomImageView(
-              imagePath: ImageConstant.imgArrowdownGray60001,
-              height: 16.adaptSize,
-              width: 16.adaptSize,
-            ),
-          ),
-          hintText: "Sort by",
-          items: dropdownItemList,
-        ),
-        CustomDropDown(
-          width: 117.h,
-          icon: Container(
-            margin: EdgeInsets.only(right: 5.v),
-            child: CustomImageView(
-              imagePath: ImageConstant.imgArrowdownGray60001,
-              height: 16.adaptSize,
-              width: 16.adaptSize,
-            ),
-          ),
-          hintText: "All levels",
-          items: dropdownItemList1,
-        )
-      ],
-    );
-  }
-
-  /// Section Widget
-  Widget _buildDataTutors(BuildContext context) {
-    return DataTutorsItemWidget();
-  }
-
-  /// Navigates back to the previous screen.
-  onTapArrowLeft(BuildContext context) {
-    Navigator.pop(context);
   }
 }

@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app requires access to the photo library.</string>
+	<key>NSCameraUsageDescription</key>
+    <string>We require camera access to connect to a call</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>We require microphone access to connect to a call</string>
+
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -26,10 +33,6 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>Chúng tôi cần quyền truy cập camera của bạn để cho phép bạn chụp ảnh đại diện.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Chúng tôi cần quyền truy cập thư viện ảnh của bạn để cho phép bạn chọn ảnh đại diện.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

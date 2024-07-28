@@ -37,6 +37,7 @@ class ProfileSubjectLearningScreenState
   bool isExpired = false;
   bool isLastMinute = false;
   late QuillController _controller;
+  final FocusNode editorFocusNode = FocusNode();
   final FocusNode _focusNode = FocusNode();
   final TextEditingController _textController = TextEditingController();
   bool isInputValid = true;
@@ -79,7 +80,8 @@ class ProfileSubjectLearningScreenState
       final String token = await AuthService.getToken();
       final List<String> parts = token.split(".");
       final String normalizedToken = base64Url.normalize(parts[1]);
-      final String decodedToken = utf8.decode(base64Url.decode(normalizedToken));
+      final String decodedToken =
+          utf8.decode(base64Url.decode(normalizedToken));
 
       final Map<String, dynamic> tokenData = json.decode(decodedToken);
 
@@ -595,9 +597,10 @@ class ProfileSubjectLearningScreenState
                       child: Column(
                         children: [
                           QuillEditor.basic(
+                            focusNode: editorFocusNode,
                             configurations: QuillEditorConfigurations(
                               controller: _controller,
-                              autoFocus: true,
+                              autoFocus: false,
                               sharedConfigurations:
                                   const QuillSharedConfigurations(
                                 locale: Locale('de'),
@@ -786,11 +789,11 @@ class ProfileSubjectLearningScreenState
                                           ),
                                           if (answer['studentId'].toString() ==
                                               studentIdFromToken)
-                                          Text(
-                                            " (You)",
-                                            style: CustomTextStyles
-                                                .labelLargeGray900_1,
-                                          ),
+                                            Text(
+                                              " (You)",
+                                              style: CustomTextStyles
+                                                  .labelLargeGray900_1,
+                                            ),
                                         ],
                                       ),
                                       SizedBox(height: 3.v),

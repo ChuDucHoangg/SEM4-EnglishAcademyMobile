@@ -28,7 +28,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
   late TabController tabviewController;
   late Future<CourseModel> _courseFuture;
   late Future<TopicModel> _topicFuture;
-  late bool _isBought;
+  bool _isBought = false;
 
   @override
   void initState() {
@@ -511,10 +511,11 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
   /// Section Widget
   Widget _buildBottomBar(
       BuildContext context, CourseModel course, bool isBought) {
+    bool isTopicListEmpty = course.topicOnlineDetailList.isEmpty;
+
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        // width: double.maxFinite,
         padding: EdgeInsets.symmetric(
           horizontal: 4.h,
           vertical: 12.v,
@@ -539,25 +540,33 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                 ),
               ),
             ),
-            isBought
+            isTopicListEmpty
                 ? CustomElevatedButton(
-                    width: 261.h,
-                    text: "Continue Studying",
-                    margin: EdgeInsets.only(bottom: 22.v),
-                    buttonStyle: CustomButtonStyles.fillPrimary,
-                    onPressed: () {
-                      _showBottomSheet();
-                    },
-                  )
+              width: 261.h,
+              text: "Coming soon ...",
+              margin: EdgeInsets.only(bottom: 22.v),
+              buttonStyle: CustomButtonStyles.fillPrimary,
+              onPressed: () {},
+            )
+                : isBought
+                ? CustomElevatedButton(
+              width: 261.h,
+              text: "Continue Studying",
+              margin: EdgeInsets.only(bottom: 22.v),
+              buttonStyle: CustomButtonStyles.fillPrimary,
+              onPressed: () {
+                _showBottomSheet();
+              },
+            )
                 : CustomElevatedButton(
-                    width: 261.h,
-                    text: "Buy \$${course.price.toString()}",
-                    margin: EdgeInsets.only(bottom: 22.v),
-                    buttonStyle: CustomButtonStyles.fillPrimary,
-                    onPressed: () {
-                      _navigateToCheckoutScreen(course.slug);
-                    },
-                  ),
+              width: 261.h,
+              text: "Buy \$${course.price.toString()}",
+              margin: EdgeInsets.only(bottom: 22.v),
+              buttonStyle: CustomButtonStyles.fillPrimary,
+              onPressed: () {
+                _navigateToCheckoutScreen(course.slug);
+              },
+            ),
           ],
         ),
       ),
