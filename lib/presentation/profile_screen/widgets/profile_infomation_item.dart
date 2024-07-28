@@ -34,8 +34,11 @@ class ProfileInfomationItemState extends State<ProfileInfomationItem>
   void _getUserInfo() async {
     try {
       final String token = await AuthService.getToken();
-      final Map<String, dynamic> tokenData = json.decode(
-          ascii.decode(base64.decode(base64.normalize(token.split(".")[1]))));
+      final List<String> parts = token.split(".");
+      final String normalizedToken = base64Url.normalize(parts[1]);
+      final String decodedToken = utf8.decode(base64Url.decode(normalizedToken));
+
+      final Map<String, dynamic> tokenData = json.decode(decodedToken);
 
       setState(() {
         _fullname = tokenData['Fullname'];
@@ -45,6 +48,7 @@ class ProfileInfomationItemState extends State<ProfileInfomationItem>
       print('Error: $e');
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

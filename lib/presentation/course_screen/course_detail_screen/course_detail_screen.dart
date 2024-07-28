@@ -101,7 +101,7 @@ class CourseDetailScreenState extends State<CourseDetailScreen>
                             ),
                             child: Text(
                               course.name,
-                              maxLines: 2,
+                              maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: theme.textTheme.titleLarge!.copyWith(
                                 height: 1.35,

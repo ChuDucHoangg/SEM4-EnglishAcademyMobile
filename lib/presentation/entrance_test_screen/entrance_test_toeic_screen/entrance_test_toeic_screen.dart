@@ -133,7 +133,8 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _buildSessionList(context, test.testInputSessionDetails),
+                      children: _buildSessionList(
+                          context, test.testInputSessionDetails),
                     ),
                   ),
                   SizedBox(height: 20),
@@ -153,7 +154,8 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
     );
   }
 
-  PreferredSizeWidget _buildAppBar(BuildContext context, TestInputDetailModel test) {
+  PreferredSizeWidget _buildAppBar(
+      BuildContext context, TestInputDetailModel test) {
     return CustomAppBar(
       leadingWidth: 46.h,
       leading: AppbarTrailingImage(
@@ -187,7 +189,8 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
     );
   }
 
-  List<Widget> _buildSessionList(BuildContext context, List<TestInputSession> sessions) {
+  List<Widget> _buildSessionList(
+      BuildContext context, List<TestInputSession> sessions) {
     List<Widget> sessionWidgets = [];
     sessionWidgets.add(_buildSession(context, sessions[currentSessionIndex]));
 
@@ -224,7 +227,8 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
     );
   }
 
-  Widget _buildQuestion(BuildContext context, TestInputSession session, QuestionTestInput question) {
+  Widget _buildQuestion(BuildContext context, TestInputSession session,
+      QuestionTestInput question) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -253,10 +257,13 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
         if (question.audiomp3 == null && question.audiomp3.isNotEmpty)
           InkWell(
             onTap: () {
-              if (audioPlayers[session.questionTestInputs.indexOf(question)].state == PlayerState.playing) {
+              if (audioPlayers[session.questionTestInputs.indexOf(question)]
+                      .state ==
+                  PlayerState.playing) {
                 pauseAudio(session.questionTestInputs.indexOf(question));
               } else {
-                playAudio(session.questionTestInputs.indexOf(question), question.audiomp3);
+                playAudio(session.questionTestInputs.indexOf(question),
+                    question.audiomp3);
                 seekToBeginning(session.questionTestInputs.indexOf(question));
               }
             },
@@ -278,7 +285,9 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
               ),
               child: Center(
                 child: Icon(
-                  audioPlayers[session.questionTestInputs.indexOf(question)].state == PlayerState.playing
+                  audioPlayers[session.questionTestInputs.indexOf(question)]
+                              .state ==
+                          PlayerState.playing
                       ? Icons.pause
                       : Icons.play_arrow_rounded,
                   size: 40,
@@ -303,15 +312,18 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
         color: canGoForward ? theme.colorScheme.primary : disabledColor,
       ),
       child: IconButton(
-        onPressed: canGoForward ? () {
-          if (currentSessionIndex < sessionDetails.length - 1) {
-            setState(() {
-              currentSessionIndex++;
-              canGoBack = true;
-              canGoForward = currentSessionIndex < sessionDetails.length - 1;
-            });
-          }
-        } : null,
+        onPressed: canGoForward
+            ? () {
+                if (currentSessionIndex < sessionDetails.length - 1) {
+                  setState(() {
+                    currentSessionIndex++;
+                    canGoBack = true;
+                    canGoForward =
+                        currentSessionIndex < sessionDetails.length - 1;
+                  });
+                }
+              }
+            : null,
         icon: Icon(Icons.arrow_forward, color: Colors.white),
         padding: EdgeInsets.zero,
         iconSize: 20,
@@ -330,15 +342,17 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
         color: canGoBack ? theme.colorScheme.primary : disabledColor,
       ),
       child: IconButton(
-        onPressed: canGoBack ? () {
-          if (currentSessionIndex > 0) {
-            setState(() {
-              currentSessionIndex--;
-              canGoForward = true;
-              canGoBack = currentSessionIndex > 0;
-            });
-          }
-        } : null,
+        onPressed: canGoBack
+            ? () {
+                if (currentSessionIndex > 0) {
+                  setState(() {
+                    currentSessionIndex--;
+                    canGoForward = true;
+                    canGoBack = currentSessionIndex > 0;
+                  });
+                }
+              }
+            : null,
         icon: Icon(Icons.arrow_back, color: Colors.white),
         padding: EdgeInsets.zero,
         iconSize: 20,
@@ -347,7 +361,16 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
     );
   }
 
-  Widget _buildAnswers(BuildContext context, TestInputSession session, QuestionTestInput question) {
+  Widget _buildAnswers(BuildContext context, TestInputSession session,
+      QuestionTestInput question) {
+    String truncateText(String text) {
+      if (text.length > 35) {
+        return text.substring(0, 35) + '...';
+      } else {
+        return text;
+      }
+    }
+
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -370,12 +393,10 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
           default:
             break;
         }
-        Color containerColor =
-        selectedAnswers[question.id.toString()] == index
+        Color containerColor = selectedAnswers[question.id.toString()] == index
             ? appTheme.indigo100
             : Colors.white;
-        Color borderColor =
-        selectedAnswers[question.id.toString()] == index
+        Color borderColor = selectedAnswers[question.id.toString()] == index
             ? theme.colorScheme.primary
             : appTheme.blueGray400.withOpacity(0.3);
         return GestureDetector(
@@ -409,11 +430,11 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
                     });
                   },
                   fillColor: MaterialStateColor.resolveWith(
-                          (states) => theme.colorScheme.primary),
+                      (states) => theme.colorScheme.primary),
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 SizedBox(width: 5),
-                Text(optionText),
+                Text(truncateText(optionText)),
               ],
             ),
           ),
@@ -430,9 +451,8 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
         },
         style: ButtonStyle(
           backgroundColor: MaterialStateColor.resolveWith(
-                  (states) => theme.colorScheme.primary),
-          minimumSize:
-          MaterialStateProperty.all(Size(double.infinity, 75)),
+              (states) => theme.colorScheme.primary),
+          minimumSize: MaterialStateProperty.all(Size(double.infinity, 75)),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -459,12 +479,9 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
   }
 
   String formatHouse(Duration duration) {
-    final houses =
-    duration.inHours.remainder(60).toString().padLeft(2, '0');
-    final minutes =
-    duration.inMinutes.remainder(60).toString().padLeft(2, '0');
-    final seconds =
-    duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    final houses = duration.inHours.remainder(60).toString().padLeft(2, '0');
+    final minutes = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
+    final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
     return '$houses:$minutes:$seconds';
   }
 
@@ -514,7 +531,8 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
       print(requestBody);
 
       try {
-        var response = await Dio().post('${ApiConstants.baseUrl}${ApiConstants.entranceTestSubmit}/${widget.slug}',
+        var response = await Dio().post(
+          '${ApiConstants.baseUrl}${ApiConstants.entranceTestSubmit}/${widget.slug}',
           data: json.encode(requestBody),
           options: Options(
             headers: <String, String>{
@@ -531,7 +549,8 @@ class _EntranceTestToeicScreenState extends State<EntranceTestToeicScreen> {
 
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => LearningPathsToeicScreen(code: code)),
+            MaterialPageRoute(
+                builder: (context) => LearningPathsToeicScreen(code: code)),
           );
         } else {
           print('Failed to submit answers: ${response.statusCode}');

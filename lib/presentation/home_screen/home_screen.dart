@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_two.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_five.dart';
 import 'package:english_academy_mobile/widgets/app_bar/appbar_image.dart';
@@ -8,16 +10,47 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:english_academy_mobile/core/app_export.dart';
 import 'package:flutter/widgets.dart';
+import '../../data/model/profileModel.dart';
+import '../../service/AuthService.dart';
+import '../../service/profileService.dart';
 import '../../widgets/app_bar/custom_app_bar_home_screen.dart';
 import 'package:english_academy_mobile/theme/theme_helper.dart';
 
 import '../tutor_screen/tutor_screen.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key})
-      : super(
-          key: key,
-        );
+class HomeScreen extends StatefulWidget {
+  HomeScreen({super.key});
+
+  @override
+  HomeScreenState createState() => HomeScreenState();
+}
+
+class HomeScreenState extends State<HomeScreen> {
+  String studentNameFromToken = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _getStudentInfo();
+  }
+
+  void _getStudentInfo() async {
+    try {
+      final String token = await AuthService.getToken();
+      final List<String> parts = token.split(".");
+      final String normalizedToken = base64Url.normalize(parts[1]);
+      final String decodedToken =
+          utf8.decode(base64Url.decode(normalizedToken));
+
+      final Map<String, dynamic> tokenData = json.decode(decodedToken);
+
+      setState(() {
+        studentNameFromToken = tokenData['Fullname'].toString();
+      });
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
 
   TextEditingController searchController = TextEditingController();
 
@@ -41,6 +74,7 @@ class HomeScreen extends StatelessWidget {
         "image": ImageConstant.imgBannerTutoring,
       },
     ];
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: _buildAppBar(context),
@@ -317,13 +351,20 @@ class HomeScreen extends StatelessWidget {
         padding: EdgeInsets.only(left: 24.h),
         child: Column(
           children: [
-            AppbarSubtitleTwo(
-              text: "Welcome, Jason 👋",
-              margin: EdgeInsets.only(right: 63.h),
+            Text(
+              "Welcome, ${studentNameFromToken} 👋",
+              style: CustomTextStyles.titleMediumOnErrorContainer_1.copyWith(
+                color: theme.colorScheme.onErrorContainer.withOpacity(1),
+              ),
+              textAlign: TextAlign.start,
             ),
             SizedBox(height: 9.v),
-            AppbarSubtitleFive(
-              text: "Upgrade your skill for better futures!",
+            Text(
+              "Upgrade your skill for better futures !      ",
+              style: CustomTextStyles.bodySmallBluegray30002.copyWith(
+                color: appTheme.blueGray30002,
+              ),
+              textAlign: TextAlign.start,
             ),
           ],
         ),
@@ -341,12 +382,12 @@ class HomeScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              AppbarImage(
-                imagePath: ImageConstant.imgContrast,
-              ),
+              // AppbarImage(
+              //   imagePath: ImageConstant.imgContrast,
+              // ),
               AppbarImage(
                 imagePath: ImageConstant.imgNotification,
-                margin: EdgeInsets.only(left: 16.h),
+                // margin: EdgeInsets.only(left: 16.h),
               ),
               // Container(
               //   margin: EdgeInsets.only(
@@ -410,6 +451,7 @@ class HomeScreen extends StatelessWidget {
               padding: EdgeInsets.only(top: 30.v),
               child: CustomSearchView(
                 width: 327.h,
+                autofocus: false,
                 controller: searchController,
                 hintText: "What do you want to learn?",
                 alignment: Alignment.topCenter,
