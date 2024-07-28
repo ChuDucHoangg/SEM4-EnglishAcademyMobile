@@ -24,12 +24,23 @@ class MyApp extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Sizer(
       builder: (context, orientation, deviceType) {
-        return MaterialApp(
-          theme: themeProvider.currentTheme,
-          title: 'English Academy Mobile',
-          debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.launchingScreen,
-          routes: AppRoutes.routes,
+        return GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+
+            if (!currentFocus.hasPrimaryFocus &&
+                currentFocus.focusedChild != null) {
+              FocusManager.instance.primaryFocus?.unfocus();
+            }
+          },
+          child: MaterialApp(
+            theme: themeProvider.currentTheme,
+            title: 'English Academy Mobile',
+            debugShowCheckedModeBanner: false,
+            initialRoute: AppRoutes.launchingScreen,
+            routes: AppRoutes.routes,
+          ),
         );
       },
     );

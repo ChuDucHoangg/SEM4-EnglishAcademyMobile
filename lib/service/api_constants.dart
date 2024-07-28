@@ -1,7 +1,7 @@
 class ApiConstants {
-  static const String baseUrl = "http://localhost:8080/api/v1";
+  // static const String baseUrl = "http://localhost:8080/api/v1";
 
-  // static const String baseUrl = "http://171.229.66.33:8080/api/v1";
+  static const String baseUrl = "http://171.229.66.33:8080/api/v1";
 
   static const String courseOnline = "/any/course-online";
   static const String courseDetail = "/any/course-online/detail";

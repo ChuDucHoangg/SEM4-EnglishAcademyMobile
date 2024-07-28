@@ -22,6 +22,7 @@ class RegisterEmailItemState extends State<RegisterEmailItem>
     with AutomaticKeepAliveClientMixin<RegisterEmailItem> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -30,8 +31,12 @@ class RegisterEmailItemState extends State<RegisterEmailItem>
       return;
     }
     try {
-      await AuthService.registerWithEmail(nameController.text,
-          emailController.text, passwordController.text, context);
+      await AuthService.registerWithEmail(
+          nameController.text,
+          phoneController.text,
+          emailController.text,
+          passwordController.text,
+          context);
     } catch (e) {
       setState(() {
         hasError = true;
@@ -67,6 +72,8 @@ class RegisterEmailItemState extends State<RegisterEmailItem>
                       children: [
                         _buildName(context),
                         SizedBox(height: 16.v),
+                        _buildPhone(context),
+                        SizedBox(height: 16.v),
                         _buildEmail(context),
                         SizedBox(height: 16.v),
                         _buildPassword(context),
@@ -80,7 +87,7 @@ class RegisterEmailItemState extends State<RegisterEmailItem>
                     child: Column(
                       children: [
                         Container(
-                          height: 150.h,
+                          height: 90.h,
                           width: 313.h,
                           margin:
                               EdgeInsets.only(left: 4.h, right: 3.h, top: 30.h),
@@ -171,6 +178,43 @@ class RegisterEmailItemState extends State<RegisterEmailItem>
             return 'Name must have at least 3 characters.';
           } else if (value.length > 200) {
             return 'Name must be less than 200 characters.';
+          }
+          return null;
+        },
+      ),
+    ]);
+  }
+
+  /// Section Widget
+  Widget _buildPhone(BuildContext context) {
+    return Column(children: [
+      CustomTextFormField(
+        controller: phoneController,
+        hintText: "0987654xxx",
+        hintStyle: CustomTextStyles.bodyLargeBluegray300,
+        prefix: Container(
+          margin: EdgeInsets.fromLTRB(16.h, 18.v, 11.h, 18.v),
+          child: CustomImageView(
+            imagePath: ImageConstant.imgCheckmark,
+            height: 20.adaptSize,
+            width: 20.adaptSize,
+          ),
+        ),
+        prefixConstraints: BoxConstraints(
+          maxHeight: 56.v,
+        ),
+        contentPadding: EdgeInsets.only(
+          top: 18.v,
+          right: 30.h,
+          bottom: 18.v,
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your phone.';
+          } else if (value.length < 6) {
+            return 'Phone must have at least 6 characters.';
+          } else if (value.length > 20) {
+            return 'Phone must be less than 20 characters.';
           }
           return null;
         },

@@ -321,6 +321,14 @@ class _BookingWaitingDetailScreenState
 
   @override
   Widget build(BuildContext context) {
+    String truncateText(String text) {
+      if (text.length > 15) {
+        return text.substring(0, 15) + '...';
+      } else {
+        return text;
+      }
+    }
+
     return FutureBuilder<StudentPackageDTO>(
         future: _bookingWaitingFuture,
         builder: (context, snapshot) {
@@ -445,7 +453,7 @@ class _BookingWaitingDetailScreenState
                                                       .textTheme.titleSmall,
                                                 ),
                                                 Text(
-                                                  bookingWaiting.packageName,
+                                                  truncateText(bookingWaiting.packageName),
                                                   style: theme
                                                       .textTheme.titleSmall,
                                                 ),

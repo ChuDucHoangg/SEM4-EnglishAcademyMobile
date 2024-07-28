@@ -4,7 +4,6 @@ import 'package:english_academy_mobile/presentation/tutor_screen/tutor_detail_sc
 import 'package:english_academy_mobile/presentation/tutor_screen/tutor_detail_screen/widgets/experience_item_widget.dart';
 import 'package:english_academy_mobile/presentation/tutor_screen/tutor_hire_screen/animation_tutor_hire.dart';
 import 'package:english_academy_mobile/service/TutorService.dart';
-import 'package:english_academy_mobile/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/image_constant.dart';

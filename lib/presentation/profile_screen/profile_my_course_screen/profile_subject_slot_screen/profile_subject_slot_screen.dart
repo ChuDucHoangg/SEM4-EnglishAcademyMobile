@@ -132,6 +132,7 @@ class ProfileSubjectSlotScreenState extends State<ProfileSubjectSlotScreen>
           ),
           SizedBox(height: 23.v),
           CustomSearchView(
+            autofocus: false,
             controller: searchController,
             hintText: "Search Slot",
             hintStyle: CustomTextStyles.bodyMediumBluegray300,

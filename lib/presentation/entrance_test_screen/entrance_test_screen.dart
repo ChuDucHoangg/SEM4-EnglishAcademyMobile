@@ -5,6 +5,8 @@ import 'package:english_academy_mobile/widgets/app_bar/appbar_subtitle_one.dart'
 import 'package:english_academy_mobile/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:english_academy_mobile/widgets/app_bar/custom_app_bar.dart';
 
+import '../../widgets/app_bar/appbar_leading_image.dart';
+
 
 class EntranceTestScreen extends StatefulWidget {
   const EntranceTestScreen({Key? key}) : super(key: key);
@@ -24,21 +26,19 @@ class EntranceTestScreenState extends State<EntranceTestScreen> with TickerProvi
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: _buildAppBar(context),
-        body: SizedBox(
-          width: SizeUtils.width,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(top: 24.v),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // _buildTabview(context),
-                // SizedBox(height: 40.v),
-                _buildEntranceTest(context),
-              ],
-            ),
+    return Scaffold(
+      appBar: _buildAppBar(context),
+      body: SizedBox(
+        width: SizeUtils.width,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.only(top: 24.v),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // _buildTabview(context),
+              // SizedBox(height: 40.v),
+              _buildEntranceTest(context),
+            ],
           ),
         ),
       ),
@@ -48,10 +48,13 @@ class EntranceTestScreenState extends State<EntranceTestScreen> with TickerProvi
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
       leadingWidth: 46.h,
-      // leading: AppbarLeadingImage(
-      //   imagePath: ImageConstant.imgArrowLeftGray900,
-      //   margin: EdgeInsets.only(left: 22.h),
-      // ),
+      leading: AppbarLeadingImage(
+        imagePath: ImageConstant.imgArrowLeftGray900,
+        margin: EdgeInsets.only(left: 22.h),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
       centerTitle: true,
       title: AppbarSubtitleOne(
         text: "Entrance Test",

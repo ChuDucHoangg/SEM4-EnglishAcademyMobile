@@ -86,11 +86,12 @@ class AuthService {
     }
   }
 
-  static Future<void> registerWithEmail(String fullname, String email,
+  static Future<void> registerWithEmail(String fullname, String phone, String email,
       String password, BuildContext context) async {
     try {
       final Map<String, dynamic> body = {
         'fullname': fullname.trim(),
+        'phone': phone.trim(),
         'email': email.trim(),
         'password': password,
       };

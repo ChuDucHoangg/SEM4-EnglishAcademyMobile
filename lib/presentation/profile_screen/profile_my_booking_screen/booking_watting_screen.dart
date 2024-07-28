@@ -18,6 +18,14 @@ class BookingWaitingScreen extends StatefulWidget {
 class _BookingWaitingScreenState extends State<BookingWaitingScreen> {
   @override
   Widget build(BuildContext context) {
+    String truncateText(String text) {
+      if (text.length > 22) {
+        return text.substring(0, 22) + '...';
+      } else {
+        return text;
+      }
+    }
+
     return FutureBuilder<List<StudentPackageDTO>>(
       future: BookingService.fetchBookingWaitingList(),
       builder: (context, snapshot) {
@@ -95,7 +103,7 @@ class _BookingWaitingScreenState extends State<BookingWaitingScreen> {
                                     Padding(
                                       padding: EdgeInsets.only(left: 1),
                                       child: Text(
-                                        booking.packageName,
+                                        truncateText(booking.packageName),
                                         style: CustomTextStyles
                                             .labelLargeGray60001,
                                       ),

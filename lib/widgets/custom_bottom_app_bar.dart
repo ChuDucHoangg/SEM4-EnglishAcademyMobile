@@ -27,10 +27,10 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
       type: BottomBarEnum.Course,
     ),
     BottomMenuModel(
-      icon: ImageConstant.imgTelevisionOnerrorcontainer,
-      activeIcon: ImageConstant.imgTelevisionOnerrorcontainerActive,
-      title: "Entrance Test",
-      type: BottomBarEnum.Notification,
+      icon: ImageConstant.imgTelevision,
+      activeIcon: ImageConstant.imgTelevision,
+      title: "Tutor",
+      type: BottomBarEnum.Tutor,
     ),
     BottomMenuModel(
       icon: ImageConstant.imgNavProfile,
@@ -52,7 +52,7 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(
             bottomMenuList.length,
-                (index) {
+            (index) {
               final BottomMenuModel menuItem = bottomMenuList[index];
               final bool isSelected = selectedMenu == menuItem.type;
               return InkWell(
@@ -78,9 +78,10 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
                       Opacity(
                         opacity: isSelected ? 1.0 : 0.6,
                         child: CustomImageView(
-                          imagePath: isSelected
-                              ? menuItem.activeIcon
-                              : menuItem.icon,
+                          width: 23,
+                          height: 23,
+                          imagePath:
+                              isSelected ? menuItem.activeIcon : menuItem.icon,
                           color: isSelected ? Colors.white : Colors.grey,
                         ),
                       ),
@@ -89,8 +90,7 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
                           padding: EdgeInsets.only(left: 12.0),
                           child: Text(
                             menuItem.title ?? "",
-                            style: CustomTextStyles
-                                .bodySmallBluegray300_1
+                            style: CustomTextStyles.bodySmallBluegray300_1
                                 .copyWith(
                               color: Color(0xFFD5E1F5),
                               fontSize: 14.0,
@@ -113,7 +113,7 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
 enum BottomBarEnum {
   Home,
   Course,
-  Notification,
+  Tutor,
   Profile,
 }
 

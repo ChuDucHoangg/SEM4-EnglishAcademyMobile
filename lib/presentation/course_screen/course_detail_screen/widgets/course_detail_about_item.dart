@@ -199,22 +199,44 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                           alignment: Alignment.bottomCenter,
                           children: [
                             CustomImageView(
-                              imagePath: ImageConstant.imgAvatar48x48,
+                              imagePath:
+                                  "https://images.pexels.com/photos/3830483/pexels-photo-3830483.jpeg",
                               height: 48.adaptSize,
                               width: 48.adaptSize,
+                              fit: BoxFit.cover,
                               radius: BorderRadius.circular(
                                 24.h,
                               ),
                               alignment: Alignment.center,
                             ),
-                            CustomElevatedButton(
-                              height: 16.v,
-                              width: 32.h,
-                              text: "4.5",
-                              buttonStyle: CustomButtonStyles.fillAmberA,
-                              buttonTextStyle:
-                                  CustomTextStyles.labelSmallOnErrorContainer,
-                              alignment: Alignment.bottomCenter,
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 3.h, vertical: 2.h),
+                              width: 45,
+                              decoration:
+                                  AppDecoration.outlineAmberA200.copyWith(
+                                borderRadius: BorderRadiusStyle.circleBorder5,
+                              ),
+                              child: Row(children: [
+                                Container(
+                                  child: CustomImageView(
+                                    imagePath:
+                                        ImageConstant.imgSignalOnerrorcontainer,
+                                    height: 9.adaptSize,
+                                    width: 9.adaptSize,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  "4.5",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ]),
                             ),
                           ],
                         ),
@@ -226,7 +248,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Charolette Hanlin",
+                              "Nguyễn Phương Thảo",
                               style: theme.textTheme.titleSmall,
                             ),
                             SizedBox(height: 6.v),
@@ -243,7 +265,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                                   Padding(
                                     padding: EdgeInsets.only(left: 4.h),
                                     child: Text(
-                                      "585k students",
+                                      "58 students",
                                       textAlign: TextAlign.right,
                                       style:
                                           CustomTextStyles.labelLargeGray60001,
@@ -259,7 +281,7 @@ class CourseDetailAboutItemState extends State<CourseDetailAboutItem>
                                   Padding(
                                     padding: EdgeInsets.only(left: 2.h),
                                     child: Text(
-                                      "12 courses",
+                                      "2 courses",
                                       textAlign: TextAlign.right,
                                       style:
                                           CustomTextStyles.labelLargeGray60001,
