@@ -212,7 +212,7 @@ class _TestOnlineScreenState extends State<TestOnlineScreen> {
                 style: TextStyle(height: 1.5, fontSize: 17, letterSpacing: 0),
               ),
               SizedBox(height: 5),
-              if (question.image != null && question.image!.isNotEmpty)
+              if (question.image != null && question.image!.trim().isNotEmpty)
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Image.network(
@@ -221,7 +221,7 @@ class _TestOnlineScreenState extends State<TestOnlineScreen> {
                   ),
                 ),
               SizedBox(height: 10),
-              if (question.audiomp3 != null && question.audiomp3!.isNotEmpty)
+              if (question.audiomp3 != null && question.audiomp3!.trim().isNotEmpty)
                 InkWell(
                   onTap: () {
                     if (audioPlayers[questionIndex].state == PlayerState.playing) {
