@@ -242,16 +242,16 @@ class _EntranceTestIeltsScreenState extends State<EntranceTestIeltsScreen> {
           ),
         ),
         SizedBox(height: 5),
-        if (question.image != null && question.image.isNotEmpty)
+        if (question.image != null && question.image.trim().isNotEmpty)
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Image.network(
-              question.image,
+              question.image.trim(),
               fit: BoxFit.cover,
             ),
           ),
         SizedBox(height: 10),
-        if (question.audiomp3 != null && question.audiomp3.isNotEmpty)
+        if (question.audiomp3 != null && question.audiomp3.trim().isNotEmpty)
           InkWell(
             onTap: () {
               if (audioPlayers[session.questionTestInputs.indexOf(question)].state == PlayerState.playing) {
@@ -293,6 +293,8 @@ class _EntranceTestIeltsScreenState extends State<EntranceTestIeltsScreen> {
       ],
     );
   }
+
+
 
   Widget _buildNextButton(BuildContext context) {
     return Container(
@@ -350,6 +352,14 @@ class _EntranceTestIeltsScreenState extends State<EntranceTestIeltsScreen> {
 
 
   Widget _buildAnswers(BuildContext context, TestInputSession session, QuestionTestInput question) {
+    String truncateText(String text) {
+      if (text.length > 35) {
+        return text.substring(0, 35) + '...';
+      } else {
+        return text;
+      }
+    }
+
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -415,7 +425,7 @@ class _EntranceTestIeltsScreenState extends State<EntranceTestIeltsScreen> {
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 SizedBox(width: 5),
-                Text(optionText),
+                Text(truncateText(optionText)),
               ],
             ),
           ),
